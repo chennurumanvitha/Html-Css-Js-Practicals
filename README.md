@@ -140,8 +140,7 @@ The practical programs are designed with the following features:
 | Browser Objects and Browser Features | 20 |
 | Web Storage | 25 |
 | Mini Projects | 17 |
-| JavaScript Fundamentals & Advanced Programs | As specified in the assignment |
-| **Total** | **To be finalized after completion** |
+
 
 ### Project OrganiZation
 
