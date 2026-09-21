@@ -144,29 +144,29 @@ The practical programs are designed with the following features:
 
 ### Project OrganiZation
 
-Home
+Home/
 │
-├── Assets
-│   ├── Images
-│   ├── Icons
-│   ├── Audio
-│   └── Video
+├── Assets/
+│   ├── Images/
+│   ├── Icons/
+│   ├── Audio/
+│   └── Video/
 │
-├── HTML Programs
-│      └── Individual HTML Programs
+├── HTML Programs/
+│      └── Individual HTML Programs/
 │
-├── CSS Programs
-│      └── Individual CSS Programs
+├── CSS Programs/
+│      └── Individual CSS Programs/
 │
 └── JavaScript
-       ├── JavaScript Events
-       ├── DOM Manipulation
-       ├── DOM Event-Based Experiments
-       ├── Forms and Validation
-       ├── Browser and Storage
-       ├── Browser Objects and Features
-       ├── Web Storage
-       └── Mini Projects
+       ├── JavaScript Events/
+       ├── DOM Manipulation/
+       ├── DOM Event-Based Experiments/
+       ├── Forms and Validation/
+       ├── Browser and Storage/
+       ├── Browser Objects and Features/
+       ├── Web Storage/
+       └── Mini Projects/
 ---
 
 ## 7. Execution
