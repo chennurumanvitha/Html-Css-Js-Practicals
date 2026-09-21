@@ -4,9 +4,11 @@
 
 **Student Name:** Chennuru Manvitha Reddy  
 **Register Number:** 250200006  
-**Class / Section:** Computing and Data Science /section-07 
+**Class:** Computing and Data Science 
+**Section:** 07 
 **Subject:** Web Technology and Internet Program 
-**Assignment:** HTML, CSS and JavaScript Practical Programs  
+**Assignment:** HTML, CSS and JavaScript Practical Programs 
+
 
 ---
 
@@ -61,10 +63,6 @@ The assignment covers the following major areas:
 ### HTML Fundamentals
 
 HTML practicals demonstrate headings, paragraphs, lists, tables, images, hyperlinks, forms, multimedia, semantic elements, HTML5 input types, iframes, responsive concepts, Bootstrap components, and portfolio development.
-
-### CSS Styling and Layouts
-
-CSS practicals demonstrate selectors, colors, backgrounds, typography, borders, spacing, box model, positioning, navigation bars, pseudo-classes, pseudo-elements, forms, Flexbox, Grid, responsive layouts, transitions, transformations, animations, gradients, shadows, tooltips, dropdowns, and complete responsive webpages.
 
 ### JavaScript Programming
 
