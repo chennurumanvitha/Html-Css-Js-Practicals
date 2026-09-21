@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Online Offline Status | JavaScript Practical</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Segoe UI", Arial, sans-serif;
+      background: #f1f5f9;
+      color: #334155;
+      line-height: 1.6;
+    }
+
+    header {
+      background: #0f172a;
+      padding: 18px 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      color: white;
+      font-size: 22px;
+      font-weight: bold;
+    }
+
+    nav a {
+      color: #cbd5e1;
+      text-decoration: none;
+      margin-left: 25px;
+      font-size: 15px;
+    }
+
+    nav a:hover {
+      color: white;
+    }
+
+    .hero {
+      background: linear-gradient(135deg, #1e3a8a, #2563eb);
+      color: white;
+      text-align: center;
+      padding: 65px 20px;
+    }
+
+    .badge {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.15);
+      padding: 7px 16px;
+      border-radius: 20px;
+      margin-bottom: 15px;
+      font-size: 14px;
+    }
+
+    .hero h1 {
+      font-size: 36px;
+      margin-bottom: 10px;
+    }
+
+    .hero p {
+      font-size: 17px;
+      opacity: 0.9;
+    }
+
+    main {
+      width: 90%;
+      max-width: 1050px;
+      margin: 40px auto;
+    }
+
+    .objective {
+      background: white;
+      padding: 22px;
+      border-left: 5px solid #2563eb;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
+      margin-bottom: 25px;
+    }
+
+    .objective h2 {
+      color: #1e3a8a;
+      margin-bottom: 8px;
+    }
+
+    .card {
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(15, 23, 42, 0.08);
+      margin-bottom: 25px;
+    }
+
+    .card h2 {
+      color: #1e3a8a;
+      margin-bottom: 25px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #e2e8f0;
+    }
+
+    .status-panel {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 35px 20px;
+      text-align: center;
+    }
+
+    .status-icon {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      display: inline-block;
+      margin-right: 8px;
+      vertical-align: middle;
+      background: #64748b;
+    }
+
+    .status-icon.online {
+      background: #16a34a;
+    }
+
+    .status-icon.offline {
+      background: #dc2626;
+    }
+
+    #statusText {
+      color: #1e3a8a;
+      font-size: 30px;
+      font-weight: bold;
+      margin: 10px 0;
+    }
+
+    #statusMessage {
+      color: #64748b;
+      font-size: 16px;
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+      margin-top: 25px;
+    }
+
+    .info-box {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 9px;
+      padding: 20px;
+    }
+
+    .info-box span {
+      display: block;
+      color: #64748b;
+      font-size: 14px;
+      margin-bottom: 6px;
+    }
+
+    .info-box strong {
+      color: #1e3a8a;
+      font-size: 18px;
+    }
+
+    .notice {
+      margin-top: 25px;
+      padding: 18px;
+      background: #eff6ff;
+      border-left: 4px solid #2563eb;
+      border-radius: 7px;
+      color: #1e40af;
+    }
+
+    .buttons {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      flex-wrap: wrap;
+      margin-top: 30px;
+    }
+
+    .btn {
+      border: none;
+      background: #2563eb;
+      color: white;
+      padding: 11px 20px;
+      border-radius: 7px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      transition: 0.2s;
+    }
+
+    .btn:hover {
+      background: #1d4ed8;
+    }
+
+    .btn.secondary {
+      background: #475569;
+    }
+
+    .btn.secondary:hover {
+      background: #334155;
+    }
+
+    .navigation {
+      display: flex;
+      justify-content: space-between;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    footer {
+      background: #0f172a;
+      color: #cbd5e1;
+      text-align: center;
+      padding: 22px;
+      margin-top: 50px;
+    }
+
+    @media (max-width: 750px) {
+      header {
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      nav a {
+        margin: 0 8px;
+      }
+
+      .hero h1 {
+        font-size: 28px;
+      }
+
+      .card {
+        padding: 22px;
+      }
+
+      .info-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 550px) {
+      main {
+        width: 94%;
+      }
+
+      .hero {
+        padding: 50px 15px;
+      }
+
+      #statusText {
+        font-size: 25px;
+      }
+
+      .navigation {
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <div class="logo">JavaScript Practical</div>
+
+    <nav>
+      <a href="../../index.html">Home</a>
+<a href="../index.html">JavaScript Programs</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <span class="badge">Browser Objects &amp; Browser Features — Practice 20</span>
+    <h1>Online / Offline Status</h1>
+    <p>Updating webpage information when the browser connection changes</p>
+  </section>
+
+  <main>
+
+    <section class="objective">
+      <h2>Objective</h2>
+      <p>
+        To create a webpage that automatically updates information when
+        the browser goes <strong>online</strong> or <strong>offline</strong>.
+      </p>
+    </section>
+
+    <section class="card">
+      <h2>Connection Status</h2>
+
+      <div class="status-panel">
+        <div>
+          <span id="statusIcon" class="status-icon"></span>
+          <span>Current Connection</span>
+        </div>
+
+        <div id="statusText">
+          Checking...
+        </div>
+
+        <p id="statusMessage">
+          Checking the browser's connection status.
+        </p>
+      </div>
+
+      <div class="info-grid">
+
+        <div class="info-box">
+          <span>navigator.onLine</span>
+          <strong id="onlineValue">Checking...</strong>
+        </div>
+
+        <div class="info-box">
+          <span>Last Status Update</span>
+          <strong id="lastUpdated">--</strong>
+        </div>
+
+      </div>
+
+      <div class="buttons">
+        <button class="btn" id="checkStatus">
+          Check Status
+        </button>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Automatic Updates</h2>
+
+      <p>
+        This webpage listens for the browser's
+        <strong>online</strong> and <strong>offline</strong> events.
+        When the connection status changes, the information displayed
+        on the page is updated automatically.
+      </p>
+
+      <div class="notice" id="eventMessage">
+        Waiting for a connection status change.
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>How It Works</h2>
+
+      <p>
+        The <strong>navigator.onLine</strong> property indicates whether
+        the browser currently reports an online connection.
+      </p>
+
+      <p style="margin-top: 12px;">
+        The <strong>online</strong> event is triggered when the browser
+        detects a connection, while the <strong>offline</strong> event
+        is triggered when the browser detects that it is offline.
+      </p>
+    </section>
+
+    <section class="card">
+      <h2>Navigation</h2>
+
+      <div class="navigation">
+        <a class="btn secondary" href="19-geographical-coordinates.html">
+          ← Previous
+        </a>
+
+        <a class="btn" href="../../index.html">
+          Home
+        </a>
+
+        <a class="btn secondary" href="01-window-object.html">
+          Back to Practice 1 →
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>JavaScript Practical &copy; 2026</p>
+  </footer>
+
+  <script>
+    const statusIcon =
+      document.getElementById("statusIcon");
+
+    const statusText =
+      document.getElementById("statusText");
+
+    const statusMessage =
+      document.getElementById("statusMessage");
+
+    const onlineValue =
+      document.getElementById("onlineValue");
+
+    const lastUpdated =
+      document.getElementById("lastUpdated");
+
+    const eventMessage =
+      document.getElementById("eventMessage");
+
+    const checkStatus =
+      document.getElementById("checkStatus");
+
+    function updateConnectionStatus(eventType = "initial") {
+      const isOnline = navigator.onLine;
+
+      if (isOnline) {
+        statusIcon.className =
+          "status-icon online";
+
+        statusText.textContent =
+          "Online";
+
+        statusMessage.textContent =
+          "The browser reports that it is connected.";
+
+        onlineValue.textContent =
+          "true";
+      } else {
+        statusIcon.className =
+          "status-icon offline";
+
+        statusText.textContent =
+          "Offline";
+
+        statusMessage.textContent =
+          "The browser reports that it is not connected.";
+
+        onlineValue.textContent =
+          "false";
+      }
+
+      lastUpdated.textContent =
+        new Date().toLocaleTimeString("en-IN");
+
+      if (eventType === "online") {
+        eventMessage.textContent =
+          "The browser has gone online. The webpage information was updated automatically.";
+      } else if (eventType === "offline") {
+        eventMessage.textContent =
+          "The browser has gone offline. The webpage information was updated automatically.";
+      } else {
+        eventMessage.textContent =
+          "The current connection status has been detected.";
+      }
+    }
+
+    window.addEventListener("online", function () {
+      updateConnectionStatus("online");
+    });
+
+    window.addEventListener("offline", function () {
+      updateConnectionStatus("offline");
+    });
+
+    checkStatus.addEventListener("click", function () {
+      updateConnectionStatus();
+    });
+
+    updateConnectionStatus();
+  </script>
+
+</body>
+</html>

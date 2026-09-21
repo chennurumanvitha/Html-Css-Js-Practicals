@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Marks Entry and Grade Calculator</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Segoe UI", Arial, sans-serif;
+      background: #f1f5f9;
+      color: #334155;
+      line-height: 1.6;
+    }
+
+    header {
+      background: #0f172a;
+      padding: 18px 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      color: white;
+      font-size: 22px;
+      font-weight: bold;
+    }
+
+    nav a {
+      color: #cbd5e1;
+      text-decoration: none;
+      margin-left: 25px;
+      font-size: 15px;
+    }
+
+    nav a:hover {
+      color: white;
+    }
+
+    .hero {
+      background: linear-gradient(135deg, #1e3a8a, #2563eb);
+      color: white;
+      text-align: center;
+      padding: 65px 20px;
+    }
+
+    .badge {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.15);
+      padding: 7px 16px;
+      border-radius: 20px;
+      margin-bottom: 15px;
+      font-size: 14px;
+    }
+
+    .hero h1 {
+      font-size: 36px;
+      margin-bottom: 10px;
+    }
+
+    .hero p {
+      font-size: 17px;
+      opacity: 0.9;
+    }
+
+    main {
+      width: 90%;
+      max-width: 1050px;
+      margin: 40px auto;
+    }
+
+    .objective {
+      background: white;
+      padding: 22px;
+      border-left: 5px solid #2563eb;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
+      margin-bottom: 25px;
+    }
+
+    .objective h2 {
+      color: #1e3a8a;
+      margin-bottom: 8px;
+    }
+
+    .card {
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(15, 23, 42, 0.08);
+      margin-bottom: 25px;
+    }
+
+    .card h2 {
+      color: #1e3a8a;
+      margin-bottom: 25px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #e2e8f0;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 7px;
+    }
+
+    input {
+      width: 100%;
+      padding: 11px 13px;
+      border: 1px solid #cbd5e1;
+      border-radius: 7px;
+      font-size: 15px;
+      font-family: inherit;
+      outline: none;
+      transition: 0.2s;
+    }
+
+    input:focus {
+      border-color: #2563eb;
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+    }
+
+    .error {
+      color: #dc2626;
+      font-size: 13px;
+      margin-top: 5px;
+      min-height: 18px;
+    }
+
+    .invalid {
+      border-color: #dc2626;
+      background: #fff7f7;
+    }
+
+    .valid {
+      border-color: #16a34a;
+      background: #f0fdf4;
+    }
+
+    .calculate-btn {
+      width: 100%;
+      border: none;
+      background: #2563eb;
+      color: white;
+      padding: 13px 20px;
+      border-radius: 7px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .calculate-btn:hover {
+      background: #1d4ed8;
+    }
+
+    .result {
+      display: none;
+      margin-top: 25px;
+      background: #f8fafc;
+      border: 1px solid #cbd5e1;
+      border-radius: 10px;
+      padding: 25px;
+    }
+
+    .result h3 {
+      color: #1e3a8a;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #e2e8f0;
+    }
+
+    .result-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 15px;
+    }
+
+    .result-box {
+      background: white;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .result-label {
+      color: #64748b;
+      font-size: 14px;
+      margin-bottom: 5px;
+    }
+
+    .result-value {
+      color: #2563eb;
+      font-size: 28px;
+      font-weight: bold;
+    }
+
+    .grade-box {
+      margin-top: 20px;
+      background: #eff6ff;
+      border: 1px solid #93c5fd;
+      border-radius: 8px;
+      padding: 18px;
+      text-align: center;
+    }
+
+    .grade-box p {
+      color: #475569;
+      margin-bottom: 5px;
+    }
+
+    .grade-value {
+      color: #1e3a8a;
+      font-size: 30px;
+      font-weight: bold;
+    }
+
+    .success-message {
+      display: none;
+      background: #ecfdf5;
+      color: #166534;
+      border: 1px solid #86efac;
+      padding: 15px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      text-align: center;
+      font-weight: 600;
+    }
+
+    .buttons {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      flex-wrap: wrap;
+      margin-top: 30px;
+    }
+
+    .btn-link {
+      text-decoration: none;
+      background: #2563eb;
+      color: white;
+      padding: 11px 20px;
+      border-radius: 7px;
+      font-weight: 600;
+    }
+
+    .btn-link:hover {
+      background: #1d4ed8;
+    }
+
+    .btn-link.secondary {
+      background: #475569;
+    }
+
+    .btn-link.secondary:hover {
+      background: #334155;
+    }
+
+    footer {
+      background: #0f172a;
+      color: #cbd5e1;
+      text-align: center;
+      padding: 22px;
+      margin-top: 50px;
+    }
+
+    @media (max-width: 750px) {
+      header {
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      nav a {
+        margin: 0 8px;
+      }
+
+      .hero h1 {
+        font-size: 28px;
+      }
+
+      .card {
+        padding: 22px;
+      }
+
+      .result-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 550px) {
+      main {
+        width: 94%;
+      }
+
+      .hero {
+        padding: 50px 15px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <div class="logo">JavaScript Practical</div>
+
+    <nav>
+      <a href="../../index.html">Home</a>
+<a href="../index.html">JavaScript Programs</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <span class="badge">Practice 41</span>
+    <h1>Marks Calculator</h1>
+    <p>Calculate total, average, and grade using JavaScript.</p>
+  </section>
+
+  <main>
+
+    <section class="objective">
+      <h2>Objective</h2>
+      <p>
+        To create a marks entry form that accepts marks for different
+        subjects and calculates the total marks, average marks, and grade.
+      </p>
+    </section>
+
+    <section class="card">
+
+      <h2>Enter Student Marks</h2>
+
+      <div class="success-message" id="successMessage">
+        Marks calculated successfully!
+      </div>
+
+      <form id="marksForm" novalidate>
+
+        <div class="form-group">
+          <label for="studentName">Student Name</label>
+
+          <input
+            type="text"
+            id="studentName"
+            placeholder="Enter student name"
+            autocomplete="off"
+          >
+
+          <div class="error" id="studentNameError"></div>
+        </div>
+
+        <div class="form-group">
+          <label for="english">English Marks</label>
+
+          <input
+            type="number"
+            id="english"
+            min="0"
+            max="100"
+            placeholder="Enter marks out of 100"
+          >
+
+          <div class="error" id="englishError"></div>
+        </div>
+
+        <div class="form-group">
+          <label for="mathematics">Mathematics Marks</label>
+
+          <input
+            type="number"
+            id="mathematics"
+            min="0"
+            max="100"
+            placeholder="Enter marks out of 100"
+          >
+
+          <div class="error" id="mathematicsError"></div>
+        </div>
+
+        <div class="form-group">
+          <label for="science">Science Marks</label>
+
+          <input
+            type="number"
+            id="science"
+            min="0"
+            max="100"
+            placeholder="Enter marks out of 100"
+          >
+
+          <div class="error" id="scienceError"></div>
+        </div>
+
+        <div class="form-group">
+          <label for="computer">Computer Science Marks</label>
+
+          <input
+            type="number"
+            id="computer"
+            min="0"
+            max="100"
+            placeholder="Enter marks out of 100"
+          >
+
+          <div class="error" id="computerError"></div>
+        </div>
+
+        <div class="form-group">
+          <label for="social">Social Science Marks</label>
+
+          <input
+            type="number"
+            id="social"
+            min="0"
+            max="100"
+            placeholder="Enter marks out of 100"
+          >
+
+          <div class="error" id="socialError"></div>
+        </div>
+
+        <button
+          type="submit"
+          class="calculate-btn"
+        >
+          Calculate Result
+        </button>
+
+      </form>
+
+      <div class="result" id="result">
+
+        <h3>Result Summary</h3>
+
+        <div class="result-grid">
+
+          <div class="result-box">
+            <div class="result-label">Total Marks</div>
+            <div class="result-value" id="totalMarks">0</div>
+          </div>
+
+          <div class="result-box">
+            <div class="result-label">Average</div>
+            <div class="result-value" id="averageMarks">0</div>
+          </div>
+
+          <div class="result-box">
+            <div class="result-label">Percentage</div>
+            <div class="result-value" id="percentage">0%</div>
+          </div>
+
+        </div>
+
+        <div class="grade-box">
+
+          <p>Grade</p>
+
+          <div class="grade-value" id="grade">
+            -
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <div class="buttons">
+
+      <a href="40-age-calculation.html" class="btn-link">
+        ← Previous Practical
+      </a>
+
+      <a href="index.html" class="btn-link secondary">
+        Forms &amp; Validation
+      </a>
+
+      <a href="42-employee-salary-calculation.html" class="btn-link">
+        Next Practical →
+      </a>
+
+    </div>
+
+  </main>
+
+  <footer>
+    <p>&copy; 2026 JavaScript Practical — Forms &amp; Validation</p>
+  </footer>
+
+  <script>
+    const marksForm =
+      document.getElementById("marksForm");
+
+    const studentName =
+      document.getElementById("studentName");
+
+    const english =
+      document.getElementById("english");
+
+    const mathematics =
+      document.getElementById("mathematics");
+
+    const science =
+      document.getElementById("science");
+
+    const computer =
+      document.getElementById("computer");
+
+    const social =
+      document.getElementById("social");
+
+    const result =
+      document.getElementById("result");
+
+    const successMessage =
+      document.getElementById("successMessage");
+
+    const studentNameRegex =
+      /^[A-Za-z ]+$/;
+
+    function validateStudentName() {
+      const value = studentName.value.trim();
+      const error =
+        document.getElementById("studentNameError");
+
+      studentName.classList.remove("valid", "invalid");
+      error.textContent = "";
+
+      if (value === "") {
+        studentName.classList.add("invalid");
+        error.textContent =
+          "Student name is required.";
+        return false;
+      }
+
+      if (!studentNameRegex.test(value)) {
+        studentName.classList.add("invalid");
+        error.textContent =
+          "Name can contain only alphabets and spaces.";
+        return false;
+      }
+
+      studentName.classList.add("valid");
+      return true;
+    }
+
+    function validateMark(input, errorId) {
+      const value = input.value.trim();
+      const error =
+        document.getElementById(errorId);
+
+      input.classList.remove("valid", "invalid");
+      error.textContent = "";
+
+      if (value === "") {
+        input.classList.add("invalid");
+        error.textContent =
+          "Marks are required.";
+        return false;
+      }
+
+      const mark = Number(value);
+
+      if (
+        !Number.isInteger(mark) ||
+        mark < 0 ||
+        mark > 100
+      ) {
+        input.classList.add("invalid");
+        error.textContent =
+          "Enter a whole number between 0 and 100.";
+        return false;
+      }
+
+      input.classList.add("valid");
+      return true;
+    }
+
+    function validateAllMarks() {
+      const validName =
+        validateStudentName();
+
+      const validEnglish =
+        validateMark(
+          english,
+          "englishError"
+        );
+
+      const validMathematics =
+        validateMark(
+          mathematics,
+          "mathematicsError"
+        );
+
+      const validScience =
+        validateMark(
+          science,
+          "scienceError"
+        );
+
+      const validComputer =
+        validateMark(
+          computer,
+          "computerError"
+        );
+
+      const validSocial =
+        validateMark(
+          social,
+          "socialError"
+        );
+
+      return (
+        validName &&
+        validEnglish &&
+        validMathematics &&
+        validScience &&
+        validComputer &&
+        validSocial
+      );
+    }
+
+    function calculateGrade(average) {
+      if (average >= 90) {
+        return "A+";
+      }
+
+      if (average >= 80) {
+        return "A";
+      }
+
+      if (average >= 70) {
+        return "B";
+      }
+
+      if (average >= 60) {
+        return "C";
+      }
+
+      if (average >= 50) {
+        return "D";
+      }
+
+      if (average >= 40) {
+        return "E";
+      }
+
+      return "F";
+    }
+
+    studentName.addEventListener(
+      "input",
+      function () {
+        successMessage.style.display = "none";
+        result.style.display = "none";
+        validateStudentName();
+      }
+    );
+
+    english.addEventListener(
+      "input",
+      function () {
+        successMessage.style.display = "none";
+        result.style.display = "none";
+        validateMark(
+          english,
+          "englishError"
+        );
+      }
+    );
+
+    mathematics.addEventListener(
+      "input",
+      function () {
+        successMessage.style.display = "none";
+        result.style.display = "none";
+        validateMark(
+          mathematics,
+          "mathematicsError"
+        );
+      }
+    );
+
+    science.addEventListener(
+      "input",
+      function () {
+        successMessage.style.display = "none";
+        result.style.display = "none";
+        validateMark(
+          science,
+          "scienceError"
+        );
+      }
+    );
+
+    computer.addEventListener(
+      "input",
+      function () {
+        successMessage.style.display = "none";
+        result.style.display = "none";
+        validateMark(
+          computer,
+          "computerError"
+        );
+      }
+    );
+
+    social.addEventListener(
+      "input",
+      function () {
+        successMessage.style.display = "none";
+        result.style.display = "none";
+        validateMark(
+          social,
+          "socialError"
+        );
+      }
+    );
+
+    marksForm.addEventListener(
+      "submit",
+      function (event) {
+
+        event.preventDefault();
+
+        result.style.display = "none";
+        successMessage.style.display = "none";
+
+        if (!validateAllMarks()) {
+          return;
+        }
+
+        const englishMark =
+          Number(english.value);
+
+        const mathematicsMark =
+          Number(mathematics.value);
+
+        const scienceMark =
+          Number(science.value);
+
+        const computerMark =
+          Number(computer.value);
+
+        const socialMark =
+          Number(social.value);
+
+        const total =
+          englishMark +
+          mathematicsMark +
+          scienceMark +
+          computerMark +
+          socialMark;
+
+        const average =
+          total / 5;
+
+        const percentage =
+          (total / 500) * 100;
+
+        const grade =
+          calculateGrade(average);
+
+        document.getElementById(
+          "totalMarks"
+        ).textContent = total;
+
+        document.getElementById(
+          "averageMarks"
+        ).textContent = average.toFixed(2);
+
+        document.getElementById(
+          "percentage"
+        ).textContent =
+          percentage.toFixed(2) + "%";
+
+        document.getElementById(
+          "grade"
+        ).textContent = grade;
+
+        result.style.display = "block";
+        successMessage.style.display = "block";
+      }
+    );
+  </script>
+
+</body>
+</html>

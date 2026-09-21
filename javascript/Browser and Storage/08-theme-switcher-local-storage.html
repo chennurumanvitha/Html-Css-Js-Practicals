@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Theme Switcher - JavaScript Practical</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Segoe UI", Arial, sans-serif;
+      background: #f1f5f9;
+      color: #334155;
+      line-height: 1.6;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    header {
+      background: #0f172a;
+      padding: 18px 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      color: white;
+      font-size: 22px;
+      font-weight: bold;
+    }
+
+    nav a {
+      color: #cbd5e1;
+      text-decoration: none;
+      margin-left: 25px;
+      font-size: 15px;
+    }
+
+    nav a:hover {
+      color: white;
+    }
+
+    .hero {
+      background: linear-gradient(135deg, #1e3a8a, #2563eb);
+      color: white;
+      text-align: center;
+      padding: 65px 20px;
+      transition: background 0.3s;
+    }
+
+    .badge {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.15);
+      padding: 7px 16px;
+      border-radius: 20px;
+      margin-bottom: 15px;
+      font-size: 14px;
+    }
+
+    .hero h1 {
+      font-size: 36px;
+      margin-bottom: 10px;
+    }
+
+    .hero p {
+      font-size: 17px;
+      opacity: 0.9;
+    }
+
+    main {
+      width: 90%;
+      max-width: 1050px;
+      margin: 40px auto;
+    }
+
+    .objective {
+      background: white;
+      padding: 22px;
+      border-left: 5px solid #2563eb;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
+      margin-bottom: 25px;
+    }
+
+    .objective h2 {
+      color: #1e3a8a;
+      margin-bottom: 8px;
+    }
+
+    .card {
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(15, 23, 42, 0.08);
+      margin-bottom: 25px;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    .card h2 {
+      color: #1e3a8a;
+      margin-bottom: 25px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #e2e8f0;
+    }
+
+    .theme-box {
+      text-align: center;
+      padding: 25px;
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 10px;
+      transition: background 0.3s, border-color 0.3s;
+    }
+
+    .theme-box h3 {
+      color: #1e3a8a;
+      margin-bottom: 10px;
+    }
+
+    .theme-box p {
+      margin-bottom: 20px;
+    }
+
+    .theme-status {
+      color: #2563eb;
+      font-weight: 600;
+      margin-top: 15px;
+    }
+
+    .buttons {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      flex-wrap: wrap;
+      margin-top: 30px;
+    }
+
+    .btn {
+      border: none;
+      background: #2563eb;
+      color: white;
+      padding: 11px 20px;
+      border-radius: 7px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      transition: 0.2s;
+    }
+
+    .btn:hover {
+      background: #1d4ed8;
+    }
+
+    .btn.secondary {
+      background: #475569;
+    }
+
+    .btn.secondary:hover {
+      background: #334155;
+    }
+
+    .btn.theme {
+      background: #0f766e;
+    }
+
+    .btn.theme:hover {
+      background: #115e59;
+    }
+
+    .note {
+      background: #eff6ff;
+      border: 1px solid #bfdbfe;
+      color: #1e40af;
+      padding: 15px;
+      border-radius: 8px;
+      margin-top: 20px;
+    }
+
+    /* Dark Theme */
+
+    body.dark-theme {
+      background: #020617;
+      color: #cbd5e1;
+    }
+
+    body.dark-theme .objective,
+    body.dark-theme .card {
+      background: #0f172a;
+      color: #cbd5e1;
+    }
+
+    body.dark-theme .objective h2,
+    body.dark-theme .card h2,
+    body.dark-theme .theme-box h3 {
+      color: #93c5fd;
+    }
+
+    body.dark-theme .card h2 {
+      border-bottom-color: #334155;
+    }
+
+    body.dark-theme .theme-box {
+      background: #1e293b;
+      border-color: #334155;
+    }
+
+    body.dark-theme .theme-status {
+      color: #93c5fd;
+    }
+
+    body.dark-theme .note {
+      background: #172554;
+      border-color: #1e40af;
+      color: #bfdbfe;
+    }
+
+    body.dark-theme .btn.secondary {
+      background: #334155;
+    }
+
+    body.dark-theme .btn.secondary:hover {
+      background: #475569;
+    }
+
+    footer {
+      background: #0f172a;
+      color: #cbd5e1;
+      text-align: center;
+      padding: 22px;
+      margin-top: 50px;
+    }
+
+    @media (max-width: 750px) {
+      header {
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      nav a {
+        margin: 0 8px;
+      }
+
+      .hero h1 {
+        font-size: 28px;
+      }
+
+      .card {
+        padding: 22px;
+      }
+    }
+
+    @media (max-width: 550px) {
+      main {
+        width: 94%;
+      }
+
+      .hero {
+        padding: 50px 15px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <div class="logo">JavaScript Practical</div>
+
+    <nav>
+      <a href="../../index.html">Home</a>
+<a href="../index.html">JavaScript Programs</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <span class="badge">Browser &amp; Storage — Practice 8</span>
+
+    <h1>Theme Switcher</h1>
+
+    <p>
+      Switch between light and dark mode using localStorage.
+    </p>
+  </section>
+
+  <main>
+
+    <section class="objective">
+      <h2>Objective</h2>
+
+      <p>
+        To create a light and dark theme switcher and save the user's
+        selected theme using the browser's localStorage object.
+      </p>
+    </section>
+
+    <section class="card">
+
+      <h2>Theme Settings</h2>
+
+      <div class="theme-box">
+
+        <h3>Choose Your Theme</h3>
+
+        <p>
+          Your selected theme will remain active after refreshing the page.
+        </p>
+
+        <button
+          type="button"
+          class="btn theme"
+          id="themeButton"
+        >
+          Enable Dark Mode
+        </button>
+
+        <p
+          class="theme-status"
+          id="themeStatus"
+        >
+          Current Theme: Light Mode
+        </p>
+
+      </div>
+
+      <div class="note">
+        <strong>localStorage:</strong>
+        The selected theme is stored in the browser and restored
+        automatically when the page is opened again.
+      </div>
+
+    </section>
+
+    <div class="buttons">
+
+      <a
+        href="07-shopping-cart-localstorage.html"
+        class="btn secondary"
+      >
+        ← Previous Practical
+      </a>
+
+      <a
+        href="../../index.html"
+        class="btn secondary"
+      >
+        Home
+      </a>
+
+      <a
+        href="09-font-size-localstorage.html"
+        class="btn"
+      >
+        Next Practical →
+      </a>
+
+    </div>
+
+  </main>
+
+  <footer>
+    <p>
+      &copy; 2026 JavaScript Practical —
+      Browser &amp; Storage
+    </p>
+  </footer>
+
+  <script>
+    const themeButton =
+      document.getElementById("themeButton");
+
+    const themeStatus =
+      document.getElementById("themeStatus");
+
+    function updateTheme() {
+
+      const isDark =
+        document.body.classList.contains("dark-theme");
+
+      if (isDark) {
+
+        themeButton.textContent =
+          "Enable Light Mode";
+
+        themeStatus.textContent =
+          "Current Theme: Dark Mode";
+
+      } else {
+
+        themeButton.textContent =
+          "Enable Dark Mode";
+
+        themeStatus.textContent =
+          "Current Theme: Light Mode";
+      }
+    }
+
+    function applySavedTheme() {
+
+      const savedTheme =
+        localStorage.getItem("theme");
+
+      if (savedTheme === "dark") {
+
+        document.body.classList.add("dark-theme");
+
+      } else {
+
+        document.body.classList.remove("dark-theme");
+      }
+
+      updateTheme();
+    }
+
+    themeButton.addEventListener("click", function () {
+
+      document.body.classList.toggle("dark-theme");
+
+      const isDark =
+        document.body.classList.contains("dark-theme");
+
+      if (isDark) {
+
+        localStorage.setItem("theme", "dark");
+
+      } else {
+
+        localStorage.setItem("theme", "light");
+      }
+
+      updateTheme();
+
+    });
+
+    applySavedTheme();
+  </script>
+
+</body>
+</html>

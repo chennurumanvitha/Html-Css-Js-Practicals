@@ -1,0 +1,893 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Marks Database using localStorage</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Segoe UI", Arial, sans-serif;
+      background: #f1f5f9;
+      color: #334155;
+      line-height: 1.6;
+    }
+
+    header {
+      background: #0f172a;
+      padding: 18px 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      color: white;
+      font-size: 22px;
+      font-weight: bold;
+    }
+
+    nav a {
+      color: #cbd5e1;
+      text-decoration: none;
+      margin-left: 25px;
+      font-size: 15px;
+    }
+
+    nav a:hover {
+      color: white;
+    }
+
+    .hero {
+      background: linear-gradient(135deg, #1e3a8a, #2563eb);
+      color: white;
+      text-align: center;
+      padding: 65px 20px;
+    }
+
+    .badge {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.15);
+      padding: 7px 16px;
+      border-radius: 20px;
+      margin-bottom: 15px;
+      font-size: 14px;
+    }
+
+    .hero h1 {
+      font-size: 36px;
+      margin-bottom: 10px;
+    }
+
+    .hero p {
+      font-size: 17px;
+      opacity: 0.9;
+    }
+
+    main {
+      width: 90%;
+      max-width: 1050px;
+      margin: 40px auto;
+    }
+
+    .objective {
+      background: white;
+      padding: 22px;
+      border-left: 5px solid #2563eb;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
+      margin-bottom: 25px;
+    }
+
+    .objective h2 {
+      color: #1e3a8a;
+      margin-bottom: 8px;
+    }
+
+    .card {
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(15, 23, 42, 0.08);
+      margin-bottom: 25px;
+    }
+
+    .card h2 {
+      color: #1e3a8a;
+      margin-bottom: 25px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #e2e8f0;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .form-group label {
+      font-weight: 600;
+      margin-bottom: 7px;
+      color: #334155;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 11px 12px;
+      border: 1px solid #cbd5e1;
+      border-radius: 7px;
+      font-size: 15px;
+      outline: none;
+    }
+
+    .form-group input:focus {
+      border-color: #2563eb;
+    }
+
+    .buttons {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      flex-wrap: wrap;
+      margin-top: 25px;
+    }
+
+    .btn {
+      border: none;
+      background: #2563eb;
+      color: white;
+      padding: 11px 20px;
+      border-radius: 7px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      background: #1d4ed8;
+    }
+
+    .btn.secondary {
+      background: #475569;
+    }
+
+    .btn.secondary:hover {
+      background: #334155;
+    }
+
+    .btn.danger {
+      background: #dc2626;
+    }
+
+    .btn.danger:hover {
+      background: #b91c1c;
+    }
+
+    .message {
+      text-align: center;
+      margin-top: 15px;
+      min-height: 24px;
+      font-weight: 600;
+    }
+
+    .table-container {
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 750px;
+    }
+
+    th,
+    td {
+      padding: 12px;
+      border-bottom: 1px solid #e2e8f0;
+      text-align: center;
+    }
+
+    th {
+      background: #1e3a8a;
+      color: white;
+    }
+
+    tr:nth-child(even) {
+      background: #f8fafc;
+    }
+
+    .edit-btn {
+      border: none;
+      background: #f59e0b;
+      color: white;
+      padding: 7px 10px;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-right: 5px;
+    }
+
+    .edit-btn:hover {
+      background: #d97706;
+    }
+
+    .delete-btn {
+      border: none;
+      background: #dc2626;
+      color: white;
+      padding: 7px 10px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .delete-btn:hover {
+      background: #b91c1c;
+    }
+
+    .empty {
+      text-align: center;
+      color: #64748b;
+      padding: 25px;
+    }
+
+    .record-count {
+      background: #eff6ff;
+      color: #1e3a8a;
+      padding: 12px;
+      border-radius: 7px;
+      margin-bottom: 20px;
+      text-align: center;
+      font-weight: 600;
+    }
+
+    .navigation {
+      display: flex;
+      justify-content: space-between;
+      gap: 15px;
+      margin-top: 35px;
+    }
+
+    .navigation a {
+      text-decoration: none;
+      background: #2563eb;
+      color: white;
+      padding: 11px 20px;
+      border-radius: 7px;
+      font-weight: 600;
+      font-size: 14px;
+    }
+
+    .navigation a:hover {
+      background: #1d4ed8;
+    }
+
+    footer {
+      background: #0f172a;
+      color: #cbd5e1;
+      text-align: center;
+      padding: 22px;
+      margin-top: 50px;
+    }
+
+    @media (max-width: 750px) {
+      header {
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      nav a {
+        margin: 0 8px;
+      }
+
+      .hero h1 {
+        font-size: 28px;
+      }
+
+      .card {
+        padding: 22px;
+      }
+
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .navigation {
+        flex-direction: column;
+      }
+
+      .navigation a {
+        text-align: center;
+      }
+    }
+
+    @media (max-width: 550px) {
+      main {
+        width: 94%;
+      }
+
+      .hero {
+        padding: 50px 15px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <div class="logo">Web Storage Practical</div>
+
+    <nav>
+      <a href="../../index.html">Home</a>
+<a href="../index.html">JavaScript Programs</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div class="badge">Practical 24</div>
+    <h1>Student Marks Database</h1>
+    <p>Store and manage student marks using localStorage</p>
+  </section>
+
+  <main>
+
+    <section class="objective">
+      <h2>Objective</h2>
+      <p>
+        To create a student marks database using localStorage
+        for storing, displaying, updating and deleting student
+        marks records.
+      </p>
+    </section>
+
+    <section class="card">
+
+      <h2>Student Marks Form</h2>
+
+      <form id="marksForm">
+
+        <div class="form-grid">
+
+          <div class="form-group">
+            <label for="studentId">Student ID</label>
+            <input
+              type="text"
+              id="studentId"
+              placeholder="Enter student ID"
+              required
+            >
+          </div>
+
+          <div class="form-group">
+            <label for="studentName">Student Name</label>
+            <input
+              type="text"
+              id="studentName"
+              placeholder="Enter student name"
+              required
+            >
+          </div>
+
+          <div class="form-group">
+            <label for="subject">Subject</label>
+            <input
+              type="text"
+              id="subject"
+              placeholder="Enter subject"
+              required
+            >
+          </div>
+
+          <div class="form-group">
+            <label for="marks">Marks</label>
+            <input
+              type="number"
+              id="marks"
+              placeholder="Enter marks (0-100)"
+              min="0"
+              max="100"
+              required
+            >
+          </div>
+
+        </div>
+
+        <div class="buttons">
+
+          <button
+            type="submit"
+            class="btn"
+            id="saveButton"
+          >
+            Add Record
+          </button>
+
+          <button
+            type="button"
+            class="btn secondary"
+            onclick="resetForm()"
+          >
+            Reset
+          </button>
+
+        </div>
+
+      </form>
+
+      <div
+        class="message"
+        id="message"
+      ></div>
+
+    </section>
+
+    <section class="card">
+
+      <h2>Student Marks Database</h2>
+
+      <div class="record-count">
+        Total Records:
+        <span id="recordCount">0</span>
+      </div>
+
+      <div class="table-container">
+
+        <table>
+
+          <thead>
+            <tr>
+              <th>Student ID</th>
+              <th>Name</th>
+              <th>Subject</th>
+              <th>Marks</th>
+              <th>Grade</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+
+          <tbody id="recordsTableBody"></tbody>
+
+        </table>
+
+      </div>
+
+      <div class="buttons">
+
+        <button
+          type="button"
+          class="btn secondary"
+          onclick="loadRecords()"
+        >
+          Refresh Records
+        </button>
+
+        <button
+          type="button"
+          class="btn danger"
+          onclick="clearDatabase()"
+        >
+          Clear Database
+        </button>
+
+      </div>
+
+    </section>
+
+    <div class="navigation">
+      <a href="23-shopping-cart-persistent.html">← Previous</a>
+      <a href="../index.html">Home</a>
+      <a href="25-crud-localstorage.html">Next →</a>
+    </div>
+
+  </main>
+
+  <footer>
+    Web Storage Practicals &copy; 2026
+  </footer>
+
+  <script>
+    let records = [];
+    let editIndex = -1;
+
+    const marksForm =
+      document.getElementById("marksForm");
+
+    const studentId =
+      document.getElementById("studentId");
+
+    const studentName =
+      document.getElementById("studentName");
+
+    const subject =
+      document.getElementById("subject");
+
+    const marks =
+      document.getElementById("marks");
+
+    const recordsTableBody =
+      document.getElementById("recordsTableBody");
+
+    const recordCount =
+      document.getElementById("recordCount");
+
+    const saveButton =
+      document.getElementById("saveButton");
+
+    const message =
+      document.getElementById("message");
+
+    function loadRecords() {
+      const savedRecords =
+        localStorage.getItem("studentMarksDatabase");
+
+      if (!savedRecords) {
+        records = [];
+        displayRecords();
+        return;
+      }
+
+      try {
+        records = JSON.parse(savedRecords);
+
+        if (!Array.isArray(records)) {
+          records = [];
+        }
+
+        displayRecords();
+
+      } catch (error) {
+        records = [];
+
+        localStorage.removeItem(
+          "studentMarksDatabase"
+        );
+
+        displayRecords();
+      }
+    }
+
+    function saveRecords() {
+      localStorage.setItem(
+        "studentMarksDatabase",
+        JSON.stringify(records)
+      );
+    }
+
+    function getGrade(mark) {
+      if (mark >= 90) {
+        return "A+";
+      }
+
+      if (mark >= 80) {
+        return "A";
+      }
+
+      if (mark >= 70) {
+        return "B";
+      }
+
+      if (mark >= 60) {
+        return "C";
+      }
+
+      if (mark >= 50) {
+        return "D";
+      }
+
+      return "F";
+    }
+
+    marksForm.addEventListener(
+      "submit",
+      function(event) {
+
+        event.preventDefault();
+
+        const id =
+          studentId.value.trim();
+
+        const name =
+          studentName.value.trim();
+
+        const subjectName =
+          subject.value.trim();
+
+        const mark =
+          Number(marks.value);
+
+        if (
+          id === "" ||
+          name === "" ||
+          subjectName === ""
+        ) {
+          showMessage(
+            "Please fill in all fields.",
+            "#dc2626"
+          );
+          return;
+        }
+
+        if (
+          !Number.isFinite(mark) ||
+          mark < 0 ||
+          mark > 100
+        ) {
+          showMessage(
+            "Marks must be between 0 and 100.",
+            "#dc2626"
+          );
+          return;
+        }
+
+        const record = {
+          id: id,
+          name: name,
+          subject: subjectName,
+          marks: mark
+        };
+
+        if (editIndex === -1) {
+
+          records.push(record);
+
+          showMessage(
+            "Student marks record added successfully.",
+            "#16a34a"
+          );
+
+        } else {
+
+          records[editIndex] = record;
+
+          showMessage(
+            "Student marks record updated successfully.",
+            "#16a34a"
+          );
+
+          editIndex = -1;
+          saveButton.textContent = "Add Record";
+        }
+
+        saveRecords();
+        displayRecords();
+        resetForm();
+
+      }
+    );
+
+    function displayRecords() {
+
+      recordsTableBody.innerHTML = "";
+
+      recordCount.textContent =
+        records.length;
+
+      if (records.length === 0) {
+
+        const row =
+          document.createElement("tr");
+
+        const cell =
+          document.createElement("td");
+
+        cell.colSpan = 6;
+        cell.className = "empty";
+        cell.textContent =
+          "No student marks records found.";
+
+        row.appendChild(cell);
+        recordsTableBody.appendChild(row);
+
+        return;
+      }
+
+      records.forEach(
+        function(record, index) {
+
+          const row =
+            document.createElement("tr");
+
+          const idCell =
+            document.createElement("td");
+
+          idCell.textContent = record.id;
+
+          const nameCell =
+            document.createElement("td");
+
+          nameCell.textContent = record.name;
+
+          const subjectCell =
+            document.createElement("td");
+
+          subjectCell.textContent =
+            record.subject;
+
+          const marksCell =
+            document.createElement("td");
+
+          marksCell.textContent =
+            record.marks;
+
+          const gradeCell =
+            document.createElement("td");
+
+          gradeCell.textContent =
+            getGrade(record.marks);
+
+          const actionCell =
+            document.createElement("td");
+
+          const editButton =
+            document.createElement("button");
+
+          editButton.type = "button";
+          editButton.className = "edit-btn";
+          editButton.textContent = "Edit";
+
+          editButton.addEventListener(
+            "click",
+            function() {
+              editRecord(index);
+            }
+          );
+
+          const deleteButton =
+            document.createElement("button");
+
+          deleteButton.type = "button";
+          deleteButton.className = "delete-btn";
+          deleteButton.textContent = "Delete";
+
+          deleteButton.addEventListener(
+            "click",
+            function() {
+              deleteRecord(index);
+            }
+          );
+
+          actionCell.appendChild(editButton);
+          actionCell.appendChild(deleteButton);
+
+          row.appendChild(idCell);
+          row.appendChild(nameCell);
+          row.appendChild(subjectCell);
+          row.appendChild(marksCell);
+          row.appendChild(gradeCell);
+          row.appendChild(actionCell);
+
+          recordsTableBody.appendChild(row);
+        }
+      );
+    }
+
+    function editRecord(index) {
+
+      const record = records[index];
+
+      if (!record) {
+        return;
+      }
+
+      studentId.value = record.id;
+      studentName.value = record.name;
+      subject.value = record.subject;
+      marks.value = record.marks;
+
+      editIndex = index;
+
+      saveButton.textContent = "Update Record";
+
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+    }
+
+    function deleteRecord(index) {
+
+      const record = records[index];
+
+      if (!record) {
+        return;
+      }
+
+      const confirmed = confirm(
+        "Delete the marks record for " +
+        record.name +
+        "?"
+      );
+
+      if (!confirmed) {
+        return;
+      }
+
+      records.splice(index, 1);
+
+      saveRecords();
+      displayRecords();
+
+      showMessage(
+        "Student marks record deleted.",
+        "#16a34a"
+      );
+
+      if (editIndex === index) {
+        resetForm();
+      }
+    }
+
+    function clearDatabase() {
+
+      if (records.length === 0) {
+        showMessage(
+          "The database is already empty.",
+          "#64748b"
+        );
+        return;
+      }
+
+      const confirmed = confirm(
+        "Are you sure you want to clear all student marks records?"
+      );
+
+      if (!confirmed) {
+        return;
+      }
+
+      records = [];
+
+      localStorage.removeItem(
+        "studentMarksDatabase"
+      );
+
+      editIndex = -1;
+
+      saveButton.textContent = "Add Record";
+
+      displayRecords();
+      resetForm();
+
+      showMessage(
+        "Student marks database cleared.",
+        "#16a34a"
+      );
+    }
+
+    function resetForm() {
+
+      marksForm.reset();
+
+      editIndex = -1;
+
+      saveButton.textContent = "Add Record";
+    }
+
+    function showMessage(text, color) {
+
+      message.textContent = text;
+      message.style.color = color;
+
+      setTimeout(
+        function() {
+          message.textContent = "";
+        },
+        2500
+      );
+    }
+
+    loadRecords();
+  </script>
+
+</body>
+</html>

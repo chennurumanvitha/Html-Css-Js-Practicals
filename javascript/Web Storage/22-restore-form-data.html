@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Restore Form Data using localStorage</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Segoe UI", Arial, sans-serif;
+      background: #f1f5f9;
+      color: #334155;
+      line-height: 1.6;
+    }
+
+    header {
+      background: #0f172a;
+      padding: 18px 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      color: white;
+      font-size: 22px;
+      font-weight: bold;
+    }
+
+    nav a {
+      color: #cbd5e1;
+      text-decoration: none;
+      margin-left: 25px;
+      font-size: 15px;
+    }
+
+    nav a:hover {
+      color: white;
+    }
+
+    .hero {
+      background: linear-gradient(135deg, #1e3a8a, #2563eb);
+      color: white;
+      text-align: center;
+      padding: 65px 20px;
+    }
+
+    .badge {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.15);
+      padding: 7px 16px;
+      border-radius: 20px;
+      margin-bottom: 15px;
+      font-size: 14px;
+    }
+
+    .hero h1 {
+      font-size: 36px;
+      margin-bottom: 10px;
+    }
+
+    .hero p {
+      font-size: 17px;
+      opacity: 0.9;
+    }
+
+    main {
+      width: 90%;
+      max-width: 1050px;
+      margin: 40px auto;
+    }
+
+    .objective {
+      background: white;
+      padding: 22px;
+      border-left: 5px solid #2563eb;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
+      margin-bottom: 25px;
+    }
+
+    .objective h2 {
+      color: #1e3a8a;
+      margin-bottom: 8px;
+    }
+
+    .card {
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(15, 23, 42, 0.08);
+      margin-bottom: 25px;
+    }
+
+    .card h2 {
+      color: #1e3a8a;
+      margin-bottom: 25px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #e2e8f0;
+    }
+
+    .form-group {
+      margin-bottom: 18px;
+    }
+
+    .form-group label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 7px;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 11px 12px;
+      border: 1px solid #cbd5e1;
+      border-radius: 7px;
+      font-size: 15px;
+      font-family: inherit;
+    }
+
+    .form-group textarea {
+      min-height: 130px;
+      resize: vertical;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: #2563eb;
+    }
+
+    .status {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      padding: 13px 15px;
+      color: #64748b;
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .buttons {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      flex-wrap: wrap;
+      margin-top: 25px;
+    }
+
+    .btn {
+      border: none;
+      background: #2563eb;
+      color: white;
+      padding: 11px 20px;
+      border-radius: 7px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      background: #1d4ed8;
+    }
+
+    .btn.secondary {
+      background: #475569;
+    }
+
+    .btn.secondary:hover {
+      background: #334155;
+    }
+
+    .btn.danger {
+      background: #dc2626;
+    }
+
+    .btn.danger:hover {
+      background: #b91c1c;
+    }
+
+    .message {
+      text-align: center;
+      margin-top: 15px;
+      font-weight: 600;
+      min-height: 24px;
+    }
+
+    .navigation {
+      display: flex;
+      justify-content: space-between;
+      gap: 15px;
+      margin-top: 35px;
+    }
+
+    .navigation a {
+      text-decoration: none;
+      background: #2563eb;
+      color: white;
+      padding: 11px 20px;
+      border-radius: 7px;
+      font-weight: 600;
+      font-size: 14px;
+    }
+
+    .navigation a:hover {
+      background: #1d4ed8;
+    }
+
+    footer {
+      background: #0f172a;
+      color: #cbd5e1;
+      text-align: center;
+      padding: 22px;
+      margin-top: 50px;
+    }
+
+    @media (max-width: 750px) {
+      header {
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      nav a {
+        margin: 0 8px;
+      }
+
+      .hero h1 {
+        font-size: 28px;
+      }
+
+      .card {
+        padding: 22px;
+      }
+
+      .navigation {
+        flex-direction: column;
+      }
+
+      .navigation a {
+        text-align: center;
+      }
+    }
+
+    @media (max-width: 550px) {
+      main {
+        width: 94%;
+      }
+
+      .hero {
+        padding: 50px 15px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <div class="logo">Web Storage Practical</div>
+
+    <nav>
+      <a href="../../index.html">Home</a>
+<a href="../index.html">JavaScript Programs</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div class="badge">Practical 22</div>
+    <h1>Restore Form Data</h1>
+    <p>Restore previously entered data after refreshing the page</p>
+  </section>
+
+  <main>
+
+    <section class="objective">
+      <h2>Objective</h2>
+      <p>
+        To save form data in localStorage and restore the previously
+        entered information automatically after refreshing the webpage.
+      </p>
+    </section>
+
+    <section class="card">
+
+      <h2>Student Form</h2>
+
+      <form id="studentForm">
+
+        <div class="form-group">
+          <label for="studentName">Student Name</label>
+          <input
+            type="text"
+            id="studentName"
+            placeholder="Enter student name"
+          >
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input
+            type="email"
+            id="email"
+            placeholder="Enter email address"
+          >
+        </div>
+
+        <div class="form-group">
+          <label for="course">Course</label>
+
+          <select id="course">
+            <option value="">Select a course</option>
+            <option value="BCA">BCA</option>
+            <option value="BSc Computer Science">
+              BSc Computer Science
+            </option>
+            <option value="BCom">BCom</option>
+            <option value="BA">BA</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="address">Address</label>
+
+          <textarea
+            id="address"
+            placeholder="Enter address"
+          ></textarea>
+        </div>
+
+        <div class="buttons">
+
+          <button
+            type="button"
+            class="btn"
+            onclick="saveData()"
+          >
+            Save Form Data
+          </button>
+
+          <button
+            type="button"
+            class="btn secondary"
+            onclick="restoreData()"
+          >
+            Restore Data
+          </button>
+
+          <button
+            type="button"
+            class="btn danger"
+            onclick="clearData()"
+          >
+            Clear Saved Data
+          </button>
+
+        </div>
+
+      </form>
+
+      <div class="status" id="status">
+        Form data will be restored automatically when the page loads.
+      </div>
+
+      <div class="message" id="message"></div>
+
+    </section>
+
+    <div class="navigation">
+      <a href="21-auto-save-form-localstorage.html">← Previous</a>
+      <a href="../index.html">Home</a>
+      <a href="23-shopping-cart-persistent.html">Next →</a>
+    </div>
+
+  </main>
+
+  <footer>
+    Web Storage Practicals &copy; 2026
+  </footer>
+
+  <script>
+    const studentName =
+      document.getElementById("studentName");
+
+    const email =
+      document.getElementById("email");
+
+    const course =
+      document.getElementById("course");
+
+    const address =
+      document.getElementById("address");
+
+    const status =
+      document.getElementById("status");
+
+    const message =
+      document.getElementById("message");
+
+    function saveData() {
+      const formData = {
+        studentName: studentName.value,
+        email: email.value,
+        course: course.value,
+        address: address.value
+      };
+
+      localStorage.setItem(
+        "restoredFormData",
+        JSON.stringify(formData)
+      );
+
+      status.textContent =
+        "Form data has been saved.";
+
+      showMessage("Form data saved successfully.");
+    }
+
+    function restoreData() {
+      const savedData =
+        localStorage.getItem("restoredFormData");
+
+      if (!savedData) {
+        status.textContent =
+          "No previously saved form data found.";
+
+        showMessage("No saved data found.");
+        return;
+      }
+
+      try {
+        const formData =
+          JSON.parse(savedData);
+
+        studentName.value =
+          formData.studentName || "";
+
+        email.value =
+          formData.email || "";
+
+        course.value =
+          formData.course || "";
+
+        address.value =
+          formData.address || "";
+
+        status.textContent =
+          "Previously entered form data has been restored.";
+
+        showMessage("Form data restored successfully.");
+      } catch (error) {
+        localStorage.removeItem("restoredFormData");
+
+        status.textContent =
+          "Saved data could not be restored.";
+
+        showMessage("Saved data is invalid.");
+      }
+    }
+
+    function clearData() {
+      const confirmed = confirm(
+        "Are you sure you want to clear the saved form data?"
+      );
+
+      if (!confirmed) {
+        return;
+      }
+
+      localStorage.removeItem("restoredFormData");
+
+      studentName.value = "";
+      email.value = "";
+      course.value = "";
+      address.value = "";
+
+      status.textContent =
+        "No saved form data is available.";
+
+      showMessage("Saved form data cleared.");
+    }
+
+    function showMessage(text) {
+      message.textContent = text;
+      message.style.color = "#16a34a";
+
+      setTimeout(function() {
+        message.textContent = "";
+      }, 2500);
+    }
+
+    window.addEventListener("load", function() {
+      restoreData();
+    });
+  </script>
+
+</body>
+</html>s

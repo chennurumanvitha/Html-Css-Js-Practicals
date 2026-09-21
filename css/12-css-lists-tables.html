@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>CSS Lists and Tables | CSS Practical 12</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: #f1f5f9;
+            color: #334155;
+            line-height: 1.6;
+        }
+
+        /* Header */
+        header {
+            background: #0f172a;
+            color: white;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header .logo {
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        header nav a {
+            color: #cbd5e1;
+            text-decoration: none;
+            margin-left: 25px;
+            font-weight: 500;
+        }
+
+        header nav a:hover {
+            color: white;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #1e3a8a, #2563eb);
+            color: white;
+            text-align: center;
+            padding: 65px 20px;
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 7px 15px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+        }
+
+        .hero h1 {
+            font-size: 38px;
+            margin-bottom: 10px;
+        }
+
+        .hero p {
+            font-size: 17px;
+            color: #dbeafe;
+        }
+
+        /* Main Content */
+        main {
+            width: 90%;
+            max-width: 1050px;
+            margin: 40px auto;
+        }
+
+        .objective {
+            background: white;
+            border-left: 5px solid #2563eb;
+            padding: 22px 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
+            margin-bottom: 25px;
+        }
+
+        .objective h2 {
+            color: #1e3a8a;
+            margin-bottom: 8px;
+        }
+
+        .content-card {
+            background: white;
+            padding: 35px;
+            margin-bottom: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
+        }
+
+        .content-card h2 {
+            color: #1e3a8a;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #dbeafe;
+        }
+
+        /* Lists */
+        .list-container {
+            background: #f8fafc;
+            border-left: 4px solid #2563eb;
+            border-radius: 10px;
+            padding: 25px 35px;
+            margin-top: 20px;
+        }
+
+        .styled-list {
+            padding-left: 25px;
+        }
+
+        .styled-list li {
+            margin-bottom: 10px;
+            padding: 8px 12px;
+            background: white;
+            border-radius: 6px;
+        }
+
+        .unordered-list {
+            list-style-type: square;
+        }
+
+        .ordered-list {
+            list-style-type: upper-roman;
+        }
+
+        .custom-list {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .custom-list li::before {
+            content: "✓";
+            color: #2563eb;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        /* Table */
+        .table-container {
+            overflow-x: auto;
+            margin-top: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        th {
+            background: #1e3a8a;
+            color: white;
+            padding: 15px;
+            text-align: left;
+        }
+
+        td {
+            padding: 14px 15px;
+            border-bottom: 1px solid #cbd5e1;
+        }
+
+        tr:nth-child(even) {
+            background: #f8fafc;
+        }
+
+        tr:hover {
+            background: #dbeafe;
+        }
+
+        /* Buttons */
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin: 30px 0;
+        }
+
+        .btn {
+            text-decoration: none;
+            background: #2563eb;
+            color: white;
+            padding: 12px 22px;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background: #1e3a8a;
+            transform: translateY(-2px);
+        }
+
+        .secondary {
+            background: #64748b;
+        }
+
+        .secondary:hover {
+            background: #475569;
+        }
+
+        /* Footer */
+        footer {
+            background: #0f172a;
+            color: #cbd5e1;
+            text-align: center;
+            padding: 25px;
+            margin-top: 40px;
+        }
+
+        footer strong {
+            color: white;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 750px) {
+            header {
+                flex-direction: column;
+                gap: 12px;
+                text-align: center;
+                padding: 20px;
+            }
+
+            header nav a {
+                margin: 0 8px;
+            }
+
+            .hero h1 {
+                font-size: 30px;
+            }
+
+            .content-card {
+                padding: 25px 20px;
+            }
+
+            .list-container {
+                padding: 20px;
+            }
+
+            th,
+            td {
+                padding: 10px;
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="logo">Web Practicals</div>
+
+        <nav>
+            <a href="../index.html">Home</a>
+            <a href="index.html">CSS Programs</a>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="badge">CSS PRACTICAL 12</div>
+        <h1>CSS Lists and Tables</h1>
+        <p>Creating and styling lists and tables using CSS.</p>
+    </section>
+
+    <!-- Main Content -->
+    <main>
+
+        <!-- Objective -->
+        <section class="objective">
+            <h2>Objective</h2>
+            <p>
+                To create a webpage using CSS to style different types of lists
+                and tables with colors, spacing, borders, and hover effects.
+            </p>
+        </section>
+
+        <!-- Unordered List -->
+        <section class="content-card">
+            <h2>Styled Unordered List</h2>
+
+            <div class="list-container">
+                <ul class="styled-list unordered-list">
+                    <li>HTML and Web Development</li>
+                    <li>CSS and Responsive Design</li>
+                    <li>JavaScript Programming</li>
+                    <li>Database Management</li>
+                    <li>Artificial Intelligence</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Ordered List -->
+        <section class="content-card">
+            <h2>Styled Ordered List</h2>
+
+            <div class="list-container">
+                <ol class="styled-list ordered-list">
+                    <li>Plan the webpage</li>
+                    <li>Create the HTML structure</li>
+                    <li>Apply CSS styles</li>
+                    <li>Test the webpage</li>
+                    <li>Make the design responsive</li>
+                </ol>
+            </div>
+        </section>
+
+        <!-- Custom List -->
+        <section class="content-card">
+            <h2>Custom Styled List</h2>
+
+            <div class="list-container">
+                <ul class="custom-list">
+                    <li>Clean and simple design</li>
+                    <li>Easy to read content</li>
+                    <li>Proper spacing and alignment</li>
+                    <li>Responsive layout</li>
+                    <li>Interactive hover effects</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Table -->
+        <section class="content-card">
+            <h2>Styled Table</h2>
+
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>S.No</th>
+                            <th>Student Name</th>
+                            <th>Subject</th>
+                            <th>Marks</th>
+                            <th>Grade</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>Manvitha</td>
+                            <td>Web Development</td>
+                            <td>92</td>
+                            <td>A+</td>
+                        </tr>
+
+                        <tr>
+                            <td>2</td>
+                            <td>Rahul</td>
+                            <td>Database</td>
+                            <td>88</td>
+                            <td>A</td>
+                        </tr>
+
+                        <tr>
+                            <td>3</td>
+                            <td>Ananya</td>
+                            <td>JavaScript</td>
+                            <td>90</td>
+                            <td>A+</td>
+                        </tr>
+
+                        <tr>
+                            <td>4</td>
+                            <td>Arjun</td>
+                            <td>CSS</td>
+                            <td>85</td>
+                            <td>A</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Navigation Buttons -->
+        <div class="buttons">
+            <a href="css-11.html" class="btn secondary">Previous Practical</a>
+            <a href="index.html" class="btn">CSS Programs</a>
+            <a href="../index.html" class="btn">Dashboard</a>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>
+            <strong>CSS Practical 12</strong> | CSS Lists and Tables
+        </p>
+        <p>Web Development Practical Assignment</p>
+    </footer>
+
+</body>
+</html>

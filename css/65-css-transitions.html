@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Transitions | Practical 65</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: #f1f5f9;
+            color: #334155;
+            line-height: 1.6;
+        }
+
+        header {
+            background: #0f172a;
+            color: white;
+            padding: 18px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        nav {
+            display: flex;
+            gap: 22px;
+        }
+
+        nav a {
+            color: #cbd5e1;
+            text-decoration: none;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            color: white;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #1e3a8a, #2563eb);
+            color: white;
+            text-align: center;
+            padding: 65px 20px;
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 8px 18px;
+            border-radius: 20px;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        .hero h1 {
+            font-size: 38px;
+            margin-bottom: 10px;
+        }
+
+        .hero p {
+            font-size: 17px;
+        }
+
+        main {
+            width: 90%;
+            max-width: 1050px;
+            margin: 40px auto;
+        }
+
+        .objective,
+        .content-card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(15, 23, 42, 0.08);
+        }
+
+        .objective {
+            border-left: 5px solid #2563eb;
+            padding: 22px 25px;
+            margin-bottom: 25px;
+        }
+
+        .objective h2 {
+            color: #1e3a8a;
+            margin-bottom: 8px;
+        }
+
+        .content-card {
+            padding: 35px;
+            margin-bottom: 25px;
+        }
+
+        .content-card h2 {
+            color: #1e3a8a;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #dbeafe;
+        }
+
+        .content-card h3 {
+            color: #2563eb;
+            margin-bottom: 10px;
+        }
+
+        .content-card p {
+            margin-bottom: 12px;
+        }
+
+        /* Basic Transition */
+
+        .transition-box {
+            width: 180px;
+            height: 100px;
+            background: #2563eb;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 25px auto;
+            border-radius: 10px;
+            font-weight: 600;
+            transition: 0.5s;
+        }
+
+        .transition-box:hover {
+            width: 300px;
+            background: #1e3a8a;
+        }
+
+        /* Background Transition */
+
+        .color-box {
+            width: 180px;
+            height: 100px;
+            background: #dbeafe;
+            color: #1e3a8a;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 25px auto;
+            border-radius: 10px;
+            font-weight: 600;
+            transition: background-color 0.6s ease;
+        }
+
+        .color-box:hover {
+            background: #2563eb;
+            color: white;
+        }
+
+        /* Border Transition */
+
+        .border-box {
+            width: 180px;
+            height: 100px;
+            background: #f8fafc;
+            color: #1e3a8a;
+            border: 3px solid #cbd5e1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 25px auto;
+            border-radius: 10px;
+            font-weight: 600;
+            transition: border-color 0.5s ease,
+                        border-radius 0.5s ease;
+        }
+
+        .border-box:hover {
+            border-color: #2563eb;
+            border-radius: 30px;
+        }
+
+        /* Transform Transition */
+
+        .transform-box {
+            width: 150px;
+            height: 100px;
+            background: #1e3a8a;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 30px auto;
+            border-radius: 10px;
+            font-weight: 600;
+            transition: transform 0.5s ease;
+        }
+
+        .transform-box:hover {
+            transform: scale(1.15) rotate(3deg);
+        }
+
+        /* Multiple Transition Cards */
+
+        .transition-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-top: 25px;
+        }
+
+        .effect-card {
+            background: #f8fafc;
+            border-left: 4px solid #2563eb;
+            border-radius: 10px;
+            padding: 25px;
+            text-align: center;
+            transition: 0.4s;
+        }
+
+        .effect-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 8px 20px rgba(15, 23, 42, 0.15);
+            background: #eff6ff;
+        }
+
+        .effect-icon {
+            width: 60px;
+            height: 60px;
+            background: #2563eb;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto 15px;
+            font-size: 20px;
+            font-weight: 700;
+            transition: 0.4s;
+        }
+
+        .effect-card:hover .effect-icon {
+            transform: rotate(360deg);
+            background: #1e3a8a;
+        }
+
+        /* Button Transition */
+
+        .transition-button {
+            display: inline-block;
+            background: #2563eb;
+            color: white;
+            text-decoration: none;
+            padding: 14px 28px;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: background 0.3s ease,
+                        transform 0.3s ease,
+                        box-shadow 0.3s ease;
+        }
+
+        .transition-button:hover {
+            background: #1e3a8a;
+            transform: translateY(-4px);
+            box-shadow: 0 8px 18px rgba(37, 99, 235, 0.3);
+        }
+
+        .button-area {
+            text-align: center;
+            margin-top: 25px;
+        }
+
+        /* Image Transition */
+
+        .image-container {
+            width: 100%;
+            max-width: 700px;
+            margin: 25px auto;
+            overflow: hidden;
+            border-radius: 12px;
+        }
+
+        .image-container img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.6s ease,
+                        filter 0.6s ease;
+        }
+
+        .image-container:hover img {
+            transform: scale(1.08);
+            filter: brightness(0.8);
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 22px;
+            background: #2563eb;
+            color: white;
+            text-decoration: none;
+            border-radius: 7px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background: #1e3a8a;
+            transform: translateY(-2px);
+        }
+
+        .secondary {
+            background: #0f172a;
+        }
+
+        .secondary:hover {
+            background: #1e293b;
+        }
+
+        footer {
+            background: #0f172a;
+            color: #cbd5e1;
+            text-align: center;
+            padding: 25px;
+            margin-top: 40px;
+        }
+
+        footer strong {
+            color: white;
+        }
+
+        @media (max-width: 850px) {
+            .transition-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 750px) {
+            header {
+                justify-content: center;
+                gap: 15px;
+            }
+
+            nav {
+                width: 100%;
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+
+            .hero h1 {
+                font-size: 30px;
+            }
+
+            .content-card {
+                padding: 25px 20px;
+            }
+
+            .transition-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .image-container img {
+                height: 220px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+
+        <div class="logo">CSS Learning Hub</div>
+
+        <nav>
+            <a href="../index.html">Home</a>
+            <a href="index.html">CSS Programs</a>
+        </nav>
+
+    </header>
+
+    <section class="hero">
+
+        <div class="badge">CSS PRACTICAL 65</div>
+
+        <h1>CSS Transitions</h1>
+
+        <p>
+            Creating smooth visual changes using CSS transitions
+        </p>
+
+    </section>
+
+    <main>
+
+        <section class="objective">
+
+            <h2>Objective</h2>
+
+            <p>
+                To create a webpage demonstrating CSS transitions
+                and apply smooth effects to properties such as
+                background color, size, borders, transformations,
+                buttons, and images.
+            </p>
+
+        </section>
+
+        <section class="content-card">
+
+            <h2>Basic CSS Transition</h2>
+
+            <p>
+                CSS transitions allow property changes to occur
+                smoothly over a specified period of time instead
+                of changing instantly.
+            </p>
+
+            <div class="transition-box">
+                Hover Me
+            </div>
+
+        </section>
+
+        <section class="content-card">
+
+            <h2>Background Color Transition</h2>
+
+            <p>
+                The background color smoothly changes when the
+                mouse pointer is moved over the element.
+            </p>
+
+            <div class="color-box">
+                Hover Me
+            </div>
+
+        </section>
+
+        <section class="content-card">
+
+            <h2>Border Transition</h2>
+
+            <p>
+                The border color and border radius can also be
+                changed smoothly using CSS transitions.
+            </p>
+
+            <div class="border-box">
+                Hover Me
+            </div>
+
+        </section>
+
+        <section class="content-card">
+
+            <h2>Transform Transition</h2>
+
+            <p>
+                CSS transitions can be combined with transform
+                properties such as scale and rotate.
+            </p>
+
+            <div class="transform-box">
+                Hover Me
+            </div>
+
+        </section>
+
+        <section class="content-card">
+
+            <h2>Multiple Transition Effects</h2>
+
+            <div class="transition-grid">
+
+                <div class="effect-card">
+
+                    <div class="effect-icon">1</div>
+
+                    <h3>Lift Effect</h3>
+
+                    <p>
+                        The card moves upward smoothly when hovered.
+                    </p>
+
+                </div>
+
+                <div class="effect-card">
+
+                    <div class="effect-icon">2</div>
+
+                    <h3>Rotate Effect</h3>
+
+                    <p>
+                        The circular element rotates smoothly.
+                    </p>
+
+                </div>
+
+                <div class="effect-card">
+
+                    <div class="effect-icon">3</div>
+
+                    <h3>Shadow Effect</h3>
+
+                    <p>
+                        A smooth shadow appears around the card.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <section class="content-card">
+
+            <h2>Button Transition</h2>
+
+            <p>
+                Transitions can be used to create interactive
+                button effects when the user moves the pointer
+                over the button.
+            </p>
+
+            <div class="button-area">
+
+                <a href="#" class="transition-button">
+                    Hover Over Button
+                </a>
+
+            </div>
+
+        </section>
+
+        <section class="content-card">
+
+            <h2>Image Transition</h2>
+
+            <p>
+                The image smoothly zooms and changes brightness
+                when the mouse pointer is placed over it.
+            </p>
+
+            <div class="image-container">
+
+                <img
+                    src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1000&q=80"
+                    alt="Web development workspace">
+
+            </div>
+
+        </section>
+
+        <div class="buttons">
+
+            <a href="css-64.html" class="btn secondary">
+                ← Previous Practical
+            </a>
+
+            <a href="index.html" class="btn">
+                CSS Programs
+            </a>
+
+            <a href="../index.html" class="btn secondary">
+                Dashboard
+            </a>
+
+        </div>
+
+    </main>
+
+    <footer>
+
+        <p>
+            <strong>CSS Practical 65</strong> |
+            CSS Transitions
+        </p>
+
+        <p>
+            Designed using HTML5 and CSS3
+        </p>
+
+    </footer>
+
+</body>
+</html>

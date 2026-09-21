@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clear All localStorage Data</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: #f1f5f9;
+            color: #334155;
+            line-height: 1.6;
+        }
+
+        header {
+            background: #0f172a;
+            padding: 18px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: white;
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        nav a {
+            color: #cbd5e1;
+            text-decoration: none;
+            margin-left: 25px;
+            font-size: 15px;
+        }
+
+        nav a:hover {
+            color: white;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #1e3a8a, #2563eb);
+            color: white;
+            text-align: center;
+            padding: 65px 20px;
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 7px 16px;
+            border-radius: 20px;
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+
+        .hero h1 {
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+
+        .hero p {
+            font-size: 17px;
+            opacity: 0.9;
+        }
+
+        main {
+            width: 90%;
+            max-width: 1050px;
+            margin: 40px auto;
+        }
+
+        .objective {
+            background: white;
+            padding: 22px;
+            border-left: 5px solid #2563eb;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
+            margin-bottom: 25px;
+        }
+
+        .objective h2 {
+            color: #1e3a8a;
+            margin-bottom: 8px;
+        }
+
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(15, 23, 42, 0.08);
+            margin-bottom: 25px;
+        }
+
+        .card h2 {
+            color: #1e3a8a;
+            margin-bottom: 25px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e2e8f0;
+        }
+
+        .storage-box {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            padding: 25px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .storage-box h3 {
+            color: #1e3a8a;
+            margin-bottom: 15px;
+        }
+
+        .data-display {
+            background: #e0f2fe;
+            border: 1px solid #bae6fd;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            font-weight: 600;
+            color: #0c4a6e;
+        }
+
+        .message {
+            min-height: 25px;
+            margin-top: 15px;
+            font-weight: 600;
+        }
+
+        .success {
+            color: #15803d;
+        }
+
+        .warning {
+            color: #b45309;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+
+        .btn {
+            border: none;
+            background: #2563eb;
+            color: white;
+            padding: 11px 20px;
+            border-radius: 7px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .btn:hover {
+            background: #1d4ed8;
+        }
+
+        .btn.danger {
+            background: #dc2626;
+        }
+
+        .btn.danger:hover {
+            background: #b91c1c;
+        }
+
+        .btn.secondary {
+            background: #475569;
+        }
+
+        .btn.secondary:hover {
+            background: #334155;
+        }
+
+        footer {
+            background: #0f172a;
+            color: #cbd5e1;
+            text-align: center;
+            padding: 22px;
+            margin-top: 50px;
+        }
+
+        @media (max-width: 750px) {
+            header {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            nav a {
+                margin: 0 8px;
+            }
+
+            .hero h1 {
+                font-size: 28px;
+            }
+
+            .card {
+                padding: 22px;
+            }
+        }
+
+        @media (max-width: 550px) {
+            main {
+                width: 94%;
+            }
+
+            .hero {
+                padding: 50px 15px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="logo">Web Storage Practical</div>
+
+        <nav>
+            <a href="../../index.html">Home</a>
+<a href="../index.html">JavaScript Programs</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <span class="badge">Practical 05</span>
+        <h1>Clear All localStorage Data</h1>
+        <p>Remove all stored data from localStorage</p>
+    </section>
+
+    <main>
+
+        <section class="objective">
+            <h2>Objective</h2>
+            <p>
+                To clear all data stored in the browser's
+                <strong>localStorage</strong>.
+            </p>
+        </section>
+
+        <section class="card">
+            <h2>Clear All Stored Data</h2>
+
+            <div class="storage-box">
+
+                <h3>Current localStorage Items</h3>
+
+                <div class="data-display" id="storageDisplay">
+                    Checking localStorage...
+                </div>
+
+                <div class="buttons">
+                    <button class="btn danger" onclick="clearStorage()">
+                        Clear All Data
+                    </button>
+
+                    <button class="btn secondary" onclick="displayStorage()">
+                        Refresh
+                    </button>
+                </div>
+
+                <p class="message" id="message"></p>
+
+            </div>
+        </section>
+
+        <div class="buttons">
+            <button class="btn secondary"
+                onclick="window.location.href='04-delete-localstorage.html'">
+                Previous
+            </button>
+
+            <button class="btn"
+                onclick="window.location.href='../index.html'">
+                Home
+            </button>
+
+            <button class="btn"
+                onclick="window.location.href='06-multiple-values-localstorage.html'">
+                Next
+            </button>
+        </div>
+
+    </main>
+
+    <footer>
+        Web Storage Practicals &copy; 2026
+    </footer>
+
+    <script>
+        function displayStorage() {
+            const display = document.getElementById("storageDisplay");
+            const message = document.getElementById("message");
+
+            if (localStorage.length > 0) {
+                display.textContent =
+                    localStorage.length + " item(s) stored in localStorage.";
+                message.textContent = "";
+                message.className = "message";
+            } else {
+                display.textContent = "No data found in localStorage.";
+                message.textContent = "";
+                message.className = "message warning";
+            }
+        }
+
+        function clearStorage() {
+            const message = document.getElementById("message");
+
+            if (localStorage.length > 0) {
+                localStorage.clear();
+
+                document.getElementById("storageDisplay").textContent =
+                    "No data found in localStorage.";
+
+                message.textContent =
+                    "All localStorage data cleared successfully.";
+
+                message.className = "message success";
+            } else {
+                message.textContent =
+                    "There is no data to clear.";
+
+                message.className = "message warning";
+            }
+        }
+
+        displayStorage();
+    </script>
+
+</body>
+</html>

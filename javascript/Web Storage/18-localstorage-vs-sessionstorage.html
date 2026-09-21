@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Compare localStorage and sessionStorage</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Segoe UI", Arial, sans-serif;
+      background: #f1f5f9;
+      color: #334155;
+      line-height: 1.6;
+    }
+
+    header {
+      background: #0f172a;
+      padding: 18px 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      color: white;
+      font-size: 22px;
+      font-weight: bold;
+    }
+
+    nav a {
+      color: #cbd5e1;
+      text-decoration: none;
+      margin-left: 25px;
+      font-size: 15px;
+    }
+
+    nav a:hover {
+      color: white;
+    }
+
+    .hero {
+      background: linear-gradient(135deg, #1e3a8a, #2563eb);
+      color: white;
+      text-align: center;
+      padding: 65px 20px;
+    }
+
+    .badge {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.15);
+      padding: 7px 16px;
+      border-radius: 20px;
+      margin-bottom: 15px;
+      font-size: 14px;
+    }
+
+    .hero h1 {
+      font-size: 36px;
+      margin-bottom: 10px;
+    }
+
+    .hero p {
+      font-size: 17px;
+      opacity: 0.9;
+    }
+
+    main {
+      width: 90%;
+      max-width: 1050px;
+      margin: 40px auto;
+    }
+
+    .objective {
+      background: white;
+      padding: 22px;
+      border-left: 5px solid #2563eb;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
+      margin-bottom: 25px;
+    }
+
+    .objective h2 {
+      color: #1e3a8a;
+      margin-bottom: 8px;
+    }
+
+    .card {
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(15, 23, 42, 0.08);
+      margin-bottom: 25px;
+    }
+
+    .card h2 {
+      color: #1e3a8a;
+      margin-bottom: 25px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #e2e8f0;
+    }
+
+    .comparison {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 30px;
+      overflow: hidden;
+      border-radius: 8px;
+    }
+
+    .comparison th,
+    .comparison td {
+      border: 1px solid #e2e8f0;
+      padding: 14px;
+      text-align: left;
+    }
+
+    .comparison th {
+      background: #1e3a8a;
+      color: white;
+    }
+
+    .comparison tr:nth-child(even) {
+      background: #f8fafc;
+    }
+
+    .storage-section {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .storage-box {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 10px;
+      padding: 22px;
+    }
+
+    .storage-box h3 {
+      color: #1e3a8a;
+      margin-bottom: 15px;
+    }
+
+    .storage-box input {
+      width: 100%;
+      padding: 11px;
+      border: 1px solid #cbd5e1;
+      border-radius: 7px;
+      margin-bottom: 12px;
+      font-size: 15px;
+    }
+
+    .storage-box input:focus {
+      outline: none;
+      border-color: #2563eb;
+    }
+
+    .stored-value {
+      margin-top: 15px;
+      padding: 12px;
+      background: white;
+      border: 1px solid #e2e8f0;
+      border-radius: 7px;
+      min-height: 48px;
+      word-break: break-word;
+    }
+
+    .buttons {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      flex-wrap: wrap;
+      margin-top: 25px;
+    }
+
+    .btn {
+      border: none;
+      background: #2563eb;
+      color: white;
+      padding: 11px 20px;
+      border-radius: 7px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      background: #1d4ed8;
+    }
+
+    .btn.secondary {
+      background: #475569;
+    }
+
+    .btn.secondary:hover {
+      background: #334155;
+    }
+
+    .message {
+      text-align: center;
+      margin-top: 15px;
+      font-weight: 600;
+      min-height: 24px;
+    }
+
+    .navigation {
+      display: flex;
+      justify-content: space-between;
+      gap: 15px;
+      margin-top: 35px;
+    }
+
+    .navigation a {
+      text-decoration: none;
+      background: #2563eb;
+      color: white;
+      padding: 11px 20px;
+      border-radius: 7px;
+      font-weight: 600;
+      font-size: 14px;
+    }
+
+    .navigation a:hover {
+      background: #1d4ed8;
+    }
+
+    footer {
+      background: #0f172a;
+      color: #cbd5e1;
+      text-align: center;
+      padding: 22px;
+      margin-top: 50px;
+    }
+
+    @media (max-width: 750px) {
+      header {
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      nav a {
+        margin: 0 8px;
+      }
+
+      .hero h1 {
+        font-size: 28px;
+      }
+
+      .card {
+        padding: 22px;
+      }
+
+      .storage-section {
+        grid-template-columns: 1fr;
+      }
+
+      .comparison {
+        font-size: 14px;
+      }
+
+      .comparison th,
+      .comparison td {
+        padding: 10px;
+      }
+
+      .navigation {
+        flex-direction: column;
+      }
+
+      .navigation a {
+        text-align: center;
+      }
+    }
+
+    @media (max-width: 550px) {
+      main {
+        width: 94%;
+      }
+
+      .hero {
+        padding: 50px 15px;
+      }
+
+      .comparison {
+        display: block;
+        overflow-x: auto;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <div class="logo">Web Storage Practical</div>
+
+    <nav>
+      <a href="../../index.html">Home</a>
+<a href="../index.html">JavaScript Programs</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div class="badge">Practical 18</div>
+    <h1>localStorage vs sessionStorage</h1>
+    <p>Compare the two browser storage mechanisms</p>
+  </section>
+
+  <main>
+
+    <section class="objective">
+      <h2>Objective</h2>
+      <p>
+        To compare localStorage and sessionStorage and demonstrate
+        how data is stored and retrieved using both browser storage methods.
+      </p>
+    </section>
+
+    <section class="card">
+
+      <h2>Storage Comparison</h2>
+
+      <table class="comparison">
+        <thead>
+          <tr>
+            <th>Feature</th>
+            <th>localStorage</th>
+            <th>sessionStorage</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr>
+            <td>Storage Duration</td>
+            <td>Data remains until it is removed.</td>
+            <td>Data remains for the current browser tab session.</td>
+          </tr>
+
+          <tr>
+            <td>Scope</td>
+            <td>Available across browser tabs for the same origin.</td>
+            <td>Limited to the current tab or window.</td>
+          </tr>
+
+          <tr>
+            <td>Data Format</td>
+            <td>Stores data as strings.</td>
+            <td>Stores data as strings.</td>
+          </tr>
+
+          <tr>
+            <td>JavaScript API</td>
+            <td>localStorage</td>
+            <td>sessionStorage</td>
+          </tr>
+
+          <tr>
+            <td>Typical Use</td>
+            <td>Preferences and persistent application data.</td>
+            <td>Temporary data for a browser session.</td>
+          </tr>
+        </tbody>
+      </table>
+
+    </section>
+
+    <section class="card">
+
+      <h2>Storage Demonstration</h2>
+
+      <div class="storage-section">
+
+        <div class="storage-box">
+
+          <h3>localStorage</h3>
+
+          <input
+            type="text"
+            id="localInput"
+            placeholder="Enter a value"
+          >
+
+          <button
+            type="button"
+            class="btn"
+            onclick="saveLocal()"
+          >
+            Save
+          </button>
+
+          <button
+            type="button"
+            class="btn secondary"
+            onclick="loadLocal()"
+          >
+            Retrieve
+          </button>
+
+          <div class="stored-value" id="localOutput">
+            No value loaded.
+          </div>
+
+        </div>
+
+        <div class="storage-box">
+
+          <h3>sessionStorage</h3>
+
+          <input
+            type="text"
+            id="sessionInput"
+            placeholder="Enter a value"
+          >
+
+          <button
+            type="button"
+            class="btn"
+            onclick="saveSession()"
+          >
+            Save
+          </button>
+
+          <button
+            type="button"
+            class="btn secondary"
+            onclick="loadSession()"
+          >
+            Retrieve
+          </button>
+
+          <div class="stored-value" id="sessionOutput">
+            No value loaded.
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="buttons">
+
+        <button
+          type="button"
+          class="btn"
+          onclick="clearLocal()"
+        >
+          Clear localStorage
+        </button>
+
+        <button
+          type="button"
+          class="btn secondary"
+          onclick="clearSession()"
+        >
+          Clear sessionStorage
+        </button>
+
+      </div>
+
+      <div class="message" id="message"></div>
+
+    </section>
+
+    <div class="navigation">
+      <a href="17-visitor-counter-localstorage.html">← Previous</a>
+      <a href="../index.html">Home</a>
+      <a href="19-temporary-form-sessionstorage.html">Next →</a>
+    </div>
+
+  </main>
+
+  <footer>
+    Web Storage Practicals &copy; 2026
+  </footer>
+
+  <script>
+    const localInput =
+      document.getElementById("localInput");
+
+    const sessionInput =
+      document.getElementById("sessionInput");
+
+    const localOutput =
+      document.getElementById("localOutput");
+
+    const sessionOutput =
+      document.getElementById("sessionOutput");
+
+    const message =
+      document.getElementById("message");
+
+    function saveLocal() {
+      const value = localInput.value.trim();
+
+      if (value === "") {
+        showMessage("Please enter a value.");
+        return;
+      }
+
+      localStorage.setItem("comparisonLocal", value);
+
+      localOutput.textContent = value;
+
+      showMessage("Value saved in localStorage.");
+    }
+
+    function loadLocal() {
+      const value =
+        localStorage.getItem("comparisonLocal");
+
+      if (value === null) {
+        localOutput.textContent =
+          "No value found in localStorage.";
+        return;
+      }
+
+      localOutput.textContent = value;
+
+      showMessage("Value retrieved from localStorage.");
+    }
+
+    function saveSession() {
+      const value = sessionInput.value.trim();
+
+      if (value === "") {
+        showMessage("Please enter a value.");
+        return;
+      }
+
+      sessionStorage.setItem("comparisonSession", value);
+
+      sessionOutput.textContent = value;
+
+      showMessage("Value saved in sessionStorage.");
+    }
+
+    function loadSession() {
+      const value =
+        sessionStorage.getItem("comparisonSession");
+
+      if (value === null) {
+        sessionOutput.textContent =
+          "No value found in sessionStorage.";
+        return;
+      }
+
+      sessionOutput.textContent = value;
+
+      showMessage("Value retrieved from sessionStorage.");
+    }
+
+    function clearLocal() {
+      localStorage.removeItem("comparisonLocal");
+
+      localOutput.textContent =
+        "No value loaded.";
+
+      showMessage("localStorage value cleared.");
+    }
+
+    function clearSession() {
+      sessionStorage.removeItem("comparisonSession");
+
+      sessionOutput.textContent =
+        "No value loaded.";
+
+      showMessage("sessionStorage value cleared.");
+    }
+
+    function showMessage(text) {
+      message.textContent = text;
+      message.style.color = "#16a34a";
+
+      setTimeout(function() {
+        message.textContent = "";
+      }, 2000);
+    }
+
+    loadLocal();
+    loadSession();
+  </script>
+
+</body>
+</html>

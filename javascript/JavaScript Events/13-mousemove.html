@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Practical 13 - onmousemove Event</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: #f1f5f9;
+            color: #334155;
+            line-height: 1.6;
+        }
+
+        header {
+            background: #0f172a;
+            padding: 18px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: white;
+            font-size: 22px;
+            font-weight: 700;
+        }
+
+        nav a {
+            color: #cbd5e1;
+            text-decoration: none;
+            margin-left: 25px;
+            font-weight: 500;
+        }
+
+        nav a:hover {
+            color: white;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #1e3a8a, #2563eb);
+            color: white;
+            text-align: center;
+            padding: 65px 20px;
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.18);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        .hero h1 {
+            font-size: 38px;
+            margin-bottom: 10px;
+        }
+
+        .hero p {
+            font-size: 17px;
+            opacity: 0.9;
+        }
+
+        main {
+            width: 90%;
+            max-width: 1050px;
+            margin: 40px auto;
+        }
+
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 15px rgba(15, 23, 42, 0.08);
+        }
+
+        .objective {
+            border-left: 5px solid #2563eb;
+        }
+
+        .card h2 {
+            color: #1e3a8a;
+            margin-bottom: 18px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .mouse-area {
+            width: 100%;
+            height: 300px;
+            background: #eff6ff;
+            border: 2px dashed #2563eb;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            cursor: crosshair;
+            user-select: none;
+        }
+
+        .mouse-area p {
+            color: #1e3a8a;
+            font-weight: 600;
+            font-size: 18px;
+        }
+
+        .output {
+            margin-top: 20px;
+            padding: 18px;
+            background: #eff6ff;
+            border: 2px dashed #93c5fd;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .output strong {
+            color: #1e3a8a;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin: 30px 0;
+        }
+
+        .btn-link {
+            display: inline-block;
+            padding: 10px 18px;
+            background: #2563eb;
+            color: white;
+            text-decoration: none;
+            border-radius: 7px;
+            font-weight: 600;
+        }
+
+        .btn-link:hover {
+            background: #1d4ed8;
+        }
+
+        .btn-link.secondary {
+            background: #475569;
+        }
+
+        .btn-link.secondary:hover {
+            background: #334155;
+        }
+
+        footer {
+            background: #0f172a;
+            color: #cbd5e1;
+            text-align: center;
+            padding: 22px;
+            margin-top: 50px;
+        }
+
+        @media (max-width: 750px) {
+            header {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            nav a {
+                margin: 0 8px;
+            }
+
+            .hero h1 {
+                font-size: 30px;
+            }
+
+            .card {
+                padding: 22px;
+            }
+        }
+
+        @media (max-width: 550px) {
+            .hero {
+                padding: 45px 15px;
+            }
+
+            .hero h1 {
+                font-size: 26px;
+            }
+
+            .mouse-area {
+                height: 240px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="logo">JavaScript Events</div>
+
+        <nav>
+            <a href="../../index.html">Home</a>
+<a href="../index.html">JavaScript Programs</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <span class="badge">Practical 13</span>
+        <h1>onmousemove Event</h1>
+        <p>Track the mouse pointer position using JavaScript</p>
+    </section>
+
+    <main>
+
+        <section class="card objective">
+            <h2>Objective</h2>
+            <p>
+                To demonstrate the <strong>onmousemove</strong> event by detecting
+                mouse movement over an HTML element and displaying the current
+                mouse coordinates.
+            </p>
+        </section>
+
+        <section class="card">
+            <h2>Interactive Demonstration</h2>
+
+            <div class="mouse-area" id="mouseArea">
+                <p>Move your mouse over this area</p>
+            </div>
+
+            <div class="output">
+                <p id="eventStatus">
+                    <strong>Event:</strong> Waiting for mouse movement
+                </p>
+
+                <p id="coordinates">
+                    <strong>Mouse Position:</strong> X: 0, Y: 0
+                </p>
+
+                <p id="moveCount">
+                    <strong>Movement Count:</strong> 0
+                </p>
+            </div>
+        </section>
+
+        <div class="buttons">
+            <a href="12-mousedown-mouseup.html" class="btn-link">
+                ← Previous Practical
+            </a>
+
+            <a href="index.html" class="btn-link secondary">
+                Events Programs
+            </a>
+
+            <a href="14-next.html" class="btn-link">
+                Next Practical →
+            </a>
+        </div>
+
+    </main>
+
+    <footer>
+        <p>JavaScript Practical Programs</p>
+    </footer>
+
+    <script>
+        const mouseArea = document.getElementById("mouseArea");
+        const eventStatus = document.getElementById("eventStatus");
+        const coordinates = document.getElementById("coordinates");
+        const moveCount = document.getElementById("moveCount");
+
+        let count = 0;
+
+        mouseArea.onmousemove = function(event) {
+            count++;
+
+            const rect = mouseArea.getBoundingClientRect();
+
+            const x = Math.round(event.clientX - rect.left);
+            const y = Math.round(event.clientY - rect.top);
+
+            eventStatus.innerHTML =
+                "<strong>Event:</strong> onmousemove triggered";
+
+            coordinates.innerHTML =
+                "<strong>Mouse Position:</strong> X: " + x + ", Y: " + y;
+
+            moveCount.innerHTML =
+                "<strong>Movement Count:</strong> " + count;
+        };
+    </script>
+
+</body>
+</html>

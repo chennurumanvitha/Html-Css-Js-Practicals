@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expense Tracker | JavaScript Mini Project</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: #f1f5f9;
+            color: #334155;
+            line-height: 1.6;
+        }
+
+        header {
+            background: #0f172a;
+            padding: 18px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: white;
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        nav a {
+            color: #cbd5e1;
+            text-decoration: none;
+            margin-left: 25px;
+            font-size: 15px;
+        }
+
+        nav a:hover {
+            color: white;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #1e3a8a, #2563eb);
+            color: white;
+            text-align: center;
+            padding: 65px 20px;
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 7px 16px;
+            border-radius: 20px;
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+
+        .hero h1 {
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+
+        .hero p {
+            font-size: 17px;
+            opacity: 0.9;
+        }
+
+        main {
+            width: 90%;
+            max-width: 1050px;
+            margin: 40px auto;
+        }
+
+        .objective {
+            background: white;
+            padding: 22px;
+            border-left: 5px solid #2563eb;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
+            margin-bottom: 25px;
+        }
+
+        .objective h2 {
+            color: #1e3a8a;
+            margin-bottom: 8px;
+        }
+
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(15, 23, 42, 0.08);
+            margin-bottom: 25px;
+        }
+
+        .card h2 {
+            color: #1e3a8a;
+            margin-bottom: 25px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e2e8f0;
+        }
+
+        .summary {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .summary-box {
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+        }
+
+        .summary-box h3 {
+            font-size: 14px;
+            color: #64748b;
+            margin-bottom: 8px;
+        }
+
+        .summary-box p {
+            font-size: 24px;
+            font-weight: bold;
+            color: #1e3a8a;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 18px;
+        }
+
+        .form-group {
+            margin-bottom: 5px;
+        }
+
+        .form-group.full {
+            grid-column: 1 / -1;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 7px;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #cbd5e1;
+            border-radius: 7px;
+            font-size: 15px;
+            outline: none;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            border-color: #2563eb;
+        }
+
+        .btn {
+            border: none;
+            background: #2563eb;
+            color: white;
+            padding: 11px 20px;
+            border-radius: 7px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .btn:hover {
+            background: #1d4ed8;
+        }
+
+        .btn.secondary {
+            background: #475569;
+        }
+
+        .btn.secondary:hover {
+            background: #334155;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 25px;
+        }
+
+        .message {
+            text-align: center;
+            min-height: 25px;
+            margin-top: 15px;
+            font-size: 14px;
+        }
+
+        .expense-list {
+            list-style: none;
+        }
+
+        .expense-item {
+            display: grid;
+            grid-template-columns: 1fr auto auto;
+            align-items: center;
+            gap: 15px;
+            padding: 15px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .expense-item:last-child {
+            border-bottom: none;
+        }
+
+        .expense-name {
+            font-weight: 600;
+            color: #1e293b;
+        }
+
+        .expense-category {
+            color: #64748b;
+            font-size: 13px;
+        }
+
+        .expense-amount {
+            font-weight: bold;
+            color: #dc2626;
+        }
+
+        .delete-btn {
+            border: none;
+            background: #fee2e2;
+            color: #b91c1c;
+            padding: 7px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .delete-btn:hover {
+            background: #fecaca;
+        }
+
+        .empty-message {
+            text-align: center;
+            color: #64748b;
+            padding: 25px;
+        }
+
+        .features {
+            padding-left: 20px;
+        }
+
+        .features li {
+            margin-bottom: 8px;
+        }
+
+        .navigation {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+
+        .navigation a {
+            text-decoration: none;
+            color: white;
+            background: #2563eb;
+            padding: 11px 20px;
+            border-radius: 7px;
+            font-weight: 600;
+        }
+
+        .navigation a:hover {
+            background: #1d4ed8;
+        }
+
+        footer {
+            background: #0f172a;
+            color: #cbd5e1;
+            text-align: center;
+            padding: 22px;
+            margin-top: 50px;
+        }
+
+        @media (max-width: 750px) {
+            header {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            nav a {
+                margin: 0 8px;
+            }
+
+            .hero h1 {
+                font-size: 28px;
+            }
+
+            .card {
+                padding: 22px;
+            }
+
+            .summary {
+                grid-template-columns: 1fr;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .form-group.full {
+                grid-column: auto;
+            }
+
+            .expense-item {
+                grid-template-columns: 1fr auto;
+            }
+
+            .expense-item .delete-btn {
+                grid-column: 2;
+                grid-row: 1 / 3;
+            }
+        }
+
+        @media (max-width: 550px) {
+            main {
+                width: 94%;
+            }
+
+            .hero {
+                padding: 50px 15px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="logo">JavaScript Mini Project</div>
+
+        <nav>
+            <a href="../../index.html">Home</a>
+<a href="../index.html">JavaScript Programs</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <span class="badge">Mini Projects — Project 10</span>
+        <h1>Simple Expense Tracker</h1>
+        <p>Record and manage your daily expenses using JavaScript</p>
+    </section>
+
+    <main>
+
+        <section class="objective">
+            <h2>Objective</h2>
+            <p>
+                Create a simple expense tracker that allows users to add,
+                view, and delete expenses while automatically calculating
+                the total amount spent.
+            </p>
+        </section>
+
+        <section class="card">
+            <h2>Expense Summary</h2>
+
+            <div class="summary">
+
+                <div class="summary-box">
+                    <h3>Total Expenses</h3>
+                    <p id="totalAmount">₹0.00</p>
+                </div>
+
+                <div class="summary-box">
+                    <h3>Number of Expenses</h3>
+                    <p id="expenseCount">0</p>
+                </div>
+
+                <div class="summary-box">
+                    <h3>Average Expense</h3>
+                    <p id="averageAmount">₹0.00</p>
+                </div>
+
+            </div>
+        </section>
+
+        <section class="card">
+            <h2>Add Expense</h2>
+
+            <form id="expenseForm">
+
+                <div class="form-grid">
+
+                    <div class="form-group">
+                        <label for="expenseName">
+                            Expense Name
+                        </label>
+
+                        <input
+                            type="text"
+                            id="expenseName"
+                            placeholder="Example: Lunch"
+                            required
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="expenseAmount">
+                            Amount
+                        </label>
+
+                        <input
+                            type="number"
+                            id="expenseAmount"
+                            placeholder="Example: 250"
+                            min="0.01"
+                            step="0.01"
+                            required
+                        >
+                    </div>
+
+                    <div class="form-group full">
+                        <label for="expenseCategory">
+                            Category
+                        </label>
+
+                        <select id="expenseCategory" required>
+                            <option value="">Select Category</option>
+                            <option value="Food">Food</option>
+                            <option value="Transport">Transport</option>
+                            <option value="Shopping">Shopping</option>
+                            <option value="Education">Education</option>
+                            <option value="Entertainment">Entertainment</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+
+                </div>
+
+                <div class="buttons">
+                    <button type="submit" class="btn">
+                        Add Expense
+                    </button>
+
+                    <button
+                        type="button"
+                        class="btn secondary"
+                        onclick="clearAllExpenses()"
+                    >
+                        Clear All
+                    </button>
+                </div>
+
+                <p class="message" id="message"></p>
+
+            </form>
+        </section>
+
+        <section class="card">
+            <h2>Expense List</h2>
+
+            <ul class="expense-list" id="expenseList">
+                <li class="empty-message">
+                    No expenses added yet.
+                </li>
+            </ul>
+        </section>
+
+        <section class="card">
+            <h2>Features</h2>
+
+            <ul class="features">
+                <li>Add expense name, amount, and category.</li>
+                <li>Display all recorded expenses.</li>
+                <li>Calculate the total expense amount.</li>
+                <li>Display the number of expenses.</li>
+                <li>Calculate the average expense.</li>
+                <li>Delete individual expenses.</li>
+                <li>Clear all expenses at once.</li>
+                <li>Validate expense input.</li>
+                <li>Responsive design for different screen sizes.</li>
+            </ul>
+        </section>
+
+        <div class="navigation">
+            <a href="09-tic-tac-toe.html">Previous</a>
+            <a href="../index.html">Home</a>
+            <a href="11-student-marks-grade-calculator.html">Next</a>
+        </div>
+
+    </main>
+
+    <footer>
+        <p>JavaScript Mini Projects &copy; 2026</p>
+    </footer>
+
+    <script>
+        const expenseForm = document.getElementById("expenseForm");
+        const expenseName = document.getElementById("expenseName");
+        const expenseAmount = document.getElementById("expenseAmount");
+        const expenseCategory = document.getElementById("expenseCategory");
+
+        const expenseList = document.getElementById("expenseList");
+        const totalAmount = document.getElementById("totalAmount");
+        const expenseCount = document.getElementById("expenseCount");
+        const averageAmount = document.getElementById("averageAmount");
+        const message = document.getElementById("message");
+
+        let expenses = [];
+
+        expenseForm.addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            const name = expenseName.value.trim();
+            const amount = Number(expenseAmount.value);
+            const category = expenseCategory.value;
+
+            if (name === "") {
+                showMessage("Please enter an expense name.", "#dc2626");
+                return;
+            }
+
+            if (!Number.isFinite(amount) || amount <= 0) {
+                showMessage(
+                    "Please enter a valid amount greater than zero.",
+                    "#dc2626"
+                );
+                return;
+            }
+
+            if (category === "") {
+                showMessage("Please select a category.", "#dc2626");
+                return;
+            }
+
+            const expense = {
+                id: Date.now(),
+                name: name,
+                amount: amount,
+                category: category
+            };
+
+            expenses.push(expense);
+
+            displayExpenses();
+            updateSummary();
+
+            expenseForm.reset();
+
+            showMessage(
+                "Expense added successfully.",
+                "#16a34a"
+            );
+
+            expenseName.focus();
+        });
+
+        function displayExpenses() {
+            expenseList.innerHTML = "";
+
+            if (expenses.length === 0) {
+                expenseList.innerHTML =
+                    '<li class="empty-message">No expenses added yet.</li>';
+                return;
+            }
+
+            expenses.forEach(function(expense) {
+
+                const listItem = document.createElement("li");
+                listItem.className = "expense-item";
+
+                const details = document.createElement("div");
+
+                const name = document.createElement("div");
+                name.className = "expense-name";
+                name.textContent = expense.name;
+
+                const category = document.createElement("div");
+                category.className = "expense-category";
+                category.textContent = expense.category;
+
+                details.appendChild(name);
+                details.appendChild(category);
+
+                const amount = document.createElement("div");
+                amount.className = "expense-amount";
+                amount.textContent =
+                    "₹" + expense.amount.toFixed(2);
+
+                const deleteButton = document.createElement("button");
+                deleteButton.className = "delete-btn";
+                deleteButton.textContent = "Delete";
+                deleteButton.type = "button";
+
+                deleteButton.addEventListener("click", function() {
+                    deleteExpense(expense.id);
+                });
+
+                listItem.appendChild(details);
+                listItem.appendChild(amount);
+                listItem.appendChild(deleteButton);
+
+                expenseList.appendChild(listItem);
+            });
+        }
+
+        function deleteExpense(id) {
+            expenses = expenses.filter(function(expense) {
+                return expense.id !== id;
+            });
+
+            displayExpenses();
+            updateSummary();
+
+            showMessage(
+                "Expense deleted.",
+                "#475569"
+            );
+        }
+
+        function clearAllExpenses() {
+            if (expenses.length === 0) {
+                showMessage(
+                    "There are no expenses to clear.",
+                    "#64748b"
+                );
+                return;
+            }
+
+            expenses = [];
+
+            displayExpenses();
+            updateSummary();
+
+            showMessage(
+                "All expenses have been cleared.",
+                "#475569"
+            );
+        }
+
+        function updateSummary() {
+            const count = expenses.length;
+
+            const total = expenses.reduce(
+                function(sum, expense) {
+                    return sum + expense.amount;
+                },
+                0
+            );
+
+            const average = count > 0 ? total / count : 0;
+
+            totalAmount.textContent =
+                "₹" + total.toFixed(2);
+
+            expenseCount.textContent = count;
+
+            averageAmount.textContent =
+                "₹" + average.toFixed(2);
+        }
+
+        function showMessage(text, color) {
+            message.textContent = text;
+            message.style.color = color;
+        }
+
+        displayExpenses();
+        updateSummary();
+    </script>
+
+</body>
+</html>

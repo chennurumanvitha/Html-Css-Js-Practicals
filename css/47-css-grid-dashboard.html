@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Layout Using CSS Grid | CSS Practical 47</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: #f1f5f9;
+            color: #334155;
+            line-height: 1.6;
+        }
+
+        /* Header */
+        header {
+            background: #0f172a;
+            color: white;
+            padding: 18px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 22px;
+            font-weight: 700;
+        }
+
+        nav a {
+            color: #cbd5e1;
+            text-decoration: none;
+            margin-left: 22px;
+            font-size: 15px;
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            color: white;
+        }
+
+        /* Hero */
+        .hero {
+            background: linear-gradient(135deg, #1e3a8a, #2563eb);
+            color: white;
+            text-align: center;
+            padding: 65px 20px;
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 7px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .hero h1 {
+            font-size: 38px;
+            margin-bottom: 10px;
+        }
+
+        .hero p {
+            max-width: 700px;
+            margin: auto;
+            color: #dbeafe;
+        }
+
+        /* Main */
+        main {
+            width: 90%;
+            max-width: 1050px;
+            margin: 40px auto;
+        }
+
+        /* Objective */
+        .objective {
+            background: white;
+            border-left: 5px solid #2563eb;
+            padding: 22px 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(15, 23, 42, 0.08);
+            margin-bottom: 25px;
+        }
+
+        .objective h2 {
+            color: #1e3a8a;
+            margin-bottom: 8px;
+        }
+
+        /* Content Card */
+        .content-card {
+            background: white;
+            padding: 35px;
+            margin-bottom: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(15, 23, 42, 0.08);
+        }
+
+        .content-card h2 {
+            color: #1e3a8a;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #dbeafe;
+        }
+
+        /* Dashboard */
+        .dashboard {
+            display: grid;
+            grid-template-columns: 220px 1fr;
+            grid-template-rows: auto 1fr;
+            gap: 20px;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            grid-row: 1 / 3;
+            background: #0f172a;
+            color: white;
+            padding: 25px 18px;
+            border-radius: 12px;
+        }
+
+        .sidebar h3 {
+            margin-bottom: 20px;
+            color: white;
+        }
+
+        .sidebar a {
+            display: block;
+            color: #cbd5e1;
+            text-decoration: none;
+            padding: 11px 12px;
+            border-radius: 6px;
+            margin-bottom: 7px;
+            transition: 0.3s;
+        }
+
+        .sidebar a:hover {
+            background: #1e3a8a;
+            color: white;
+        }
+
+        /* Dashboard Content */
+        .dashboard-content {
+            min-width: 0;
+        }
+
+        /* Statistics */
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .stat-card {
+            background: #eff6ff;
+            border-left: 4px solid #2563eb;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .stat-card h3 {
+            color: #1e3a8a;
+            font-size: 15px;
+            margin-bottom: 8px;
+        }
+
+        .stat-card .number {
+            font-size: 28px;
+            font-weight: 700;
+            color: #2563eb;
+        }
+
+        /* Dashboard Cards */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 20px;
+        }
+
+        .dashboard-card {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 22px;
+        }
+
+        .dashboard-card h3 {
+            color: #1e3a8a;
+            margin-bottom: 15px;
+        }
+
+        /* Progress */
+        .progress-item {
+            margin-bottom: 16px;
+        }
+
+        .progress-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .progress-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 6px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .progress-bar {
+            height: 9px;
+            background: #e2e8f0;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .progress {
+            height: 100%;
+            background: #2563eb;
+            border-radius: 10px;
+        }
+
+        .html-progress {
+            width: 90%;
+        }
+
+        .css-progress {
+            width: 80%;
+        }
+
+        .js-progress {
+            width: 65%;
+        }
+
+        /* Activity List */
+        .activity-list {
+            list-style: none;
+        }
+
+        .activity-list li {
+            padding: 11px 0;
+            border-bottom: 1px solid #e2e8f0;
+            font-size: 14px;
+        }
+
+        .activity-list li:last-child {
+            border-bottom: none;
+        }
+
+        /* Grid Technique */
+        .technique {
+            background: #0f172a;
+            color: #e2e8f0;
+            padding: 20px;
+            border-radius: 10px;
+            overflow-x: auto;
+        }
+
+        .technique code {
+            font-family: Consolas, monospace;
+            font-size: 14px;
+        }
+
+        /* Buttons */
+        .buttons {
+            text-align: center;
+            margin: 35px 0;
+        }
+
+        .btn {
+            display: inline-block;
+            background: #2563eb;
+            color: white;
+            text-decoration: none;
+            padding: 11px 22px;
+            border-radius: 7px;
+            margin: 5px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background: #1e3a8a;
+            transform: translateY(-2px);
+        }
+
+        .secondary {
+            background: #64748b;
+        }
+
+        .secondary:hover {
+            background: #475569;
+        }
+
+        /* Footer */
+        footer {
+            background: #0f172a;
+            color: #94a3b8;
+            text-align: center;
+            padding: 25px;
+            margin-top: 40px;
+        }
+
+        footer strong {
+            color: white;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 900px) {
+            .dashboard {
+                grid-template-columns: 180px 1fr;
+            }
+
+            .stats {
+                grid-template-columns: 1fr;
+            }
+
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 750px) {
+            header {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            nav a {
+                margin: 0 8px;
+            }
+
+            .hero h1 {
+                font-size: 30px;
+            }
+
+            .content-card {
+                padding: 25px;
+            }
+
+            .dashboard {
+                display: block;
+            }
+
+            .sidebar {
+                margin-bottom: 20px;
+            }
+
+            .stats {
+                grid-template-columns: 1fr;
+            }
+
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="logo">CSS Practical Portfolio</div>
+
+        <nav>
+            <a href="../index.html">Home</a>
+            <a href="index.html">CSS Programs</a>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="badge">CSS PRACTICAL 47</div>
+
+        <h1>Dashboard Layout Using CSS Grid</h1>
+
+        <p>
+            A responsive dashboard created using CSS Grid to organize
+            navigation, statistics, progress information and activities.
+        </p>
+    </section>
+
+    <main>
+
+        <!-- Objective -->
+        <section class="objective">
+            <h2>Objective</h2>
+
+            <p>
+                To create a dashboard layout using CSS Grid for arranging
+                different sections such as a sidebar, statistics cards,
+                progress information and recent activities.
+            </p>
+        </section>
+
+        <!-- Dashboard -->
+        <section class="content-card">
+            <h2>CSS Grid Dashboard</h2>
+
+            <div class="dashboard">
+
+                <!-- Sidebar -->
+                <aside class="sidebar">
+
+                    <h3>Dashboard</h3>
+
+                    <a href="#">Home</a>
+                    <a href="#">Profile</a>
+                    <a href="#">Courses</a>
+                    <a href="#">Projects</a>
+                    <a href="#">Settings</a>
+
+                </aside>
+
+                <!-- Dashboard Content -->
+                <div class="dashboard-content">
+
+                    <!-- Statistics -->
+                    <div class="stats">
+
+                        <div class="stat-card">
+                            <h3>Courses</h3>
+                            <div class="number">06</div>
+                        </div>
+
+                        <div class="stat-card">
+                            <h3>Projects</h3>
+                            <div class="number">12</div>
+                        </div>
+
+                        <div class="stat-card">
+                            <h3>Assignments</h3>
+                            <div class="number">18</div>
+                        </div>
+
+                    </div>
+
+                    <!-- Dashboard Grid -->
+                    <div class="dashboard-grid">
+
+                        <!-- Progress Card -->
+                        <div class="dashboard-card">
+
+                            <h3>Learning Progress</h3>
+
+                            <div class="progress-item">
+                                <div class="progress-label">
+                                    <span>HTML</span>
+                                    <span>90%</span>
+                                </div>
+
+                                <div class="progress-bar">
+                                    <div class="progress html-progress"></div>
+                                </div>
+                            </div>
+
+                            <div class="progress-item">
+                                <div class="progress-label">
+                                    <span>CSS</span>
+                                    <span>80%</span>
+                                </div>
+
+                                <div class="progress-bar">
+                                    <div class="progress css-progress"></div>
+                                </div>
+                            </div>
+
+                            <div class="progress-item">
+                                <div class="progress-label">
+                                    <span>JavaScript</span>
+                                    <span>65%</span>
+                                </div>
+
+                                <div class="progress-bar">
+                                    <div class="progress js-progress"></div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <!-- Activity Card -->
+                        <div class="dashboard-card">
+
+                            <h3>Recent Activity</h3>
+
+                            <ul class="activity-list">
+                                <li>Completed HTML Practical</li>
+                                <li>Created CSS Gallery</li>
+                                <li>Submitted Assignment</li>
+                                <li>Started JavaScript Project</li>
+                            </ul>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+        
+
+        <!-- Navigation -->
+        <div class="buttons">
+
+            <a href="css-46.html" class="btn secondary">
+                ← Previous Practical
+            </a>
+
+            <a href="index.html" class="btn">
+                CSS Programs
+            </a>
+
+            <a href="../index.html" class="btn">
+                Dashboard
+            </a>
+
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>
+            <strong>CSS Practical 47</strong> |
+            Dashboard Layout Using CSS Grid
+        </p>
+
+        <p>Created using HTML5 and CSS3</p>
+    </footer>
+
+</body>
+</html>

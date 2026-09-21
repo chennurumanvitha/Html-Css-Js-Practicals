@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Alert Confirm Prompt - JavaScript Practical</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Segoe UI", Arial, sans-serif;
+      background: #f1f5f9;
+      color: #334155;
+      line-height: 1.6;
+    }
+
+    header {
+      background: #0f172a;
+      padding: 18px 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      color: white;
+      font-size: 22px;
+      font-weight: bold;
+    }
+
+    nav a {
+      color: #cbd5e1;
+      text-decoration: none;
+      margin-left: 25px;
+      font-size: 15px;
+    }
+
+    nav a:hover {
+      color: white;
+    }
+
+    .hero {
+      background: linear-gradient(135deg, #1e3a8a, #2563eb);
+      color: white;
+      text-align: center;
+      padding: 65px 20px;
+    }
+
+    .badge {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.15);
+      padding: 7px 16px;
+      border-radius: 20px;
+      margin-bottom: 15px;
+      font-size: 14px;
+    }
+
+    .hero h1 {
+      font-size: 36px;
+      margin-bottom: 10px;
+    }
+
+    .hero p {
+      font-size: 17px;
+      opacity: 0.9;
+    }
+
+    main {
+      width: 90%;
+      max-width: 1050px;
+      margin: 40px auto;
+    }
+
+    .objective {
+      background: white;
+      padding: 22px;
+      border-left: 5px solid #2563eb;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
+      margin-bottom: 25px;
+    }
+
+    .objective h2 {
+      color: #1e3a8a;
+      margin-bottom: 8px;
+    }
+
+    .card {
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(15, 23, 42, 0.08);
+      margin-bottom: 25px;
+    }
+
+    .card h2 {
+      color: #1e3a8a;
+      margin-bottom: 25px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #e2e8f0;
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .feature-box {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 10px;
+      padding: 22px;
+      text-align: center;
+    }
+
+    .feature-box h3 {
+      color: #1e3a8a;
+      margin-bottom: 10px;
+    }
+
+    .feature-box p {
+      color: #64748b;
+      font-size: 14px;
+      margin-bottom: 20px;
+    }
+
+    .btn {
+      border: none;
+      background: #2563eb;
+      color: white;
+      padding: 11px 20px;
+      border-radius: 7px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .btn:hover {
+      background: #1d4ed8;
+    }
+
+    .btn.secondary {
+      background: #475569;
+    }
+
+    .btn.secondary:hover {
+      background: #334155;
+    }
+
+    .btn.success {
+      background: #0f766e;
+    }
+
+    .btn.success:hover {
+      background: #115e59;
+    }
+
+    .result {
+      background: #eff6ff;
+      border: 1px solid #bfdbfe;
+      border-radius: 9px;
+      padding: 20px;
+      margin-top: 25px;
+      text-align: center;
+    }
+
+    .result h3 {
+      color: #1e3a8a;
+      margin-bottom: 8px;
+    }
+
+    #resultText {
+      color: #2563eb;
+      font-weight: 600;
+    }
+
+    .buttons {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      flex-wrap: wrap;
+      margin-top: 30px;
+    }
+
+    footer {
+      background: #0f172a;
+      color: #cbd5e1;
+      text-align: center;
+      padding: 22px;
+      margin-top: 50px;
+    }
+
+    @media (max-width: 750px) {
+      header {
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      nav a {
+        margin: 0 8px;
+      }
+
+      .hero h1 {
+        font-size: 28px;
+      }
+
+      .card {
+        padding: 22px;
+      }
+
+      .feature-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 550px) {
+      main {
+        width: 94%;
+      }
+
+      .hero {
+        padding: 50px 15px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <div class="logo">JavaScript Practical</div>
+
+    <nav>
+      <a href="../../index.html">Home</a>
+<a href="../index.html">JavaScript Programs</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <span class="badge">Browser Objects &amp; Browser Features — Practice 2</span>
+
+    <h1>Alert, Confirm &amp; Prompt</h1>
+
+    <p>
+      Demonstration of JavaScript alert(), confirm(), and prompt().
+    </p>
+  </section>
+
+  <main>
+
+    <section class="objective">
+      <h2>Objective</h2>
+
+      <p>
+        To demonstrate the use of JavaScript alert(), confirm(), and
+        prompt() dialog boxes for displaying messages, receiving
+        confirmation, and accepting user input.
+      </p>
+    </section>
+
+    <section class="card">
+
+      <h2>JavaScript Dialog Boxes</h2>
+
+      <div class="feature-grid">
+
+        <div class="feature-box">
+
+          <h3>Alert</h3>
+
+          <p>
+            Displays a simple message to the user.
+          </p>
+
+          <button
+            type="button"
+            class="btn"
+            id="alertButton"
+          >
+            Show Alert
+          </button>
+
+        </div>
+
+        <div class="feature-box">
+
+          <h3>Confirm</h3>
+
+          <p>
+            Asks the user to confirm or cancel an action.
+          </p>
+
+          <button
+            type="button"
+            class="btn secondary"
+            id="confirmButton"
+          >
+            Show Confirm
+          </button>
+
+        </div>
+
+        <div class="feature-box">
+
+          <h3>Prompt</h3>
+
+          <p>
+            Allows the user to enter a value.
+          </p>
+
+          <button
+            type="button"
+            class="btn success"
+            id="promptButton"
+          >
+            Show Prompt
+          </button>
+
+        </div>
+
+      </div>
+
+      <div class="result">
+
+        <h3>Result</h3>
+
+        <p id="resultText">
+          Select a button above to demonstrate a JavaScript dialog box.
+        </p>
+
+      </div>
+
+    </section>
+
+    <div class="buttons">
+
+      <a
+        href="01-window-object.html"
+        class="btn secondary"
+      >
+        ← Previous Practical
+      </a>
+
+      <a
+        href="../../index.html"
+        class="btn secondary"
+      >
+        Home
+      </a>
+
+      <a
+        href="03-settimeout.html"
+        class="btn"
+      >
+        Next Practical →
+      </a>
+
+    </div>
+
+  </main>
+
+  <footer>
+    <p>
+      &copy; 2026 JavaScript Practical —
+      Browser Objects &amp; Browser Features
+    </p>
+  </footer>
+
+  <script>
+    const resultText =
+      document.getElementById("resultText");
+
+    document
+      .getElementById("alertButton")
+      .addEventListener("click", function () {
+
+        alert(
+          "Welcome! This message is displayed using the alert() function."
+        );
+
+        resultText.textContent =
+          "The alert() function displayed a message successfully.";
+
+      });
+
+    document
+      .getElementById("confirmButton")
+      .addEventListener("click", function () {
+
+        const answer =
+          confirm("Do you want to continue?");
+
+        if (answer) {
+
+          resultText.textContent =
+            "You selected OK in the confirm() dialog.";
+
+        } else {
+
+          resultText.textContent =
+            "You selected Cancel in the confirm() dialog.";
+
+        }
+
+      });
+
+    document
+      .getElementById("promptButton")
+      .addEventListener("click", function () {
+
+        const name =
+          prompt("Please enter your name:");
+
+        if (name === null) {
+
+          resultText.textContent =
+            "You cancelled the prompt() dialog.";
+
+        } else if (name.trim() === "") {
+
+          resultText.textContent =
+            "No name was entered.";
+
+        } else {
+
+          resultText.textContent =
+            "Hello, " + name.trim() +
+            "! Your name was received using prompt().";
+
+        }
+
+      });
+  </script>
+
+</body>
+</html>

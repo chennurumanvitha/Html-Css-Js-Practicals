@@ -1,0 +1,911 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Employee Salary Calculator</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Segoe UI", Arial, sans-serif;
+      background: #f1f5f9;
+      color: #334155;
+      line-height: 1.6;
+    }
+
+    header {
+      background: #0f172a;
+      padding: 18px 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      color: white;
+      font-size: 22px;
+      font-weight: bold;
+    }
+
+    nav a {
+      color: #cbd5e1;
+      text-decoration: none;
+      margin-left: 25px;
+      font-size: 15px;
+    }
+
+    nav a:hover {
+      color: white;
+    }
+
+    .hero {
+      background: linear-gradient(135deg, #1e3a8a, #2563eb);
+      color: white;
+      text-align: center;
+      padding: 65px 20px;
+    }
+
+    .badge {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.15);
+      padding: 7px 16px;
+      border-radius: 20px;
+      margin-bottom: 15px;
+      font-size: 14px;
+    }
+
+    .hero h1 {
+      font-size: 36px;
+      margin-bottom: 10px;
+    }
+
+    .hero p {
+      font-size: 17px;
+      opacity: 0.9;
+    }
+
+    main {
+      width: 90%;
+      max-width: 1050px;
+      margin: 40px auto;
+    }
+
+    .objective {
+      background: white;
+      padding: 22px;
+      border-left: 5px solid #2563eb;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
+      margin-bottom: 25px;
+    }
+
+    .objective h2 {
+      color: #1e3a8a;
+      margin-bottom: 8px;
+    }
+
+    .card {
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(15, 23, 42, 0.08);
+      margin-bottom: 25px;
+    }
+
+    .card h2 {
+      color: #1e3a8a;
+      margin-bottom: 25px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #e2e8f0;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 7px;
+    }
+
+    input,
+    select {
+      width: 100%;
+      padding: 11px 13px;
+      border: 1px solid #cbd5e1;
+      border-radius: 7px;
+      font-size: 15px;
+      font-family: inherit;
+      outline: none;
+      transition: 0.2s;
+    }
+
+    input:focus,
+    select:focus {
+      border-color: #2563eb;
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+    }
+
+    .error {
+      color: #dc2626;
+      font-size: 13px;
+      margin-top: 5px;
+      min-height: 18px;
+    }
+
+    .invalid {
+      border-color: #dc2626;
+      background: #fff7f7;
+    }
+
+    .valid {
+      border-color: #16a34a;
+      background: #f0fdf4;
+    }
+
+    .calculate-btn {
+      width: 100%;
+      border: none;
+      background: #2563eb;
+      color: white;
+      padding: 13px 20px;
+      border-radius: 7px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .calculate-btn:hover {
+      background: #1d4ed8;
+    }
+
+    .result {
+      display: none;
+      margin-top: 25px;
+      background: #f8fafc;
+      border: 1px solid #cbd5e1;
+      border-radius: 10px;
+      padding: 25px;
+    }
+
+    .result h3 {
+      color: #1e3a8a;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #e2e8f0;
+    }
+
+    .employee-summary {
+      background: white;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      padding: 18px;
+      margin-bottom: 20px;
+    }
+
+    .summary-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 8px 0;
+      border-bottom: 1px solid #f1f5f9;
+    }
+
+    .summary-row:last-child {
+      border-bottom: none;
+    }
+
+    .summary-label {
+      font-weight: 600;
+      color: #475569;
+    }
+
+    .summary-value {
+      color: #1e293b;
+      text-align: right;
+    }
+
+    .salary-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
+    }
+
+    .salary-box {
+      background: white;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      padding: 18px;
+      text-align: center;
+    }
+
+    .salary-label {
+      color: #64748b;
+      font-size: 14px;
+      margin-bottom: 5px;
+    }
+
+    .salary-value {
+      color: #2563eb;
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    .net-salary {
+      margin-top: 20px;
+      background: #eff6ff;
+      border: 1px solid #93c5fd;
+      border-radius: 8px;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .net-salary p {
+      color: #475569;
+      margin-bottom: 5px;
+    }
+
+    .net-value {
+      color: #1e3a8a;
+      font-size: 30px;
+      font-weight: bold;
+    }
+
+    .success-message {
+      display: none;
+      background: #ecfdf5;
+      color: #166534;
+      border: 1px solid #86efac;
+      padding: 15px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      text-align: center;
+      font-weight: 600;
+    }
+
+    .buttons {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      flex-wrap: wrap;
+      margin-top: 30px;
+    }
+
+    .btn-link {
+      text-decoration: none;
+      background: #2563eb;
+      color: white;
+      padding: 11px 20px;
+      border-radius: 7px;
+      font-weight: 600;
+    }
+
+    .btn-link:hover {
+      background: #1d4ed8;
+    }
+
+    .btn-link.secondary {
+      background: #475569;
+    }
+
+    .btn-link.secondary:hover {
+      background: #334155;
+    }
+
+    footer {
+      background: #0f172a;
+      color: #cbd5e1;
+      text-align: center;
+      padding: 22px;
+      margin-top: 50px;
+    }
+
+    @media (max-width: 750px) {
+      header {
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      nav a {
+        margin: 0 8px;
+      }
+
+      .hero h1 {
+        font-size: 28px;
+      }
+
+      .card {
+        padding: 22px;
+      }
+
+      .salary-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .summary-row {
+        flex-direction: column;
+        gap: 2px;
+      }
+
+      .summary-value {
+        text-align: left;
+      }
+    }
+
+    @media (max-width: 550px) {
+      main {
+        width: 94%;
+      }
+
+      .hero {
+        padding: 50px 15px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <div class="logo">JavaScript Practical</div>
+
+    <nav>
+      <a href="../../index.html">Home</a>
+<a href="../index.html">JavaScript Programs</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <span class="badge">Practice 42</span>
+    <h1>Employee Salary Calculator</h1>
+    <p>Calculate salary details using JavaScript.</p>
+  </section>
+
+  <main>
+
+    <section class="objective">
+      <h2>Objective</h2>
+      <p>
+        To create an employee salary form that accepts basic salary,
+        allowances, and deductions and calculates the gross salary
+        and net salary.
+      </p>
+    </section>
+
+    <section class="card">
+
+      <h2>Employee Salary Form</h2>
+
+      <div class="success-message" id="successMessage">
+        Salary details calculated successfully!
+      </div>
+
+      <form id="salaryForm" novalidate>
+
+        <div class="form-group">
+          <label for="employeeName">Employee Name</label>
+
+          <input
+            type="text"
+            id="employeeName"
+            placeholder="Enter employee name"
+            autocomplete="off"
+          >
+
+          <div class="error" id="employeeNameError"></div>
+        </div>
+
+        <div class="form-group">
+          <label for="employeeId">Employee ID</label>
+
+          <input
+            type="text"
+            id="employeeId"
+            placeholder="Enter employee ID"
+            autocomplete="off"
+          >
+
+          <div class="error" id="employeeIdError"></div>
+        </div>
+
+        <div class="form-group">
+          <label for="basicSalary">Basic Salary</label>
+
+          <input
+            type="number"
+            id="basicSalary"
+            min="1"
+            step="0.01"
+            placeholder="Enter basic salary"
+          >
+
+          <div class="error" id="basicSalaryError"></div>
+        </div>
+
+        <div class="form-group">
+          <label for="allowance">Allowance</label>
+
+          <input
+            type="number"
+            id="allowance"
+            min="0"
+            step="0.01"
+            placeholder="Enter allowance"
+          >
+
+          <div class="error" id="allowanceError"></div>
+        </div>
+
+        <div class="form-group">
+          <label for="deduction">Deduction</label>
+
+          <input
+            type="number"
+            id="deduction"
+            min="0"
+            step="0.01"
+            placeholder="Enter deduction"
+          >
+
+          <div class="error" id="deductionError"></div>
+        </div>
+
+        <button
+          type="submit"
+          class="calculate-btn"
+        >
+          Calculate Salary
+        </button>
+
+      </form>
+
+      <div class="result" id="result">
+
+        <h3>Salary Details</h3>
+
+        <div class="employee-summary">
+
+          <div class="summary-row">
+            <span class="summary-label">
+              Employee Name
+            </span>
+
+            <span class="summary-value" id="displayName">
+            </span>
+          </div>
+
+          <div class="summary-row">
+            <span class="summary-label">
+              Employee ID
+            </span>
+
+            <span class="summary-value" id="displayId">
+            </span>
+          </div>
+
+        </div>
+
+        <div class="salary-grid">
+
+          <div class="salary-box">
+            <div class="salary-label">
+              Basic Salary
+            </div>
+
+            <div class="salary-value" id="displayBasic">
+              ₹0.00
+            </div>
+          </div>
+
+          <div class="salary-box">
+            <div class="salary-label">
+              Allowance
+            </div>
+
+            <div class="salary-value" id="displayAllowance">
+              ₹0.00
+            </div>
+          </div>
+
+          <div class="salary-box">
+            <div class="salary-label">
+              Gross Salary
+            </div>
+
+            <div class="salary-value" id="displayGross">
+              ₹0.00
+            </div>
+          </div>
+
+          <div class="salary-box">
+            <div class="salary-label">
+              Deduction
+            </div>
+
+            <div class="salary-value" id="displayDeduction">
+              ₹0.00
+            </div>
+          </div>
+
+        </div>
+
+        <div class="net-salary">
+
+          <p>Net Salary</p>
+
+          <div class="net-value" id="displayNet">
+            ₹0.00
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <div class="buttons">
+
+      <a href="41-marks-calculation.html" class="btn-link">
+        ← Previous Practical
+      </a>
+
+      <a href="index.html" class="btn-link secondary">
+        Forms &amp; Validation
+      </a>
+
+      <a href="43-shopping-order-calculation.html" class="btn-link">
+        Next Practical →
+      </a>
+
+    </div>
+
+  </main>
+
+  <footer>
+    <p>&copy; 2026 JavaScript Practical — Forms &amp; Validation</p>
+  </footer>
+
+  <script>
+    const salaryForm =
+      document.getElementById("salaryForm");
+
+    const employeeName =
+      document.getElementById("employeeName");
+
+    const employeeId =
+      document.getElementById("employeeId");
+
+    const basicSalary =
+      document.getElementById("basicSalary");
+
+    const allowance =
+      document.getElementById("allowance");
+
+    const deduction =
+      document.getElementById("deduction");
+
+    const result =
+      document.getElementById("result");
+
+    const successMessage =
+      document.getElementById("successMessage");
+
+    const nameRegex =
+      /^[A-Za-z ]+$/;
+
+    function validateEmployeeName() {
+      const value =
+        employeeName.value.trim();
+
+      const error =
+        document.getElementById(
+          "employeeNameError"
+        );
+
+      employeeName.classList.remove(
+        "valid",
+        "invalid"
+      );
+
+      error.textContent = "";
+
+      if (value === "") {
+        employeeName.classList.add("invalid");
+        error.textContent =
+          "Employee name is required.";
+        return false;
+      }
+
+      if (!nameRegex.test(value)) {
+        employeeName.classList.add("invalid");
+        error.textContent =
+          "Name can contain only alphabets and spaces.";
+        return false;
+      }
+
+      employeeName.classList.add("valid");
+      return true;
+    }
+
+    function validateEmployeeId() {
+      const value =
+        employeeId.value.trim();
+
+      const error =
+        document.getElementById(
+          "employeeIdError"
+        );
+
+      employeeId.classList.remove(
+        "valid",
+        "invalid"
+      );
+
+      error.textContent = "";
+
+      if (value === "") {
+        employeeId.classList.add("invalid");
+        error.textContent =
+          "Employee ID is required.";
+        return false;
+      }
+
+      employeeId.classList.add("valid");
+      return true;
+    }
+
+    function validateSalaryInput(
+      input,
+      errorId,
+      message
+    ) {
+      const value =
+        input.value.trim();
+
+      const error =
+        document.getElementById(errorId);
+
+      input.classList.remove(
+        "valid",
+        "invalid"
+      );
+
+      error.textContent = "";
+
+      if (value === "") {
+        input.classList.add("invalid");
+        error.textContent =
+          message + " is required.";
+        return false;
+      }
+
+      const amount = Number(value);
+
+      if (!Number.isFinite(amount)) {
+        input.classList.add("invalid");
+        error.textContent =
+          "Enter a valid amount.";
+        return false;
+      }
+
+      if (amount < 0) {
+        input.classList.add("invalid");
+        error.textContent =
+          message + " cannot be negative.";
+        return false;
+      }
+
+      input.classList.add("valid");
+      return true;
+    }
+
+    function validateBasicSalary() {
+      const value =
+        basicSalary.value.trim();
+
+      const error =
+        document.getElementById(
+          "basicSalaryError"
+        );
+
+      basicSalary.classList.remove(
+        "valid",
+        "invalid"
+      );
+
+      error.textContent = "";
+
+      if (value === "") {
+        basicSalary.classList.add("invalid");
+        error.textContent =
+          "Basic salary is required.";
+        return false;
+      }
+
+      const amount = Number(value);
+
+      if (
+        !Number.isFinite(amount) ||
+        amount <= 0
+      ) {
+        basicSalary.classList.add("invalid");
+        error.textContent =
+          "Basic salary must be greater than 0.";
+        return false;
+      }
+
+      basicSalary.classList.add("valid");
+      return true;
+    }
+
+    function validateAll() {
+      const validName =
+        validateEmployeeName();
+
+      const validId =
+        validateEmployeeId();
+
+      const validBasic =
+        validateBasicSalary();
+
+      const validAllowance =
+        validateSalaryInput(
+          allowance,
+          "allowanceError",
+          "Allowance"
+        );
+
+      const validDeduction =
+        validateSalaryInput(
+          deduction,
+          "deductionError",
+          "Deduction"
+        );
+
+      return (
+        validName &&
+        validId &&
+        validBasic &&
+        validAllowance &&
+        validDeduction
+      );
+    }
+
+    function formatCurrency(amount) {
+      return "₹" + amount.toFixed(2);
+    }
+
+    employeeName.addEventListener(
+      "input",
+      function () {
+        successMessage.style.display = "none";
+        result.style.display = "none";
+        validateEmployeeName();
+      }
+    );
+
+    employeeId.addEventListener(
+      "input",
+      function () {
+        successMessage.style.display = "none";
+        result.style.display = "none";
+        validateEmployeeId();
+      }
+    );
+
+    basicSalary.addEventListener(
+      "input",
+      function () {
+        successMessage.style.display = "none";
+        result.style.display = "none";
+        validateBasicSalary();
+      }
+    );
+
+    allowance.addEventListener(
+      "input",
+      function () {
+        successMessage.style.display = "none";
+        result.style.display = "none";
+
+        validateSalaryInput(
+          allowance,
+          "allowanceError",
+          "Allowance"
+        );
+      }
+    );
+
+    deduction.addEventListener(
+      "input",
+      function () {
+        successMessage.style.display = "none";
+        result.style.display = "none";
+
+        validateSalaryInput(
+          deduction,
+          "deductionError",
+          "Deduction"
+        );
+      }
+    );
+
+    salaryForm.addEventListener(
+      "submit",
+      function (event) {
+
+        event.preventDefault();
+
+        result.style.display = "none";
+        successMessage.style.display = "none";
+
+        if (!validateAll()) {
+          return;
+        }
+
+        const basic =
+          Number(basicSalary.value);
+
+        const allowanceAmount =
+          Number(allowance.value);
+
+        const deductionAmount =
+          Number(deduction.value);
+
+        const grossSalary =
+          basic + allowanceAmount;
+
+        const netSalary =
+          grossSalary - deductionAmount;
+
+        document.getElementById(
+          "displayName"
+        ).textContent =
+          employeeName.value.trim();
+
+        document.getElementById(
+          "displayId"
+        ).textContent =
+          employeeId.value.trim();
+
+        document.getElementById(
+          "displayBasic"
+        ).textContent =
+          formatCurrency(basic);
+
+        document.getElementById(
+          "displayAllowance"
+        ).textContent =
+          formatCurrency(allowanceAmount);
+
+        document.getElementById(
+          "displayGross"
+        ).textContent =
+          formatCurrency(grossSalary);
+
+        document.getElementById(
+          "displayDeduction"
+        ).textContent =
+          formatCurrency(deductionAmount);
+
+        document.getElementById(
+          "displayNet"
+        ).textContent =
+          formatCurrency(netSalary);
+
+        result.style.display = "block";
+        successMessage.style.display = "block";
+      }
+    );
+  </script>
+
+</body>
+</html>

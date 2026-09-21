@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Practical 7 - Keyboard Controlled Game</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: #f1f5f9;
+            color: #334155;
+            line-height: 1.6;
+        }
+
+        header {
+            background: #0f172a;
+            color: white;
+            padding: 18px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        nav a {
+            color: #cbd5e1;
+            text-decoration: none;
+            margin-left: 25px;
+            font-size: 15px;
+        }
+
+        nav a:hover {
+            color: white;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #1e3a8a, #2563eb);
+            color: white;
+            text-align: center;
+            padding: 65px 20px;
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.18);
+            padding: 7px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            margin-bottom: 12px;
+        }
+
+        .hero h1 {
+            margin: 5px 0;
+            font-size: 36px;
+        }
+
+        .hero p {
+            margin: 8px 0 0;
+            opacity: 0.9;
+        }
+
+        main {
+            width: 90%;
+            max-width: 1050px;
+            margin: 40px auto;
+        }
+
+        .card {
+            background: white;
+            padding: 28px;
+            margin-bottom: 25px;
+            border-radius: 12px;
+            box-shadow: 0 5px 18px rgba(15, 23, 42, 0.08);
+        }
+
+        .objective {
+            border-left: 5px solid #2563eb;
+        }
+
+        .card h2 {
+            color: #1e3a8a;
+            margin-top: 0;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 10px;
+        }
+
+        .game-info {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .instructions {
+            background: #eff6ff;
+            border: 1px solid #bfdbfe;
+            border-radius: 8px;
+            padding: 12px;
+            margin: 15px auto;
+            max-width: 650px;
+        }
+
+        .game-area {
+            position: relative;
+            width: 100%;
+            max-width: 650px;
+            height: 350px;
+            margin: 25px auto;
+            background: #e0f2fe;
+            border: 4px solid #1e3a8a;
+            border-radius: 12px;
+            overflow: hidden;
+            outline: none;
+        }
+
+        .player {
+            position: absolute;
+            width: 45px;
+            height: 45px;
+            background: #2563eb;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            user-select: none;
+            box-shadow: 0 4px 10px rgba(37, 99, 235, 0.3);
+        }
+
+        .target {
+            position: absolute;
+            width: 35px;
+            height: 35px;
+            background: #16a34a;
+            border-radius: 50%;
+            right: 60px;
+            bottom: 60px;
+            box-shadow: 0 3px 8px rgba(22, 163, 74, 0.3);
+        }
+
+        .output {
+            background: #eff6ff;
+            border: 2px dashed #93c5fd;
+            border-radius: 10px;
+            padding: 18px;
+            max-width: 650px;
+            margin: 20px auto;
+            text-align: left;
+        }
+
+        .output p {
+            margin: 6px 0;
+        }
+
+        .output strong {
+            color: #1e3a8a;
+        }
+
+        .reset-btn {
+            border: none;
+            background: #2563eb;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 7px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .reset-btn:hover {
+            background: #1d4ed8;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin: 30px 0;
+        }
+
+        .btn-link {
+            display: inline-block;
+            background: #2563eb;
+            color: white;
+            text-decoration: none;
+            padding: 10px 18px;
+            border-radius: 7px;
+            font-weight: 600;
+            transition: 0.2s;
+        }
+
+        .btn-link:hover {
+            background: #1d4ed8;
+        }
+
+        .btn-link.secondary {
+            background: #475569;
+        }
+
+        .btn-link.secondary:hover {
+            background: #334155;
+        }
+
+        footer {
+            background: #0f172a;
+            color: #cbd5e1;
+            text-align: center;
+            padding: 20px;
+            margin-top: 50px;
+        }
+
+        @media (max-width: 750px) {
+            header {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            nav a {
+                margin: 0 8px;
+            }
+
+            .hero h1 {
+                font-size: 30px;
+            }
+
+            .game-area {
+                height: 300px;
+            }
+        }
+
+        @media (max-width: 550px) {
+            main {
+                width: 94%;
+            }
+
+            .card {
+                padding: 20px;
+            }
+
+            .hero {
+                padding: 45px 15px;
+            }
+
+            .game-area {
+                height: 260px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="logo">JavaScript Practical</div>
+
+        <nav>
+            <a href="../../index.html">Home</a>
+<a href="../index.html">JavaScript Programs</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="badge">Events Practical 7</div>
+        <h1>Keyboard-Controlled Game</h1>
+        <p>Control a character using keyboard events</p>
+    </section>
+
+    <main>
+
+        <section class="card objective">
+            <h2>Objective</h2>
+            <p>
+                To demonstrate keyboard events by creating an interactive
+                webpage/game where a player is controlled using keyboard keys.
+            </p>
+        </section>
+
+        <section class="card">
+
+            <h2>Keyboard-Controlled Game</h2>
+
+            <div class="game-info">
+                <p>
+                    Move the blue player to the green target using the
+                    <strong>Arrow Keys</strong> or <strong>W, A, S, D</strong>.
+                </p>
+
+                <div class="instructions">
+                    <strong>Controls:</strong>
+                    ↑ W = Up &nbsp; | &nbsp;
+                    ↓ S = Down &nbsp; | &nbsp;
+                    ← A = Left &nbsp; | &nbsp;
+                    → D = Right
+                </div>
+            </div>
+
+            <div
+                class="game-area"
+                id="gameArea"
+                tabindex="0"
+                aria-label="Keyboard controlled game area"
+            >
+                <div class="player" id="player">P</div>
+                <div class="target" id="target"></div>
+            </div>
+
+            <div class="output">
+                <strong>Game Status</strong>
+
+                <p id="status">
+                    Click inside the game area and press a movement key.
+                </p>
+
+                <p>
+                    <strong>Last Key:</strong>
+                    <span id="lastKey">None</span>
+                </p>
+
+                <p>
+                    <strong>Player Position:</strong>
+                    <span id="position">20, 20</span>
+                </p>
+            </div>
+
+            <div style="text-align: center;">
+                <button class="reset-btn" id="resetButton">
+                    Reset Game
+                </button>
+            </div>
+
+        </section>
+
+        <div class="buttons">
+            <a href="06-event-delegation.html" class="btn-link">
+                ← Previous Practical
+            </a>
+
+            <a href="index.html" class="btn-link secondary">
+                Events Programs
+            </a>
+
+            <a href="08-next.html" class="btn-link">
+                Next Practical →
+            </a>
+        </div>
+
+    </main>
+
+    <footer>
+        <p>JavaScript Practical Assignment</p>
+    </footer>
+
+    <script>
+        const gameArea = document.getElementById("gameArea");
+        const player = document.getElementById("player");
+        const target = document.getElementById("target");
+
+        const status = document.getElementById("status");
+        const lastKey = document.getElementById("lastKey");
+        const position = document.getElementById("position");
+        const resetButton = document.getElementById("resetButton");
+
+        let playerX = 20;
+        let playerY = 20;
+
+        const speed = 10;
+
+        function updatePlayer() {
+            player.style.left = playerX + "px";
+            player.style.top = playerY + "px";
+
+            position.textContent = playerX + ", " + playerY;
+
+            checkTarget();
+        }
+
+        function checkTarget() {
+            const playerRect = player.getBoundingClientRect();
+            const targetRect = target.getBoundingClientRect();
+
+            const touching =
+                playerRect.left < targetRect.right &&
+                playerRect.right > targetRect.left &&
+                playerRect.top < targetRect.bottom &&
+                playerRect.bottom > targetRect.top;
+
+            if (touching) {
+                status.textContent =
+                    "Congratulations! You reached the target.";
+            } else {
+                status.textContent =
+                    "Use the keyboard to move the player.";
+            }
+        }
+
+        gameArea.addEventListener("keydown", function(event) {
+
+            const gameWidth = gameArea.clientWidth;
+            const gameHeight = gameArea.clientHeight;
+
+            const playerWidth = player.offsetWidth;
+            const playerHeight = player.offsetHeight;
+
+            if (
+                event.key === "ArrowUp" ||
+                event.key.toLowerCase() === "w"
+            ) {
+                playerY -= speed;
+            }
+
+            if (
+                event.key === "ArrowDown" ||
+                event.key.toLowerCase() === "s"
+            ) {
+                playerY += speed;
+            }
+
+            if (
+                event.key === "ArrowLeft" ||
+                event.key.toLowerCase() === "a"
+            ) {
+                playerX -= speed;
+            }
+
+            if (
+                event.key === "ArrowRight" ||
+                event.key.toLowerCase() === "d"
+            ) {
+                playerX += speed;
+            }
+
+            playerX = Math.max(
+                0,
+                Math.min(playerX, gameWidth - playerWidth)
+            );
+
+            playerY = Math.max(
+                0,
+                Math.min(playerY, gameHeight - playerHeight)
+            );
+
+            lastKey.textContent = event.key;
+
+            updatePlayer();
+
+            event.preventDefault();
+        });
+
+        gameArea.addEventListener("click", function() {
+            gameArea.focus();
+        });
+
+        resetButton.addEventListener("click", function() {
+            playerX = 20;
+            playerY = 20;
+
+            lastKey.textContent = "None";
+            status.textContent =
+                "Game reset. Click inside the game area and start moving.";
+
+            updatePlayer();
+            gameArea.focus();
+        });
+
+        updatePlayer();
+    </script>
+
+</body>
+</html>

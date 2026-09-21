@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM Manipulation - Live Character Counter</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: #f1f5f9;
+            color: #334155;
+            line-height: 1.6;
+        }
+
+        header {
+            background: #0f172a;
+            padding: 18px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: white;
+            font-size: 22px;
+            font-weight: 700;
+        }
+
+        nav a {
+            color: #cbd5e1;
+            text-decoration: none;
+            margin-left: 25px;
+            font-size: 15px;
+        }
+
+        nav a:hover {
+            color: white;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #1e3a8a, #2563eb);
+            color: white;
+            text-align: center;
+            padding: 65px 20px;
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 7px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        .hero h1 {
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+
+        .hero p {
+            font-size: 16px;
+            opacity: 0.9;
+        }
+
+        main {
+            width: 90%;
+            max-width: 1050px;
+            margin: 40px auto;
+        }
+
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 28px;
+            margin-bottom: 25px;
+            box-shadow: 0 5px 18px rgba(15, 23, 42, 0.08);
+        }
+
+        .objective {
+            border-left: 5px solid #2563eb;
+        }
+
+        .objective h2,
+        .card h2 {
+            color: #1e3a8a;
+            margin-bottom: 15px;
+        }
+
+        .card h2 {
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 8px;
+        }
+
+        .demo {
+            background: #eff6ff;
+            border: 2px dashed #93c5fd;
+            border-radius: 10px;
+            padding: 30px 25px;
+            margin-top: 20px;
+        }
+
+        .instruction {
+            margin-bottom: 20px;
+            color: #475569;
+            text-align: center;
+        }
+
+        .counter-box {
+            max-width: 750px;
+            margin: 0 auto;
+        }
+
+        textarea {
+            width: 100%;
+            min-height: 180px;
+            resize: vertical;
+            padding: 15px;
+            border: 1px solid #94a3b8;
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 16px;
+            color: #334155;
+            background: white;
+            outline: none;
+        }
+
+        textarea:focus {
+            border-color: #2563eb;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+        }
+
+        .counter {
+            margin-top: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+            padding: 13px 16px;
+            background: white;
+            border: 1px solid #bfdbfe;
+            border-radius: 8px;
+        }
+
+        .counter-label {
+            color: #475569;
+            font-weight: 600;
+        }
+
+        .count {
+            color: #1e3a8a;
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        .limit-message {
+            margin-top: 12px;
+            text-align: center;
+            font-size: 14px;
+            font-weight: 600;
+            color: #64748b;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin: 35px 0;
+        }
+
+        .btn-link {
+            display: inline-block;
+            background: #2563eb;
+            color: white;
+            text-decoration: none;
+            padding: 11px 20px;
+            border-radius: 7px;
+            font-size: 15px;
+        }
+
+        .btn-link:hover {
+            background: #1e3a8a;
+        }
+
+        .btn-link.secondary {
+            background: #0f172a;
+        }
+
+        .btn-link.secondary:hover {
+            background: #1e293b;
+        }
+
+        footer {
+            background: #0f172a;
+            color: #cbd5e1;
+            text-align: center;
+            padding: 22px;
+            margin-top: 50px;
+            font-size: 14px;
+        }
+
+        @media (max-width: 750px) {
+            header {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            nav a {
+                margin: 0 8px;
+            }
+
+            .hero h1 {
+                font-size: 30px;
+            }
+
+            .card {
+                padding: 22px;
+            }
+        }
+
+        @media (max-width: 550px) {
+            .hero {
+                padding: 50px 15px;
+            }
+
+            .demo {
+                padding: 25px 18px;
+            }
+
+            .counter {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="logo">Practical Programs</div>
+
+        <nav>
+            <a href="../../index.html">Home</a>
+<a href="../index.html">JavaScript Programs</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="badge">DOM Manipulation • Practical 45</div>
+        <h1>Live Character Counter</h1>
+        <p>Count textarea characters dynamically using JavaScript</p>
+    </section>
+
+    <main>
+
+        <section class="card objective">
+            <h2>Objective</h2>
+            <p>
+                To create a live character counter for a textarea
+                using JavaScript DOM manipulation and update the
+                character count dynamically as the user types.
+            </p>
+        </section>
+
+        <section class="card">
+            <h2>Interactive Demonstration</h2>
+
+            <div class="demo">
+
+                <p class="instruction">
+                    Type something in the textarea to see the
+                    character count update automatically.
+                </p>
+
+                <div class="counter-box">
+
+                    <textarea
+                        id="message"
+                        maxlength="200"
+                        placeholder="Start typing your message here..."
+                        oninput="updateCharacterCount()"></textarea>
+
+                    <div class="counter">
+                        <span class="counter-label">
+                            Characters
+                        </span>
+
+                        <span class="count" id="characterCount">
+                            0 / 200
+                        </span>
+                    </div>
+
+                    <div class="limit-message" id="limitMessage">
+                        You can enter up to 200 characters.
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+        <div class="buttons">
+
+            <a href="44-tooltip.html" class="btn-link">
+                ← Previous Practical
+            </a>
+
+            <a href="index.html" class="btn-link secondary">
+                DOM Programs
+            </a>
+
+            <a href="46-word-counter.html" class="btn-link">
+                Next Practical →
+            </a>
+
+        </div>
+
+    </main>
+
+    <footer>
+        <p>JavaScript Practical Programs | DOM Manipulation</p>
+    </footer>
+
+    <script>
+        const message =
+            document.getElementById("message");
+
+        const characterCount =
+            document.getElementById("characterCount");
+
+        const limitMessage =
+            document.getElementById("limitMessage");
+
+        function updateCharacterCount() {
+
+            const currentLength =
+                message.value.length;
+
+            const maximumLength =
+                message.maxLength;
+
+            characterCount.textContent =
+                currentLength + " / " + maximumLength;
+
+            if (currentLength === maximumLength) {
+
+                limitMessage.textContent =
+                    "Character limit reached.";
+
+            } else if (currentLength > 0) {
+
+                const remaining =
+                    maximumLength - currentLength;
+
+                limitMessage.textContent =
+                    remaining +
+                    " characters remaining.";
+
+            } else {
+
+                limitMessage.textContent =
+                    "You can enter up to 200 characters.";
+            }
+        }
+    </script>
+
+</body>
+</html>

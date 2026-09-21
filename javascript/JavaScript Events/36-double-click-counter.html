@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Double-Click Counter</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: #f1f5f9;
+            color: #334155;
+            line-height: 1.6;
+        }
+
+        header {
+            background: #0f172a;
+            padding: 18px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: white;
+            font-size: 22px;
+            font-weight: 700;
+        }
+
+        nav {
+            display: flex;
+            gap: 24px;
+        }
+
+        nav a {
+            color: #cbd5e1;
+            text-decoration: none;
+            font-size: 15px;
+        }
+
+        nav a:hover {
+            color: white;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #1e3a8a, #2563eb);
+            color: white;
+            text-align: center;
+            padding: 65px 20px;
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        .hero h1 {
+            font-size: 38px;
+            margin-bottom: 10px;
+        }
+
+        .hero p {
+            font-size: 17px;
+            opacity: 0.9;
+        }
+
+        main {
+            width: 90%;
+            max-width: 1050px;
+            margin: 40px auto;
+        }
+
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 15px rgba(15, 23, 42, 0.08);
+        }
+
+        .objective {
+            border-left: 5px solid #2563eb;
+        }
+
+        .card h2 {
+            color: #1e3a8a;
+            font-size: 23px;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e2e8f0;
+        }
+
+        .demo {
+            text-align: center;
+            padding: 20px 10px;
+        }
+
+        .counter-box {
+            width: 180px;
+            margin: 10px auto 25px;
+            padding: 20px;
+            background: #eff6ff;
+            border: 2px solid #bfdbfe;
+            border-radius: 12px;
+        }
+
+        .counter-label {
+            color: #475569;
+            font-size: 15px;
+            margin-bottom: 5px;
+        }
+
+        .counter {
+            color: #1e3a8a;
+            font-size: 42px;
+            font-weight: 700;
+        }
+
+        .double-click-area {
+            max-width: 500px;
+            margin: 0 auto 20px;
+            padding: 35px 20px;
+            background: #dbeafe;
+            border: 2px dashed #2563eb;
+            border-radius: 12px;
+            color: #1e3a8a;
+            font-weight: 600;
+            cursor: pointer;
+            user-select: none;
+            transition: 0.2s;
+        }
+
+        .double-click-area:hover {
+            background: #bfdbfe;
+        }
+
+        .double-click-area.active {
+            background: #2563eb;
+            color: white;
+        }
+
+        .output {
+            max-width: 650px;
+            margin: 20px auto 0;
+            padding: 18px;
+            background: #eff6ff;
+            border: 2px dashed #93c5fd;
+            border-radius: 10px;
+            text-align: left;
+        }
+
+        .output p {
+            margin: 5px 0;
+        }
+
+        .output strong {
+            color: #1e3a8a;
+        }
+
+        button {
+            border: none;
+            padding: 11px 22px;
+            border-radius: 7px;
+            background: #2563eb;
+            color: white;
+            font-size: 15px;
+            cursor: pointer;
+            margin: 5px;
+        }
+
+        button:hover {
+            background: #1e40af;
+        }
+
+        button.secondary {
+            background: #64748b;
+        }
+
+        button.secondary:hover {
+            background: #475569;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin: 30px 0;
+        }
+
+        .btn-link {
+            display: inline-block;
+            padding: 11px 20px;
+            background: #2563eb;
+            color: white;
+            text-decoration: none;
+            border-radius: 7px;
+            font-size: 15px;
+        }
+
+        .btn-link:hover {
+            background: #1e40af;
+        }
+
+        .btn-link.secondary {
+            background: #64748b;
+        }
+
+        .btn-link.secondary:hover {
+            background: #475569;
+        }
+
+        footer {
+            background: #0f172a;
+            color: #cbd5e1;
+            text-align: center;
+            padding: 22px;
+            margin-top: 50px;
+        }
+
+        @media (max-width: 750px) {
+            header {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            .hero h1 {
+                font-size: 30px;
+            }
+
+            .card {
+                padding: 22px;
+            }
+        }
+
+        @media (max-width: 550px) {
+            nav {
+                gap: 14px;
+            }
+
+            .hero {
+                padding: 45px 15px;
+            }
+
+            .hero h1 {
+                font-size: 26px;
+            }
+
+            .double-click-area {
+                padding: 28px 15px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="logo">JavaScript Events</div>
+
+        <nav>
+            <a href="../../index.html">Home</a>
+<a href="../index.html">JavaScript Programs</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="badge">Events Practical 36</div>
+        <h1>Double-Click Counter</h1>
+        <p>Count the number of double-click events using JavaScript</p>
+    </section>
+
+    <main>
+
+        <section class="card objective">
+            <h2>Objective</h2>
+            <p>
+                Create a double-click counter that counts and displays the
+                number of times an element is double-clicked using JavaScript.
+            </p>
+        </section>
+
+        <section class="card">
+            <h2>Interactive Demonstration</h2>
+
+            <div class="demo">
+
+                <div class="counter-box">
+                    <div class="counter-label">Double Clicks</div>
+                    <div class="counter" id="counter">0</div>
+                </div>
+
+                <div class="double-click-area" id="doubleClickArea">
+                    Double-click this area
+                </div>
+
+                <button id="resetButton" class="secondary">
+                    Reset Counter
+                </button>
+
+                <div class="output">
+                    <p>
+                        <strong>Event:</strong>
+                        <span id="eventName">Waiting for double-click...</span>
+                    </p>
+
+                    <p>
+                        <strong>Response:</strong>
+                        <span id="response">No double-click detected yet.</span>
+                    </p>
+                </div>
+
+            </div>
+        </section>
+
+        <div class="buttons">
+            <a href="35-click-counter.html" class="btn-link">
+                ← Previous Practical
+            </a>
+
+            <a href="index.html" class="btn-link secondary">
+                Events Programs
+            </a>
+
+            <a href="37-next.html" class="btn-link">
+                Next Practical →
+            </a>
+        </div>
+
+    </main>
+
+    <footer>
+        <p>JavaScript Events Practical</p>
+    </footer>
+
+    <script>
+        let doubleClickCount = 0;
+
+        const doubleClickArea = document.getElementById("doubleClickArea");
+        const counter = document.getElementById("counter");
+        const eventName = document.getElementById("eventName");
+        const response = document.getElementById("response");
+        const resetButton = document.getElementById("resetButton");
+
+        doubleClickArea.addEventListener("dblclick", function () {
+            doubleClickCount++;
+
+            counter.textContent = doubleClickCount;
+            eventName.textContent = "dblclick";
+            response.textContent =
+                "Double-click detected. Total double-clicks: "
+                + doubleClickCount;
+
+            doubleClickArea.classList.add("active");
+
+            setTimeout(function () {
+                doubleClickArea.classList.remove("active");
+            }, 300);
+        });
+
+        resetButton.addEventListener("click", function () {
+            doubleClickCount = 0;
+
+            counter.textContent = "0";
+            eventName.textContent = "Waiting for double-click...";
+            response.textContent = "Counter has been reset.";
+
+            doubleClickArea.classList.remove("active");
+        });
+    </script>
+
+</body>
+</html>

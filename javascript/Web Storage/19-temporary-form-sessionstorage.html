@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Temporary Form Data using sessionStorage</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Segoe UI", Arial, sans-serif;
+      background: #f1f5f9;
+      color: #334155;
+      line-height: 1.6;
+    }
+
+    header {
+      background: #0f172a;
+      padding: 18px 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      color: white;
+      font-size: 22px;
+      font-weight: bold;
+    }
+
+    nav a {
+      color: #cbd5e1;
+      text-decoration: none;
+      margin-left: 25px;
+      font-size: 15px;
+    }
+
+    nav a:hover {
+      color: white;
+    }
+
+    .hero {
+      background: linear-gradient(135deg, #1e3a8a, #2563eb);
+      color: white;
+      text-align: center;
+      padding: 65px 20px;
+    }
+
+    .badge {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.15);
+      padding: 7px 16px;
+      border-radius: 20px;
+      margin-bottom: 15px;
+      font-size: 14px;
+    }
+
+    .hero h1 {
+      font-size: 36px;
+      margin-bottom: 10px;
+    }
+
+    .hero p {
+      font-size: 17px;
+      opacity: 0.9;
+    }
+
+    main {
+      width: 90%;
+      max-width: 1050px;
+      margin: 40px auto;
+    }
+
+    .objective {
+      background: white;
+      padding: 22px;
+      border-left: 5px solid #2563eb;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
+      margin-bottom: 25px;
+    }
+
+    .objective h2 {
+      color: #1e3a8a;
+      margin-bottom: 8px;
+    }
+
+    .card {
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(15, 23, 42, 0.08);
+      margin-bottom: 25px;
+    }
+
+    .card h2 {
+      color: #1e3a8a;
+      margin-bottom: 25px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #e2e8f0;
+    }
+
+    .form-group {
+      margin-bottom: 18px;
+    }
+
+    .form-group label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 7px;
+      color: #334155;
+    }
+
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      width: 100%;
+      padding: 11px 12px;
+      border: 1px solid #cbd5e1;
+      border-radius: 7px;
+      font-size: 15px;
+      font-family: inherit;
+    }
+
+    .form-group textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+      outline: none;
+      border-color: #2563eb;
+    }
+
+    .buttons {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      flex-wrap: wrap;
+      margin-top: 25px;
+    }
+
+    .btn {
+      border: none;
+      background: #2563eb;
+      color: white;
+      padding: 11px 20px;
+      border-radius: 7px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      background: #1d4ed8;
+    }
+
+    .btn.secondary {
+      background: #475569;
+    }
+
+    .btn.secondary:hover {
+      background: #334155;
+    }
+
+    .btn.danger {
+      background: #dc2626;
+    }
+
+    .btn.danger:hover {
+      background: #b91c1c;
+    }
+
+    .message {
+      text-align: center;
+      margin-top: 15px;
+      font-weight: 600;
+      min-height: 24px;
+    }
+
+    .navigation {
+      display: flex;
+      justify-content: space-between;
+      gap: 15px;
+      margin-top: 35px;
+    }
+
+    .navigation a {
+      text-decoration: none;
+      background: #2563eb;
+      color: white;
+      padding: 11px 20px;
+      border-radius: 7px;
+      font-weight: 600;
+      font-size: 14px;
+    }
+
+    .navigation a:hover {
+      background: #1d4ed8;
+    }
+
+    footer {
+      background: #0f172a;
+      color: #cbd5e1;
+      text-align: center;
+      padding: 22px;
+      margin-top: 50px;
+    }
+
+    @media (max-width: 750px) {
+      header {
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      nav a {
+        margin: 0 8px;
+      }
+
+      .hero h1 {
+        font-size: 28px;
+      }
+
+      .card {
+        padding: 22px;
+      }
+
+      .navigation {
+        flex-direction: column;
+      }
+
+      .navigation a {
+        text-align: center;
+      }
+    }
+
+    @media (max-width: 550px) {
+      main {
+        width: 94%;
+      }
+
+      .hero {
+        padding: 50px 15px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <div class="logo">Web Storage Practical</div>
+
+    <nav>
+     <a href="../../index.html">Home</a>
+<a href="../index.html">JavaScript Programs</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div class="badge">Practical 19</div>
+    <h1>Temporary Form Data</h1>
+    <p>Store form data using sessionStorage</p>
+  </section>
+
+  <main>
+
+    <section class="objective">
+      <h2>Objective</h2>
+      <p>
+        To store temporary form data using sessionStorage and
+        restore the entered data during the current browser session.
+      </p>
+    </section>
+
+    <section class="card">
+
+      <h2>Student Form</h2>
+
+      <form id="studentForm">
+
+        <div class="form-group">
+          <label for="studentName">Student Name</label>
+          <input
+            type="text"
+            id="studentName"
+            placeholder="Enter student name"
+          >
+        </div>
+
+        <div class="form-group">
+          <label for="studentEmail">Email</label>
+          <input
+            type="email"
+            id="studentEmail"
+            placeholder="Enter email address"
+          >
+        </div>
+
+        <div class="form-group">
+          <label for="course">Course</label>
+          <select id="course">
+            <option value="">Select a course</option>
+            <option value="BCA">BCA</option>
+            <option value="BSc Computer Science">BSc Computer Science</option>
+            <option value="BCom">BCom</option>
+            <option value="BA">BA</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="messageBox">Message</label>
+          <textarea
+            id="messageBox"
+            placeholder="Enter your message"
+          ></textarea>
+        </div>
+
+        <div class="buttons">
+
+          <button
+            type="button"
+            class="btn"
+            onclick="saveFormData()"
+          >
+            Save Temporarily
+          </button>
+
+          <button
+            type="button"
+            class="btn secondary"
+            onclick="restoreFormData()"
+          >
+            Restore Data
+          </button>
+
+          <button
+            type="button"
+            class="btn danger"
+            onclick="clearFormData()"
+          >
+            Clear Data
+          </button>
+
+        </div>
+
+      </form>
+
+      <div class="message" id="message"></div>
+
+    </section>
+
+    <div class="navigation">
+      <a href="18-localstorage-sessionstorage.html">← Previous</a>
+      <a href="../index.html">Home</a>
+      <a href="20-multi-page-form-sessionstorage.html">Next →</a>
+    </div>
+
+  </main>
+
+  <footer>
+    Web Storage Practicals &copy; 2026
+  </footer>
+
+  <script>
+    const studentName =
+      document.getElementById("studentName");
+
+    const studentEmail =
+      document.getElementById("studentEmail");
+
+    const course =
+      document.getElementById("course");
+
+    const messageBox =
+      document.getElementById("messageBox");
+
+    const message =
+      document.getElementById("message");
+
+    function saveFormData() {
+      sessionStorage.setItem(
+        "temporaryStudentName",
+        studentName.value
+      );
+
+      sessionStorage.setItem(
+        "temporaryStudentEmail",
+        studentEmail.value
+      );
+
+      sessionStorage.setItem(
+        "temporaryCourse",
+        course.value
+      );
+
+      sessionStorage.setItem(
+        "temporaryMessage",
+        messageBox.value
+      );
+
+      showMessage("Form data saved temporarily.");
+    }
+
+    function restoreFormData() {
+      studentName.value =
+        sessionStorage.getItem("temporaryStudentName") || "";
+
+      studentEmail.value =
+        sessionStorage.getItem("temporaryStudentEmail") || "";
+
+      course.value =
+        sessionStorage.getItem("temporaryCourse") || "";
+
+      messageBox.value =
+        sessionStorage.getItem("temporaryMessage") || "";
+
+      showMessage("Form data restored.");
+    }
+
+    function clearFormData() {
+      sessionStorage.removeItem("temporaryStudentName");
+      sessionStorage.removeItem("temporaryStudentEmail");
+      sessionStorage.removeItem("temporaryCourse");
+      sessionStorage.removeItem("temporaryMessage");
+
+      studentName.value = "";
+      studentEmail.value = "";
+      course.value = "";
+      messageBox.value = "";
+
+      showMessage("Temporary form data cleared.");
+    }
+
+    function showMessage(text) {
+      message.textContent = text;
+      message.style.color = "#16a34a";
+
+      setTimeout(function() {
+        message.textContent = "";
+      }, 2000);
+    }
+
+    restoreFormData();
+  </script>
+
+</body>
+</html>

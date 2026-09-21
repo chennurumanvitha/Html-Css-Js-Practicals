@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gender Selection Validation</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Segoe UI", Arial, sans-serif;
+      background: #f1f5f9;
+      color: #334155;
+      line-height: 1.6;
+    }
+
+    header {
+      background: #0f172a;
+      padding: 18px 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      color: white;
+      font-size: 22px;
+      font-weight: bold;
+    }
+
+    nav a {
+      color: #cbd5e1;
+      text-decoration: none;
+      margin-left: 25px;
+      font-size: 15px;
+    }
+
+    nav a:hover {
+      color: white;
+    }
+
+    .hero {
+      background: linear-gradient(135deg, #1e3a8a, #2563eb);
+      color: white;
+      text-align: center;
+      padding: 65px 20px;
+    }
+
+    .badge {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.15);
+      padding: 7px 16px;
+      border-radius: 20px;
+      margin-bottom: 15px;
+      font-size: 14px;
+    }
+
+    .hero h1 {
+      font-size: 36px;
+      margin-bottom: 10px;
+    }
+
+    .hero p {
+      font-size: 17px;
+      opacity: 0.9;
+    }
+
+    main {
+      width: 90%;
+      max-width: 1050px;
+      margin: 40px auto;
+    }
+
+    .objective {
+      background: white;
+      padding: 22px;
+      border-left: 5px solid #2563eb;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
+      margin-bottom: 25px;
+    }
+
+    .objective h2 {
+      color: #1e3a8a;
+      margin-bottom: 8px;
+    }
+
+    .card {
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(15, 23, 42, 0.08);
+    }
+
+    .card h2 {
+      color: #1e3a8a;
+      margin-bottom: 25px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #e2e8f0;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .gender-options {
+      display: flex;
+      gap: 25px;
+      flex-wrap: wrap;
+      padding: 12px 0;
+    }
+
+    .gender-option {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 500;
+      cursor: pointer;
+    }
+
+    .gender-option input {
+      width: auto;
+      cursor: pointer;
+      accent-color: #2563eb;
+    }
+
+    .error {
+      color: #dc2626;
+      font-size: 13px;
+      margin-top: 5px;
+      min-height: 18px;
+    }
+
+    .success-message {
+      display: none;
+      background: #ecfdf5;
+      color: #166534;
+      border: 1px solid #86efac;
+      padding: 15px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      text-align: center;
+      font-weight: 600;
+    }
+
+    .submit-btn {
+      width: 100%;
+      border: none;
+      background: #2563eb;
+      color: white;
+      padding: 13px 20px;
+      border-radius: 7px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .submit-btn:hover {
+      background: #1d4ed8;
+    }
+
+    .buttons {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      flex-wrap: wrap;
+      margin-top: 30px;
+    }
+
+    .btn-link {
+      text-decoration: none;
+      background: #2563eb;
+      color: white;
+      padding: 11px 20px;
+      border-radius: 7px;
+      font-weight: 600;
+    }
+
+    .btn-link:hover {
+      background: #1d4ed8;
+    }
+
+    .btn-link.secondary {
+      background: #475569;
+    }
+
+    .btn-link.secondary:hover {
+      background: #334155;
+    }
+
+    footer {
+      background: #0f172a;
+      color: #cbd5e1;
+      text-align: center;
+      padding: 22px;
+      margin-top: 50px;
+    }
+
+    @media (max-width: 750px) {
+      header {
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      nav a {
+        margin: 0 8px;
+      }
+
+      .hero h1 {
+        font-size: 28px;
+      }
+
+      .card {
+        padding: 22px;
+      }
+    }
+
+    @media (max-width: 550px) {
+      main {
+        width: 94%;
+      }
+
+      .hero {
+        padding: 50px 15px;
+      }
+
+      .gender-options {
+        flex-direction: column;
+        gap: 12px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <div class="logo">JavaScript Practical</div>
+
+    <nav>
+     <a href="../../index.html">Home</a>
+<a href="../index.html">JavaScript Programs</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div class="badge">Practice 16</div>
+    <h1>Gender Selection Validation</h1>
+    <p>Validate a gender selection using JavaScript</p>
+  </section>
+
+  <main>
+
+    <section class="objective">
+      <h2>Objective</h2>
+      <p>
+        To validate a gender selection by checking whether the user has
+        selected one option from the available radio buttons.
+      </p>
+    </section>
+
+    <section class="card">
+
+      <h2>Gender Selection Form</h2>
+
+      <div id="successMessage" class="success-message">
+        Gender selection is valid!
+      </div>
+
+      <form id="genderForm" novalidate>
+
+        <div class="form-group">
+
+          <label>Gender</label>
+
+          <div class="gender-options">
+
+            <label class="gender-option">
+              <input
+                type="radio"
+                name="gender"
+                value="Male"
+              >
+              Male
+            </label>
+
+            <label class="gender-option">
+              <input
+                type="radio"
+                name="gender"
+                value="Female"
+              >
+              Female
+            </label>
+
+            <label class="gender-option">
+              <input
+                type="radio"
+                name="gender"
+                value="Other"
+              >
+              Other
+            </label>
+
+          </div>
+
+          <div id="genderError" class="error"></div>
+
+        </div>
+
+        <button type="submit" class="submit-btn">
+          Validate Gender
+        </button>
+
+      </form>
+
+      <div class="buttons">
+
+        <a href="15-date-of-birth-validation.html" class="btn-link">
+          ← Previous Practical
+        </a>
+
+        <a href="index.html" class="btn-link secondary">
+          Forms &amp; Validation
+        </a>
+
+        <a href="17-radio-button-validation.html" class="btn-link">
+          Next Practical →
+        </a>
+
+      </div>
+
+    </section>
+
+  </main>
+
+  <footer>
+    <p>JavaScript Practical — Forms and Validation</p>
+  </footer>
+
+  <script>
+    const form = document.getElementById("genderForm");
+
+    const genderOptions =
+      document.querySelectorAll('input[name="gender"]');
+
+    const genderError =
+      document.getElementById("genderError");
+
+    const successMessage =
+      document.getElementById("successMessage");
+
+
+    function validateGender() {
+
+      let selectedGender = false;
+
+      genderOptions.forEach(function (option) {
+        if (option.checked) {
+          selectedGender = true;
+        }
+      });
+
+      if (!selectedGender) {
+
+        genderError.textContent =
+          "Please select a gender.";
+
+        return false;
+      }
+
+      genderError.textContent = "";
+
+      return true;
+    }
+
+
+    genderOptions.forEach(function (option) {
+
+      option.addEventListener("change", function () {
+
+        validateGender();
+
+        successMessage.style.display = "none";
+
+      });
+
+    });
+
+
+    form.addEventListener("submit", function (event) {
+
+      event.preventDefault();
+
+      if (validateGender()) {
+
+        successMessage.textContent =
+          "Gender selection is valid!";
+
+        successMessage.style.display = "block";
+
+      } else {
+
+        successMessage.style.display = "none";
+
+      }
+
+    });
+  </script>
+
+</body>
+</html>

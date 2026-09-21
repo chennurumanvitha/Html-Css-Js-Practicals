@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Countdown Timer | JavaScript Mini Project</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: #f1f5f9;
+            color: #334155;
+            line-height: 1.6;
+        }
+
+        header {
+            background: #0f172a;
+            padding: 18px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: white;
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        nav a {
+            color: #cbd5e1;
+            text-decoration: none;
+            margin-left: 25px;
+            font-size: 15px;
+        }
+
+        nav a:hover {
+            color: white;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #1e3a8a, #2563eb);
+            color: white;
+            text-align: center;
+            padding: 65px 20px;
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 7px 16px;
+            border-radius: 20px;
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+
+        .hero h1 {
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+
+        .hero p {
+            font-size: 17px;
+            opacity: 0.9;
+        }
+
+        main {
+            width: 90%;
+            max-width: 1050px;
+            margin: 40px auto;
+        }
+
+        .objective {
+            background: white;
+            padding: 22px;
+            border-left: 5px solid #2563eb;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
+            margin-bottom: 25px;
+        }
+
+        .objective h2 {
+            color: #1e3a8a;
+            margin-bottom: 8px;
+        }
+
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(15, 23, 42, 0.08);
+            margin-bottom: 25px;
+        }
+
+        .card h2 {
+            color: #1e3a8a;
+            margin-bottom: 25px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e2e8f0;
+        }
+
+        .timer-box {
+            text-align: center;
+            max-width: 550px;
+            margin: auto;
+        }
+
+        .timer-display {
+            background: #0f172a;
+            color: white;
+            font-size: 64px;
+            font-weight: bold;
+            letter-spacing: 4px;
+            padding: 25px 20px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            font-family: "Courier New", monospace;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .input-group label {
+            display: block;
+            font-weight: 600;
+            color: #334155;
+            margin-bottom: 8px;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #cbd5e1;
+            border-radius: 7px;
+            font-size: 16px;
+            text-align: center;
+            outline: none;
+        }
+
+        .input-group input:focus {
+            border-color: #2563eb;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 25px;
+        }
+
+        .btn {
+            border: none;
+            background: #2563eb;
+            color: white;
+            padding: 11px 20px;
+            border-radius: 7px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .btn:hover {
+            background: #1d4ed8;
+        }
+
+        .btn.secondary {
+            background: #475569;
+        }
+
+        .btn.secondary:hover {
+            background: #334155;
+        }
+
+        .status {
+            margin-top: 20px;
+            color: #64748b;
+            font-weight: 600;
+        }
+
+        .features {
+            padding-left: 20px;
+        }
+
+        .features li {
+            margin-bottom: 8px;
+        }
+
+        .navigation {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+
+        .navigation a {
+            text-decoration: none;
+            color: white;
+            background: #2563eb;
+            padding: 11px 20px;
+            border-radius: 7px;
+            font-weight: 600;
+        }
+
+        .navigation a:hover {
+            background: #1d4ed8;
+        }
+
+        footer {
+            background: #0f172a;
+            color: #cbd5e1;
+            text-align: center;
+            padding: 22px;
+            margin-top: 50px;
+        }
+
+        @media (max-width: 750px) {
+            header {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            nav a {
+                margin: 0 8px;
+            }
+
+            .hero h1 {
+                font-size: 28px;
+            }
+
+            .card {
+                padding: 22px;
+            }
+
+            .timer-display {
+                font-size: 45px;
+            }
+        }
+
+        @media (max-width: 550px) {
+            main {
+                width: 94%;
+            }
+
+            .hero {
+                padding: 50px 15px;
+            }
+
+            .timer-display {
+                font-size: 36px;
+                letter-spacing: 2px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="logo">JavaScript Mini Project</div>
+
+        <nav>
+            <a href="../../index.html">Home</a>
+<a href="../index.html">JavaScript Programs</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <span class="badge">Mini Projects — Project 4</span>
+        <h1>Countdown Timer</h1>
+        <p>A simple countdown timer using JavaScript</p>
+    </section>
+
+    <main>
+
+        <section class="objective">
+            <h2>Objective</h2>
+            <p>
+                Create a countdown timer that counts down from a user-defined
+                number of seconds and stops automatically when the timer reaches zero.
+            </p>
+        </section>
+
+        <section class="card">
+            <h2>Countdown Timer</h2>
+
+            <div class="timer-box">
+
+                <div class="timer-display" id="timerDisplay">
+                    01:00
+                </div>
+
+                <div class="input-group">
+                    <label for="secondsInput">
+                        Enter Countdown Time (seconds)
+                    </label>
+
+                    <input
+                        type="number"
+                        id="secondsInput"
+                        min="1"
+                        value="60"
+                    >
+                </div>
+
+                <div class="buttons">
+                    <button class="btn" onclick="startTimer()">
+                        Start
+                    </button>
+
+                    <button class="btn secondary" onclick="pauseTimer()">
+                        Pause
+                    </button>
+
+                    <button class="btn secondary" onclick="resetTimer()">
+                        Reset
+                    </button>
+                </div>
+
+                <p class="status" id="status">
+                    Ready to start
+                </p>
+
+            </div>
+        </section>
+
+        <section class="card">
+            <h2>Features</h2>
+
+            <ul class="features">
+                <li>Accepts countdown time from the user.</li>
+                <li>Displays remaining time in minutes and seconds.</li>
+                <li>Start, Pause, and Reset controls.</li>
+                <li>Uses setInterval() for automatic countdown.</li>
+                <li>Uses clearInterval() to stop the timer.</li>
+                <li>Automatically stops when the countdown reaches zero.</li>
+                <li>Responsive design for different screen sizes.</li>
+            </ul>
+        </section>
+
+        <div class="navigation">
+            <a href="03-stopwatch.html">Previous</a>
+            <a href="../index.html">Home</a>
+            <a href="05-to-do-list.html">Next</a>
+        </div>
+
+    </main>
+
+    <footer>
+        <p>JavaScript Mini Projects &copy; 2026</p>
+    </footer>
+
+    <script>
+        let remainingSeconds = 60;
+        let timerId = null;
+
+        const timerDisplay = document.getElementById("timerDisplay");
+        const secondsInput = document.getElementById("secondsInput");
+        const status = document.getElementById("status");
+
+        function formatTime(seconds) {
+            const minutes = Math.floor(seconds / 60);
+            const remaining = seconds % 60;
+
+            const formattedMinutes = String(minutes).padStart(2, "0");
+            const formattedSeconds = String(remaining).padStart(2, "0");
+
+            return formattedMinutes + ":" + formattedSeconds;
+        }
+
+        function updateDisplay() {
+            timerDisplay.textContent = formatTime(remainingSeconds);
+        }
+
+        function startTimer() {
+            if (timerId !== null) {
+                return;
+            }
+
+            if (remainingSeconds <= 0) {
+                const inputValue = Number(secondsInput.value);
+
+                if (!inputValue || inputValue < 1) {
+                    status.textContent = "Please enter a valid number of seconds.";
+                    return;
+                }
+
+                remainingSeconds = Math.floor(inputValue);
+                updateDisplay();
+            }
+
+            status.textContent = "Timer is running...";
+
+            timerId = setInterval(function () {
+                remainingSeconds--;
+
+                updateDisplay();
+
+                if (remainingSeconds <= 0) {
+                    clearInterval(timerId);
+                    timerId = null;
+                    remainingSeconds = 0;
+                    updateDisplay();
+                    status.textContent = "Time is up!";
+                }
+            }, 1000);
+        }
+
+        function pauseTimer() {
+            if (timerId !== null) {
+                clearInterval(timerId);
+                timerId = null;
+                status.textContent = "Timer paused";
+            }
+        }
+
+        function resetTimer() {
+            clearInterval(timerId);
+            timerId = null;
+
+            const inputValue = Number(secondsInput.value);
+
+            if (inputValue && inputValue > 0) {
+                remainingSeconds = Math.floor(inputValue);
+            } else {
+                remainingSeconds = 60;
+                secondsInput.value = 60;
+            }
+
+            updateDisplay();
+            status.textContent = "Ready to start";
+        }
+
+        secondsInput.addEventListener("input", function () {
+            if (timerId === null) {
+                const inputValue = Number(secondsInput.value);
+
+                if (inputValue && inputValue > 0) {
+                    remainingSeconds = Math.floor(inputValue);
+                    updateDisplay();
+                    status.textContent = "Ready to start";
+                }
+            }
+        });
+
+        updateDisplay();
+    </script>
+
+</body>
+</html>

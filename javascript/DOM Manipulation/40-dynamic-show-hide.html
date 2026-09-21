@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM Manipulation - Show Hide Content</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: #f1f5f9;
+            color: #334155;
+            line-height: 1.6;
+        }
+
+        header {
+            background: #0f172a;
+            padding: 18px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: white;
+            font-size: 22px;
+            font-weight: 700;
+        }
+
+        nav a {
+            color: #cbd5e1;
+            text-decoration: none;
+            margin-left: 25px;
+            font-size: 15px;
+        }
+
+        nav a:hover {
+            color: white;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #1e3a8a, #2563eb);
+            color: white;
+            text-align: center;
+            padding: 65px 20px;
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 7px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        .hero h1 {
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+
+        .hero p {
+            font-size: 16px;
+            opacity: 0.9;
+        }
+
+        main {
+            width: 90%;
+            max-width: 1050px;
+            margin: 40px auto;
+        }
+
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 28px;
+            margin-bottom: 25px;
+            box-shadow: 0 5px 18px rgba(15, 23, 42, 0.08);
+        }
+
+        .objective {
+            border-left: 5px solid #2563eb;
+        }
+
+        .objective h2,
+        .card h2 {
+            color: #1e3a8a;
+            margin-bottom: 15px;
+        }
+
+        .card h2 {
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 8px;
+        }
+
+        .demo {
+            background: #eff6ff;
+            border: 2px dashed #93c5fd;
+            border-radius: 10px;
+            padding: 30px;
+            margin-top: 20px;
+        }
+
+        .instruction {
+            margin-bottom: 25px;
+            color: #475569;
+            text-align: center;
+        }
+
+        .content-box {
+            max-width: 650px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            border: 1px solid #bfdbfe;
+        }
+
+        .content-box h3 {
+            color: #1e3a8a;
+            margin-bottom: 10px;
+        }
+
+        .content-box p {
+            color: #475569;
+            margin-bottom: 10px;
+        }
+
+        .controls {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-top: 22px;
+        }
+
+        button {
+            background: #2563eb;
+            color: white;
+            border: none;
+            padding: 11px 20px;
+            border-radius: 7px;
+            cursor: pointer;
+            font-size: 15px;
+        }
+
+        button:hover {
+            background: #1e3a8a;
+        }
+
+        button.secondary {
+            background: #0f172a;
+        }
+
+        button.secondary:hover {
+            background: #1e293b;
+        }
+
+        .status {
+            margin-top: 20px;
+            padding: 14px;
+            background: white;
+            border: 1px solid #bfdbfe;
+            border-radius: 8px;
+            text-align: center;
+            color: #1e3a8a;
+            font-weight: 600;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin: 35px 0;
+        }
+
+        .btn-link {
+            display: inline-block;
+            background: #2563eb;
+            color: white;
+            text-decoration: none;
+            padding: 11px 20px;
+            border-radius: 7px;
+            font-size: 15px;
+        }
+
+        .btn-link:hover {
+            background: #1e3a8a;
+        }
+
+        .btn-link.secondary {
+            background: #0f172a;
+        }
+
+        .btn-link.secondary:hover {
+            background: #1e293b;
+        }
+
+        footer {
+            background: #0f172a;
+            color: #cbd5e1;
+            text-align: center;
+            padding: 22px;
+            margin-top: 50px;
+            font-size: 14px;
+        }
+
+        @media (max-width: 750px) {
+            header {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            nav a {
+                margin: 0 8px;
+            }
+
+            .hero h1 {
+                font-size: 30px;
+            }
+
+            .card {
+                padding: 22px;
+            }
+        }
+
+        @media (max-width: 550px) {
+            .hero {
+                padding: 50px 15px;
+            }
+
+            .demo {
+                padding: 20px;
+            }
+
+            .controls button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="logo">Practical Programs</div>
+
+        <nav>
+            <a href="../../index.html">Home</a>
+<a href="../index.html">JavaScript Programs</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="badge">DOM Manipulation • Practical 40</div>
+        <h1>Show / Hide Content</h1>
+        <p>Display and hide webpage content using JavaScript</p>
+    </section>
+
+    <main>
+
+        <section class="card objective">
+            <h2>Objective</h2>
+            <p>
+                To create a show/hide content button using JavaScript
+                and DOM manipulation by dynamically changing the
+                visibility of an HTML element.
+            </p>
+        </section>
+
+        <section class="card">
+            <h2>Interactive Demonstration</h2>
+
+            <div class="demo">
+
+                <p class="instruction">
+                    Click the button to show or hide the content below.
+                </p>
+
+                <div class="content-box" id="contentBox">
+
+                    <h3>Welcome to JavaScript</h3>
+
+                    <p>
+                        JavaScript can be used to interact with HTML
+                        elements and dynamically change their appearance
+                        and visibility.
+                    </p>
+
+                    <p>
+                        This content can be displayed or hidden by
+                        clicking the button below.
+                    </p>
+
+                </div>
+
+                <div class="controls">
+
+                    <button id="toggleButton"
+                            onclick="toggleContent()">
+                        Hide Content
+                    </button>
+
+                    <button class="secondary"
+                            onclick="showContent()">
+                        Show Content
+                    </button>
+
+                </div>
+
+                <div class="status" id="status">
+                    Content is currently visible.
+                </div>
+
+            </div>
+        </section>
+
+        <div class="buttons">
+
+            <a href="39-password.html" class="btn-link">
+                ← Previous Practical
+            </a>
+
+            <a href="index.html" class="btn-link secondary">
+                DOM Programs
+            </a>
+
+            <a href="41-tabs.html" class="btn-link">
+                Next Practical →
+            </a>
+
+        </div>
+
+    </main>
+
+    <footer>
+        <p>JavaScript Practical Programs | DOM Manipulation</p>
+    </footer>
+
+    <script>
+        function toggleContent() {
+            const content =
+                document.getElementById("contentBox");
+
+            const button =
+                document.getElementById("toggleButton");
+
+            const status =
+                document.getElementById("status");
+
+            if (content.style.display === "none") {
+
+                content.style.display = "block";
+
+                button.textContent =
+                    "Hide Content";
+
+                status.textContent =
+                    "Content is currently visible.";
+
+            } else {
+
+                content.style.display = "none";
+
+                button.textContent =
+                    "Show Content";
+
+                status.textContent =
+                    "Content is currently hidden.";
+            }
+        }
+
+        function showContent() {
+            const content =
+                document.getElementById("contentBox");
+
+            const button =
+                document.getElementById("toggleButton");
+
+            const status =
+                document.getElementById("status");
+
+            content.style.display = "block";
+
+            button.textContent =
+                "Hide Content";
+
+            status.textContent =
+                "Content is currently visible.";
+        }
+    </script>
+
+</body>
+</html>

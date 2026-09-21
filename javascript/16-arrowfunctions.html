@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Practical 16 - Arrow Functions</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: #f1f5f9;
+            color: #334155;
+            line-height: 1.6;
+        }
+
+        header {
+            background: #0f172a;
+            padding: 18px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: white;
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        nav a {
+            color: #cbd5e1;
+            text-decoration: none;
+            margin-left: 25px;
+            font-size: 15px;
+        }
+
+        nav a:hover {
+            color: white;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #1e3a8a, #2563eb);
+            color: white;
+            text-align: center;
+            padding: 65px 20px;
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.18);
+            padding: 7px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        .hero h1 {
+            font-size: 38px;
+            margin-bottom: 10px;
+        }
+
+        .hero p {
+            font-size: 17px;
+            color: #dbeafe;
+        }
+
+        main {
+            width: 90%;
+            max-width: 1050px;
+            margin: 40px auto;
+        }
+
+        .card {
+            background: white;
+            padding: 28px;
+            margin-bottom: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(15, 23, 42, 0.08);
+        }
+
+        .card h2 {
+            color: #1e3a8a;
+            margin-bottom: 18px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e2e8f0;
+        }
+
+        .objective {
+            border-left: 5px solid #2563eb;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #1e293b;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px 14px;
+            border: 1px solid #cbd5e1;
+            border-radius: 7px;
+            font-size: 16px;
+            outline: none;
+        }
+
+        input:focus {
+            border-color: #2563eb;
+        }
+
+        .btn {
+            display: inline-block;
+            background: #2563eb;
+            color: white;
+            padding: 11px 20px;
+            border-radius: 7px;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            font-size: 15px;
+            font-weight: 600;
+        }
+
+        .btn:hover {
+            background: #1d4ed8;
+        }
+
+        .output {
+            margin-top: 20px;
+            padding: 18px;
+            background: #eff6ff;
+            border: 2px dashed #93c5fd;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 18px;
+            font-weight: 600;
+            color: #1e3a8a;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+
+        .secondary {
+            background: #475569;
+        }
+
+        .secondary:hover {
+            background: #334155;
+        }
+
+        footer {
+            background: #0f172a;
+            color: #cbd5e1;
+            text-align: center;
+            padding: 25px;
+            margin-top: 50px;
+            font-size: 14px;
+        }
+
+        @media (max-width: 750px) {
+            header {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            nav a {
+                margin: 0 8px;
+            }
+
+            .hero h1 {
+                font-size: 30px;
+            }
+
+            .card {
+                padding: 22px;
+            }
+
+            .buttons {
+                flex-direction: column;
+            }
+
+            .buttons .btn {
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="logo">JavaScript Programs</div>
+
+        <nav>
+            <a href="../index.html">Home</a>
+            <a href="index.html">JavaScript Programs</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="badge">JavaScript Practical 16</div>
+        <h1>Using Arrow Functions</h1>
+        <p>Perform calculations using JavaScript arrow functions</p>
+    </section>
+
+    <main>
+
+        <div class="card objective">
+            <h2>Objective</h2>
+            <p>
+                Write a JavaScript program using arrow functions.
+            </p>
+        </div>
+
+        <div class="card">
+            <h2>Program</h2>
+
+            <div class="form-group">
+                <label for="number1">Enter First Number</label>
+                <input type="number" id="number1" value="15">
+            </div>
+
+            <div class="form-group">
+                <label for="number2">Enter Second Number</label>
+                <input type="number" id="number2" value="5">
+            </div>
+
+            <button class="btn" onclick="calculate()">
+                Calculate Using Arrow Functions
+            </button>
+
+            <div class="output" id="result">
+                Addition = 20<br>
+                Multiplication = 75
+            </div>
+        </div>
+
+        <div class="buttons">
+            <a href="javascript-15.html" class="btn">← Previous Practical</a>
+            <a href="index.html" class="btn secondary">JavaScript Programs</a>
+            <a href="../index.html" class="btn">Dashboard</a>
+        </div>
+
+    </main>
+
+    <footer>
+        <p>JavaScript Practical Programs | Web Technology</p>
+    </footer>
+
+    <script>
+        const add = (a, b) => a + b;
+        const multiply = (a, b) => a * b;
+
+        function calculate() {
+            const number1 = Number(document.getElementById("number1").value);
+            const number2 = Number(document.getElementById("number2").value);
+            const result = document.getElementById("result");
+
+            if (Number.isNaN(number1) || Number.isNaN(number2)) {
+                result.textContent = "Please enter valid numbers.";
+                return;
+            }
+
+            result.innerHTML =
+                "Addition = " + add(number1, number2) +
+                "<br>Multiplication = " + multiply(number1, number2);
+        }
+    </script>
+
+</body>
+</html>

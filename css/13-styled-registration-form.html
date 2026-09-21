@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Styled Registration Form | CSS Practical 13</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: #f1f5f9;
+            color: #334155;
+            line-height: 1.6;
+        }
+
+        /* Header */
+        header {
+            background: #0f172a;
+            color: white;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header .logo {
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        header nav a {
+            color: #cbd5e1;
+            text-decoration: none;
+            margin-left: 25px;
+            font-weight: 500;
+        }
+
+        header nav a:hover {
+            color: white;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #1e3a8a, #2563eb);
+            color: white;
+            text-align: center;
+            padding: 65px 20px;
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 7px 15px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+        }
+
+        .hero h1 {
+            font-size: 38px;
+            margin-bottom: 10px;
+        }
+
+        .hero p {
+            font-size: 17px;
+            color: #dbeafe;
+        }
+
+        /* Main Content */
+        main {
+            width: 90%;
+            max-width: 1050px;
+            margin: 40px auto;
+        }
+
+        .objective {
+            background: white;
+            border-left: 5px solid #2563eb;
+            padding: 22px 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
+            margin-bottom: 25px;
+        }
+
+        .objective h2 {
+            color: #1e3a8a;
+            margin-bottom: 8px;
+        }
+
+        .content-card {
+            background: white;
+            padding: 35px;
+            margin-bottom: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
+        }
+
+        .content-card h2 {
+            color: #1e3a8a;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #dbeafe;
+        }
+
+        /* Registration Form */
+        .form-container {
+            background: #f8fafc;
+            border-left: 4px solid #2563eb;
+            border-radius: 10px;
+            padding: 30px;
+            margin-top: 20px;
+        }
+
+        .registration-form {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group.full-width {
+            grid-column: 1 / -1;
+        }
+
+        label {
+            font-weight: 600;
+            color: #1e3a8a;
+            margin-bottom: 7px;
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            padding: 12px 14px;
+            border: 2px solid #cbd5e1;
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 15px;
+            color: #334155;
+            background: white;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+            border-color: #2563eb;
+            box-shadow: 0 0 0 3px #dbeafe;
+        }
+
+        textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        /* Radio and Checkbox */
+        .option-group {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            padding-top: 8px;
+        }
+
+        .option {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            color: #334155;
+            font-weight: 500;
+        }
+
+        .option input {
+            width: auto;
+        }
+
+        /* Submit Buttons */
+        .form-buttons {
+            grid-column: 1 / -1;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 10px;
+        }
+
+        .submit-btn,
+        .reset-btn {
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .submit-btn {
+            background: #2563eb;
+            color: white;
+        }
+
+        .submit-btn:hover {
+            background: #1e3a8a;
+            transform: translateY(-2px);
+        }
+
+        .reset-btn {
+            background: #64748b;
+            color: white;
+        }
+
+        .reset-btn:hover {
+            background: #475569;
+            transform: translateY(-2px);
+        }
+
+        /* Buttons */
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin: 30px 0;
+        }
+
+        .btn {
+            text-decoration: none;
+            background: #2563eb;
+            color: white;
+            padding: 12px 22px;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background: #1e3a8a;
+            transform: translateY(-2px);
+        }
+
+        .secondary {
+            background: #64748b;
+        }
+
+        .secondary:hover {
+            background: #475569;
+        }
+
+        /* Footer */
+        footer {
+            background: #0f172a;
+            color: #cbd5e1;
+            text-align: center;
+            padding: 25px;
+            margin-top: 40px;
+        }
+
+        footer strong {
+            color: white;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 750px) {
+            header {
+                flex-direction: column;
+                gap: 12px;
+                text-align: center;
+                padding: 20px;
+            }
+
+            header nav a {
+                margin: 0 8px;
+            }
+
+            .hero h1 {
+                font-size: 30px;
+            }
+
+            .content-card {
+                padding: 25px 20px;
+            }
+
+            .form-container {
+                padding: 20px;
+            }
+
+            .registration-form {
+                grid-template-columns: 1fr;
+            }
+
+            .form-group.full-width {
+                grid-column: auto;
+            }
+
+            .form-buttons {
+                grid-column: auto;
+                flex-direction: column;
+            }
+
+            .submit-btn,
+            .reset-btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="logo">Web Practicals</div>
+
+        <nav>
+            <a href="../index.html">Home</a>
+            <a href="index.html">CSS Programs</a>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="badge">CSS PRACTICAL 13</div>
+        <h1>Styled Registration Form</h1>
+        <p>Creating a clean and responsive registration form using CSS.</p>
+    </section>
+
+    <!-- Main Content -->
+    <main>
+
+        <!-- Objective -->
+        <section class="objective">
+            <h2>Objective</h2>
+            <p>
+                To create and style a registration form using CSS properties
+                such as colors, borders, padding, spacing, focus effects,
+                and responsive design.
+            </p>
+        </section>
+
+        <!-- Registration Form -->
+        <section class="content-card">
+            <h2>Student Registration Form</h2>
+
+            <div class="form-container">
+
+                <form class="registration-form">
+
+                    <div class="form-group">
+                        <label for="firstName">First Name</label>
+                        <input
+                            type="text"
+                            id="firstName"
+                            name="firstName"
+                            placeholder="Enter your first name"
+                            required
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="lastName">Last Name</label>
+                        <input
+                            type="text"
+                            id="lastName"
+                            name="lastName"
+                            placeholder="Enter your last name"
+                            required
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            placeholder="Enter your email"
+                            required
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input
+                            type="tel"
+                            id="phone"
+                            name="phone"
+                            placeholder="Enter your phone number"
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="dob">Date of Birth</label>
+                        <input
+                            type="date"
+                            id="dob"
+                            name="dob"
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="course">Select Course</label>
+                        <select id="course" name="course">
+                            <option value="">Select a course</option>
+                            <option value="aiml">Artificial Intelligence & Machine Learning</option>
+                            <option value="datascience">Data Science</option>
+                            <option value="computing">Computing and Data Science</option>
+                            <option value="web">Web Development</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Gender</label>
+
+                        <div class="option-group">
+                            <label class="option">
+                                <input type="radio" name="gender" value="female">
+                                Female
+                            </label>
+
+                            <label class="option">
+                                <input type="radio" name="gender" value="male">
+                                Male
+                            </label>
+
+                            <label class="option">
+                                <input type="radio" name="gender" value="other">
+                                Other
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Interests</label>
+
+                        <div class="option-group">
+                            <label class="option">
+                                <input type="checkbox" name="interest" value="coding">
+                                Coding
+                            </label>
+
+                            <label class="option">
+                                <input type="checkbox" name="interest" value="ai">
+                                AI/ML
+                            </label>
+
+                            <label class="option">
+                                <input type="checkbox" name="interest" value="sports">
+                                Sports
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label for="address">Address</label>
+                        <textarea
+                            id="address"
+                            name="address"
+                            placeholder="Enter your address"
+                        ></textarea>
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label class="option">
+                            <input type="checkbox" required>
+                            I agree to the terms and conditions.
+                        </label>
+                    </div>
+
+                    <div class="form-buttons">
+                        <button type="submit" class="submit-btn">
+                            Register
+                        </button>
+
+                        <button type="reset" class="reset-btn">
+                            Reset
+                        </button>
+                    </div>
+
+                </form>
+
+            </div>
+        </section>
+
+        <!-- Navigation Buttons -->
+        <div class="buttons">
+            <a href="css-12.html" class="btn secondary">Previous Practical</a>
+            <a href="index.html" class="btn">CSS Programs</a>
+            <a href="../index.html" class="btn">Dashboard</a>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>
+            <strong>CSS Practical 13</strong> | Styled Registration Form
+        </p>
+        <p>Web Development Practical Assignment</p>
+    </footer>
+
+</body>
+</html>

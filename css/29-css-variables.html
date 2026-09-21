@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Variables | Practical 29</title>
+
+    <style>
+        /* CSS Variables */
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #1e3a8a;
+            --dark-color: #0f172a;
+            --light-color: #f1f5f9;
+            --card-color: #ffffff;
+            --text-color: #334155;
+            --muted-color: #64748b;
+            --border-color: #cbd5e1;
+            --radius: 10px;
+            --card-shadow: 0 4px 15px rgba(15, 23, 42, 0.08);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: var(--light-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        header {
+            background: var(--dark-color);
+            color: white;
+            padding: 18px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        nav a {
+            color: #cbd5e1;
+            text-decoration: none;
+            margin-left: 25px;
+            font-weight: 500;
+        }
+
+        nav a:hover {
+            color: white;
+        }
+
+        .hero {
+            background: linear-gradient(
+                135deg,
+                var(--secondary-color),
+                var(--primary-color)
+            );
+            color: white;
+            text-align: center;
+            padding: 65px 20px;
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 7px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+        }
+
+        .hero h1 {
+            font-size: 42px;
+            margin-bottom: 10px;
+        }
+
+        .hero p {
+            font-size: 17px;
+            color: #dbeafe;
+        }
+
+        main {
+            width: 90%;
+            max-width: 1050px;
+            margin: 40px auto;
+        }
+
+        .objective,
+        .content-card {
+            background: var(--card-color);
+            border-radius: 12px;
+            box-shadow: var(--card-shadow);
+        }
+
+        .objective {
+            border-left: 5px solid var(--primary-color);
+            padding: 22px 25px;
+            margin-bottom: 25px;
+        }
+
+        .objective h2 {
+            color: var(--secondary-color);
+            margin-bottom: 8px;
+        }
+
+        .content-card {
+            padding: 35px;
+            margin-bottom: 25px;
+        }
+
+        .content-card h2 {
+            color: var(--secondary-color);
+            border-bottom: 2px solid #dbeafe;
+            padding-bottom: 10px;
+            margin-bottom: 25px;
+        }
+
+        .variable-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .variable-card {
+            background: #f8fafc;
+            border-left: 4px solid var(--primary-color);
+            border-radius: var(--radius);
+            padding: 22px;
+            transition: 0.3s;
+        }
+
+        .variable-card:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--card-shadow);
+        }
+
+        .variable-card h3 {
+            color: var(--secondary-color);
+            margin-bottom: 8px;
+        }
+
+        .variable-name {
+            display: inline-block;
+            background: #dbeafe;
+            color: var(--secondary-color);
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-family: Consolas, monospace;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .demo-area {
+            background: #f8fafc;
+            border: 2px solid var(--border-color);
+            border-radius: var(--radius);
+            padding: 25px;
+            margin-top: 20px;
+        }
+
+        .demo-box {
+            background: var(--primary-color);
+            color: white;
+            padding: 20px;
+            border-radius: var(--radius);
+            text-align: center;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .demo-button {
+            display: inline-block;
+            background: var(--secondary-color);
+            color: white;
+            padding: 12px 22px;
+            border-radius: var(--radius);
+            text-decoration: none;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .demo-button:hover {
+            background: var(--primary-color);
+        }
+
+        .code-box {
+            background: var(--dark-color);
+            color: #e2e8f0;
+            padding: 20px;
+            border-radius: var(--radius);
+            overflow-x: auto;
+            margin-top: 20px;
+        }
+
+        .code-box code {
+            font-family: Consolas, "Courier New", monospace;
+            font-size: 14px;
+        }
+
+        .buttons {
+            text-align: center;
+            margin: 35px 0;
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--primary-color);
+            color: white;
+            text-decoration: none;
+            padding: 11px 22px;
+            border-radius: 7px;
+            margin: 5px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background: var(--secondary-color);
+            transform: translateY(-2px);
+        }
+
+        .secondary {
+            background: #475569;
+        }
+
+        .secondary:hover {
+            background: #334155;
+        }
+
+        footer {
+            background: var(--dark-color);
+            color: #cbd5e1;
+            text-align: center;
+            padding: 25px;
+            margin-top: 40px;
+        }
+
+        footer strong {
+            color: white;
+        }
+
+        @media (max-width: 750px) {
+            header {
+                flex-direction: column;
+                gap: 12px;
+                text-align: center;
+            }
+
+            nav a {
+                margin: 0 8px;
+            }
+
+            .hero h1 {
+                font-size: 32px;
+            }
+
+            .variable-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .content-card {
+                padding: 25px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="logo">Web Practicals</div>
+
+        <nav>
+            <a href="../index.html">Home</a>
+            <a href="index.html">CSS Programs</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="badge">CSS PRACTICAL 29</div>
+        <h1>CSS Variables</h1>
+        <p>Demonstrating custom properties and the var() function</p>
+    </section>
+
+    <main>
+
+        <section class="objective">
+            <h2>Objective</h2>
+            <p>
+                To create a webpage demonstrating CSS variables, also known
+                as custom properties, and use them with the var() function.
+            </p>
+        </section>
+
+        <section class="content-card">
+            <h2>CSS Variables Demonstration</h2>
+
+            <div class="variable-grid">
+
+                <div class="variable-card">
+                    <h3>Primary Color</h3>
+                    <div class="variable-name">--primary-color</div>
+                    <p>
+                        Stores the main blue color used throughout the webpage.
+                    </p>
+                </div>
+
+                <div class="variable-card">
+                    <h3>Secondary Color</h3>
+                    <div class="variable-name">--secondary-color</div>
+                    <p>
+                        Stores the darker blue color used for headings and buttons.
+                    </p>
+                </div>
+
+                <div class="variable-card">
+                    <h3>Border Radius</h3>
+                    <div class="variable-name">--radius</div>
+                    <p>
+                        Stores a common border-radius value for reusable styling.
+                    </p>
+                </div>
+
+            </div>
+        </section>
+
+        <section class="content-card">
+            <h2>Using CSS Variables</h2>
+
+            <div class="demo-area">
+                <div class="demo-box">
+                    This box uses the --primary-color variable
+                </div>
+
+                <a href="#" class="demo-button">
+                    Button Using CSS Variables
+                </a>
+            </div>
+
+            <div class="code-box">
+                <code>
+                    :root {<br>
+                    &nbsp;&nbsp;--primary-color: #2563eb;<br>
+                    &nbsp;&nbsp;--secondary-color: #1e3a8a;<br>
+                    &nbsp;&nbsp;--radius: 10px;<br>
+                    }<br><br>
+
+                    .demo-box {<br>
+                    &nbsp;&nbsp;background: var(--primary-color);<br>
+                    &nbsp;&nbsp;border-radius: var(--radius);<br>
+                    }<br><br>
+
+                    .demo-button {<br>
+                    &nbsp;&nbsp;background: var(--secondary-color);<br>
+                    &nbsp;&nbsp;border-radius: var(--radius);<br>
+                    }
+                </code>
+            </div>
+        </section>
+
+        <section class="content-card">
+            <h2>CSS Variable Syntax</h2>
+
+            <div class="demo-area">
+                <p>
+                    CSS variables are declared using a name beginning with
+                    two hyphens, such as <strong>--primary-color</strong>.
+                </p>
+
+                <p style="margin-top: 12px;">
+                    The <strong>var()</strong> function is then used to access
+                    the value of the custom property.
+                </p>
+
+                <div class="code-box">
+                    <code>
+                        :root {<br>
+                        &nbsp;&nbsp;--main-color: #2563eb;<br>
+                        }<br><br>
+
+                        element {<br>
+                        &nbsp;&nbsp;color: var(--main-color);<br>
+                        }
+                    </code>
+                </div>
+            </div>
+        </section>
+
+        <div class="buttons">
+            <a href="css-28.html" class="btn">← Previous Practical</a>
+            <a href="index.html" class="btn secondary">CSS Programs</a>
+            <a href="../index.html" class="btn secondary">Dashboard</a>
+        </div>
+
+    </main>
+
+    <footer>
+        <p>
+            <strong>Web Practicals</strong> | CSS Practical 29
+        </p>
+        <p>Designed for learning and practical demonstration of CSS variables.</p>
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Simple Quiz Application | JavaScript Practical 32</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: #f1f5f9;
+            color: #334155;
+            line-height: 1.6;
+        }
+
+        header {
+            background: #0f172a;
+            color: white;
+            padding: 18px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            font-size: 22px;
+            font-weight: 700;
+        }
+
+        nav {
+            display: flex;
+            gap: 22px;
+        }
+
+        nav a {
+            color: #cbd5e1;
+            text-decoration: none;
+            font-size: 15px;
+        }
+
+        nav a:hover {
+            color: white;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #1e3a8a, #2563eb);
+            color: white;
+            text-align: center;
+            padding: 65px 20px;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 7px 14px;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.18);
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        .hero h1 {
+            margin: 0;
+            font-size: 38px;
+        }
+
+        .hero p {
+            margin: 10px 0 0;
+            font-size: 17px;
+            color: #dbeafe;
+        }
+
+        main {
+            width: 90%;
+            max-width: 1050px;
+            margin: 40px auto;
+        }
+
+        .card {
+            background: white;
+            padding: 28px;
+            margin-bottom: 25px;
+            border-radius: 12px;
+            box-shadow: 0 5px 18px rgba(15, 23, 42, 0.08);
+        }
+
+        .objective {
+            border-left: 5px solid #2563eb;
+        }
+
+        .card h2 {
+            margin-top: 0;
+            color: #1e3a8a;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 10px;
+        }
+
+        .quiz-box {
+            max-width: 700px;
+            margin: auto;
+        }
+
+        .question-number {
+            color: #64748b;
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+
+        .question {
+            font-size: 20px;
+            font-weight: 600;
+            color: #1e3a8a;
+            margin-bottom: 20px;
+        }
+
+        .options {
+            display: grid;
+            gap: 12px;
+        }
+
+        .option {
+            width: 100%;
+            text-align: left;
+            padding: 13px 16px;
+            background: #f8fafc;
+            color: #334155;
+            border: 1px solid #cbd5e1;
+            border-radius: 7px;
+            cursor: pointer;
+            font-size: 15px;
+        }
+
+        .option:hover {
+            background: #eff6ff;
+            border-color: #2563eb;
+        }
+
+        .option.selected {
+            background: #dbeafe;
+            border-color: #2563eb;
+            color: #1e3a8a;
+            font-weight: 600;
+        }
+
+        .option.correct {
+            background: #dcfce7;
+            border-color: #16a34a;
+            color: #166534;
+        }
+
+        .option.wrong {
+            background: #fee2e2;
+            border-color: #dc2626;
+            color: #991b1b;
+        }
+
+        .quiz-buttons {
+            display: flex;
+            justify-content: space-between;
+            gap: 12px;
+            margin-top: 25px;
+        }
+
+        .quiz-buttons button {
+            padding: 11px 20px;
+            border: none;
+            border-radius: 7px;
+            background: #2563eb;
+            color: white;
+            font-size: 15px;
+            cursor: pointer;
+        }
+
+        .quiz-buttons button:hover {
+            background: #1d4ed8;
+        }
+
+        .quiz-buttons button:disabled {
+            background: #94a3b8;
+            cursor: not-allowed;
+        }
+
+        .result {
+            margin-top: 20px;
+            padding: 18px;
+            background: #eff6ff;
+            border: 1px dashed #93c5fd;
+            border-radius: 8px;
+            text-align: center;
+            color: #1e3a8a;
+            font-weight: 600;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 11px 20px;
+            border-radius: 7px;
+            background: #2563eb;
+            color: white;
+            text-decoration: none;
+            font-size: 15px;
+        }
+
+        .btn:hover {
+            background: #1d4ed8;
+        }
+
+        .secondary {
+            background: #475569;
+        }
+
+        .secondary:hover {
+            background: #334155;
+        }
+
+        footer {
+            background: #0f172a;
+            color: #94a3b8;
+            text-align: center;
+            padding: 22px;
+            margin-top: 50px;
+        }
+
+        @media (max-width: 650px) {
+            header {
+                justify-content: center;
+                gap: 12px;
+            }
+
+            nav {
+                gap: 15px;
+            }
+
+            .hero h1 {
+                font-size: 30px;
+            }
+
+            .card {
+                padding: 20px;
+            }
+
+            .quiz-buttons {
+                flex-direction: column;
+            }
+
+            .quiz-buttons button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+
+    <div class="logo">JavaScript Practical</div>
+
+    <nav>
+        <a href="../../index.html">Home</a>
+<a href="../index.html">JavaScript Programs</a>
+    </nav>
+
+</header>
+
+
+<section class="hero">
+
+    <div class="badge">JavaScript Practical 32</div>
+
+    <h1>Simple Quiz Application</h1>
+
+    <p>Answer multiple-choice questions using JavaScript</p>
+
+</section>
+
+
+<main>
+
+    <section class="card objective">
+
+        <h2>Objective</h2>
+
+        <p>
+            Create a simple quiz application using JavaScript.
+        </p>
+
+    </section>
+
+
+    <section class="card">
+
+        <h2>Quiz</h2>
+
+        <div class="quiz-box">
+
+            <div class="question-number" id="questionNumber">
+                Question 1 of 5
+            </div>
+
+            <div class="question" id="question">
+                Which language is used to make webpages interactive?
+            </div>
+
+            <div class="options" id="options"></div>
+
+            <div class="quiz-buttons">
+
+                <button id="nextButton" onclick="nextQuestion()" disabled>
+                    Next Question
+                </button>
+
+                <button onclick="restartQuiz()">
+                    Restart Quiz
+                </button>
+
+            </div>
+
+            <div class="result hidden" id="result"></div>
+
+        </div>
+
+    </section>
+
+
+    <div class="buttons">
+
+        <a href="todolist.html" class="btn">
+            ← Previous Practical
+        </a>
+
+        <a href="index.html" class="btn secondary">
+            JavaScript Programs
+        </a>
+
+        <a href="../index.html" class="btn">
+            Dashboard
+        </a>
+
+    </div>
+
+</main>
+
+
+<footer>
+
+    <p>JavaScript Practical Assignment</p>
+
+</footer>
+
+
+<script>
+
+    const questions = [
+        {
+            question: "Which language is used to make webpages interactive?",
+            options: [
+                "HTML",
+                "CSS",
+                "JavaScript",
+                "SQL"
+            ],
+            answer: 2
+        },
+
+        {
+            question: "Which keyword is used to declare a constant in JavaScript?",
+            options: [
+                "var",
+                "let",
+                "const",
+                "constant"
+            ],
+            answer: 2
+        },
+
+        {
+            question: "Which method is used to display a message in the browser console?",
+            options: [
+                "console.log()",
+                "print()",
+                "display()",
+                "write()"
+            ],
+            answer: 0
+        },
+
+        {
+            question: "Which symbol is used for a single-line comment in JavaScript?",
+            options: [
+                "/*",
+                "//",
+                "#",
+                "<!--"
+            ],
+            answer: 1
+        },
+
+        {
+            question: "Which method adds an element to the end of an array?",
+            options: [
+                "push()",
+                "pop()",
+                "shift()",
+                "slice()"
+            ],
+            answer: 0
+        }
+    ];
+
+
+    let currentQuestion = 0;
+    let score = 0;
+    let selectedAnswer = null;
+
+
+    function loadQuestion() {
+
+        const questionData = questions[currentQuestion];
+
+        document.getElementById("questionNumber").textContent =
+            "Question " + (currentQuestion + 1) +
+            " of " + questions.length;
+
+        document.getElementById("question").textContent =
+            questionData.question;
+
+        const optionsContainer =
+            document.getElementById("options");
+
+        optionsContainer.innerHTML = "";
+
+        selectedAnswer = null;
+
+        document.getElementById("nextButton").disabled = true;
+
+        questionData.options.forEach(function(option, index) {
+
+            const button = document.createElement("button");
+
+            button.className = "option";
+
+            button.textContent =
+                String.fromCharCode(65 + index) + ". " + option;
+
+            button.onclick = function() {
+                selectAnswer(index, button);
+            };
+
+            optionsContainer.appendChild(button);
+
+        });
+
+        document.getElementById("result").classList.add("hidden");
+    }
+
+
+    function selectAnswer(index, button) {
+
+        const optionButtons =
+            document.querySelectorAll(".option");
+
+        optionButtons.forEach(function(option) {
+            option.classList.remove("selected");
+        });
+
+        button.classList.add("selected");
+
+        selectedAnswer = index;
+
+        document.getElementById("nextButton").disabled = false;
+    }
+
+
+    function nextQuestion() {
+
+        if (selectedAnswer === null) {
+            return;
+        }
+
+        const correctAnswer =
+            questions[currentQuestion].answer;
+
+        const optionButtons =
+            document.querySelectorAll(".option");
+
+        optionButtons.forEach(function(option) {
+            option.disabled = true;
+        });
+
+        if (selectedAnswer === correctAnswer) {
+
+            optionButtons[selectedAnswer].classList.remove("selected");
+            optionButtons[selectedAnswer].classList.add("correct");
+
+            score++;
+
+        } else {
+
+            optionButtons[selectedAnswer].classList.remove("selected");
+            optionButtons[selectedAnswer].classList.add("wrong");
+
+            optionButtons[correctAnswer].classList.add("correct");
+        }
+
+        document.getElementById("nextButton").disabled = true;
+
+        setTimeout(function() {
+
+            currentQuestion++;
+
+            if (currentQuestion < questions.length) {
+
+                loadQuestion();
+
+            } else {
+
+                showResult();
+
+            }
+
+        }, 800);
+    }
+
+
+    function showResult() {
+
+        document.getElementById("questionNumber").textContent =
+            "Quiz Completed";
+
+        document.getElementById("question").textContent =
+            "Well done! You have completed the quiz.";
+
+        document.getElementById("options").innerHTML = "";
+
+        document.getElementById("nextButton").style.display =
+            "none";
+
+        const result = document.getElementById("result");
+
+        result.classList.remove("hidden");
+
+        result.textContent =
+            "Your Score: " + score + " / " + questions.length;
+    }
+
+
+    function restartQuiz() {
+
+        currentQuestion = 0;
+        score = 0;
+        selectedAnswer = null;
+
+        document.getElementById("nextButton").style.display =
+            "block";
+
+        loadQuestion();
+    }
+
+
+    loadQuestion();
+
+</script>
+
+</body>
+</html>

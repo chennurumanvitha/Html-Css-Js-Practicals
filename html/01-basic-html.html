@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Student Profile | HTML Practical 01</title>
+
+    <style>
+        /* ------------------------------
+           General Page Styling
+        ------------------------------ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: #f1f5f9;
+            color: #334155;
+            line-height: 1.7;
+        }
+
+        /* ------------------------------
+           Navigation Bar
+        ------------------------------ */
+        nav {
+            background: #0f172a;
+            padding: 16px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: white;
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        nav a {
+            color: #cbd5e1;
+            text-decoration: none;
+            margin-left: 25px;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            color: white;
+        }
+
+        /* ------------------------------
+           Hero Section
+        ------------------------------ */
+        .hero {
+            background: linear-gradient(135deg, #1e3a8a, #2563eb);
+            color: white;
+            text-align: center;
+            padding: 70px 20px;
+        }
+
+        .hero h1 {
+            font-size: 42px;
+            margin-bottom: 10px;
+        }
+
+        .hero p {
+            font-size: 18px;
+            color: #dbeafe;
+        }
+
+        .badge {
+            display: inline-block;
+            margin-bottom: 18px;
+            padding: 6px 14px;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 20px;
+            font-size: 13px;
+        }
+
+        /* ------------------------------
+           Main Content
+        ------------------------------ */
+        main {
+            width: 90%;
+            max-width: 1000px;
+            margin: 40px auto;
+        }
+
+        .objective {
+            background: white;
+            border-left: 5px solid #2563eb;
+            padding: 22px 25px;
+            margin-bottom: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(15, 23, 42, 0.06);
+        }
+
+        .objective h2 {
+            color: #1e3a8a;
+            font-size: 20px;
+            margin-bottom: 5px;
+        }
+
+        .content-card {
+            background: white;
+            padding: 35px;
+            margin-bottom: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(15, 23, 42, 0.06);
+        }
+
+        .content-card h2 {
+            color: #1e3a8a;
+            margin-bottom: 12px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #e2e8f0;
+        }
+
+        .content-card h3 {
+            color: #2563eb;
+            margin-top: 25px;
+            margin-bottom: 8px;
+        }
+
+        .content-card p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+
+        /* ------------------------------
+           HTML Concept Demonstration
+        ------------------------------ */
+        .concept-box {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 15px;
+        }
+
+        .concept-box span {
+            display: inline-block;
+            background: #dbeafe;
+            color: #1e40af;
+            padding: 4px 10px;
+            margin: 4px;
+            border-radius: 5px;
+            font-family: monospace;
+            font-weight: 600;
+        }
+
+        /* ------------------------------
+           Navigation Buttons
+        ------------------------------ */
+        .buttons {
+            text-align: center;
+            margin: 35px 0;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 22px;
+            margin: 5px;
+            background: #2563eb;
+            color: white;
+            text-decoration: none;
+            border-radius: 7px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background: #1d4ed8;
+            transform: translateY(-2px);
+        }
+
+        .btn.secondary {
+            background: #475569;
+        }
+
+        .btn.secondary:hover {
+            background: #334155;
+        }
+
+        /* ------------------------------
+           Footer
+        ------------------------------ */
+        footer {
+            background: #0f172a;
+            color: #94a3b8;
+            text-align: center;
+            padding: 25px 15px;
+            margin-top: 50px;
+        }
+
+        footer strong {
+            color: white;
+        }
+
+        /* ------------------------------
+           Responsive Design
+        ------------------------------ */
+        @media (max-width: 700px) {
+
+            nav {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            nav a {
+                margin: 0 8px;
+            }
+
+            .hero h1 {
+                font-size: 30px;
+            }
+
+            .content-card {
+                padding: 22px;
+            }
+
+            .content-card p {
+                text-align: left;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ==============================
+         Navigation Bar
+    =============================== -->
+    <nav>
+        <div class="logo">Web Practicals</div>
+
+        <div>
+            <a href="../index.html">Home</a>
+            <a href="index.html">HTML Programs</a>
+        </div>
+    </nav>
+
+
+    <!-- ==============================
+         Hero Section
+    =============================== -->
+    <section class="hero">
+
+        <div class="badge">HTML PRACTICAL 01</div>
+
+        <h1>Student Profile</h1>
+
+        <p>
+            A Basic Web Page Using HTML Headings, Paragraphs and Line Breaks
+        </p>
+
+    </section>
+
+
+    <!-- ==============================
+         Main Content
+    =============================== -->
+    <main>
+
+        <!-- Objective -->
+        <section class="objective">
+
+            <h2>Objective</h2>
+
+            <p>
+                To create a basic HTML webpage using headings,
+                paragraphs and line breaks.
+            </p>
+
+        </section>
+
+
+        <!-- Profile Content -->
+        <section class="content-card">
+
+            <h2>About Me</h2>
+
+            <p>
+                My name is <strong>Chennuru Manvitha Reddy</strong>.
+                I am a student at Sai University, pursuing Computing
+                and Data Science with a specialization in Artificial
+                Intelligence and Machine Learning (AIML).
+            </p>
+
+            <p>
+                I am interested in technology, data science, and
+                artificial intelligence. I am developing my knowledge
+                and skills in programming, data analysis, machine
+                learning, and modern computing technologies.
+            </p>
+
+
+            <h2>My Academic Journey</h2>
+
+            <p>
+                My studies at Sai University provide me with opportunities
+                to explore computing and data science through both
+                theoretical knowledge and practical learning.
+            </p>
+
+            <p>
+                I aim to build a strong foundation in emerging technologies
+                and apply my knowledge to real-world problems.
+            </p>
+
+
+            <h2>My Interests</h2>
+
+            <p>
+                My areas of interest include Artificial Intelligence,
+                Machine Learning, Data Science, and Programming.
+                <br><br>
+
+                I am enthusiastic about learning new technologies and
+                improving my problem-solving and analytical skills.
+                <br><br>
+
+                I hope to use these skills to contribute to innovative
+                and meaningful technological solutions.
+            </p>
+
+
+            <h2>My Goal</h2>
+
+            <p>
+                My goal is to develop strong technical and analytical
+                skills and build a successful career in the field of
+                Artificial Intelligence and Data Science.
+            </p>
+
+            <p>
+                I look forward to continuously learning, gaining
+                practical experience, and contributing to the
+                development of technology.
+            </p>
+
+
+            <h3>Thank You</h3>
+
+            <p>
+                Thank you for visiting my webpage.
+            </p>
+
+        </section>
+
+
+        
+
+    <!-- ==============================
+         Footer
+    =============================== -->
+    <footer>
+
+        <p>
+            <strong>Web Practicals</strong> |
+            HTML Practical 01
+        </p>
+
+        <p>
+            Student Profile • Basic HTML Web Page
+        </p>
+
+    </footer>
+
+</body>
+</html>

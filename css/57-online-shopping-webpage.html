@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Shopping Webpage | CSS Practical 57</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: #f1f5f9;
+            color: #334155;
+            line-height: 1.6;
+        }
+
+        header {
+            background: #0f172a;
+            color: white;
+            padding: 18px 6%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 3px 12px rgba(15, 23, 42, 0.18);
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: white;
+        }
+
+        nav a {
+            color: #cbd5e1;
+            text-decoration: none;
+            margin-left: 25px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            color: white;
+        }
+
+        .hero {
+            background:
+                linear-gradient(rgba(15, 23, 42, 0.75), rgba(37, 99, 235, 0.75)),
+                url("https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=1600&q=80");
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            padding: 75px 20px;
+        }
+
+        .hero h1 {
+            font-size: 42px;
+            margin-bottom: 12px;
+        }
+
+        .hero p {
+            font-size: 18px;
+            max-width: 700px;
+            margin: auto;
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.18);
+            padding: 8px 18px;
+            border-radius: 30px;
+            margin-bottom: 15px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        main {
+            width: 90%;
+            max-width: 1100px;
+            margin: 40px auto;
+        }
+
+        .objective,
+        .content-card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(15, 23, 42, 0.08);
+        }
+
+        .objective {
+            border-left: 5px solid #2563eb;
+            padding: 22px 25px;
+            margin-bottom: 25px;
+        }
+
+        .objective h2 {
+            color: #1e3a8a;
+            margin-bottom: 8px;
+        }
+
+        .content-card {
+            padding: 35px;
+            margin-bottom: 25px;
+        }
+
+        .content-card h2 {
+            color: #1e3a8a;
+            border-bottom: 2px solid #dbeafe;
+            padding-bottom: 10px;
+            margin-bottom: 25px;
+        }
+
+        /* Category Cards */
+
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 18px;
+        }
+
+        .category-card {
+            background: #eff6ff;
+            border-left: 4px solid #2563eb;
+            border-radius: 10px;
+            padding: 22px;
+            text-align: center;
+            transition: 0.3s;
+        }
+
+        .category-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 18px rgba(15, 23, 42, 0.12);
+        }
+
+        .category-icon {
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+
+        .category-card h3 {
+            color: #1e3a8a;
+            margin-bottom: 5px;
+        }
+
+        /* Product Cards */
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        .product-card {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            overflow: hidden;
+            transition: 0.3s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 10px 25px rgba(15, 23, 42, 0.15);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 210px;
+            object-fit: cover;
+            transition: 0.4s;
+        }
+
+        .product-card:hover .product-image {
+            transform: scale(1.04);
+        }
+
+        .product-info {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+        }
+
+        .product-category {
+            color: #2563eb;
+            font-size: 13px;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-bottom: 5px;
+        }
+
+        .product-info h3 {
+            color: #1e3a8a;
+            margin-bottom: 8px;
+        }
+
+        .product-description {
+            font-size: 14px;
+            color: #64748b;
+            margin-bottom: 12px;
+        }
+
+        .price {
+            color: #0f172a;
+            font-size: 21px;
+            font-weight: 700;
+            margin-top: auto;
+            margin-bottom: 15px;
+        }
+
+        .old-price {
+            color: #94a3b8;
+            text-decoration: line-through;
+            font-size: 14px;
+            margin-left: 6px;
+        }
+
+        .buy-button {
+            display: inline-block;
+            background: #2563eb;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            padding: 11px 18px;
+            border-radius: 7px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .buy-button:hover {
+            background: #1e3a8a;
+        }
+
+        /* Features */
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .feature-card {
+            background: #f8fafc;
+            border-left: 4px solid #2563eb;
+            border-radius: 10px;
+            padding: 22px;
+        }
+
+        .feature-card h3 {
+            color: #1e3a8a;
+            margin-bottom: 8px;
+        }
+
+        .feature-icon {
+            font-size: 28px;
+            margin-bottom: 8px;
+        }
+
+        /* Offer Banner */
+
+        .offer-banner {
+            background: linear-gradient(135deg, #1e3a8a, #2563eb);
+            color: white;
+            border-radius: 12px;
+            padding: 35px;
+            text-align: center;
+        }
+
+        .offer-banner h2 {
+            margin-bottom: 8px;
+        }
+
+        .offer-button {
+            display: inline-block;
+            margin-top: 18px;
+            background: white;
+            color: #1e3a8a;
+            padding: 11px 25px;
+            border-radius: 7px;
+            text-decoration: none;
+            font-weight: 700;
+            transition: 0.3s;
+        }
+
+        .offer-button:hover {
+            background: #dbeafe;
+        }
+
+        /* Navigation Buttons */
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 35px 0;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 11px 22px;
+            background: #2563eb;
+            color: white;
+            text-decoration: none;
+            border-radius: 7px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background: #1e3a8a;
+            transform: translateY(-2px);
+        }
+
+        .secondary {
+            background: #64748b;
+        }
+
+        .secondary:hover {
+            background: #475569;
+        }
+
+        footer {
+            background: #0f172a;
+            color: #cbd5e1;
+            text-align: center;
+            padding: 25px;
+            margin-top: 40px;
+        }
+
+        footer strong {
+            color: white;
+        }
+
+        /* Responsive Design */
+
+        @media (max-width: 850px) {
+            .category-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .product-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 750px) {
+            header {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            nav a {
+                margin: 0 8px;
+                font-size: 14px;
+            }
+
+            .hero h1 {
+                font-size: 32px;
+            }
+
+            .content-card {
+                padding: 25px;
+            }
+
+            .product-grid,
+            .category-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="logo">ShopEase</div>
+
+        <nav>
+            <a href="../index.html">Home</a>
+            <a href="index.html">CSS Programs</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="badge">CSS PRACTICAL 57</div>
+
+        <h1>Online Shopping</h1>
+
+        <p>
+            A modern online shopping webpage designed using HTML and CSS
+            with product cards, categories, offers, and responsive layouts.
+        </p>
+    </section>
+
+    <main>
+
+        <!-- Objective -->
+
+        <section class="objective">
+            <h2>Objective</h2>
+
+            <p>
+                To create an attractive online shopping webpage using CSS
+                by designing product cards, categories, buttons, offers,
+                and a responsive layout.
+            </p>
+        </section>
+
+        <!-- Categories -->
+
+        <section class="content-card">
+
+            <h2>Shop by Category</h2>
+
+            <div class="category-grid">
+
+                <div class="category-card">
+                    <div class="category-icon">💻</div>
+                    <h3>Electronics</h3>
+                    <p>Laptops, phones and accessories</p>
+                </div>
+
+                <div class="category-card">
+                    <div class="category-icon">👕</div>
+                    <h3>Fashion</h3>
+                    <p>Clothing and accessories</p>
+                </div>
+
+                <div class="category-card">
+                    <div class="category-icon">🏠</div>
+                    <h3>Home</h3>
+                    <p>Furniture and home products</p>
+                </div>
+
+                <div class="category-card">
+                    <div class="category-icon">🎧</div>
+                    <h3>Accessories</h3>
+                    <p>Useful everyday accessories</p>
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- Products -->
+
+        <section class="content-card">
+
+            <h2>Featured Products</h2>
+
+            <div class="product-grid">
+
+                <div class="product-card">
+
+                    <img
+                        class="product-image"
+                        src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853?auto=format&fit=crop&w=800&q=80"
+                        alt="Laptop"
+                    >
+
+                    <div class="product-info">
+
+                        <div class="product-category">
+                            Electronics
+                        </div>
+
+                        <h3>Professional Laptop</h3>
+
+                        <p class="product-description">
+                            15.6-inch Full HD laptop with powerful
+                            performance for study and work.
+                        </p>
+
+                        <div class="price">
+                            ₹59,999
+                            <span class="old-price">₹69,999</span>
+                        </div>
+
+                        <a href="#" class="buy-button">
+                            Add to Cart
+                        </a>
+
+                    </div>
+                </div>
+
+
+                <div class="product-card">
+
+                    <img
+                        class="product-image"
+                        src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=800&q=80"
+                        alt="Sports Shoes"
+                    >
+
+                    <div class="product-info">
+
+                        <div class="product-category">
+                            Fashion
+                        </div>
+
+                        <h3>Sports Shoes</h3>
+
+                        <p class="product-description">
+                            Comfortable and lightweight shoes suitable
+                            for everyday activities.
+                        </p>
+
+                        <div class="price">
+                            ₹2,499
+                            <span class="old-price">₹3,499</span>
+                        </div>
+
+                        <a href="#" class="buy-button">
+                            Add to Cart
+                        </a>
+
+                    </div>
+                </div>
+
+
+                <div class="product-card">
+
+                    <img
+                        class="product-image"
+                        src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=800&q=80"
+                        alt="Headphones"
+                    >
+
+                    <div class="product-info">
+
+                        <div class="product-category">
+                            Accessories
+                        </div>
+
+                        <h3>Wireless Headphones</h3>
+
+                        <p class="product-description">
+                            Wireless headphones with comfortable design
+                            and high-quality audio.
+                        </p>
+
+                        <div class="price">
+                            ₹3,999
+                            <span class="old-price">₹5,499</span>
+                        </div>
+
+                        <a href="#" class="buy-button">
+                            Add to Cart
+                        </a>
+
+                    </div>
+                </div>
+
+
+                <div class="product-card">
+
+                    <img
+                        class="product-image"
+                        src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=800&q=80"
+                        alt="Smart Watch"
+                    >
+
+                    <div class="product-info">
+
+                        <div class="product-category">
+                            Electronics
+                        </div>
+
+                        <h3>Smart Watch</h3>
+
+                        <p class="product-description">
+                            Stylish smart watch with useful fitness
+                            and notification features.
+                        </p>
+
+                        <div class="price">
+                            ₹4,499
+                            <span class="old-price">₹6,499</span>
+                        </div>
+
+                        <a href="#" class="buy-button">
+                            Add to Cart
+                        </a>
+
+                    </div>
+                </div>
+
+
+                <div class="product-card">
+
+                    <img
+                        class="product-image"
+                        src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=800&q=80"
+                        alt="T-Shirt"
+                    >
+
+                    <div class="product-info">
+
+                        <div class="product-category">
+                            Fashion
+                        </div>
+
+                        <h3>Casual T-Shirt</h3>
+
+                        <p class="product-description">
+                            Comfortable casual T-shirt suitable for
+                            everyday wear.
+                        </p>
+
+                        <div class="price">
+                            ₹799
+                            <span class="old-price">₹1,199</span>
+                        </div>
+
+                        <a href="#" class="buy-button">
+                            Add to Cart
+                        </a>
+
+                    </div>
+                </div>
+
+
+                <div class="product-card">
+
+                    <img
+                        class="product-image"
+                        src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=800&q=80"
+                        alt="Sofa"
+                    >
+
+                    <div class="product-info">
+
+                        <div class="product-category">
+                            Home
+                        </div>
+
+                        <h3>Modern Sofa</h3>
+
+                        <p class="product-description">
+                            Modern and comfortable sofa designed for
+                            contemporary living spaces.
+                        </p>
+
+                        <div class="price">
+                            ₹24,999
+                            <span class="old-price">₹29,999</span>
+                        </div>
+
+                        <a href="#" class="buy-button">
+                            Add to Cart
+                        </a>
+
+                    </div>
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- Offer -->
+
+        <section class="content-card">
+
+            <div class="offer-banner">
+
+                <h2>Special Shopping Offer</h2>
+
+                <p>
+                    Get exciting discounts on selected products.
+                    Shop your favourite products today!
+                </p>
+
+                <a href="#" class="offer-button">
+                    Shop Now
+                </a>
+
+            </div>
+
+        </section>
+
+        <!-- Features -->
+
+        <section class="content-card">
+
+            <h2>Why Shop With Us?</h2>
+
+            <div class="features-grid">
+
+                <div class="feature-card">
+                    <div class="feature-icon">🚚</div>
+                    <h3>Fast Delivery</h3>
+                    <p>
+                        Get your orders delivered quickly and safely
+                        to your doorstep.
+                    </p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🔒</div>
+                    <h3>Secure Shopping</h3>
+                    <p>
+                        Enjoy a safe and user-friendly online shopping
+                        experience.
+                    </p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">↩️</div>
+                    <h3>Easy Returns</h3>
+                    <p>
+                        Simple return options help make shopping
+                        convenient.
+                    </p>
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- Navigation -->
+
+        <div class="buttons">
+
+            <a href="css-56.html" class="btn">
+                Previous Practical
+            </a>
+
+            <a href="index.html" class="btn">
+                CSS Programs
+            </a>
+
+            <a href="../index.html" class="btn secondary">
+                Dashboard
+            </a>
+
+        </div>
+
+    </main>
+
+    <footer>
+
+        <p>
+            <strong>CSS Practical 57</strong> |
+            Online Shopping Webpage
+        </p>
+
+        <p>
+            Designed using HTML5 and CSS3
+        </p>
+
+    </footer>
+
+</body>
+</html>

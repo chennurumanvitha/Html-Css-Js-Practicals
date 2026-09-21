@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="description"
+        content="CSS Practical 12 demonstrating selectors, colors, fonts, margins, padding and borders."
+    >
+
+    <title>CSS Selectors and Styling | Practical 12</title>
+
+    <style>
+        /* ================================
+           GENERAL PAGE STYLING
+        ================================== */
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #f4f7fb;
+            color: #1f2937;
+            line-height: 1.7;
+        }
+
+        /* ================================
+           NAVIGATION BAR
+        ================================== */
+
+        nav {
+            background-color: #0f172a;
+            padding: 18px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: white;
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        nav a {
+            color: #e2e8f0;
+            text-decoration: none;
+            margin-left: 25px;
+            font-size: 15px;
+        }
+
+        nav a:hover {
+            color: #60a5fa;
+        }
+
+        /* ================================
+           HERO SECTION
+        ================================== */
+
+        .hero {
+            background: linear-gradient(135deg, #2563eb, #1e40af);
+            color: white;
+            text-align: center;
+            padding: 65px 20px;
+        }
+
+        .badge {
+            display: inline-block;
+            background-color: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.35);
+            padding: 7px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            margin-bottom: 18px;
+        }
+
+        .hero h1 {
+            font-size: 42px;
+            margin-bottom: 12px;
+        }
+
+        .hero p {
+            font-size: 17px;
+            color: #dbeafe;
+        }
+
+        /* ================================
+           MAIN CONTENT
+        ================================== */
+
+        main {
+            max-width: 1050px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .objective {
+            background-color: white;
+            border-left: 5px solid #2563eb;
+            padding: 22px 25px;
+            margin-bottom: 25px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
+        }
+
+        .objective h2 {
+            color: #1d4ed8;
+            margin-bottom: 8px;
+        }
+
+        .content-card {
+            background-color: white;
+            padding: 30px;
+            margin-bottom: 25px;
+            border: 1px solid #dbe3ef;
+            border-radius: 12px;
+            box-shadow: 0 4px 14px rgba(15, 23, 42, 0.06);
+        }
+
+        .content-card h2 {
+            color: #1d4ed8;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #dbeafe;
+            padding-bottom: 8px;
+        }
+
+        .content-card h3 {
+            color: #334155;
+            margin-top: 20px;
+            margin-bottom: 8px;
+        }
+
+        /* ================================
+           1. CSS SELECTORS
+        ================================== */
+
+        /* Element Selector */
+        .selector-element-demo p {
+            color: #2563eb;
+        }
+
+        /* Class Selector */
+        .class-selector {
+            background-color: #eff6ff;
+            color: #1e40af;
+            padding: 15px;
+            margin-top: 12px;
+            border-left: 4px solid #2563eb;
+        }
+
+        /* ID Selector */
+        #id-selector {
+            background-color: #ecfdf5;
+            color: #047857;
+            padding: 15px;
+            margin-top: 12px;
+            border-left: 4px solid #10b981;
+        }
+
+        /* Group Selector */
+        .group-one,
+        .group-two {
+            font-weight: bold;
+            color: #7c3aed;
+            margin-top: 8px;
+        }
+
+        /* ================================
+           2. COLORS
+        ================================== */
+
+        .color-box {
+            background-color: #2563eb;
+            color: white;
+            padding: 20px;
+            margin-top: 15px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .color-example {
+            background-color: #fef3c7;
+            color: #92400e;
+            padding: 15px;
+            margin-top: 12px;
+            border: 2px solid #f59e0b;
+            border-radius: 8px;
+        }
+
+        /* ================================
+           3. FONTS
+        ================================== */
+
+        .font-example {
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 22px;
+            font-weight: bold;
+            font-style: italic;
+            color: #4c1d95;
+            margin-top: 15px;
+            padding: 18px;
+            background-color: #f5f3ff;
+            border: 1px solid #c4b5fd;
+            border-radius: 8px;
+        }
+
+        /* ================================
+           4. MARGIN AND PADDING
+        ================================== */
+
+        .spacing-demo {
+            background-color: #dbeafe;
+            margin: 25px;
+            padding: 25px;
+            border: 3px solid #2563eb;
+            border-radius: 8px;
+        }
+
+        .spacing-inner {
+            background-color: white;
+            padding: 15px;
+            border-radius: 5px;
+        }
+
+        /* ================================
+           5. BORDERS
+        ================================== */
+
+        .border-demo {
+            padding: 20px;
+            margin-top: 15px;
+            border: 3px solid #2563eb;
+            border-radius: 10px;
+            background-color: #f8fafc;
+        }
+
+        .border-dashed {
+            padding: 15px;
+            margin-top: 15px;
+            border: 2px dashed #7c3aed;
+            background-color: #faf5ff;
+        }
+
+        /* ================================
+           ELEMENTS USED SECTION
+        ================================== */
+
+        .properties-box {
+            background-color: #f8fafc;
+            border: 1px solid #dbe3ef;
+            border-radius: 8px;
+            padding: 20px;
+        }
+
+        .properties-box ul {
+            padding-left: 22px;
+        }
+
+        .properties-box li {
+            margin-bottom: 8px;
+        }
+
+        .properties-box strong {
+            color: #1d4ed8;
+        }
+
+        /* ================================
+           CODE DEMONSTRATION
+        ================================== */
+
+        pre {
+            background-color: #0f172a;
+            color: #e2e8f0;
+            padding: 20px;
+            margin-top: 15px;
+            border-radius: 8px;
+            overflow-x: auto;
+            font-size: 14px;
+        }
+
+        code {
+            font-family: "Courier New", monospace;
+        }
+
+        /* ================================
+           NAVIGATION BUTTONS
+        ================================== */
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin: 35px 0;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: #2563eb;
+            color: white;
+            text-decoration: none;
+            padding: 12px 22px;
+            border-radius: 7px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #1d4ed8;
+            transform: translateY(-2px);
+        }
+
+        /* ================================
+           FOOTER
+        ================================== */
+
+        footer {
+            background-color: #0f172a;
+            color: #cbd5e1;
+            text-align: center;
+            padding: 25px 20px;
+            margin-top: 40px;
+        }
+
+        footer strong {
+            color: white;
+        }
+
+        /* ================================
+           RESPONSIVE DESIGN
+        ================================== */
+
+        @media (max-width: 700px) {
+
+            nav {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            nav a {
+                margin: 0 8px;
+            }
+
+            .hero h1 {
+                font-size: 32px;
+            }
+
+            .content-card {
+                padding: 22px;
+            }
+
+            .spacing-demo {
+                margin: 15px;
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ================================
+         NAVIGATION
+    ================================== -->
+
+    <nav>
+        <div class="logo">Web Practicals</div>
+
+        <div>
+            <a href="../index.html">Home</a>
+            <a href="index.html">CSS Programs</a>
+        </div>
+    </nav>
+
+
+    <!-- ================================
+         HERO SECTION
+    ================================== -->
+
+    <header class="hero">
+
+        <div class="badge">CSS PRACTICAL 12</div>
+
+        <h1>CSS Selectors &amp; Styling</h1>
+
+        <p>
+            Demonstration of selectors, colors, fonts, margins,
+            padding and borders
+        </p>
+
+    </header>
+
+
+    <main>
+
+        <!-- ================================
+             OBJECTIVE
+        ================================== -->
+
+        <section class="objective">
+
+            <h2>Objective</h2>
+
+            <p>
+                To create a webpage demonstrating CSS selectors,
+                colors, fonts, margins, padding, and borders using
+                internal CSS styling.
+            </p>
+
+        </section>
+
+
+        <!-- ================================
+             1. CSS SELECTORS
+        ================================== -->
+
+        <section class="content-card">
+
+            <h2>1. CSS Selectors</h2>
+
+            <p>
+                CSS selectors are used to select HTML elements
+                and apply styles to them.
+            </p>
+
+            <div class="selector-element-demo">
+
+                <h3>Element Selector</h3>
+
+                <p>
+                    This paragraph is styled using an element selector.
+                </p>
+
+            </div>
+
+            <h3>Class Selector</h3>
+
+            <div class="class-selector">
+                This element is styled using a class selector.
+            </div>
+
+            <h3>ID Selector</h3>
+
+            <div id="id-selector">
+                This element is styled using an ID selector.
+            </div>
+
+            <h3>Group Selector</h3>
+
+            <p class="group-one">
+                This paragraph uses the group selector.
+            </p>
+
+            <p class="group-two">
+                This paragraph also uses the group selector.
+            </p>
+
+        </section>
+
+
+        <!-- ================================
+             2. CSS COLORS
+        ================================== -->
+
+        <section class="content-card">
+
+            <h2>2. CSS Colors</h2>
+
+            <p>
+                CSS colors can be used to change the text color
+                and background color of HTML elements.
+            </p>
+
+            <div class="color-box">
+                This box demonstrates text color and background color.
+            </div>
+
+            <div class="color-example">
+                This box demonstrates another combination of CSS colors.
+            </div>
+
+        </section>
+
+
+        <!-- ================================
+             3. CSS FONTS
+        ================================== -->
+
+        <section class="content-card">
+
+            <h2>3. CSS Fonts</h2>
+
+            <p>
+                CSS font properties control the appearance,
+                size, style, and thickness of text.
+            </p>
+
+            <div class="font-example">
+                This text demonstrates font-family, font-size,
+                font-weight, and font-style.
+            </div>
+
+        </section>
+
+
+        <!-- ================================
+             4. MARGIN AND PADDING
+        ================================== -->
+
+        <section class="content-card">
+
+            <h2>4. CSS Margin and Padding</h2>
+
+            <p>
+                Margin creates space outside an element,
+                while padding creates space inside an element.
+            </p>
+
+            <div class="spacing-demo">
+
+                <div class="spacing-inner">
+                    This inner box demonstrates padding.
+                    The blue area around it demonstrates margin.
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================================
+             5. CSS BORDERS
+        ================================== -->
+
+        <section class="content-card">
+
+            <h2>5. CSS Borders</h2>
+
+            <p>
+                Borders are used to create visible boundaries
+                around HTML elements.
+            </p>
+
+            <div class="border-demo">
+                This box demonstrates a solid border and rounded corners.
+            </div>
+
+            <div class="border-dashed">
+                This box demonstrates a dashed border.
+            </div>
+
+        </section>
+
+
+        <!-- ================================
+             NAVIGATION BUTTONS
+        ================================== -->
+
+        <div class="buttons">
+
+            <a href="index.html" class="btn">
+                CSS Programs
+            </a>
+
+            <a href="../index.html" class="btn">
+                Dashboard
+            </a>
+
+        </div>
+
+    </main>
+
+
+    <!-- ================================
+         FOOTER
+    ================================== -->
+
+    <footer>
+
+        <p>
+            <strong>Web Practicals | CSS Practical 12</strong>
+        </p>
+
+        <p>
+            CSS Selectors • Colors • Fonts • Margin • Padding • Borders
+        </p>
+
+    </footer>
+
+</body>
+</html>

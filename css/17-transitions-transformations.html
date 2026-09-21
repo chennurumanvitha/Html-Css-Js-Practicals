@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transitions and Transformations | Practical 17</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: #f1f5f9;
+            color: #334155;
+            line-height: 1.6;
+        }
+
+        header {
+            background: #0f172a;
+            color: white;
+            padding: 18px 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header .logo {
+            font-size: 22px;
+            font-weight: 700;
+        }
+
+        header nav a {
+            color: #cbd5e1;
+            text-decoration: none;
+            margin-left: 25px;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+
+        header nav a:hover {
+            color: white;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #1e3a8a, #2563eb);
+            color: white;
+            text-align: center;
+            padding: 65px 20px;
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 7px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .hero h1 {
+            font-size: 40px;
+            margin-bottom: 10px;
+        }
+
+        .hero p {
+            font-size: 17px;
+            color: #dbeafe;
+        }
+
+        main {
+            width: 90%;
+            max-width: 1050px;
+            margin: 40px auto;
+        }
+
+        .objective {
+            background: white;
+            border-left: 5px solid #2563eb;
+            border-radius: 12px;
+            padding: 22px 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 15px rgba(15, 23, 42, 0.06);
+        }
+
+        .objective h2 {
+            color: #1e3a8a;
+            margin-bottom: 8px;
+        }
+
+        .content-card {
+            background: white;
+            border-radius: 12px;
+            padding: 35px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 15px rgba(15, 23, 42, 0.06);
+        }
+
+        .content-card h2 {
+            color: #1e3a8a;
+            margin-bottom: 10px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #dbeafe;
+        }
+
+        .content-card p {
+            margin-bottom: 15px;
+        }
+
+        .demo-area {
+            background: #f8fafc;
+            border-left: 4px solid #2563eb;
+            border-radius: 10px;
+            padding: 25px;
+            margin-top: 20px;
+        }
+
+        .demo-title {
+            color: #1e3a8a;
+            font-size: 18px;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        /* Transition */
+        .transition-box {
+            width: 180px;
+            height: 100px;
+            background: #2563eb;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            margin: 25px auto;
+            font-weight: 600;
+            transition: background 0.5s, transform 0.5s, border-radius 0.5s;
+        }
+
+        .transition-box:hover {
+            background: #1e3a8a;
+            transform: scale(1.15);
+            border-radius: 25px;
+        }
+
+        /* Translate */
+        .translate-box {
+            width: 180px;
+            padding: 20px;
+            background: #2563eb;
+            color: white;
+            text-align: center;
+            border-radius: 8px;
+            margin: 25px auto;
+            transition: transform 0.5s;
+        }
+
+        .translate-box:hover {
+            transform: translate(40px, -15px);
+        }
+
+        /* Scale */
+        .scale-box {
+            width: 180px;
+            padding: 20px;
+            background: #1e3a8a;
+            color: white;
+            text-align: center;
+            border-radius: 8px;
+            margin: 25px auto;
+            transition: transform 0.5s;
+        }
+
+        .scale-box:hover {
+            transform: scale(1.3);
+        }
+
+        /* Rotate */
+        .rotate-box {
+            width: 120px;
+            height: 120px;
+            background: #2563eb;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            margin: 30px auto;
+            font-weight: 600;
+            transition: transform 0.6s;
+        }
+
+        .rotate-box:hover {
+            transform: rotate(45deg);
+        }
+
+        /* Skew */
+        .skew-box {
+            width: 180px;
+            padding: 20px;
+            background: #1e3a8a;
+            color: white;
+            text-align: center;
+            border-radius: 8px;
+            margin: 30px auto;
+            transition: transform 0.5s;
+        }
+
+        .skew-box:hover {
+            transform: skew(15deg, 5deg);
+        }
+
+        /* Multiple Transformations */
+        .multiple-box {
+            width: 180px;
+            padding: 20px;
+            background: #2563eb;
+            color: white;
+            text-align: center;
+            border-radius: 8px;
+            margin: 30px auto;
+            transition: transform 0.6s;
+        }
+
+        .multiple-box:hover {
+            transform: translateY(-15px) rotate(8deg) scale(1.15);
+        }
+
+        /* Button Transition */
+        .transition-button {
+            display: block;
+            width: fit-content;
+            margin: 25px auto;
+            padding: 13px 28px;
+            background: #2563eb;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.4s ease;
+        }
+
+        .transition-button:hover {
+            background: #1e3a8a;
+            transform: translateY(-4px);
+            box-shadow: 0 8px 18px rgba(15, 23, 42, 0.2);
+        }
+
+        .buttons {
+            text-align: center;
+            margin: 30px 0;
+        }
+
+        .btn {
+            display: inline-block;
+            background: #2563eb;
+            color: white;
+            text-decoration: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            margin: 5px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background: #1e3a8a;
+            transform: translateY(-2px);
+        }
+
+        .btn.secondary {
+            background: #64748b;
+        }
+
+        .btn.secondary:hover {
+            background: #475569;
+        }
+
+        footer {
+            background: #0f172a;
+            color: #cbd5e1;
+            text-align: center;
+            padding: 25px;
+            margin-top: 40px;
+        }
+
+        footer strong {
+            color: white;
+        }
+
+        @media (max-width: 750px) {
+            header {
+                flex-direction: column;
+                gap: 12px;
+                text-align: center;
+                padding: 20px;
+            }
+
+            header nav a {
+                margin: 0 8px;
+            }
+
+            .hero h1 {
+                font-size: 30px;
+            }
+
+            .content-card {
+                padding: 25px 20px;
+            }
+
+            .transition-box,
+            .translate-box,
+            .scale-box,
+            .skew-box,
+            .multiple-box {
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="logo">Web Practicals</div>
+
+        <nav>
+            <a href="../index.html">Home</a>
+            <a href="index.html">CSS Programs</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <span class="badge">CSS PRACTICAL 17</span>
+        <h1>Transitions and Transformations</h1>
+        <p>Demonstrating CSS transitions and transform properties</p>
+    </section>
+
+    <main>
+
+        <section class="objective">
+            <h2>Objective</h2>
+            <p>
+                To create a webpage demonstrating CSS transitions and
+                transformations such as translate, scale, rotate, skew,
+                and combined transformations.
+            </p>
+        </section>
+
+        <section class="content-card">
+            <h2>CSS Transition</h2>
+            <p>
+                The <strong>transition</strong> property creates a smooth
+                change between different CSS property values when an element
+                is interacted with.
+            </p>
+
+            <div class="demo-area">
+                <div class="demo-title">Hover Over the Box</div>
+
+                <div class="transition-box">
+                    Hover Me
+                </div>
+            </div>
+        </section>
+
+        <section class="content-card">
+            <h2>Translate Transformation</h2>
+            <p>
+                The <strong>translate()</strong> function moves an element
+                horizontally and vertically from its original position.
+            </p>
+
+            <div class="demo-area">
+                <div class="demo-title">Translate Effect</div>
+
+                <div class="translate-box">
+                    Move Me
+                </div>
+            </div>
+        </section>
+
+        <section class="content-card">
+            <h2>Scale Transformation</h2>
+            <p>
+                The <strong>scale()</strong> function increases or decreases
+                the size of an element.
+            </p>
+
+            <div class="demo-area">
+                <div class="demo-title">Scale Effect</div>
+
+                <div class="scale-box">
+                    Resize Me
+                </div>
+            </div>
+        </section>
+
+        <section class="content-card">
+            <h2>Rotate Transformation</h2>
+            <p>
+                The <strong>rotate()</strong> function rotates an element
+                around its center.
+            </p>
+
+            <div class="demo-area">
+                <div class="demo-title">Rotate Effect</div>
+
+                <div class="rotate-box">
+                    Rotate Me
+                </div>
+            </div>
+        </section>
+
+        <section class="content-card">
+            <h2>Skew Transformation</h2>
+            <p>
+                The <strong>skew()</strong> function tilts an element along
+                the horizontal and vertical axes.
+            </p>
+
+            <div class="demo-area">
+                <div class="demo-title">Skew Effect</div>
+
+                <div class="skew-box">
+                    Skew Me
+                </div>
+            </div>
+        </section>
+
+        <section class="content-card">
+            <h2>Multiple Transformations</h2>
+            <p>
+                Multiple transform functions can be combined to create
+                different visual effects.
+            </p>
+
+            <div class="demo-area">
+                <div class="demo-title">Combined Transform Effect</div>
+
+                <div class="multiple-box">
+                    Hover Me
+                </div>
+            </div>
+        </section>
+
+        <section class="content-card">
+            <h2>Transition Button</h2>
+            <p>
+                Transitions can also be applied to buttons to create
+                smooth hover effects.
+            </p>
+
+            <div class="demo-area">
+                <a href="#" class="transition-button">
+                    Hover Over Button
+                </a>
+            </div>
+        </section>
+
+        <div class="buttons">
+            <a href="css-16.html" class="btn secondary">Previous Practical</a>
+            <a href="index.html" class="btn">CSS Programs</a>
+            <a href="../index.html" class="btn">Dashboard</a>
+        </div>
+
+    </main>
+
+    <footer>
+        <p><strong>CSS Practical 17</strong> | Web Practicals Assignment</p>
+        <p>Designed using HTML5 and CSS3</p>
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Recently Viewed Items using localStorage</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Segoe UI", Arial, sans-serif;
+      background: #f1f5f9;
+      color: #334155;
+      line-height: 1.6;
+    }
+
+    header {
+      background: #0f172a;
+      padding: 18px 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      color: white;
+      font-size: 22px;
+      font-weight: bold;
+    }
+
+    nav a {
+      color: #cbd5e1;
+      text-decoration: none;
+      margin-left: 25px;
+      font-size: 15px;
+    }
+
+    nav a:hover {
+      color: white;
+    }
+
+    .hero {
+      background: linear-gradient(135deg, #1e3a8a, #2563eb);
+      color: white;
+      text-align: center;
+      padding: 65px 20px;
+    }
+
+    .badge {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.15);
+      padding: 7px 16px;
+      border-radius: 20px;
+      margin-bottom: 15px;
+      font-size: 14px;
+    }
+
+    .hero h1 {
+      font-size: 36px;
+      margin-bottom: 10px;
+    }
+
+    .hero p {
+      font-size: 17px;
+      opacity: 0.9;
+    }
+
+    main {
+      width: 90%;
+      max-width: 1050px;
+      margin: 40px auto;
+    }
+
+    .objective {
+      background: white;
+      padding: 22px;
+      border-left: 5px solid #2563eb;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
+      margin-bottom: 25px;
+    }
+
+    .objective h2 {
+      color: #1e3a8a;
+      margin-bottom: 8px;
+    }
+
+    .card {
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(15, 23, 42, 0.08);
+      margin-bottom: 25px;
+    }
+
+    .card h2 {
+      color: #1e3a8a;
+      margin-bottom: 25px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #e2e8f0;
+    }
+
+    .items {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+    }
+
+    .item {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 10px;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .item h3 {
+      color: #1e3a8a;
+      margin-bottom: 8px;
+    }
+
+    .item p {
+      color: #64748b;
+      margin-bottom: 15px;
+    }
+
+    .price {
+      color: #2563eb;
+      font-size: 18px;
+      font-weight: bold;
+      margin-bottom: 15px;
+    }
+
+    .btn {
+      border: none;
+      background: #2563eb;
+      color: white;
+      padding: 10px 18px;
+      border-radius: 7px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      background: #1d4ed8;
+    }
+
+    .btn.danger {
+      background: #dc2626;
+    }
+
+    .btn.danger:hover {
+      background: #b91c1c;
+    }
+
+    .recent-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 15px;
+      padding: 15px 0;
+      border-bottom: 1px solid #e2e8f0;
+    }
+
+    .recent-item:last-child {
+      border-bottom: none;
+    }
+
+    .recent-info {
+      flex: 1;
+    }
+
+    .recent-info h3 {
+      color: #1e3a8a;
+      margin-bottom: 4px;
+    }
+
+    .recent-info p {
+      color: #64748b;
+      font-size: 14px;
+    }
+
+    .empty {
+      text-align: center;
+      color: #64748b;
+      padding: 30px;
+      border: 1px dashed #cbd5e1;
+      border-radius: 10px;
+    }
+
+    .message {
+      text-align: center;
+      margin-top: 15px;
+      font-weight: 600;
+      min-height: 24px;
+    }
+
+    .navigation {
+      display: flex;
+      justify-content: space-between;
+      gap: 15px;
+      margin-top: 35px;
+    }
+
+    .navigation a {
+      text-decoration: none;
+      background: #2563eb;
+      color: white;
+      padding: 11px 20px;
+      border-radius: 7px;
+      font-weight: 600;
+      font-size: 14px;
+    }
+
+    .navigation a:hover {
+      background: #1d4ed8;
+    }
+
+    footer {
+      background: #0f172a;
+      color: #cbd5e1;
+      text-align: center;
+      padding: 22px;
+      margin-top: 50px;
+    }
+
+    @media (max-width: 750px) {
+      header {
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      nav a {
+        margin: 0 8px;
+      }
+
+      .hero h1 {
+        font-size: 28px;
+      }
+
+      .card {
+        padding: 22px;
+      }
+
+      .recent-item {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .navigation {
+        flex-direction: column;
+      }
+
+      .navigation a {
+        text-align: center;
+      }
+    }
+
+    @media (max-width: 550px) {
+      main {
+        width: 94%;
+      }
+
+      .hero {
+        padding: 50px 15px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <div class="logo">Web Storage Practical</div>
+
+    <nav>
+      <a href="../../index.html">Home</a>
+<a href="../index.html">JavaScript Programs</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div class="badge">Practical 16</div>
+    <h1>Recently Viewed Items</h1>
+    <p>Store recently viewed items using localStorage</p>
+  </section>
+
+  <main>
+
+    <section class="objective">
+      <h2>Objective</h2>
+      <p>
+        To create a recently viewed items feature that stores and
+        displays recently viewed products using localStorage.
+      </p>
+    </section>
+
+    <section class="card">
+      <h2>Products</h2>
+
+      <div class="items">
+
+        <div class="item">
+          <h3>Wireless Mouse</h3>
+          <p>Computer accessory</p>
+          <div class="price">₹650</div>
+          <button class="btn" onclick="viewItem(1)">
+            View Item
+          </button>
+        </div>
+
+        <div class="item">
+          <h3>Keyboard</h3>
+          <p>Computer accessory</p>
+          <div class="price">₹950</div>
+          <button class="btn" onclick="viewItem(2)">
+            View Item
+          </button>
+        </div>
+
+        <div class="item">
+          <h3>Headphones</h3>
+          <p>Audio accessory</p>
+          <div class="price">₹1,200</div>
+          <button class="btn" onclick="viewItem(3)">
+            View Item
+          </button>
+        </div>
+
+        <div class="item">
+          <h3>USB Drive</h3>
+          <p>Storage device</p>
+          <div class="price">₹550</div>
+          <button class="btn" onclick="viewItem(4)">
+            View Item
+          </button>
+        </div>
+
+        <div class="item">
+          <h3>Webcam</h3>
+          <p>Computer accessory</p>
+          <div class="price">₹1,500</div>
+          <button class="btn" onclick="viewItem(5)">
+            View Item
+          </button>
+        </div>
+
+        <div class="item">
+          <h3>Bluetooth Speaker</h3>
+          <p>Audio accessory</p>
+          <div class="price">₹1,800</div>
+          <button class="btn" onclick="viewItem(6)">
+            View Item
+          </button>
+        </div>
+
+      </div>
+
+      <div class="message" id="message"></div>
+    </section>
+
+    <section class="card">
+      <h2>Recently Viewed</h2>
+
+      <div id="recentItems"></div>
+
+      <div class="buttons">
+        <button class="btn danger" onclick="clearRecentlyViewed()">
+          Clear Recently Viewed
+        </button>
+      </div>
+    </section>
+
+    <div class="navigation">
+      <a href="15-preferred-font-size-localstorage.html">← Previous</a>
+      <a href="../index.html">Home</a>
+      <a href="17-visitor-counter-localstorage.html">Next →</a>
+    </div>
+
+  </main>
+
+  <footer>
+    Web Storage Practicals &copy; 2026
+  </footer>
+
+  <script>
+    const products = [
+      {
+        id: 1,
+        name: "Wireless Mouse",
+        description: "Computer accessory",
+        price: 650
+      },
+      {
+        id: 2,
+        name: "Keyboard",
+        description: "Computer accessory",
+        price: 950
+      },
+      {
+        id: 3,
+        name: "Headphones",
+        description: "Audio accessory",
+        price: 1200
+      },
+      {
+        id: 4,
+        name: "USB Drive",
+        description: "Storage device",
+        price: 550
+      },
+      {
+        id: 5,
+        name: "Webcam",
+        description: "Computer accessory",
+        price: 1500
+      },
+      {
+        id: 6,
+        name: "Bluetooth Speaker",
+        description: "Audio accessory",
+        price: 1800
+      }
+    ];
+
+    let recentlyViewed = [];
+
+    function loadRecentlyViewed() {
+      const storedItems =
+        localStorage.getItem("recentlyViewedItems");
+
+      if (storedItems) {
+        try {
+          recentlyViewed = JSON.parse(storedItems);
+
+          if (!Array.isArray(recentlyViewed)) {
+            recentlyViewed = [];
+          }
+        } catch (error) {
+          recentlyViewed = [];
+        }
+      }
+
+      displayRecentlyViewed();
+    }
+
+    function saveRecentlyViewed() {
+      localStorage.setItem(
+        "recentlyViewedItems",
+        JSON.stringify(recentlyViewed)
+      );
+    }
+
+    function viewItem(productId) {
+      const product = products.find(function(item) {
+        return item.id === productId;
+      });
+
+      if (!product) {
+        return;
+      }
+
+      recentlyViewed = recentlyViewed.filter(function(item) {
+        return item.id !== productId;
+      });
+
+      recentlyViewed.unshift(product);
+
+      if (recentlyViewed.length > 5) {
+        recentlyViewed = recentlyViewed.slice(0, 5);
+      }
+
+      saveRecentlyViewed();
+      displayRecentlyViewed();
+
+      showMessage(product.name + " added to recently viewed.");
+    }
+
+    function displayRecentlyViewed() {
+      const container =
+        document.getElementById("recentItems");
+
+      container.innerHTML = "";
+
+      if (recentlyViewed.length === 0) {
+        const emptyMessage =
+          document.createElement("div");
+
+        emptyMessage.className = "empty";
+        emptyMessage.textContent =
+          "No recently viewed items.";
+
+        container.appendChild(emptyMessage);
+        return;
+      }
+
+      recentlyViewed.forEach(function(item) {
+        const recentItem =
+          document.createElement("div");
+
+        recentItem.className = "recent-item";
+
+        const info =
+          document.createElement("div");
+
+        info.className = "recent-info";
+
+        const title =
+          document.createElement("h3");
+
+        title.textContent = item.name;
+
+        const description =
+          document.createElement("p");
+
+        description.textContent =
+          item.description + " • ₹" + item.price;
+
+        info.appendChild(title);
+        info.appendChild(description);
+
+        const viewButton =
+          document.createElement("button");
+
+        viewButton.className = "btn";
+        viewButton.textContent = "View Again";
+
+        viewButton.addEventListener(
+          "click",
+          function() {
+            viewItem(item.id);
+          }
+        );
+
+        recentItem.appendChild(info);
+        recentItem.appendChild(viewButton);
+
+        container.appendChild(recentItem);
+      });
+    }
+
+    function clearRecentlyViewed() {
+      if (recentlyViewed.length === 0) {
+        showMessage("Recently viewed list is already empty.");
+        return;
+      }
+
+      const confirmed = confirm(
+        "Are you sure you want to clear recently viewed items?"
+      );
+
+      if (!confirmed) {
+        return;
+      }
+
+      recentlyViewed = [];
+
+      localStorage.removeItem("recentlyViewedItems");
+
+      displayRecentlyViewed();
+
+      showMessage(
+        "Recently viewed items cleared successfully."
+      );
+    }
+
+    function showMessage(text) {
+      const message =
+        document.getElementById("message");
+
+      message.textContent = text;
+      message.style.color = "#16a34a";
+
+      setTimeout(function() {
+        message.textContent = "";
+      }, 2200);
+    }
+
+    loadRecentlyViewed();
+  </script>
+
+</body>
+</html>

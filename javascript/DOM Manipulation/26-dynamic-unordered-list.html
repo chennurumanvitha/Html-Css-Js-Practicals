@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM Manipulation - Dynamic Unordered List</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: #f1f5f9;
+            color: #334155;
+            line-height: 1.6;
+        }
+
+        header {
+            background: #0f172a;
+            padding: 18px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: white;
+            font-size: 22px;
+            font-weight: 700;
+        }
+
+        nav a {
+            color: #cbd5e1;
+            text-decoration: none;
+            margin-left: 25px;
+            font-size: 15px;
+        }
+
+        nav a:hover {
+            color: white;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #1e3a8a, #2563eb);
+            color: white;
+            text-align: center;
+            padding: 65px 20px;
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 7px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        .hero h1 {
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+
+        .hero p {
+            font-size: 16px;
+            opacity: 0.9;
+        }
+
+        main {
+            width: 90%;
+            max-width: 1050px;
+            margin: 40px auto;
+        }
+
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 28px;
+            margin-bottom: 25px;
+            box-shadow: 0 5px 18px rgba(15, 23, 42, 0.08);
+        }
+
+        .objective {
+            border-left: 5px solid #2563eb;
+        }
+
+        .objective h2,
+        .card h2 {
+            color: #1e3a8a;
+            margin-bottom: 15px;
+        }
+
+        .card h2 {
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 8px;
+        }
+
+        .demo {
+            background: #eff6ff;
+            border: 2px dashed #93c5fd;
+            border-radius: 10px;
+            padding: 30px;
+            margin-top: 20px;
+        }
+
+        #listContainer {
+            max-width: 500px;
+            margin: 0 auto 20px;
+            background: white;
+            border-radius: 8px;
+            padding: 20px 35px;
+            border: 1px solid #bfdbfe;
+        }
+
+        #dynamicList {
+            color: #1e3a8a;
+        }
+
+        #dynamicList li {
+            padding: 8px 0;
+            font-weight: 600;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        #dynamicList li:last-child {
+            border-bottom: none;
+        }
+
+        .message {
+            text-align: center;
+            margin-bottom: 15px;
+            color: #475569;
+            font-weight: 600;
+        }
+
+        .controls {
+            text-align: center;
+        }
+
+        button {
+            background: #2563eb;
+            color: white;
+            border: none;
+            padding: 11px 20px;
+            border-radius: 7px;
+            cursor: pointer;
+            font-size: 15px;
+            margin: 5px;
+        }
+
+        button:hover {
+            background: #1e3a8a;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin: 35px 0;
+        }
+
+        .btn-link {
+            display: inline-block;
+            background: #2563eb;
+            color: white;
+            text-decoration: none;
+            padding: 11px 20px;
+            border-radius: 7px;
+            font-size: 15px;
+        }
+
+        .btn-link:hover {
+            background: #1e3a8a;
+        }
+
+        .btn-link.secondary {
+            background: #0f172a;
+        }
+
+        .btn-link.secondary:hover {
+            background: #1e293b;
+        }
+
+        footer {
+            background: #0f172a;
+            color: #cbd5e1;
+            text-align: center;
+            padding: 22px;
+            margin-top: 50px;
+            font-size: 14px;
+        }
+
+        @media (max-width: 750px) {
+            header {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            nav a {
+                margin: 0 8px;
+            }
+
+            .hero h1 {
+                font-size: 30px;
+            }
+        }
+
+        @media (max-width: 650px) {
+            .card {
+                padding: 20px;
+            }
+
+            .hero {
+                padding: 50px 15px;
+            }
+
+            #listContainer {
+                padding: 18px 28px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="logo">Practical Programs</div>
+
+        <nav>
+            <a href="../../index.html">Home</a>
+<a href="../index.html">JavaScript Programs</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="badge">DOM Manipulation • Practical 26</div>
+        <h1>Dynamic Unordered List</h1>
+        <p>Create an unordered list dynamically from a JavaScript array</p>
+    </section>
+
+    <main>
+
+        <section class="card objective">
+            <h2>Objective</h2>
+            <p>
+                To demonstrate how JavaScript can create an unordered list
+                dynamically from the elements of an array.
+            </p>
+        </section>
+
+        <section class="card">
+            <h2>Interactive Demonstration</h2>
+
+            <div class="demo">
+
+                <p class="message">
+                    Click the button to generate the list.
+                </p>
+
+                <div id="listContainer"></div>
+
+                <div class="controls">
+                    <button onclick="createList()">
+                        Create List
+                    </button>
+
+                    <button onclick="clearList()">
+                        Clear List
+                    </button>
+                </div>
+
+            </div>
+        </section>
+
+        <div class="buttons">
+            <a href="25-attributes.html" class="btn-link">
+                ← Previous Practical
+            </a>
+
+            <a href="index.html" class="btn-link secondary">
+                DOM Programs
+            </a>
+
+            <a href="27-ordered-list.html" class="btn-link">
+                Next Practical →
+            </a>
+        </div>
+
+    </main>
+
+    <footer>
+        <p>JavaScript Practical Programs | DOM Manipulation</p>
+    </footer>
+
+    <script>
+        const subjects = [
+            "HTML",
+            "CSS",
+            "JavaScript",
+            "Python",
+            "Database"
+        ];
+
+        function createList() {
+            const container = document.getElementById("listContainer");
+
+            container.innerHTML = "";
+
+            const unorderedList = document.createElement("ul");
+            unorderedList.id = "dynamicList";
+
+            subjects.forEach(function(subject) {
+                const listItem = document.createElement("li");
+
+                listItem.textContent = subject;
+                unorderedList.appendChild(listItem);
+            });
+
+            container.appendChild(unorderedList);
+        }
+
+        function clearList() {
+            document.getElementById("listContainer").innerHTML = "";
+        }
+    </script>
+
+</body>
+</html>

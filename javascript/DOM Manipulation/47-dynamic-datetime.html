@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM Manipulation - Current Date and Time</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: #f1f5f9;
+            color: #334155;
+            line-height: 1.6;
+        }
+
+        header {
+            background: #0f172a;
+            padding: 18px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: white;
+            font-size: 22px;
+            font-weight: 700;
+        }
+
+        nav a {
+            color: #cbd5e1;
+            text-decoration: none;
+            margin-left: 25px;
+            font-size: 15px;
+        }
+
+        nav a:hover {
+            color: white;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #1e3a8a, #2563eb);
+            color: white;
+            text-align: center;
+            padding: 65px 20px;
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 7px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        .hero h1 {
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+
+        .hero p {
+            font-size: 16px;
+            opacity: 0.9;
+        }
+
+        main {
+            width: 90%;
+            max-width: 1050px;
+            margin: 40px auto;
+        }
+
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 28px;
+            margin-bottom: 25px;
+            box-shadow: 0 5px 18px rgba(15, 23, 42, 0.08);
+        }
+
+        .objective {
+            border-left: 5px solid #2563eb;
+        }
+
+        .objective h2,
+        .card h2 {
+            color: #1e3a8a;
+            margin-bottom: 15px;
+        }
+
+        .card h2 {
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 8px;
+        }
+
+        .demo {
+            background: #eff6ff;
+            border: 2px dashed #93c5fd;
+            border-radius: 10px;
+            padding: 35px 25px;
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .instruction {
+            margin-bottom: 25px;
+            color: #475569;
+        }
+
+        .date-time-box {
+            max-width: 700px;
+            margin: 0 auto;
+            background: white;
+            border: 1px solid #bfdbfe;
+            border-radius: 12px;
+            padding: 30px 20px;
+        }
+
+        .date-display {
+            color: #475569;
+            font-size: 19px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .time-display {
+            color: #1e3a8a;
+            font-size: 42px;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .timezone {
+            color: #64748b;
+            font-size: 14px;
+            margin-top: 8px;
+        }
+
+        .status {
+            margin-top: 20px;
+            padding: 12px;
+            background: white;
+            border: 1px solid #bfdbfe;
+            border-radius: 8px;
+            color: #1e3a8a;
+            font-weight: 600;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin: 35px 0;
+        }
+
+        .btn-link {
+            display: inline-block;
+            background: #2563eb;
+            color: white;
+            text-decoration: none;
+            padding: 11px 20px;
+            border-radius: 7px;
+            font-size: 15px;
+        }
+
+        .btn-link:hover {
+            background: #1e3a8a;
+        }
+
+        .btn-link.secondary {
+            background: #0f172a;
+        }
+
+        .btn-link.secondary:hover {
+            background: #1e293b;
+        }
+
+        footer {
+            background: #0f172a;
+            color: #cbd5e1;
+            text-align: center;
+            padding: 22px;
+            margin-top: 50px;
+            font-size: 14px;
+        }
+
+        @media (max-width: 750px) {
+            header {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            nav a {
+                margin: 0 8px;
+            }
+
+            .hero h1 {
+                font-size: 30px;
+            }
+
+            .card {
+                padding: 22px;
+            }
+
+            .time-display {
+                font-size: 32px;
+            }
+        }
+
+        @media (max-width: 550px) {
+            .hero {
+                padding: 50px 15px;
+            }
+
+            .demo {
+                padding: 25px 18px;
+            }
+
+            .date-time-box {
+                padding: 25px 15px;
+            }
+
+            .date-display {
+                font-size: 17px;
+            }
+
+            .time-display {
+                font-size: 27px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="logo">Practical Programs</div>
+
+        <nav>
+            <a href="../../index.html">Home</a>
+<a href="../index.html">JavaScript Programs</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="badge">DOM Manipulation • Practical 47</div>
+        <h1>Current Date and Time</h1>
+        <p>Display the current date and time dynamically using JavaScript</p>
+    </section>
+
+    <main>
+
+        <section class="card objective">
+            <h2>Objective</h2>
+            <p>
+                To create a program that dynamically displays the
+                current date and time using JavaScript and updates
+                the displayed time every second.
+            </p>
+        </section>
+
+        <section class="card">
+            <h2>Interactive Demonstration</h2>
+
+            <div class="demo">
+
+                <p class="instruction">
+                    The date and time below are updated automatically
+                    every second.
+                </p>
+
+                <div class="date-time-box">
+
+                    <div class="date-display" id="dateDisplay">
+                        Loading date...
+                    </div>
+
+                    <div class="time-display" id="timeDisplay">
+                        Loading time...
+                    </div>
+
+                    <div class="timezone">
+                        Current local date and time
+                    </div>
+
+                </div>
+
+                <div class="status" id="status">
+                    Date and time are updating automatically.
+                </div>
+
+            </div>
+        </section>
+
+        <div class="buttons">
+
+            <a href="46-word-counter.html" class="btn-link">
+                ← Previous Practical
+            </a>
+
+            <a href="index.html" class="btn-link secondary">
+                DOM Programs
+            </a>
+
+            <a href="48-todo-list.html" class="btn-link">
+                Next Practical →
+            </a>
+
+        </div>
+
+    </main>
+
+    <footer>
+        <p>JavaScript Practical Programs | DOM Manipulation</p>
+    </footer>
+
+    <script>
+        const dateDisplay =
+            document.getElementById("dateDisplay");
+
+        const timeDisplay =
+            document.getElementById("timeDisplay");
+
+        function displayDateTime() {
+
+            const currentDate = new Date();
+
+            const dateOptions = {
+                weekday: "long",
+                year: "numeric",
+                month: "long",
+                day: "numeric"
+            };
+
+            const currentDateText =
+                currentDate.toLocaleDateString(
+                    "en-IN",
+                    dateOptions
+                );
+
+            const currentTimeText =
+                currentDate.toLocaleTimeString(
+                    "en-IN",
+                    {
+                        hour: "2-digit",
+                        minute: "2-digit",
+                        second: "2-digit",
+                        hour12: true
+                    }
+                );
+
+            dateDisplay.textContent =
+                currentDateText;
+
+            timeDisplay.textContent =
+                currentTimeText;
+        }
+
+        displayDateTime();
+
+        setInterval(displayDateTime, 1000);
+    </script>
+
+</body>
+</html>

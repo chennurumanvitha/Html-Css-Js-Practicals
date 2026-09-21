@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Practical 15 - Image Slideshow</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: #f1f5f9;
+            color: #334155;
+            line-height: 1.6;
+        }
+
+        header {
+            background: #0f172a;
+            padding: 18px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: white;
+            font-size: 22px;
+            font-weight: 700;
+        }
+
+        nav a {
+            color: #cbd5e1;
+            text-decoration: none;
+            margin-left: 25px;
+            font-size: 15px;
+        }
+
+        nav a:hover {
+            color: white;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #1e3a8a, #2563eb);
+            color: white;
+            text-align: center;
+            padding: 65px 20px;
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 7px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        .hero h1 {
+            font-size: 38px;
+            margin-bottom: 10px;
+        }
+
+        .hero p {
+            font-size: 16px;
+            opacity: 0.9;
+        }
+
+        main {
+            width: 90%;
+            max-width: 1050px;
+            margin: 40px auto;
+        }
+
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 28px;
+            margin-bottom: 25px;
+            box-shadow: 0 5px 18px rgba(15, 23, 42, 0.08);
+        }
+
+        .objective {
+            border-left: 5px solid #2563eb;
+        }
+
+        .objective h2,
+        .card h2 {
+            color: #1e3a8a;
+            margin-bottom: 15px;
+        }
+
+        .card h2 {
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 8px;
+        }
+
+        .demo {
+            background: #eff6ff;
+            border: 2px dashed #93c5fd;
+            border-radius: 10px;
+            padding: 22px;
+            margin-top: 20px;
+        }
+
+        .slideshow {
+            position: relative;
+            max-width: 800px;
+            margin: auto;
+            overflow: hidden;
+            border-radius: 10px;
+            background: #0f172a;
+        }
+
+        .slide-image {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .slide-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(15, 23, 42, 0.75);
+            color: white;
+            padding: 12px;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .slide-controls {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .slide-btn {
+            border: none;
+            padding: 11px 22px;
+            border-radius: 7px;
+            background: #2563eb;
+            color: white;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .slide-btn:hover {
+            background: #1d4ed8;
+        }
+
+        .slide-btn.secondary {
+            background: #475569;
+        }
+
+        .slide-btn.secondary:hover {
+            background: #334155;
+        }
+
+        .dots {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 18px;
+        }
+
+        .dot {
+            width: 11px;
+            height: 11px;
+            border: none;
+            border-radius: 50%;
+            background: #cbd5e1;
+            cursor: pointer;
+        }
+
+        .dot.active {
+            background: #2563eb;
+        }
+
+        .slide-number {
+            text-align: center;
+            margin-top: 12px;
+            color: #475569;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin: 35px 0;
+        }
+
+        .btn-link {
+            display: inline-block;
+            padding: 11px 20px;
+            background: #2563eb;
+            color: white;
+            text-decoration: none;
+            border-radius: 7px;
+            font-weight: 600;
+        }
+
+        .btn-link:hover {
+            background: #1d4ed8;
+        }
+
+        .btn-link.secondary {
+            background: #475569;
+        }
+
+        .btn-link.secondary:hover {
+            background: #334155;
+        }
+
+        footer {
+            background: #0f172a;
+            color: #cbd5e1;
+            text-align: center;
+            padding: 22px;
+            margin-top: 50px;
+            font-size: 14px;
+        }
+
+        @media (max-width: 750px) {
+            header {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            nav a {
+                margin: 0 8px;
+            }
+
+            .hero h1 {
+                font-size: 30px;
+            }
+
+            .slide-image {
+                height: 300px;
+            }
+        }
+
+        @media (max-width: 650px) {
+            .card {
+                padding: 20px;
+            }
+
+            .hero {
+                padding: 50px 15px;
+            }
+
+            .slide-image {
+                height: 240px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="logo">Practical Programs</div>
+
+        <nav>
+            <a href="../../index.html">Home</a>
+<a href="../index.html">JavaScript Programs</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <span class="badge">DOM Manipulation • Practical 15</span>
+        <h1>Image Slideshow</h1>
+        <p>Create an image carousel using JavaScript</p>
+    </section>
+
+    <main>
+
+        <section class="card objective">
+            <h2>Objective</h2>
+            <p>
+                To create an image slideshow or carousel using JavaScript
+                that allows users to move between images and automatically
+                displays the next image at regular intervals.
+            </p>
+        </section>
+
+        <section class="card">
+            <h2>Image Slideshow / Carousel</h2>
+
+            <div class="demo">
+
+                <div class="slideshow">
+                    <img
+                        id="slideImage"
+                        class="slide-image"
+                        src="https://picsum.photos/id/1015/800/400"
+                        alt="Slideshow image"
+                    >
+
+                    <div class="slide-caption" id="slideCaption">
+                        Mountain Landscape
+                    </div>
+                </div>
+
+                <div class="slide-controls">
+                    <button class="slide-btn" id="previousBtn">
+                        ← Previous
+                    </button>
+
+                    <button class="slide-btn secondary" id="playBtn">
+                        Pause
+                    </button>
+
+                    <button class="slide-btn" id="nextBtn">
+                        Next →
+                    </button>
+                </div>
+
+                <div class="dots" id="dots"></div>
+
+                <div class="slide-number" id="slideNumber">
+                    Image 1 of 5
+                </div>
+
+            </div>
+        </section>
+
+        <div class="buttons">
+            <a href="14-dependent-dropdown.html" class="btn-link">
+                ← Previous Practical
+            </a>
+
+            <a href="index.html" class="btn-link secondary">
+                DOM Programs
+            </a>
+
+            <a href="16-password.html" class="btn-link">
+                Next Practical →
+            </a>
+        </div>
+
+    </main>
+
+    <footer>
+        <p>JavaScript Practical Programs &copy; 2026</p>
+    </footer>
+
+    <script>
+        const slides = [
+            {
+                image: "https://picsum.photos/id/1015/800/400",
+                caption: "Mountain Landscape"
+            },
+            {
+                image: "https://picsum.photos/id/1016/800/400",
+                caption: "Beautiful Nature"
+            },
+            {
+                image: "https://picsum.photos/id/1025/800/400",
+                caption: "Cute Dog"
+            },
+            {
+                image: "https://picsum.photos/id/1035/800/400",
+                caption: "River View"
+            },
+            {
+                image: "https://picsum.photos/id/1043/800/400",
+                caption: "Forest Landscape"
+            }
+        ];
+
+        const slideImage = document.getElementById("slideImage");
+        const slideCaption = document.getElementById("slideCaption");
+        const slideNumber = document.getElementById("slideNumber");
+        const previousBtn = document.getElementById("previousBtn");
+        const nextBtn = document.getElementById("nextBtn");
+        const playBtn = document.getElementById("playBtn");
+        const dotsContainer = document.getElementById("dots");
+
+        let currentSlide = 0;
+        let slideshowTimer;
+        let isPlaying = true;
+
+        function showSlide(index) {
+            currentSlide = (index + slides.length) % slides.length;
+
+            slideImage.src = slides[currentSlide].image;
+            slideImage.alt = slides[currentSlide].caption;
+            slideCaption.textContent = slides[currentSlide].caption;
+
+            slideNumber.textContent =
+                "Image " + (currentSlide + 1) +
+                " of " + slides.length;
+
+            updateDots();
+        }
+
+        function updateDots() {
+            const dots = document.querySelectorAll(".dot");
+
+            dots.forEach(function (dot, index) {
+                dot.classList.toggle(
+                    "active",
+                    index === currentSlide
+                );
+            });
+        }
+
+        function createDots() {
+            slides.forEach(function (_, index) {
+                const dot = document.createElement("button");
+
+                dot.className = "dot";
+                dot.setAttribute("aria-label", "Go to image " + (index + 1));
+
+                dot.addEventListener("click", function () {
+                    showSlide(index);
+                    restartSlideshow();
+                });
+
+                dotsContainer.appendChild(dot);
+            });
+
+            updateDots();
+        }
+
+        function nextSlide() {
+            showSlide(currentSlide + 1);
+        }
+
+        function previousSlide() {
+            showSlide(currentSlide - 1);
+        }
+
+        function startSlideshow() {
+            slideshowTimer = setInterval(nextSlide, 3000);
+            isPlaying = true;
+            playBtn.textContent = "Pause";
+        }
+
+        function stopSlideshow() {
+            clearInterval(slideshowTimer);
+            isPlaying = false;
+            playBtn.textContent = "Play";
+        }
+
+        function restartSlideshow() {
+            clearInterval(slideshowTimer);
+            startSlideshow();
+        }
+
+        nextBtn.addEventListener("click", function () {
+            nextSlide();
+            restartSlideshow();
+        });
+
+        previousBtn.addEventListener("click", function () {
+            previousSlide();
+            restartSlideshow();
+        });
+
+        playBtn.addEventListener("click", function () {
+            if (isPlaying) {
+                stopSlideshow();
+            } else {
+                startSlideshow();
+            }
+        });
+
+        createDots();
+        startSlideshow();
+    </script>
+
+</body>
+</html>

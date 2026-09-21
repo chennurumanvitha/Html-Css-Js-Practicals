@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>CSS Practical 02 - CSS Selectors</title>
+
+    <!-- External CSS -->
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        /* Internal CSS */
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f4f7fb;
+            color: #1f2937;
+        }
+
+        header {
+            background: linear-gradient(135deg, #0f172a, #2563eb);
+            color: white;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        header h1 {
+            margin: 0 0 10px;
+            font-size: 32px;
+        }
+
+        header p {
+            margin: 0;
+            font-size: 17px;
+        }
+
+        nav {
+            background-color: #111827;
+            padding: 14px;
+            text-align: center;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 12px;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            color: #60a5fa;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1000px;
+            margin: 30px auto;
+        }
+
+        .card {
+            background-color: white;
+            padding: 25px;
+            margin-bottom: 25px;
+            border-radius: 12px;
+            box-shadow: 0 5px 18px rgba(0, 0, 0, 0.08);
+        }
+
+        .card h2 {
+            color: #1d4ed8;
+            border-bottom: 2px solid #dbeafe;
+            padding-bottom: 10px;
+        }
+
+        .objective {
+            background-color: #eff6ff;
+            border-left: 5px solid #2563eb;
+            padding: 15px;
+            line-height: 1.6;
+        }
+
+        .selector-demo {
+            padding: 18px;
+            margin-top: 15px;
+            border-radius: 10px;
+            background-color: #f8fafc;
+            border: 1px solid #cbd5e1;
+        }
+
+        /* Element Selector */
+        p.element-example {
+            font-size: 17px;
+            line-height: 1.6;
+        }
+
+        /* Class Selector */
+        .class-selector {
+            background-color: #ecfdf5;
+            border-left: 5px solid #10b981;
+            padding: 15px;
+            color: #065f46;
+        }
+
+        /* ID Selector */
+        #id-selector {
+            background-color: #fff7ed;
+            border-left: 5px solid #f97316;
+            padding: 15px;
+            color: #9a3412;
+        }
+
+        /* Group Selector */
+        .group-heading,
+        .group-text {
+            color: #7c3aed;
+        }
+
+        /* Descendant Selector */
+        .descendant-demo p {
+            color: #0369a1;
+            font-weight: bold;
+        }
+
+        /* Child Selector */
+        .child-demo > p {
+            background-color: #fef3c7;
+            padding: 10px;
+            border-radius: 6px;
+        }
+
+        /* Attribute Selector */
+        input[type="text"] {
+            border: 2px solid #2563eb;
+            padding: 10px;
+            border-radius: 6px;
+            font-size: 15px;
+        }
+
+        .selector-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+
+        .selector-table th,
+        .selector-table td {
+            border: 1px solid #cbd5e1;
+            padding: 12px;
+            text-align: left;
+        }
+
+        .selector-table th {
+            background-color: #1d4ed8;
+            color: white;
+        }
+
+        .code {
+            background-color: #111827;
+            color: #e5e7eb;
+            padding: 18px;
+            border-radius: 8px;
+            overflow-x: auto;
+            line-height: 1.6;
+            font-family: Consolas, monospace;
+            font-size: 14px;
+        }
+
+        /* Navigation buttons */
+        .navigation {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin: 35px 0;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 22px;
+            background-color: #2563eb;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #1d4ed8;
+            transform: translateY(-2px);
+        }
+
+        .btn.secondary {
+            background-color: #475569;
+        }
+
+        .btn.secondary:hover {
+            background-color: #334155;
+        }
+
+        footer {
+            background-color: #0f172a;
+            color: #cbd5e1;
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+        }
+
+        footer p {
+            margin: 5px;
+        }
+
+        @media (max-width: 600px) {
+            header h1 {
+                font-size: 25px;
+            }
+
+            nav a {
+                display: inline-block;
+                margin: 6px;
+            }
+
+            .container {
+                width: 94%;
+            }
+
+            .card {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header>
+        <h1>CSS Practical 02</h1>
+        <p>Demonstration of Different CSS Selectors</p>
+    </header>
+
+    <!-- Navigation -->
+    <nav>
+        <a href="../index.html">Dashboard</a>
+        <a href="index.html">CSS Programs</a>
+    </nav>
+
+    <main class="container">
+
+        <!-- Objective -->
+        <section class="card">
+            <h2>1. Objective</h2>
+
+            <div class="objective">
+                To create a webpage demonstrating different CSS selectors
+                such as element, class, ID, group, descendant, child,
+                and attribute selectors.
+            </div>
+        </section>
+
+        <!-- Element Selector -->
+        <section class="card">
+            <h2>2. Element Selector</h2>
+
+            <p class="element-example">
+                This paragraph is styled using an element selector.
+                The selector targets the HTML element type.
+            </p>
+
+            <p>
+                Example: <strong>p { ... }</strong>
+            </p>
+        </section>
+
+        <!-- Class Selector -->
+        <section class="card">
+            <h2>3. Class Selector</h2>
+
+            <div class="class-selector">
+                <strong>Class Selector:</strong>
+                This element is styled using the
+                <strong>.class-selector</strong> selector.
+            </div>
+        </section>
+
+        <!-- ID Selector -->
+        <section class="card">
+            <h2>4. ID Selector</h2>
+
+            <div id="id-selector">
+                <strong>ID Selector:</strong>
+                This element is styled using the
+                <strong>#id-selector</strong> selector.
+            </div>
+        </section>
+
+        <!-- Group Selector -->
+        <section class="card">
+            <h2>5. Group Selector</h2>
+
+            <h3 class="group-heading">
+                Group Selector Heading
+            </h3>
+
+            <p class="group-text">
+                This paragraph shares the same CSS rule with the heading.
+            </p>
+
+            <p>
+                Multiple selectors can be grouped using a comma.
+            </p>
+        </section>
+
+        <!-- Descendant Selector -->
+        <section class="card">
+            <h2>6. Descendant Selector</h2>
+
+            <div class="descendant-demo">
+                <p>
+                    This paragraph is inside the container and is
+                    selected using a descendant selector.
+                </p>
+            </div>
+        </section>
+
+        <!-- Child Selector -->
+        <section class="card">
+            <h2>7. Child Selector</h2>
+
+            <div class="child-demo">
+                <p>
+                    This is a direct child of the container.
+                </p>
+
+                <div>
+                    <p>
+                        This paragraph is nested inside another element.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Attribute Selector -->
+        <section class="card">
+            <h2>8. Attribute Selector</h2>
+
+            <p>
+                The following input is styled using an attribute selector.
+            </p>
+
+            <input
+                type="text"
+                placeholder="Enter your name"
+            >
+        </section>
+
+
+
+        <!-- Navigation Buttons -->
+        <div class="navigation">
+            <a href="css-01.html" class="btn secondary">
+                ← Previous Practical
+            </a>
+
+            <a href="index.html" class="btn">
+                CSS Programs
+            </a>
+
+            <a href="css-03.html" class="btn">
+                Next Practical →
+            </a>
+
+            <a href="../index.html" class="btn secondary">
+                Dashboard
+            </a>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p><strong>CSS Practical 02</strong></p>
+        <p>Different CSS Selectors</p>
+    </footer>
+
+</body>
+</html>

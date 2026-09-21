@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="description"
+        content="College timetable using HTML tables - HTML Practical 10"
+    >
+
+    <title>College Timetable | Practical 10</title>
+
+    <style>
+        /* ================================
+           GLOBAL STYLES
+        ================================= */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f4f7fb;
+            color: #1e293b;
+            line-height: 1.6;
+        }
+
+        /* ================================
+           NAVIGATION BAR
+        ================================= */
+
+        nav {
+            background: #0f172a;
+            color: white;
+            padding: 18px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .logo {
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        nav a {
+            color: #e2e8f0;
+            text-decoration: none;
+            margin-left: 25px;
+            font-size: 15px;
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            color: #60a5fa;
+        }
+
+        /* ================================
+           HERO SECTION
+        ================================= */
+
+        .hero {
+            background: linear-gradient(135deg, #1d4ed8, #2563eb);
+            color: white;
+            text-align: center;
+            padding: 65px 20px;
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 7px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+        }
+
+        .hero h1 {
+            font-size: 42px;
+            margin-bottom: 10px;
+        }
+
+        .hero p {
+            font-size: 17px;
+            opacity: 0.9;
+        }
+
+        /* ================================
+           MAIN CONTENT
+        ================================= */
+
+        main {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .objective {
+            background: white;
+            border-left: 5px solid #2563eb;
+            padding: 22px;
+            margin-bottom: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(15, 23, 42, 0.08);
+        }
+
+        .objective h2 {
+            color: #1d4ed8;
+            margin-bottom: 8px;
+            font-size: 22px;
+        }
+
+        .content-card {
+            background: white;
+            padding: 30px;
+            margin-bottom: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(15, 23, 42, 0.08);
+        }
+
+        .content-card h2 {
+            color: #1e3a8a;
+            margin-bottom: 20px;
+            font-size: 25px;
+        }
+
+        /* ================================
+           TIMETABLE
+        ================================= */
+
+        .table-container {
+            width: 100%;
+            overflow-x: auto;
+        }
+
+        .timetable {
+            width: 100%;
+            min-width: 950px;
+            border-collapse: collapse;
+            text-align: center;
+            background: white;
+        }
+
+        .timetable th {
+            background: #1e3a8a;
+            color: white;
+            padding: 14px 10px;
+            border: 1px solid #cbd5e1;
+            font-size: 14px;
+        }
+
+        .timetable td {
+            padding: 13px 10px;
+            border: 1px solid #cbd5e1;
+            vertical-align: middle;
+            font-size: 13px;
+        }
+
+        .timetable tr:nth-child(even) {
+            background: #f8fafc;
+        }
+
+        .timetable tr:hover {
+            background: #eff6ff;
+        }
+
+        .time {
+            font-weight: bold;
+            color: #1e3a8a;
+            white-space: nowrap;
+        }
+
+        .subject {
+            font-weight: bold;
+            color: #1e293b;
+            display: block;
+        }
+
+        .room {
+            display: block;
+            color: #64748b;
+            font-size: 12px;
+            margin-top: 4px;
+        }
+
+        .lab {
+            background: #fff7ed !important;
+        }
+
+        .lab .subject {
+            color: #c2410c;
+        }
+
+        .break {
+            background: #f1f5f9 !important;
+            color: #475569;
+            font-weight: bold;
+            letter-spacing: 0.5px;
+        }
+
+        /* ================================
+           TABLE ELEMENTS SECTION
+        ================================= */
+
+        .elements-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+        }
+
+        .element-box {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 18px;
+        }
+
+        .element-box h3 {
+            color: #2563eb;
+            margin-bottom: 7px;
+        }
+
+        .element-box code {
+            background: #e0e7ff;
+            color: #1e3a8a;
+            padding: 3px 7px;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        /* ================================
+           CODE DEMONSTRATION
+        ================================= */
+
+        .code-box {
+            background: #0f172a;
+            color: #e2e8f0;
+            padding: 22px;
+            border-radius: 10px;
+            overflow-x: auto;
+            font-family: Consolas, "Courier New", monospace;
+            font-size: 14px;
+            line-height: 1.7;
+        }
+
+        /* ================================
+           NAVIGATION BUTTONS
+        ================================= */
+
+        .navigation-buttons {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin: 35px 0;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 22px;
+            background: #2563eb;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background: #1d4ed8;
+            transform: translateY(-2px);
+        }
+
+        .btn.secondary {
+            background: #475569;
+        }
+
+        .btn.secondary:hover {
+            background: #334155;
+        }
+
+        /* ================================
+           FOOTER
+        ================================= */
+
+        footer {
+            background: #0f172a;
+            color: #cbd5e1;
+            text-align: center;
+            padding: 25px 20px;
+            margin-top: 40px;
+        }
+
+        footer strong {
+            color: white;
+        }
+
+        /* ================================
+           RESPONSIVE DESIGN
+        ================================= */
+
+        @media (max-width: 800px) {
+
+            nav {
+                flex-direction: column;
+                gap: 12px;
+                text-align: center;
+            }
+
+            nav a {
+                margin: 0 8px;
+            }
+
+            .hero h1 {
+                font-size: 32px;
+            }
+
+            .content-card {
+                padding: 20px;
+            }
+
+            .elements-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ================================
+         NAVIGATION BAR
+    ================================= -->
+
+    <nav>
+        <div class="logo">Web Practicals</div>
+
+        <div>
+            <a href="../index.html">Home</a>
+            <a href="index.html">HTML Programs</a>
+        </div>
+    </nav>
+
+
+    <!-- ================================
+         HERO SECTION
+    ================================= -->
+
+    <section class="hero">
+
+        <div class="badge">HTML PRACTICAL 10</div>
+
+        <h1>College Timetable</h1>
+
+        <p>
+            Creating a weekly college timetable using HTML tables
+        </p>
+
+    </section>
+
+
+    <!-- ================================
+         MAIN CONTENT
+    ================================= -->
+
+    <main>
+
+        <!-- Objective -->
+
+        <div class="objective">
+
+            <h2>Objective</h2>
+
+            <p>
+                To create a college timetable using HTML table elements
+                such as rows, columns, borders, rowspan, and colspan.
+            </p>
+
+        </div>
+
+
+        <!-- ================================
+             TIMETABLE SECTION
+        ================================= -->
+
+        <section class="content-card">
+
+            <h2>1. College Timetable</h2>
+
+            <div class="table-container">
+
+                <table class="timetable">
+
+                    <thead>
+
+                        <tr>
+                            <th>Time</th>
+                            <th>Monday</th>
+                            <th>Tuesday</th>
+                            <th>Wednesday</th>
+                            <th>Thursday</th>
+                            <th>Friday</th>
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        <!-- 9:15 - 10:10 -->
+
+                        <tr>
+
+                            <td class="time">
+                                9:15 AM<br>
+                                10:10 AM
+                            </td>
+
+                            <td rowspan="1">
+                                —
+                            </td>
+
+                            <td>
+                                <span class="subject">
+                                    Linear Algebra
+                                </span>
+                                <span class="room">
+                                    AB1 - 101
+                                </span>
+                            </td>
+
+                            <td>
+                                —
+                            </td>
+
+                            <td>
+                                <span class="subject">
+                                    Foundations of Data Engineering
+                                </span>
+                                <span class="room">
+                                    AB2 - 203
+                                </span>
+                            </td>
+
+                            <td class="lab">
+                                <span class="subject">
+                                    Design and Analysis of Algorithms
+                                </span>
+                                <span class="room">
+                                    Lab • AB1 - Computer Lab
+                                </span>
+                            </td>
+
+                        </tr>
+
+
+                        <!-- 10:15 - 11:10 -->
+
+                        <tr>
+
+                            <td class="time">
+                                10:15 AM<br>
+                                11:10 AM
+                            </td>
+
+                            <td>
+                                —
+                            </td>
+
+                            <td>
+                                —
+                            </td>
+
+                            <td>
+                                <span class="subject">
+                                    Linear Algebra
+                                </span>
+                                <span class="room">
+                                    AB2 - 203
+                                </span>
+                            </td>
+
+                            <td>
+                                <span class="subject">
+                                    Linear Algebra
+                                </span>
+                                <span class="room">
+                                    AB2 - 203
+                                </span>
+                            </td>
+
+                            <td class="lab">
+                                <span class="subject">
+                                    Design and Analysis of Algorithms
+                                </span>
+                                <span class="room">
+                                    Lab • AB1 - Computer Lab
+                                </span>
+                            </td>
+
+                        </tr>
+
+
+                        <!-- 11:15 - 12:10 -->
+
+                        <tr>
+
+                            <td class="time">
+                                11:15 AM<br>
+                                12:10 PM
+                            </td>
+
+                            <td>
+                                <span class="subject">
+                                    Design and Analysis of Algorithms
+                                </span>
+                                <span class="room">
+                                    AB2 - 207
+                                </span>
+                            </td>
+
+                            <td>
+                                —
+                            </td>
+
+                            <td>
+                                <span class="subject">
+                                    Web Technology
+                                </span>
+                                <span class="room">
+                                    AB1 - 101
+                                </span>
+                            </td>
+
+                            <td>
+                                <span class="subject">
+                                    Design and Analysis of Algorithms
+                                </span>
+                                <span class="room">
+                                    AB2 - 203
+                                </span>
+                            </td>
+
+                            <td class="lab">
+                                <span class="subject">
+                                    Foundations of Data Engineering
+                                </span>
+                                <span class="room">
+                                    Lab • AB1 - Computer Lab
+                                </span>
+                            </td>
+
+                        </tr>
+
+
+                        <!-- 12:15 - 1:10 -->
+
+                        <tr>
+
+                            <td class="time">
+                                12:15 PM<br>
+                                1:10 PM
+                            </td>
+
+                            <td class="break" rowspan="1">
+                                Lunch Break
+                            </td>
+
+                            <td class="break">
+                                Lunch Break
+                            </td>
+
+                            <td>
+                                <span class="subject">
+                                    Web Technology
+                                </span>
+                                <span class="room">
+                                    AB1 - 101
+                                </span>
+                            </td>
+
+                            <td class="break">
+                                Lunch Break
+                            </td>
+
+                            <td class="lab">
+                                <span class="subject">
+                                    Foundations of Data Engineering
+                                </span>
+                                <span class="room">
+                                    Lab • AB1 - Computer Lab
+                                </span>
+                            </td>
+
+                        </tr>
+
+
+                        <!-- 1:00 - 1:55 -->
+
+                        <tr>
+
+                            <td class="time">
+                                1:00 PM<br>
+                                1:55 PM
+                            </td>
+
+                            <td>
+                                <span class="subject">
+                                    Emerging Tools and Applications
+                                </span>
+                                <span class="room">
+                                    AB2 - 101
+                                </span>
+                            </td>
+
+                            <td>
+                                <span class="subject">
+                                    Linear Algebra
+                                </span>
+                                <span class="room">
+                                    AB2 - 203
+                                </span>
+                            </td>
+
+                            <td>
+                                —
+                            </td>
+
+                            <td>
+                                <span class="subject">
+                                    Emerging Tools and Applications
+                                </span>
+                                <span class="room">
+                                    AB2 - 101
+                                </span>
+                            </td>
+
+                            <td>
+                                —
+                            </td>
+
+                        </tr>
+
+
+                        <!-- 2:00 - 2:55 -->
+
+                        <tr>
+
+                            <td class="time">
+                                2:00 PM<br>
+                                2:55 PM
+                            </td>
+
+                            <td>
+                                <span class="subject">
+                                    Foundations of Data Engineering
+                                </span>
+                                <span class="room">
+                                    AB2 - 202
+                                </span>
+                            </td>
+
+                            <td>
+                                <span class="subject">
+                                    Foundations of Data Engineering
+                                </span>
+                                <span class="room">
+                                    AB2 - 202
+                                </span>
+                            </td>
+
+                            <td>
+                                —
+                            </td>
+
+                            <td>
+                                <span class="subject">
+                                    Web Technology
+                                </span>
+                                <span class="room">
+                                    AB2 - 101
+                                </span>
+                            </td>
+
+                            <td>
+                                <span class="subject">
+                                    Design and Analysis of Algorithms
+                                </span>
+                                <span class="room">
+                                    AB2 - 101
+                                </span>
+                            </td>
+
+                        </tr>
+
+
+                        <!-- 3:00 - 3:55 -->
+
+                        <tr>
+
+                            <td class="time">
+                                3:00 PM<br>
+                                3:55 PM
+                            </td>
+
+                            <td class="lab">
+                                <span class="subject">
+                                    Emerging Tools and Applications
+                                </span>
+                                <span class="room">
+                                    Lab • AB1 - Computer Lab
+                                </span>
+                            </td>
+
+                            <td>
+                                —
+                            </td>
+
+                            <td>
+                                —
+                            </td>
+
+                            <td>
+                                <span class="subject">
+                                    Web Technology
+                                </span>
+                                <span class="room">
+                                    AB2 - 101
+                                </span>
+                            </td>
+
+                            <td>
+                                —
+                            </td>
+
+                        </tr>
+
+
+                        <!-- 4:00 - 4:55 -->
+
+                        <tr>
+
+                            <td class="time">
+                                4:00 PM<br>
+                                4:55 PM
+                            </td>
+
+                            <td class="lab">
+                                <span class="subject">
+                                    Emerging Tools and Applications
+                                </span>
+                                <span class="room">
+                                    Lab • AB1 - Computer Lab
+                                </span>
+                            </td>
+
+                            <td>
+                                —
+                            </td>
+
+                            <td>
+                                —
+                            </td>
+
+                            <td>
+                                —
+                            </td>
+
+                            <td>
+                                <span class="subject">
+                                    Emerging Tools and Applications
+                                </span>
+                                <span class="room">
+                                    AB2 - 101
+                                </span>
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================================
+             NAVIGATION BUTTONS
+        ================================= -->
+
+        <div class="navigation-buttons">
+
+            <a href="index.html" class="btn">
+                ← HTML Programs
+            </a>
+
+            <a href="html-09.html" class="btn secondary">
+                Previous Practical
+            </a>
+
+            <a href="../index.html" class="btn secondary">
+                Dashboard
+            </a>
+
+        </div>
+
+    </main>
+
+
+    <!-- ================================
+         FOOTER
+    ================================= -->
+
+    <footer>
+
+        <p>
+            <strong>Web Practicals</strong> |
+            HTML Practical 10
+        </p>
+
+        <p>
+            HTML Tables • Rows • Columns • Rowspan • Colspan
+        </p>
+
+    </footer>
+
+</body>
+</html>

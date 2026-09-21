@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Store Array in localStorage using JSON</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: #f1f5f9;
+            color: #334155;
+            line-height: 1.6;
+        }
+
+        header {
+            background: #0f172a;
+            padding: 18px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: white;
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        nav a {
+            color: #cbd5e1;
+            text-decoration: none;
+            margin-left: 25px;
+            font-size: 15px;
+        }
+
+        nav a:hover {
+            color: white;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #1e3a8a, #2563eb);
+            color: white;
+            text-align: center;
+            padding: 65px 20px;
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 7px 16px;
+            border-radius: 20px;
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+
+        .hero h1 {
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+
+        .hero p {
+            font-size: 17px;
+            opacity: 0.9;
+        }
+
+        main {
+            width: 90%;
+            max-width: 1050px;
+            margin: 40px auto;
+        }
+
+        .objective {
+            background: white;
+            padding: 22px;
+            border-left: 5px solid #2563eb;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
+            margin-bottom: 25px;
+        }
+
+        .objective h2 {
+            color: #1e3a8a;
+            margin-bottom: 8px;
+        }
+
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(15, 23, 42, 0.08);
+            margin-bottom: 25px;
+        }
+
+        .card h2 {
+            color: #1e3a8a;
+            margin-bottom: 25px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e2e8f0;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 7px;
+        }
+
+        input {
+            width: 100%;
+            padding: 11px 13px;
+            border: 1px solid #cbd5e1;
+            border-radius: 7px;
+            font-size: 15px;
+            outline: none;
+        }
+
+        input:focus {
+            border-color: #2563eb;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+
+        .btn {
+            border: none;
+            background: #2563eb;
+            color: white;
+            padding: 11px 20px;
+            border-radius: 7px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .btn:hover {
+            background: #1d4ed8;
+        }
+
+        .btn.secondary {
+            background: #475569;
+        }
+
+        .btn.secondary:hover {
+            background: #334155;
+        }
+
+        .btn.danger {
+            background: #dc2626;
+        }
+
+        .btn.danger:hover {
+            background: #b91c1c;
+        }
+
+        .data-display {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+
+        .array-list {
+            list-style: none;
+        }
+
+        .array-list li {
+            background: white;
+            border: 1px solid #e2e8f0;
+            padding: 10px 14px;
+            margin-bottom: 8px;
+            border-radius: 6px;
+        }
+
+        .message {
+            min-height: 25px;
+            margin-top: 15px;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .success {
+            color: #15803d;
+        }
+
+        .warning {
+            color: #b45309;
+        }
+
+        footer {
+            background: #0f172a;
+            color: #cbd5e1;
+            text-align: center;
+            padding: 22px;
+            margin-top: 50px;
+        }
+
+        @media (max-width: 750px) {
+            header {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            nav a {
+                margin: 0 8px;
+            }
+
+            .hero h1 {
+                font-size: 28px;
+            }
+
+            .card {
+                padding: 22px;
+            }
+        }
+
+        @media (max-width: 550px) {
+            main {
+                width: 94%;
+            }
+
+            .hero {
+                padding: 50px 15px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="logo">Web Storage Practical</div>
+
+        <nav>
+            <a href="../../index.html">Home</a>
+<a href="../index.html">JavaScript Programs</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <span class="badge">Practical 07</span>
+        <h1>Store an Array in localStorage using JSON</h1>
+        <p>Store and retrieve array data using browser storage</p>
+    </section>
+
+    <main>
+
+        <section class="objective">
+            <h2>Objective</h2>
+            <p>
+                To store a JavaScript array in
+                <strong>localStorage</strong> using JSON and retrieve
+                the stored array.
+            </p>
+        </section>
+
+        <section class="card">
+            <h2>Student Names</h2>
+
+            <div class="form-group">
+                <label for="studentName">Enter Student Name</label>
+                <input
+                    type="text"
+                    id="studentName"
+                    placeholder="Enter student name"
+                >
+            </div>
+
+            <div class="buttons">
+                <button class="btn" onclick="addStudent()">
+                    Add Student
+                </button>
+
+                <button class="btn secondary" onclick="loadStudents()">
+                    Retrieve Array
+                </button>
+
+                <button class="btn danger" onclick="clearStudents()">
+                    Clear Array
+                </button>
+            </div>
+
+            <p class="message" id="message"></p>
+        </section>
+
+        <section class="card">
+            <h2>Stored Array</h2>
+
+            <div class="data-display">
+                <ul class="array-list" id="studentList">
+                    <li>No students stored.</li>
+                </ul>
+            </div>
+        </section>
+
+        <div class="buttons">
+            <button class="btn secondary"
+                onclick="window.location.href='06-multiple-values-localstorage.html'">
+                Previous
+            </button>
+
+            <button class="btn"
+                onclick="window.location.href='../index.html'">
+                Home
+            </button>
+
+            <button class="btn"
+                onclick="window.location.href='08-object-localstorage.html'">
+                Next
+            </button>
+        </div>
+
+    </main>
+
+    <footer>
+        Web Storage Practicals &copy; 2026
+    </footer>
+
+    <script>
+        let students = [];
+
+        function loadStudents() {
+            const storedData = localStorage.getItem("studentNames");
+
+            if (storedData) {
+                students = JSON.parse(storedData);
+            } else {
+                students = [];
+            }
+
+            displayStudents();
+        }
+
+        function addStudent() {
+            const input = document.getElementById("studentName");
+            const name = input.value.trim();
+            const message = document.getElementById("message");
+
+            if (name === "") {
+                message.textContent = "Please enter a student name.";
+                message.className = "message warning";
+                return;
+            }
+
+            students.push(name);
+
+            localStorage.setItem(
+                "studentNames",
+                JSON.stringify(students)
+            );
+
+            input.value = "";
+
+            message.textContent = "Student added successfully.";
+            message.className = "message success";
+
+            displayStudents();
+        }
+
+        function displayStudents() {
+            const list = document.getElementById("studentList");
+
+            list.innerHTML = "";
+
+            if (students.length === 0) {
+                const item = document.createElement("li");
+                item.textContent = "No students stored.";
+                list.appendChild(item);
+                return;
+            }
+
+            students.forEach(function(student) {
+                const item = document.createElement("li");
+                item.textContent = student;
+                list.appendChild(item);
+            });
+        }
+
+        function clearStudents() {
+            localStorage.removeItem("studentNames");
+
+            students = [];
+
+            displayStudents();
+
+            const message = document.getElementById("message");
+            message.textContent = "Array data cleared successfully.";
+            message.className = "message success";
+        }
+
+        loadStudents();
+    </script>
+
+</body>
+</html>

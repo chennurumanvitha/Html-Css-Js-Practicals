@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Screen Width & Height | JavaScript Practical</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Segoe UI", Arial, sans-serif;
+      background: #f1f5f9;
+      color: #334155;
+      line-height: 1.6;
+    }
+
+    header {
+      background: #0f172a;
+      padding: 18px 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      color: white;
+      font-size: 22px;
+      font-weight: bold;
+    }
+
+    nav a {
+      color: #cbd5e1;
+      text-decoration: none;
+      margin-left: 25px;
+      font-size: 15px;
+    }
+
+    nav a:hover {
+      color: white;
+    }
+
+    .hero {
+      background: linear-gradient(135deg, #1e3a8a, #2563eb);
+      color: white;
+      text-align: center;
+      padding: 65px 20px;
+    }
+
+    .badge {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.15);
+      padding: 7px 16px;
+      border-radius: 20px;
+      margin-bottom: 15px;
+      font-size: 14px;
+    }
+
+    .hero h1 {
+      font-size: 36px;
+      margin-bottom: 10px;
+    }
+
+    .hero p {
+      font-size: 17px;
+      opacity: 0.9;
+    }
+
+    main {
+      width: 90%;
+      max-width: 1050px;
+      margin: 40px auto;
+    }
+
+    .objective {
+      background: white;
+      padding: 22px;
+      border-left: 5px solid #2563eb;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
+      margin-bottom: 25px;
+    }
+
+    .objective h2 {
+      color: #1e3a8a;
+      margin-bottom: 8px;
+    }
+
+    .card {
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(15, 23, 42, 0.08);
+      margin-bottom: 25px;
+    }
+
+    .card h2 {
+      color: #1e3a8a;
+      margin-bottom: 25px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #e2e8f0;
+    }
+
+    .dimension-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+
+    .dimension-box {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 10px;
+      padding: 25px;
+      text-align: center;
+    }
+
+    .dimension-box h3 {
+      color: #475569;
+      margin-bottom: 12px;
+      font-size: 16px;
+    }
+
+    .dimension-value {
+      color: #1e3a8a;
+      font-size: 32px;
+      font-weight: bold;
+    }
+
+    .unit {
+      color: #64748b;
+      font-size: 15px;
+      margin-left: 4px;
+    }
+
+    .buttons {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      flex-wrap: wrap;
+      margin-top: 30px;
+    }
+
+    .btn {
+      border: none;
+      background: #2563eb;
+      color: white;
+      padding: 11px 20px;
+      border-radius: 7px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      transition: 0.2s;
+    }
+
+    .btn:hover {
+      background: #1d4ed8;
+    }
+
+    .btn.secondary {
+      background: #475569;
+    }
+
+    .btn.secondary:hover {
+      background: #334155;
+    }
+
+    .info-box {
+      margin-top: 25px;
+      padding: 18px;
+      background: #eff6ff;
+      border-left: 4px solid #2563eb;
+      border-radius: 7px;
+      color: #1e40af;
+      text-align: center;
+    }
+
+    .navigation {
+      display: flex;
+      justify-content: space-between;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    footer {
+      background: #0f172a;
+      color: #cbd5e1;
+      text-align: center;
+      padding: 22px;
+      margin-top: 50px;
+    }
+
+    @media (max-width: 750px) {
+      header {
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      nav a {
+        margin: 0 8px;
+      }
+
+      .hero h1 {
+        font-size: 28px;
+      }
+
+      .card {
+        padding: 22px;
+      }
+
+      .dimension-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 550px) {
+      main {
+        width: 94%;
+      }
+
+      .hero {
+        padding: 50px 15px;
+      }
+
+      .navigation {
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <div class="logo">JavaScript Practical</div>
+
+    <nav>
+      <a href="../../index.html">Home</a>
+<a href="../index.html">JavaScript Programs</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <span class="badge">Browser Objects &amp; Browser Features — Practice 15</span>
+    <h1>Screen Width &amp; Height</h1>
+    <p>Displaying the user's screen dimensions using JavaScript</p>
+  </section>
+
+  <main>
+
+    <section class="objective">
+      <h2>Objective</h2>
+      <p>
+        To display the user's screen width and height using the
+        JavaScript <strong>screen</strong> object.
+      </p>
+    </section>
+
+    <section class="card">
+      <h2>Screen Dimensions</h2>
+
+      <div class="dimension-grid">
+
+        <div class="dimension-box">
+          <h3>Screen Width</h3>
+          <div class="dimension-value">
+            <span id="screenWidth">0</span>
+            <span class="unit">px</span>
+          </div>
+        </div>
+
+        <div class="dimension-box">
+          <h3>Screen Height</h3>
+          <div class="dimension-value">
+            <span id="screenHeight">0</span>
+            <span class="unit">px</span>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="info-box" id="screenInfo">
+        Screen information is being loaded...
+      </div>
+
+      <div class="buttons">
+        <button class="btn" id="refreshButton">
+          Refresh Dimensions
+        </button>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Additional Screen Information</h2>
+
+      <div class="dimension-grid">
+
+        <div class="dimension-box">
+          <h3>Available Width</h3>
+          <div class="dimension-value">
+            <span id="availableWidth">0</span>
+            <span class="unit">px</span>
+          </div>
+        </div>
+
+        <div class="dimension-box">
+          <h3>Available Height</h3>
+          <div class="dimension-value">
+            <span id="availableHeight">0</span>
+            <span class="unit">px</span>
+          </div>
+        </div>
+
+        <div class="dimension-box">
+          <h3>Color Depth</h3>
+          <div class="dimension-value">
+            <span id="colorDepth">0</span>
+            <span class="unit">bits</span>
+          </div>
+        </div>
+
+        <div class="dimension-box">
+          <h3>Pixel Depth</h3>
+          <div class="dimension-value">
+            <span id="pixelDepth">0</span>
+            <span class="unit">bits</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Navigation</h2>
+
+      <div class="navigation">
+        <a class="btn secondary" href="14-browser-information.html">
+          ← Previous
+        </a>
+
+        <a class="btn" href="../../index.html">
+          Home
+        </a>
+
+        <a class="btn secondary" href="16-online-offline.html">
+          Next →
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>JavaScript Practical &copy; 2026</p>
+  </footer>
+
+  <script>
+    const screenWidth = document.getElementById("screenWidth");
+    const screenHeight = document.getElementById("screenHeight");
+    const availableWidth = document.getElementById("availableWidth");
+    const availableHeight = document.getElementById("availableHeight");
+    const colorDepth = document.getElementById("colorDepth");
+    const pixelDepth = document.getElementById("pixelDepth");
+    const screenInfo = document.getElementById("screenInfo");
+    const refreshButton = document.getElementById("refreshButton");
+
+    function displayScreenInformation() {
+      screenWidth.textContent = screen.width;
+      screenHeight.textContent = screen.height;
+
+      availableWidth.textContent = screen.availWidth;
+      availableHeight.textContent = screen.availHeight;
+
+      colorDepth.textContent = screen.colorDepth;
+      pixelDepth.textContent = screen.pixelDepth;
+
+      screenInfo.textContent =
+        "Your screen resolution is " +
+        screen.width +
+        " × " +
+        screen.height +
+        " pixels.";
+    }
+
+    refreshButton.addEventListener("click", function () {
+      displayScreenInformation();
+    });
+
+    window.addEventListener("resize", displayScreenInformation);
+
+    displayScreenInformation();
+  </script>
+
+</body>
+</html>

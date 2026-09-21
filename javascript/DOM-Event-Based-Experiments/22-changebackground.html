@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Practical 22 - Change Background Color</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: #f1f5f9;
+            color: #334155;
+            line-height: 1.6;
+            transition: background-color 0.4s ease;
+        }
+
+        header {
+            background: #0f172a;
+            padding: 18px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: white;
+            font-size: 22px;
+            font-weight: 700;
+        }
+
+        nav a {
+            color: #cbd5e1;
+            text-decoration: none;
+            margin-left: 22px;
+            font-size: 15px;
+        }
+
+        nav a:hover {
+            color: white;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #1e3a8a, #2563eb);
+            color: white;
+            text-align: center;
+            padding: 65px 20px;
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.18);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        .hero h1 {
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+
+        .hero p {
+            font-size: 17px;
+            opacity: 0.9;
+        }
+
+        main {
+            width: 90%;
+            max-width: 1050px;
+            margin: 40px auto;
+        }
+
+        .card {
+            background: white;
+            padding: 28px;
+            margin-bottom: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(15, 23, 42, 0.08);
+        }
+
+        .objective {
+            border-left: 5px solid #2563eb;
+        }
+
+        .card h2 {
+            color: #1e3a8a;
+            margin-bottom: 18px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e2e8f0;
+        }
+
+        .demo {
+            text-align: center;
+        }
+
+        .color-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-block;
+            background: #2563eb;
+            color: white;
+            text-decoration: none;
+            border: none;
+            padding: 11px 20px;
+            border-radius: 7px;
+            font-size: 15px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .btn:hover {
+            background: #1d4ed8;
+        }
+
+        .green {
+            background: #16a34a;
+        }
+
+        .green:hover {
+            background: #15803d;
+        }
+
+        .purple {
+            background: #7c3aed;
+        }
+
+        .purple:hover {
+            background: #6d28d9;
+        }
+
+        .orange {
+            background: #ea580c;
+        }
+
+        .orange:hover {
+            background: #c2410c;
+        }
+
+        .reset {
+            background: #475569;
+        }
+
+        .reset:hover {
+            background: #334155;
+        }
+
+        .output {
+            background: #eff6ff;
+            border: 2px dashed #93c5fd;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        #result {
+            font-size: 20px;
+            font-weight: 600;
+            color: #1e3a8a;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+
+        .secondary {
+            background: #475569;
+        }
+
+        .secondary:hover {
+            background: #334155;
+        }
+
+        footer {
+            background: #0f172a;
+            color: #cbd5e1;
+            text-align: center;
+            padding: 22px;
+            margin-top: 50px;
+        }
+
+        @media (max-width: 750px) {
+            header {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            nav a {
+                margin: 0 8px;
+            }
+
+            .hero h1 {
+                font-size: 28px;
+            }
+
+            .card {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="logo">JavaScript Practical</div>
+
+        <nav>
+           <a href="../../index.html">Home</a>
+<a href="../index.html">JavaScript Programs</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="badge">JavaScript Practical 22</div>
+        <h1>Change Background Color</h1>
+        <p>Change the background color of a webpage using JavaScript</p>
+    </section>
+
+    <main>
+
+        <section class="card objective">
+            <h2>Objective</h2>
+            <p>
+                Change the background color of a webpage using JavaScript.
+            </p>
+        </section>
+
+        <section class="card">
+            <h2>Demonstration</h2>
+
+            <div class="demo">
+                <div class="color-buttons">
+                    <button class="btn" onclick="changeColor('#dbeafe', 'Light Blue')">
+                        Blue
+                    </button>
+
+                    <button class="btn green" onclick="changeColor('#dcfce7', 'Light Green')">
+                        Green
+                    </button>
+
+                    <button class="btn purple" onclick="changeColor('#ede9fe', 'Light Purple')">
+                        Purple
+                    </button>
+
+                    <button class="btn orange" onclick="changeColor('#ffedd5', 'Light Orange')">
+                        Orange
+                    </button>
+
+                    <button class="btn reset" onclick="resetColor()">
+                        Reset
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <section class="card">
+            <h2>Output</h2>
+
+            <div class="output">
+                <p id="result">
+                    Current Background Color = Default
+                </p>
+            </div>
+        </section>
+
+        <div class="buttons">
+            <a href="javascript-21.html" class="btn">← Previous Practical</a>
+            <a href="index.html" class="btn secondary">JavaScript Programs</a>
+            <a href="../index.html" class="btn">Dashboard</a>
+        </div>
+
+    </main>
+
+    <footer>
+        <p>JavaScript Practical Programs</p>
+    </footer>
+
+    <script>
+        function changeColor(color, colorName) {
+            document.body.style.backgroundColor = color;
+
+            document.getElementById("result").textContent =
+                "Current Background Color = " + colorName;
+        }
+
+        function resetColor() {
+            document.body.style.backgroundColor = "#f1f5f9";
+
+            document.getElementById("result").textContent =
+                "Current Background Color = Default";
+        }
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notes Application | JavaScript Mini Project</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: #f1f5f9;
+            color: #334155;
+            line-height: 1.6;
+        }
+
+        header {
+            background: #0f172a;
+            padding: 18px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: white;
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        nav a {
+            color: #cbd5e1;
+            text-decoration: none;
+            margin-left: 25px;
+            font-size: 15px;
+        }
+
+        nav a:hover {
+            color: white;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #1e3a8a, #2563eb);
+            color: white;
+            text-align: center;
+            padding: 65px 20px;
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 7px 16px;
+            border-radius: 20px;
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+
+        .hero h1 {
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+
+        .hero p {
+            font-size: 17px;
+            opacity: 0.9;
+        }
+
+        main {
+            width: 90%;
+            max-width: 1050px;
+            margin: 40px auto;
+        }
+
+        .objective {
+            background: white;
+            padding: 22px;
+            border-left: 5px solid #2563eb;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
+            margin-bottom: 25px;
+        }
+
+        .objective h2 {
+            color: #1e3a8a;
+            margin-bottom: 8px;
+        }
+
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(15, 23, 42, 0.08);
+            margin-bottom: 25px;
+        }
+
+        .card h2 {
+            color: #1e3a8a;
+            margin-bottom: 25px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e2e8f0;
+        }
+
+        .note-form {
+            display: grid;
+            gap: 15px;
+        }
+
+        .note-form input,
+        .note-form textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #cbd5e1;
+            border-radius: 7px;
+            font-family: inherit;
+            font-size: 15px;
+            outline: none;
+        }
+
+        .note-form input:focus,
+        .note-form textarea:focus {
+            border-color: #2563eb;
+        }
+
+        .note-form textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 10px;
+        }
+
+        .btn {
+            border: none;
+            background: #2563eb;
+            color: white;
+            padding: 11px 20px;
+            border-radius: 7px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .btn:hover {
+            background: #1d4ed8;
+        }
+
+        .btn.secondary {
+            background: #475569;
+        }
+
+        .btn.secondary:hover {
+            background: #334155;
+        }
+
+        .message {
+            text-align: center;
+            min-height: 25px;
+            margin-top: 10px;
+            font-size: 14px;
+        }
+
+        .notes-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+        }
+
+        .note {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .note h3 {
+            color: #1e3a8a;
+            margin-bottom: 10px;
+            word-break: break-word;
+        }
+
+        .note p {
+            color: #475569;
+            white-space: pre-wrap;
+            word-break: break-word;
+            flex: 1;
+            margin-bottom: 15px;
+        }
+
+        .note-date {
+            color: #94a3b8;
+            font-size: 12px;
+            margin-bottom: 12px;
+        }
+
+        .note-actions {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .edit-btn,
+        .delete-btn {
+            border: none;
+            padding: 8px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .edit-btn {
+            background: #dbeafe;
+            color: #1d4ed8;
+        }
+
+        .edit-btn:hover {
+            background: #bfdbfe;
+        }
+
+        .delete-btn {
+            background: #fee2e2;
+            color: #b91c1c;
+        }
+
+        .delete-btn:hover {
+            background: #fecaca;
+        }
+
+        .empty-message {
+            grid-column: 1 / -1;
+            text-align: center;
+            color: #64748b;
+            padding: 25px;
+        }
+
+        .features {
+            padding-left: 20px;
+        }
+
+        .features li {
+            margin-bottom: 8px;
+        }
+
+        .navigation {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+
+        .navigation a {
+            text-decoration: none;
+            color: white;
+            background: #2563eb;
+            padding: 11px 20px;
+            border-radius: 7px;
+            font-weight: 600;
+        }
+
+        .navigation a:hover {
+            background: #1d4ed8;
+        }
+
+        footer {
+            background: #0f172a;
+            color: #cbd5e1;
+            text-align: center;
+            padding: 22px;
+            margin-top: 50px;
+        }
+
+        @media (max-width: 850px) {
+            .notes-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 750px) {
+            header {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            nav a {
+                margin: 0 8px;
+            }
+
+            .hero h1 {
+                font-size: 28px;
+            }
+
+            .card {
+                padding: 22px;
+            }
+        }
+
+        @media (max-width: 550px) {
+            main {
+                width: 94%;
+            }
+
+            .hero {
+                padding: 50px 15px;
+            }
+
+            .notes-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="logo">JavaScript Mini Project</div>
+
+        <nav>
+            <a href="../../index.html">Home</a>
+<a href="../index.html">JavaScript Programs</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <span class="badge">Mini Projects — Project 13</span>
+        <h1>Notes Application</h1>
+        <p>Create, edit, delete and save notes using localStorage</p>
+    </section>
+
+    <main>
+
+        <section class="objective">
+            <h2>Objective</h2>
+            <p>
+                Create a notes application that allows users to create,
+                edit, delete and permanently store notes in the browser
+                using localStorage.
+            </p>
+        </section>
+
+        <section class="card">
+            <h2>Create a Note</h2>
+
+            <form class="note-form" id="noteForm">
+
+                <input
+                    type="text"
+                    id="noteTitle"
+                    placeholder="Enter note title"
+                    maxlength="100"
+                    required
+                >
+
+                <textarea
+                    id="noteContent"
+                    placeholder="Write your note here..."
+                    required
+                ></textarea>
+
+                <div class="buttons">
+
+                    <button
+                        type="submit"
+                        class="btn"
+                        id="saveButton"
+                    >
+                        Add Note
+                    </button>
+
+                    <button
+                        type="button"
+                        class="btn secondary"
+                        id="cancelButton"
+                        onclick="cancelEdit()"
+                        style="display: none;"
+                    >
+                        Cancel Edit
+                    </button>
+
+                </div>
+
+                <p class="message" id="message"></p>
+
+            </form>
+        </section>
+
+        <section class="card">
+            <h2>Saved Notes</h2>
+
+            <div class="notes-container" id="notesContainer">
+                <p class="empty-message">
+                    No notes saved yet.
+                </p>
+            </div>
+
+            <div class="buttons">
+                <button
+                    type="button"
+                    class="btn secondary"
+                    onclick="clearAllNotes()"
+                >
+                    Clear All Notes
+                </button>
+            </div>
+        </section>
+
+        <section class="card">
+            <h2>Features</h2>
+
+            <ul class="features">
+                <li>Create new notes with a title and content.</li>
+                <li>Save notes using browser localStorage.</li>
+                <li>Notes remain available after refreshing the page.</li>
+                <li>Edit existing notes.</li>
+                <li>Delete individual notes.</li>
+                <li>Clear all saved notes.</li>
+                <li>Display the note creation/update date.</li>
+                <li>Automatically load saved notes when the page opens.</li>
+                <li>Responsive design for different screen sizes.</li>
+            </ul>
+        </section>
+
+        <div class="navigation">
+            <a href="12-simple-shopping-cart.html">Previous</a>
+            <a href="../index.html">Home</a>
+            <a href="14-random-password-generator.html">Next</a>
+        </div>
+
+    </main>
+
+    <footer>
+        <p>JavaScript Mini Projects &copy; 2026</p>
+    </footer>
+
+    <script>
+        const noteForm = document.getElementById("noteForm");
+        const noteTitle = document.getElementById("noteTitle");
+        const noteContent = document.getElementById("noteContent");
+        const notesContainer = document.getElementById("notesContainer");
+        const message = document.getElementById("message");
+        const saveButton = document.getElementById("saveButton");
+        const cancelButton = document.getElementById("cancelButton");
+
+        let notes = [];
+        let editingNoteId = null;
+
+        function loadNotes() {
+            const savedNotes = localStorage.getItem("studentNotes");
+
+            if (savedNotes) {
+                try {
+                    const parsedNotes = JSON.parse(savedNotes);
+
+                    if (Array.isArray(parsedNotes)) {
+                        notes = parsedNotes;
+                    } else {
+                        notes = [];
+                    }
+                } catch (error) {
+                    notes = [];
+                }
+            }
+
+            displayNotes();
+        }
+
+        function saveNotes() {
+            localStorage.setItem(
+                "studentNotes",
+                JSON.stringify(notes)
+            );
+        }
+
+        noteForm.addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            const title = noteTitle.value.trim();
+            const content = noteContent.value.trim();
+
+            if (title === "" || content === "") {
+                showMessage(
+                    "Please enter both a title and note content.",
+                    "#dc2626"
+                );
+                return;
+            }
+
+            if (editingNoteId !== null) {
+                const note = notes.find(function(item) {
+                    return item.id === editingNoteId;
+                });
+
+                if (note) {
+                    note.title = title;
+                    note.content = content;
+                    note.updatedAt = new Date().toLocaleString();
+                }
+
+                showMessage(
+                    "Note updated successfully.",
+                    "#16a34a"
+                );
+
+            } else {
+                const newNote = {
+                    id: Date.now(),
+                    title: title,
+                    content: content,
+                    updatedAt: new Date().toLocaleString()
+                };
+
+                notes.unshift(newNote);
+
+                showMessage(
+                    "Note saved successfully.",
+                    "#16a34a"
+                );
+            }
+
+            saveNotes();
+            displayNotes();
+            resetForm();
+        });
+
+        function displayNotes() {
+            notesContainer.innerHTML = "";
+
+            if (notes.length === 0) {
+                notesContainer.innerHTML =
+                    '<p class="empty-message">No notes saved yet.</p>';
+                return;
+            }
+
+            notes.forEach(function(note) {
+
+                const noteElement =
+                    document.createElement("article");
+
+                noteElement.className = "note";
+
+                const title =
+                    document.createElement("h3");
+
+                title.textContent = note.title;
+
+                const content =
+                    document.createElement("p");
+
+                content.textContent = note.content;
+
+                const date =
+                    document.createElement("div");
+
+                date.className = "note-date";
+
+                date.textContent =
+                    "Last updated: " + note.updatedAt;
+
+                const actions =
+                    document.createElement("div");
+
+                actions.className = "note-actions";
+
+                const editButton =
+                    document.createElement("button");
+
+                editButton.type = "button";
+                editButton.className = "edit-btn";
+                editButton.textContent = "Edit";
+
+                editButton.addEventListener(
+                    "click",
+                    function() {
+                        editNote(note.id);
+                    }
+                );
+
+                const deleteButton =
+                    document.createElement("button");
+
+                deleteButton.type = "button";
+                deleteButton.className = "delete-btn";
+                deleteButton.textContent = "Delete";
+
+                deleteButton.addEventListener(
+                    "click",
+                    function() {
+                        deleteNote(note.id);
+                    }
+                );
+
+                actions.appendChild(editButton);
+                actions.appendChild(deleteButton);
+
+                noteElement.appendChild(title);
+                noteElement.appendChild(content);
+                noteElement.appendChild(date);
+                noteElement.appendChild(actions);
+
+                notesContainer.appendChild(noteElement);
+            });
+        }
+
+        function editNote(id) {
+            const note = notes.find(function(item) {
+                return item.id === id;
+            });
+
+            if (!note) {
+                return;
+            }
+
+            noteTitle.value = note.title;
+            noteContent.value = note.content;
+
+            editingNoteId = id;
+
+            saveButton.textContent = "Update Note";
+            cancelButton.style.display = "inline-block";
+
+            noteTitle.focus();
+
+            showMessage(
+                "Editing selected note.",
+                "#475569"
+            );
+        }
+
+        function deleteNote(id) {
+            const note = notes.find(function(item) {
+                return item.id === id;
+            });
+
+            notes = notes.filter(function(item) {
+                return item.id !== id;
+            });
+
+            saveNotes();
+            displayNotes();
+
+            if (editingNoteId === id) {
+                resetForm();
+            }
+
+            if (note) {
+                showMessage(
+                    "Note deleted successfully.",
+                    "#475569"
+                );
+            }
+        }
+
+        function clearAllNotes() {
+            if (notes.length === 0) {
+                showMessage(
+                    "There are no notes to clear.",
+                    "#64748b"
+                );
+                return;
+            }
+
+            notes = [];
+
+            saveNotes();
+            displayNotes();
+            resetForm();
+
+            showMessage(
+                "All notes have been cleared.",
+                "#475569"
+            );
+        }
+
+        function cancelEdit() {
+            resetForm();
+
+            showMessage(
+                "Editing cancelled.",
+                "#475569"
+            );
+        }
+
+        function resetForm() {
+            noteForm.reset();
+
+            editingNoteId = null;
+
+            saveButton.textContent = "Add Note";
+            cancelButton.style.display = "none";
+        }
+
+        function showMessage(text, color) {
+            message.textContent = text;
+            message.style.color = color;
+        }
+
+        loadNotes();
+    </script>
+
+</body>
+</html>

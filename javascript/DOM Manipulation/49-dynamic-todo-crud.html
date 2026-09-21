@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Practical 49 - Add, Edit and Delete To-Do Items</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: #f1f5f9;
+            color: #334155;
+            line-height: 1.6;
+        }
+
+        header {
+            background: #0f172a;
+            padding: 18px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: white;
+            font-size: 22px;
+            font-weight: 700;
+        }
+
+        nav a {
+            color: #cbd5e1;
+            text-decoration: none;
+            margin-left: 24px;
+            font-size: 15px;
+        }
+
+        nav a:hover {
+            color: white;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #1e3a8a, #2563eb);
+            color: white;
+            text-align: center;
+            padding: 65px 20px;
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.18);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        .hero h1 {
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+
+        .hero p {
+            font-size: 17px;
+            opacity: 0.95;
+        }
+
+        main {
+            width: 90%;
+            max-width: 1050px;
+            margin: 40px auto;
+        }
+
+        .objective {
+            background: white;
+            padding: 22px;
+            border-radius: 12px;
+            border-left: 5px solid #2563eb;
+            box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
+            margin-bottom: 25px;
+        }
+
+        .objective h2 {
+            color: #1e3a8a;
+            margin-bottom: 8px;
+        }
+
+        .card {
+            background: white;
+            padding: 28px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
+        }
+
+        .card h2 {
+            color: #1e3a8a;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 10px;
+            margin-bottom: 22px;
+        }
+
+        .input-section {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 25px;
+        }
+
+        .input-section input {
+            flex: 1;
+            padding: 12px 14px;
+            border: 1px solid #cbd5e1;
+            border-radius: 7px;
+            font-size: 15px;
+            outline: none;
+        }
+
+        .input-section input:focus {
+            border-color: #2563eb;
+        }
+
+        button {
+            border: none;
+            border-radius: 7px;
+            padding: 11px 18px;
+            font-size: 14px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .add-btn {
+            background: #2563eb;
+            color: white;
+        }
+
+        .add-btn:hover {
+            background: #1d4ed8;
+        }
+
+        .todo-list {
+            margin-top: 10px;
+        }
+
+        .todo-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 13px 15px;
+            margin-bottom: 10px;
+        }
+
+        .todo-text {
+            flex: 1;
+            font-size: 15px;
+        }
+
+        .todo-item.completed .todo-text {
+            text-decoration: line-through;
+            opacity: 0.55;
+        }
+
+        .edit-btn {
+            background: #dbeafe;
+            color: #1d4ed8;
+        }
+
+        .delete-btn {
+            background: #fee2e2;
+            color: #b91c1c;
+        }
+
+        .edit-btn:hover {
+            background: #bfdbfe;
+        }
+
+        .delete-btn:hover {
+            background: #fecaca;
+        }
+
+        .empty-message {
+            text-align: center;
+            color: #64748b;
+            padding: 20px;
+            border: 1px dashed #cbd5e1;
+            border-radius: 8px;
+        }
+
+        .output {
+            margin-top: 25px;
+            background: #eff6ff;
+            border: 1px dashed #93c5fd;
+            padding: 18px;
+            border-radius: 8px;
+        }
+
+        .output p {
+            margin: 5px 0;
+        }
+
+        .status {
+            color: #1e3a8a;
+            font-weight: 600;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        .btn-link {
+            display: inline-block;
+            text-decoration: none;
+            background: #2563eb;
+            color: white;
+            padding: 11px 20px;
+            border-radius: 7px;
+            font-weight: 600;
+        }
+
+        .btn-link:hover {
+            background: #1d4ed8;
+        }
+
+        .btn-link.secondary {
+            background: #475569;
+        }
+
+        .btn-link.secondary:hover {
+            background: #334155;
+        }
+
+        footer {
+            background: #0f172a;
+            color: #cbd5e1;
+            text-align: center;
+            padding: 20px;
+            margin-top: 50px;
+            font-size: 14px;
+        }
+
+        @media (max-width: 750px) {
+            header {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            nav a {
+                margin: 0 8px;
+            }
+
+            .hero h1 {
+                font-size: 29px;
+            }
+
+            .input-section {
+                flex-direction: column;
+            }
+
+            .todo-item {
+                flex-wrap: wrap;
+            }
+        }
+
+        @media (max-width: 550px) {
+            main {
+                width: 94%;
+            }
+
+            .card {
+                padding: 20px;
+            }
+
+            .todo-item button {
+                padding: 8px 12px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="logo">JavaScript Practicals</div>
+
+        <nav>
+           <a href="../../index.html">Home</a>
+<a href="../index.html">JavaScript Programs</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="badge">Practical 49</div>
+        <h1>Add, Edit and Delete To-Do Items</h1>
+        <p>Using JavaScript DOM Manipulation</p>
+    </section>
+
+    <main>
+
+        <section class="objective">
+            <h2>Objective</h2>
+            <p>
+                To create a dynamic to-do list that allows users to add,
+                edit, complete, and delete to-do items using JavaScript
+                DOM manipulation.
+            </p>
+        </section>
+
+        <section class="card">
+            <h2>To-Do List</h2>
+
+            <div class="input-section">
+                <input
+                    type="text"
+                    id="taskInput"
+                    placeholder="Enter a to-do item"
+                >
+                <button class="add-btn" onclick="addTask()">
+                    Add Task
+                </button>
+            </div>
+
+            <div id="todoList" class="todo-list">
+                <div class="empty-message" id="emptyMessage">
+                    No to-do items added yet.
+                </div>
+            </div>
+
+            <div class="output">
+                <p>Total Items: <span id="totalCount" class="status">0</span></p>
+                <p>Completed: <span id="completedCount" class="status">0</span></p>
+                <p id="message">Enter a task and click "Add Task".</p>
+            </div>
+        </section>
+
+        <div class="buttons">
+            <a href="48-todo-list.html" class="btn-link">
+                ← Previous Practical
+            </a>
+
+            <a href="index.html" class="btn-link secondary">
+                DOM Programs
+            </a>
+
+            <a href="50-demo.html" class="btn-link">
+                Next Practical →
+            </a>
+        </div>
+
+    </main>
+
+    <footer>
+        JavaScript Practical Programs &copy; 2026
+    </footer>
+
+    <script>
+        let taskCount = 0;
+
+        function addTask() {
+            const input = document.getElementById("taskInput");
+            const taskText = input.value.trim();
+
+            if (taskText === "") {
+                document.getElementById("message").textContent =
+                    "Please enter a to-do item.";
+                input.focus();
+                return;
+            }
+
+            taskCount++;
+
+            const todoList = document.getElementById("todoList");
+
+            const emptyMessage = document.getElementById("emptyMessage");
+
+            if (emptyMessage) {
+                emptyMessage.remove();
+            }
+
+            const todoItem = document.createElement("div");
+            todoItem.className = "todo-item";
+
+            const checkbox = document.createElement("input");
+            checkbox.type = "checkbox";
+
+            const taskSpan = document.createElement("span");
+            taskSpan.className = "todo-text";
+            taskSpan.textContent = taskText;
+
+            const editButton = document.createElement("button");
+            editButton.className = "edit-btn";
+            editButton.textContent = "Edit";
+
+            const deleteButton = document.createElement("button");
+            deleteButton.className = "delete-btn";
+            deleteButton.textContent = "Delete";
+
+            checkbox.addEventListener("change", function () {
+                todoItem.classList.toggle(
+                    "completed",
+                    checkbox.checked
+                );
+
+                updateCount();
+
+                if (checkbox.checked) {
+                    document.getElementById("message").textContent =
+                        "Task marked as completed.";
+                } else {
+                    document.getElementById("message").textContent =
+                        "Task marked as incomplete.";
+                }
+            });
+
+            editButton.addEventListener("click", function () {
+                const updatedTask = prompt(
+                    "Edit the to-do item:",
+                    taskSpan.textContent
+                );
+
+                if (updatedTask !== null) {
+                    const newText = updatedTask.trim();
+
+                    if (newText !== "") {
+                        taskSpan.textContent = newText;
+
+                        document.getElementById("message").textContent =
+                            "To-do item edited successfully.";
+                    } else {
+                        document.getElementById("message").textContent =
+                            "To-do item was not changed.";
+                    }
+                }
+            });
+
+            deleteButton.addEventListener("click", function () {
+                todoItem.remove();
+
+                taskCount--;
+
+                updateCount();
+
+                document.getElementById("message").textContent =
+                    "To-do item deleted successfully.";
+
+                if (taskCount === 0) {
+                    const message = document.createElement("div");
+                    message.id = "emptyMessage";
+                    message.className = "empty-message";
+                    message.textContent =
+                        "No to-do items added yet.";
+
+                    todoList.appendChild(message);
+                }
+            });
+
+            todoItem.appendChild(checkbox);
+            todoItem.appendChild(taskSpan);
+            todoItem.appendChild(editButton);
+            todoItem.appendChild(deleteButton);
+
+            todoList.appendChild(todoItem);
+
+            input.value = "";
+
+            updateCount();
+
+            document.getElementById("message").textContent =
+                "To-do item added successfully.";
+
+            input.focus();
+        }
+
+        function updateCount() {
+            const items =
+                document.querySelectorAll(".todo-item");
+
+            const completedItems =
+                document.querySelectorAll(".todo-item.completed");
+
+            document.getElementById("totalCount").textContent =
+                items.length;
+
+            document.getElementById("completedCount").textContent =
+                completedItems.length;
+        }
+
+        document.getElementById("taskInput").addEventListener(
+            "keydown",
+            function (event) {
+                if (event.key === "Enter") {
+                    addTask();
+                }
+            }
+        );
+    </script>
+
+</body>
+</html>

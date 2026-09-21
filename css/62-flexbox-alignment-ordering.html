@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flexbox Alignment and Ordering | Practical 62</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: #f1f5f9;
+            color: #334155;
+            line-height: 1.6;
+        }
+
+        header {
+            background: #0f172a;
+            color: white;
+            padding: 18px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        nav {
+            display: flex;
+            gap: 22px;
+        }
+
+        nav a {
+            color: #cbd5e1;
+            text-decoration: none;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            color: white;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #1e3a8a, #2563eb);
+            color: white;
+            text-align: center;
+            padding: 65px 20px;
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 8px 18px;
+            border-radius: 20px;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        .hero h1 {
+            font-size: 38px;
+            margin-bottom: 10px;
+        }
+
+        .hero p {
+            font-size: 17px;
+        }
+
+        main {
+            width: 90%;
+            max-width: 1050px;
+            margin: 40px auto;
+        }
+
+        .objective,
+        .content-card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(15, 23, 42, 0.08);
+        }
+
+        .objective {
+            border-left: 5px solid #2563eb;
+            padding: 22px 25px;
+            margin-bottom: 25px;
+        }
+
+        .objective h2 {
+            color: #1e3a8a;
+            margin-bottom: 8px;
+        }
+
+        .content-card {
+            padding: 35px;
+            margin-bottom: 25px;
+        }
+
+        .content-card h2 {
+            color: #1e3a8a;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #dbeafe;
+        }
+
+        .content-card h3 {
+            color: #2563eb;
+            margin-bottom: 10px;
+        }
+
+        .content-card p {
+            margin-bottom: 12px;
+        }
+
+        /* Justify Content */
+
+        .justify-demo {
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+            background: #eff6ff;
+            padding: 25px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+
+        .justify-box {
+            background: #2563eb;
+            color: white;
+            padding: 18px 25px;
+            border-radius: 8px;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        /* Align Items */
+
+        .align-demo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            min-height: 220px;
+            background: #eff6ff;
+            padding: 25px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+
+        .align-box {
+            background: #1e3a8a;
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            font-weight: 600;
+        }
+
+        .align-box:nth-child(2) {
+            padding-top: 40px;
+            padding-bottom: 40px;
+        }
+
+        /* Align Content */
+
+        .align-content-demo {
+            display: flex;
+            flex-wrap: wrap;
+            align-content: space-between;
+            height: 300px;
+            gap: 10px;
+            background: #eff6ff;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+
+        .content-box {
+            width: 30%;
+            background: #2563eb;
+            color: white;
+            padding: 15px;
+            border-radius: 7px;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        /* Align Self */
+
+        .align-self-demo {
+            display: flex;
+            align-items: flex-start;
+            height: 220px;
+            gap: 15px;
+            background: #eff6ff;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+
+        .self-box {
+            background: #1e3a8a;
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            font-weight: 600;
+        }
+
+        .self-center {
+            align-self: center;
+        }
+
+        .self-end {
+            align-self: flex-end;
+        }
+
+        /* Ordering */
+
+        .order-demo {
+            display: flex;
+            gap: 15px;
+            background: #eff6ff;
+            padding: 25px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+
+        .order-box {
+            flex: 1;
+            background: #2563eb;
+            color: white;
+            padding: 22px;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .order-one {
+            order: 3;
+        }
+
+        .order-two {
+            order: 1;
+        }
+
+        .order-three {
+            order: 2;
+        }
+
+        /* Combined Example */
+
+        .combined-demo {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            background: #dbeafe;
+            padding: 30px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+
+        .combined-box {
+            background: white;
+            border-left: 4px solid #2563eb;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            flex: 1;
+            font-weight: 600;
+        }
+
+        .combined-box:nth-child(2) {
+            order: -1;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 22px;
+            background: #2563eb;
+            color: white;
+            text-decoration: none;
+            border-radius: 7px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background: #1e3a8a;
+            transform: translateY(-2px);
+        }
+
+        .secondary {
+            background: #0f172a;
+        }
+
+        .secondary:hover {
+            background: #1e293b;
+        }
+
+        footer {
+            background: #0f172a;
+            color: #cbd5e1;
+            text-align: center;
+            padding: 25px;
+            margin-top: 40px;
+        }
+
+        footer strong {
+            color: white;
+        }
+
+        @media (max-width: 750px) {
+            header {
+                justify-content: center;
+                gap: 15px;
+            }
+
+            nav {
+                width: 100%;
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+
+            .hero h1 {
+                font-size: 30px;
+            }
+
+            .content-card {
+                padding: 25px 20px;
+            }
+
+            .justify-demo,
+            .align-demo,
+            .order-demo,
+            .combined-demo {
+                flex-direction: column;
+            }
+
+            .align-content-demo {
+                height: auto;
+            }
+
+            .content-box {
+                width: 100%;
+            }
+
+            .align-self-demo {
+                height: auto;
+                flex-direction: column;
+            }
+
+            .self-center,
+            .self-end {
+                align-self: auto;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="logo">CSS Learning Hub</div>
+
+        <nav>
+            <a href="../index.html">Home</a>
+            <a href="index.html">CSS Programs</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="badge">CSS PRACTICAL 62</div>
+
+        <h1>Flexbox Alignment and Ordering</h1>
+
+        <p>
+            Demonstrating Flexbox alignment and ordering properties
+        </p>
+    </section>
+
+    <main>
+
+        <section class="objective">
+            <h2>Objective</h2>
+
+            <p>
+                To demonstrate Flexbox alignment and ordering properties such as
+                <strong>justify-content</strong>, <strong>align-items</strong>,
+                <strong>align-content</strong>, <strong>align-self</strong>,
+                and <strong>order</strong>.
+            </p>
+        </section>
+
+        <section class="content-card">
+            <h2>Justify-Content</h2>
+
+            <p>
+                The <strong>justify-content</strong> property controls the
+                alignment of Flexbox items along the main axis.
+            </p>
+
+            <div class="justify-demo">
+                <div class="justify-box">Item 1</div>
+                <div class="justify-box">Item 2</div>
+                <div class="justify-box">Item 3</div>
+            </div>
+        </section>
+
+        <section class="content-card">
+            <h2>Align-Items</h2>
+
+            <p>
+                The <strong>align-items</strong> property controls the
+                alignment of flex items along the cross axis.
+            </p>
+
+            <div class="align-demo">
+                <div class="align-box">Item 1</div>
+                <div class="align-box">Item 2</div>
+                <div class="align-box">Item 3</div>
+            </div>
+        </section>
+
+        <section class="content-card">
+            <h2>Align-Content</h2>
+
+            <p>
+                The <strong>align-content</strong> property controls the
+                spacing between multiple flex lines when wrapping occurs.
+            </p>
+
+            <div class="align-content-demo">
+                <div class="content-box">Item 1</div>
+                <div class="content-box">Item 2</div>
+                <div class="content-box">Item 3</div>
+                <div class="content-box">Item 4</div>
+                <div class="content-box">Item 5</div>
+                <div class="content-box">Item 6</div>
+            </div>
+        </section>
+
+        <section class="content-card">
+            <h2>Align-Self</h2>
+
+            <p>
+                The <strong>align-self</strong> property allows an individual
+                flex item to override the alignment set by
+                <strong>align-items</strong>.
+            </p>
+
+            <div class="align-self-demo">
+                <div class="self-box">Default</div>
+                <div class="self-box self-center">Center</div>
+                <div class="self-box self-end">End</div>
+            </div>
+        </section>
+
+        <section class="content-card">
+            <h2>Flexbox Ordering</h2>
+
+            <p>
+                The <strong>order</strong> property changes the visual order
+                of Flexbox items without changing their HTML structure.
+            </p>
+
+            <div class="order-demo">
+                <div class="order-box order-one">
+                    Item 1
+                    <br>
+                    order: 3
+                </div>
+
+                <div class="order-box order-two">
+                    Item 2
+                    <br>
+                    order: 1
+                </div>
+
+                <div class="order-box order-three">
+                    Item 3
+                    <br>
+                    order: 2
+                </div>
+            </div>
+        </section>
+
+        <section class="content-card">
+            <h2>Combined Alignment and Ordering</h2>
+
+            <p>
+                Flexbox properties can be combined to control both the
+                alignment and visual order of elements.
+            </p>
+
+            <div class="combined-demo">
+                <div class="combined-box">
+                    Item A
+                </div>
+
+                <div class="combined-box">
+                    Item B
+                    <br>
+                    order: -1
+                </div>
+
+                <div class="combined-box">
+                    Item C
+                </div>
+            </div>
+        </section>
+
+        <div class="buttons">
+            <a href="css-61.html" class="btn secondary">
+                ← Previous Practical
+            </a>
+
+            <a href="index.html" class="btn">
+                CSS Programs
+            </a>
+
+            <a href="../index.html" class="btn secondary">
+                Dashboard
+            </a>
+        </div>
+
+    </main>
+
+    <footer>
+        <p>
+            <strong>CSS Practical 62</strong> |
+            Flexbox Alignment and Ordering
+        </p>
+
+        <p>
+            Designed using HTML5 and CSS3
+        </p>
+    </footer>
+
+</body>
+</html>

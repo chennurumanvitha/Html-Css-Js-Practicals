@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Practical 20 - Date and Math Objects</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: #f1f5f9;
+            color: #334155;
+            line-height: 1.6;
+        }
+
+        header {
+            background: #0f172a;
+            padding: 18px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: white;
+            font-size: 22px;
+            font-weight: 700;
+        }
+
+        nav a {
+            color: #cbd5e1;
+            text-decoration: none;
+            margin-left: 22px;
+            font-size: 15px;
+        }
+
+        nav a:hover {
+            color: white;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #1e3a8a, #2563eb);
+            color: white;
+            text-align: center;
+            padding: 65px 20px;
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.18);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        .hero h1 {
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+
+        .hero p {
+            font-size: 17px;
+            opacity: 0.9;
+        }
+
+        main {
+            width: 90%;
+            max-width: 1050px;
+            margin: 40px auto;
+        }
+
+        .card {
+            background: white;
+            padding: 28px;
+            margin-bottom: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(15, 23, 42, 0.08);
+        }
+
+        .objective {
+            border-left: 5px solid #2563eb;
+        }
+
+        .card h2 {
+            color: #1e3a8a;
+            margin-bottom: 18px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e2e8f0;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 7px;
+            color: #334155;
+        }
+
+        input {
+            width: 100%;
+            padding: 11px 13px;
+            border: 1px solid #cbd5e1;
+            border-radius: 7px;
+            font-size: 15px;
+            outline: none;
+        }
+
+        input:focus {
+            border-color: #2563eb;
+        }
+
+        .btn {
+            display: inline-block;
+            background: #2563eb;
+            color: white;
+            text-decoration: none;
+            border: none;
+            padding: 11px 20px;
+            border-radius: 7px;
+            font-size: 15px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .btn:hover {
+            background: #1d4ed8;
+        }
+
+        .output {
+            background: #eff6ff;
+            border: 2px dashed #93c5fd;
+            border-radius: 8px;
+            padding: 20px;
+        }
+
+        .output p {
+            margin: 8px 0;
+            font-weight: 500;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+
+        .secondary {
+            background: #475569;
+        }
+
+        .secondary:hover {
+            background: #334155;
+        }
+
+        footer {
+            background: #0f172a;
+            color: #cbd5e1;
+            text-align: center;
+            padding: 22px;
+            margin-top: 50px;
+        }
+
+        @media (max-width: 750px) {
+            header {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            nav a {
+                margin: 0 8px;
+            }
+
+            .hero h1 {
+                font-size: 28px;
+            }
+
+            .card {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="logo">JavaScript Practical</div>
+
+        <nav>
+            <a href="../index.html">Home</a>
+            <a href="index.html">JavaScript Programs</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="badge">JavaScript Practical 20</div>
+        <h1>Date and Math Objects</h1>
+        <p>Demonstrate the use of JavaScript Date and Math objects</p>
+    </section>
+
+    <main>
+
+        <section class="card objective">
+            <h2>Objective</h2>
+            <p>
+                Write a JavaScript program demonstrating the use of Date and Math objects.
+            </p>
+        </section>
+
+        <section class="card">
+            <h2>Demonstration</h2>
+
+            <div class="form-group">
+                <label for="number">Enter a Number</label>
+                <input type="number" id="number" value="25">
+            </div>
+
+            <button class="btn" onclick="demonstrateObjects()">
+                Demonstrate Date & Math
+            </button>
+        </section>
+
+        <section class="card">
+            <h2>Output</h2>
+
+            <div class="output">
+                <p id="date"></p>
+                <p id="year"></p>
+                <p id="squareRoot"></p>
+                <p id="power"></p>
+                <p id="round"></p>
+                <p id="random"></p>
+            </div>
+        </section>
+
+        <div class="buttons">
+            <a href="javascript-19.html" class="btn">← Previous Practical</a>
+            <a href="index.html" class="btn secondary">JavaScript Programs</a>
+            <a href="../index.html" class="btn">Dashboard</a>
+        </div>
+
+    </main>
+
+    <footer>
+        <p>JavaScript Practical Programs</p>
+    </footer>
+
+    <script>
+        function demonstrateObjects() {
+            const number = Number(document.getElementById("number").value);
+
+            const currentDate = new Date();
+
+            document.getElementById("date").textContent =
+                "Current Date and Time = " + currentDate.toLocaleString();
+
+            document.getElementById("year").textContent =
+                "Current Year = " + currentDate.getFullYear();
+
+            document.getElementById("squareRoot").textContent =
+                "Square Root = " + Math.sqrt(number);
+
+            document.getElementById("power").textContent =
+                "Number Squared = " + Math.pow(number, 2);
+
+            document.getElementById("round").textContent =
+                "Rounded Value = " + Math.round(number);
+
+            document.getElementById("random").textContent =
+                "Random Number = " + Math.random().toFixed(2);
+        }
+
+        demonstrateObjects();
+    </script>
+
+</body>
+</html>

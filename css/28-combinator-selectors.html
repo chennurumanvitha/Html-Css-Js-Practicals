@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Combinators | Practical 28</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: #f1f5f9;
+            color: #334155;
+            line-height: 1.6;
+        }
+
+        header {
+            background: #0f172a;
+            color: white;
+            padding: 18px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        nav a {
+            color: #cbd5e1;
+            text-decoration: none;
+            margin-left: 25px;
+            font-weight: 500;
+        }
+
+        nav a:hover {
+            color: white;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #1e3a8a, #2563eb);
+            color: white;
+            text-align: center;
+            padding: 65px 20px;
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 7px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+        }
+
+        .hero h1 {
+            font-size: 42px;
+            margin-bottom: 10px;
+        }
+
+        .hero p {
+            font-size: 17px;
+            color: #dbeafe;
+        }
+
+        main {
+            width: 90%;
+            max-width: 1050px;
+            margin: 40px auto;
+        }
+
+        .objective,
+        .content-card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(15, 23, 42, 0.08);
+        }
+
+        .objective {
+            border-left: 5px solid #2563eb;
+            padding: 22px 25px;
+            margin-bottom: 25px;
+        }
+
+        .objective h2 {
+            color: #1e3a8a;
+            margin-bottom: 8px;
+        }
+
+        .content-card {
+            padding: 35px;
+            margin-bottom: 25px;
+        }
+
+        .content-card h2 {
+            color: #1e3a8a;
+            border-bottom: 2px solid #dbeafe;
+            padding-bottom: 10px;
+            margin-bottom: 25px;
+        }
+
+        .combinator-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .combinator-card {
+            background: #f8fafc;
+            border-left: 4px solid #2563eb;
+            border-radius: 10px;
+            padding: 22px;
+            transition: 0.3s;
+        }
+
+        .combinator-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(15, 23, 42, 0.1);
+        }
+
+        .combinator-card h3 {
+            color: #1e3a8a;
+            margin-bottom: 8px;
+        }
+
+        .selector {
+            display: inline-block;
+            background: #dbeafe;
+            color: #1e3a8a;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-family: Consolas, monospace;
+            font-weight: 600;
+            margin: 8px 0;
+        }
+
+        .demo-box {
+            background: #f8fafc;
+            border: 2px solid #cbd5e1;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 15px;
+        }
+
+        .demo-box h4 {
+            color: #1e3a8a;
+            margin-bottom: 10px;
+        }
+
+        /* Descendant combinator */
+        .descendant-demo p {
+            color: #2563eb;
+            font-weight: 600;
+        }
+
+        /* Child combinator */
+        .child-demo > p {
+            color: #7c3aed;
+            font-weight: 700;
+        }
+
+        /* Adjacent sibling combinator */
+        .adjacent-demo h4 + p {
+            color: #059669;
+            font-weight: 700;
+        }
+
+        /* General sibling combinator */
+        .general-demo h4 ~ p {
+            color: #dc2626;
+            font-weight: 700;
+        }
+
+        .code-box {
+            background: #0f172a;
+            color: #e2e8f0;
+            padding: 20px;
+            border-radius: 10px;
+            overflow-x: auto;
+            margin-top: 20px;
+        }
+
+        .code-box code {
+            font-family: Consolas, "Courier New", monospace;
+            font-size: 14px;
+        }
+
+        .buttons {
+            text-align: center;
+            margin: 35px 0;
+        }
+
+        .btn {
+            display: inline-block;
+            background: #2563eb;
+            color: white;
+            text-decoration: none;
+            padding: 11px 22px;
+            border-radius: 7px;
+            margin: 5px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background: #1e3a8a;
+            transform: translateY(-2px);
+        }
+
+        .secondary {
+            background: #475569;
+        }
+
+        .secondary:hover {
+            background: #334155;
+        }
+
+        footer {
+            background: #0f172a;
+            color: #cbd5e1;
+            text-align: center;
+            padding: 25px;
+            margin-top: 40px;
+        }
+
+        footer strong {
+            color: white;
+        }
+
+        @media (max-width: 750px) {
+            header {
+                flex-direction: column;
+                gap: 12px;
+                text-align: center;
+            }
+
+            nav a {
+                margin: 0 8px;
+            }
+
+            .hero h1 {
+                font-size: 32px;
+            }
+
+            .combinator-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .content-card {
+                padding: 25px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="logo">Web Practicals</div>
+
+        <nav>
+            <a href="../index.html">Home</a>
+            <a href="index.html">CSS Programs</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="badge">CSS PRACTICAL 28</div>
+        <h1>CSS Combinator Selectors</h1>
+        <p>Demonstrating descendant, child, adjacent sibling, and general sibling selectors</p>
+    </section>
+
+    <main>
+
+        <section class="objective">
+            <h2>Objective</h2>
+            <p>
+                To create a webpage demonstrating CSS combinator selectors
+                including descendant, child, adjacent sibling, and general sibling selectors.
+            </p>
+        </section>
+
+        <section class="content-card">
+            <h2>Combinator Selectors</h2>
+
+            <div class="combinator-grid">
+
+                <div class="combinator-card">
+                    <h3>1. Descendant Selector</h3>
+                    <span class="selector">.parent p</span>
+                    <p>
+                        Selects all matching elements that are anywhere inside
+                        the specified parent element.
+                    </p>
+
+                    <div class="demo-box descendant-demo">
+                        <h4>Descendant Example</h4>
+                        <div>
+                            <p>This paragraph is inside a descendant element.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="combinator-card">
+                    <h3>2. Child Selector</h3>
+                    <span class="selector">.parent &gt; p</span>
+                    <p>
+                        Selects only the elements that are direct children
+                        of the specified parent.
+                    </p>
+
+                    <div class="demo-box child-demo">
+                        <h4>Child Example</h4>
+                        <p>This paragraph is a direct child.</p>
+                        <div>
+                            <p>This paragraph is a nested child.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="combinator-card">
+                    <h3>3. Adjacent Sibling</h3>
+                    <span class="selector">h4 + p</span>
+                    <p>
+                        Selects the first matching sibling element that
+                        immediately follows another element.
+                    </p>
+
+                    <div class="demo-box adjacent-demo">
+                        <h4>Adjacent Sibling Example</h4>
+                        <p>This paragraph immediately follows the heading.</p>
+                        <p>This paragraph is not immediately after the heading.</p>
+                    </div>
+                </div>
+
+                <div class="combinator-card">
+                    <h3>4. General Sibling</h3>
+                    <span class="selector">h4 ~ p</span>
+                    <p>
+                        Selects all matching sibling elements that appear
+                        after the specified element.
+                    </p>
+
+                    <div class="demo-box general-demo">
+                        <h4>General Sibling Example</h4>
+                        <p>This paragraph is a sibling after the heading.</p>
+                        <div>Another element between the siblings.</div>
+                        <p>This paragraph is also selected.</p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <section class="content-card">
+            <h2>CSS Combinator Examples</h2>
+
+            <div class="code-box">
+                <code>
+                    /* Descendant Selector */<br>
+                    .parent p { color: blue; }<br><br>
+
+                    /* Child Selector */<br>
+                    .parent &gt; p { color: purple; }<br><br>
+
+                    /* Adjacent Sibling Selector */<br>
+                    h4 + p { color: green; }<br><br>
+
+                    /* General Sibling Selector */<br>
+                    h4 ~ p { color: red; }
+                </code>
+            </div>
+        </section>
+
+        <div class="buttons">
+            <a href="css-27.html" class="btn">← Previous Practical</a>
+            <a href="index.html" class="btn secondary">CSS Programs</a>
+            <a href="../index.html" class="btn secondary">Dashboard</a>
+        </div>
+
+    </main>
+
+    <footer>
+        <p>
+            <strong>Web Practicals</strong> | CSS Practical 28
+        </p>
+        <p>Designed for learning and practical demonstration of CSS combinators.</p>
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,1114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Restaurant Webpage | CSS Practical 56</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: #f1f5f9;
+            color: #334155;
+            line-height: 1.6;
+        }
+
+        /* Header */
+        header {
+            background: #0f172a;
+            color: white;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 3px 12px rgba(15, 23, 42, 0.18);
+        }
+
+        .header-container {
+            width: 90%;
+            max-width: 1100px;
+            min-height: 72px;
+            margin: auto;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .restaurant-logo {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: #2563eb;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            color: white;
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        .restaurant-name {
+            font-size: 19px;
+            font-weight: 700;
+        }
+
+        .restaurant-name span {
+            display: block;
+            color: #94a3b8;
+            font-size: 11px;
+            font-weight: 400;
+        }
+
+        nav {
+            display: flex;
+            gap: 20px;
+        }
+
+        nav a {
+            color: #cbd5e1;
+            text-decoration: none;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            color: white;
+        }
+
+        /* Hero */
+        .hero {
+            min-height: 500px;
+
+            background:
+                linear-gradient(
+                    rgba(15, 23, 42, 0.70),
+                    rgba(30, 58, 138, 0.78)
+                ),
+                url("https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1600&q=80")
+                center/cover no-repeat;
+
+            color: white;
+
+            display: flex;
+            align-items: center;
+            text-align: center;
+        }
+
+        .hero-content {
+            width: 90%;
+            max-width: 850px;
+            margin: auto;
+            padding: 60px 20px;
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.35);
+
+            padding: 7px 16px;
+            border-radius: 20px;
+
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+
+            margin-bottom: 18px;
+        }
+
+        .hero h1 {
+            font-size: 44px;
+            margin-bottom: 12px;
+        }
+
+        .hero h1 span {
+            color: #bfdbfe;
+        }
+
+        .hero p {
+            max-width: 700px;
+            margin: auto;
+
+            color: #dbeafe;
+            font-size: 17px;
+        }
+
+        .hero-buttons {
+            margin-top: 25px;
+        }
+
+        .hero-btn {
+            display: inline-block;
+
+            background: white;
+            color: #1e3a8a;
+
+            text-decoration: none;
+
+            padding: 12px 22px;
+            border-radius: 7px;
+
+            margin: 5px;
+            font-weight: 600;
+
+            transition: 0.3s;
+        }
+
+        .hero-btn:hover {
+            background: #dbeafe;
+            transform: translateY(-2px);
+        }
+
+        .hero-btn.outline {
+            background: transparent;
+            color: white;
+            border: 1px solid white;
+        }
+
+        .hero-btn.outline:hover {
+            background: white;
+            color: #1e3a8a;
+        }
+
+        /* Main */
+        main {
+            width: 90%;
+            max-width: 1100px;
+            margin: 40px auto;
+        }
+
+        .objective,
+        .content-card {
+            background: white;
+            border-radius: 12px;
+
+            box-shadow:
+                0 4px 15px rgba(15, 23, 42, 0.08);
+        }
+
+        .objective {
+            border-left: 5px solid #2563eb;
+
+            padding: 22px 25px;
+            margin-bottom: 25px;
+        }
+
+        .objective h2 {
+            color: #1e3a8a;
+            margin-bottom: 8px;
+        }
+
+        .content-card {
+            padding: 35px;
+            margin-bottom: 25px;
+        }
+
+        .content-card h2 {
+            color: #1e3a8a;
+
+            margin-bottom: 10px;
+            padding-bottom: 10px;
+
+            border-bottom: 2px solid #dbeafe;
+        }
+
+        .section-intro {
+            color: #64748b;
+            margin-bottom: 25px;
+        }
+
+        /* About */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+
+            align-items: center;
+        }
+
+        .about-image {
+            width: 100%;
+            height: 300px;
+
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        .about-text h3 {
+            color: #1e3a8a;
+            margin-bottom: 10px;
+        }
+
+        .about-text p {
+            margin-bottom: 12px;
+        }
+
+        /* Menu */
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .menu-card {
+            background: #f8fafc;
+
+            border-left: 4px solid #2563eb;
+            border-radius: 10px;
+
+            overflow: hidden;
+
+            transition: 0.3s;
+        }
+
+        .menu-card:hover {
+            transform: translateY(-5px);
+
+            box-shadow:
+                0 8px 20px rgba(15, 23, 42, 0.12);
+        }
+
+        .menu-card img {
+            width: 100%;
+            height: 180px;
+
+            object-fit: cover;
+            display: block;
+        }
+
+        .menu-content {
+            padding: 18px;
+        }
+
+        .menu-content h3 {
+            color: #1e3a8a;
+            margin-bottom: 6px;
+        }
+
+        .menu-content p {
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        .price {
+            color: #2563eb;
+            font-size: 17px;
+            font-weight: 700;
+        }
+
+        /* Restaurant Features */
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+        }
+
+        .feature-card {
+            background: #f8fafc;
+
+            border-left: 4px solid #2563eb;
+            border-radius: 10px;
+
+            padding: 20px;
+        }
+
+        .feature-card h3 {
+            color: #1e3a8a;
+            margin-bottom: 8px;
+        }
+
+        .feature-card p {
+            font-size: 14px;
+        }
+
+        /* Opening Hours */
+        .hours-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+        }
+
+        .hours-card {
+            background: #f8fafc;
+
+            border-left: 4px solid #2563eb;
+            border-radius: 10px;
+
+            padding: 25px;
+        }
+
+        .hours-card h3 {
+            color: #1e3a8a;
+            margin-bottom: 12px;
+        }
+
+        .hours-list {
+            list-style: none;
+        }
+
+        .hours-list li {
+            display: flex;
+            justify-content: space-between;
+
+            padding: 8px 0;
+            border-bottom: 1px solid #e2e8f0;
+
+            font-size: 14px;
+        }
+
+        .hours-list li:last-child {
+            border-bottom: none;
+        }
+
+        .day {
+            font-weight: 600;
+            color: #1e3a8a;
+        }
+
+        /* Contact */
+        .contact-section {
+            background: linear-gradient(
+                135deg,
+                #1e3a8a,
+                #2563eb
+            );
+
+            color: white;
+            text-align: center;
+
+            padding: 40px 25px;
+            border-radius: 12px;
+
+            margin-bottom: 25px;
+        }
+
+        .contact-section h2 {
+            margin-bottom: 10px;
+        }
+
+        .contact-section p {
+            color: #dbeafe;
+            margin-bottom: 8px;
+        }
+
+        .contact-section a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        /* Navigation Buttons */
+        .buttons {
+            text-align: center;
+            margin: 35px 0;
+        }
+
+        .btn {
+            display: inline-block;
+
+            background: #2563eb;
+            color: white;
+
+            text-decoration: none;
+
+            padding: 11px 20px;
+            border-radius: 7px;
+
+            margin: 5px;
+            font-weight: 600;
+
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background: #1e3a8a;
+            transform: translateY(-2px);
+        }
+
+        .btn.secondary {
+            background: #e2e8f0;
+            color: #1e3a8a;
+        }
+
+        .btn.secondary:hover {
+            background: #cbd5e1;
+        }
+
+        /* Footer */
+        footer {
+            background: #0f172a;
+            color: #94a3b8;
+
+            padding: 35px 20px 20px;
+        }
+
+        .footer-container {
+            width: 90%;
+            max-width: 1100px;
+            margin: auto;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+
+            gap: 35px;
+            padding-bottom: 25px;
+        }
+
+        .footer-section h3 {
+            color: white;
+            margin-bottom: 10px;
+        }
+
+        .footer-section p {
+            font-size: 14px;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 6px;
+        }
+
+        .footer-links a {
+            color: #94a3b8;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #334155;
+
+            padding-top: 18px;
+            text-align: center;
+
+            font-size: 13px;
+        }
+
+        .footer-bottom strong {
+            color: white;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 900px) {
+
+            .menu-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .feature-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hours-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 750px) {
+
+            .header-container {
+                flex-direction: column;
+                padding: 15px 0;
+                gap: 12px;
+            }
+
+            nav {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 12px;
+            }
+
+            .hero {
+                min-height: 450px;
+            }
+
+            .hero h1 {
+                font-size: 32px;
+            }
+
+            .hero p {
+                font-size: 15px;
+            }
+
+            .content-card {
+                padding: 25px 20px;
+            }
+
+            .menu-grid,
+            .feature-grid,
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .menu-card img {
+                height: 210px;
+            }
+
+            .about-image {
+                height: 230px;
+            }
+
+            .footer-section {
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header>
+
+        <div class="header-container">
+
+            <div class="logo-area">
+
+                <div class="restaurant-logo">
+                    R
+                </div>
+
+                <div class="restaurant-name">
+                    Royal Taste
+                    <span>Restaurant & Café</span>
+                </div>
+
+            </div>
+
+            <nav>
+                <a href="#home">Home</a>
+                <a href="#about">About</a>
+                <a href="#menu">Menu</a>
+                <a href="#facilities">Features</a>
+                <a href="#contact">Contact</a>
+            </nav>
+
+        </div>
+
+    </header>
+
+
+    <!-- Hero -->
+    <section class="hero" id="home">
+
+        <div class="hero-content">
+
+            <span class="badge">
+                WELCOME TO ROYAL TASTE
+            </span>
+
+            <h1>
+                Fresh Food. <span>Great Taste.</span>
+            </h1>
+
+            <p>
+                Enjoy delicious dishes prepared with fresh
+                ingredients in a comfortable and welcoming
+                dining environment.
+            </p>
+
+            <div class="hero-buttons">
+
+                <a href="#menu" class="hero-btn">
+                    View Our Menu
+                </a>
+
+                <a href="#contact" class="hero-btn outline">
+                    Contact Us
+                </a>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <main>
+
+        <!-- Objective -->
+        <section class="objective">
+
+            <h2>Objective</h2>
+
+            <p>
+                To create a restaurant webpage using HTML5 and
+                CSS3 with a responsive layout, attractive food
+                images, menu cards, restaurant information,
+                opening hours, and contact details.
+            </p>
+
+        </section>
+
+
+        <!-- About -->
+        <section class="content-card" id="about">
+
+            <h2>About Our Restaurant</h2>
+
+            <div class="about-grid">
+
+                <img
+                    class="about-image"
+                    src="https://images.unsplash.com/photo-1515003197210-e0cd71810b5f?auto=format&fit=crop&w=1000&q=80"
+                    alt="Restaurant dining area"
+                >
+
+                <div class="about-text">
+
+                    <h3>A Place for Good Food</h3>
+
+                    <p>
+                        Royal Taste is a modern restaurant offering
+                        a variety of delicious dishes prepared with
+                        quality ingredients.
+                    </p>
+
+                    <p>
+                        Our goal is to provide guests with great food,
+                        friendly service, and a comfortable atmosphere
+                        for family and friends.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- Menu -->
+        <section class="content-card" id="menu">
+
+            <h2>Our Popular Menu</h2>
+
+            <p class="section-intro">
+                Explore some of our popular dishes prepared
+                especially for our guests.
+            </p>
+
+            <div class="menu-grid">
+
+                <article class="menu-card">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=800&q=80"
+                        alt="Pizza"
+                    >
+
+                    <div class="menu-content">
+
+                        <h3>Classic Pizza</h3>
+
+                        <p>
+                            Freshly baked pizza with vegetables,
+                            cheese, and delicious toppings.
+                        </p>
+
+                        <span class="price">₹299</span>
+
+                    </div>
+
+                </article>
+
+
+                <article class="menu-card">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=800&q=80"
+                        alt="Burger"
+                    >
+
+                    <div class="menu-content">
+
+                        <h3>Classic Burger</h3>
+
+                        <p>
+                            A tasty burger served with fresh
+                            vegetables and crispy fries.
+                        </p>
+
+                        <span class="price">₹249</span>
+
+                    </div>
+
+                </article>
+
+
+                <article class="menu-card">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1551183053-bf91a1d81141?auto=format&fit=crop&w=800&q=80"
+                        alt="Pasta"
+                    >
+
+                    <div class="menu-content">
+
+                        <h3>Creamy Pasta</h3>
+
+                        <p>
+                            Delicious pasta prepared with creamy
+                            sauce, herbs, and fresh ingredients.
+                        </p>
+
+                        <span class="price">₹279</span>
+
+                    </div>
+
+                </article>
+
+
+                <article class="menu-card">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=800&q=80"
+                        alt="Indian food"
+                    >
+
+                    <div class="menu-content">
+
+                        <h3>Indian Special</h3>
+
+                        <p>
+                            Traditional Indian flavours prepared
+                            with aromatic spices and fresh ingredients.
+                        </p>
+
+                        <span class="price">₹299</span>
+
+                    </div>
+
+                </article>
+
+
+                <article class="menu-card">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1551024506-0bccd828d307?auto=format&fit=crop&w=800&q=80"
+                        alt="Dessert"
+                    >
+
+                    <div class="menu-content">
+
+                        <h3>Chocolate Dessert</h3>
+
+                        <p>
+                            A sweet and delicious chocolate dessert
+                            to complete your meal.
+                        </p>
+
+                        <span class="price">₹179</span>
+
+                    </div>
+
+                </article>
+
+
+                <article class="menu-card">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1544145945-f90425340c7e?auto=format&fit=crop&w=800&q=80"
+                        alt="Fresh beverage"
+                    >
+
+                    <div class="menu-content">
+
+                        <h3>Fresh Beverage</h3>
+
+                        <p>
+                            Refreshing beverages prepared with
+                            fresh fruits and quality ingredients.
+                        </p>
+
+                        <span class="price">₹129</span>
+
+                    </div>
+
+                </article>
+
+            </div>
+
+        </section>
+
+
+        <!-- Features -->
+        <section class="content-card" id="facilities">
+
+            <h2>Why Choose Us?</h2>
+
+            <div class="feature-grid">
+
+                <div class="feature-card">
+
+                    <h3>Fresh Ingredients</h3>
+
+                    <p>
+                        We use fresh and quality ingredients
+                        to prepare our dishes.
+                    </p>
+
+                </div>
+
+
+                <div class="feature-card">
+
+                    <h3>Comfortable Dining</h3>
+
+                    <p>
+                        Enjoy your meal in a clean, comfortable,
+                        and welcoming environment.
+                    </p>
+
+                </div>
+
+
+                <div class="feature-card">
+
+                    <h3>Friendly Service</h3>
+
+                    <p>
+                        Our team provides friendly and helpful
+                        service to every guest.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- Opening Hours -->
+        <section class="content-card">
+
+            <h2>Opening Hours</h2>
+
+            <div class="hours-grid">
+
+                <div class="hours-card">
+
+                    <h3>Restaurant Hours</h3>
+
+                    <ul class="hours-list">
+
+                        <li>
+                            <span class="day">Monday</span>
+                            <span>11:00 AM - 10:00 PM</span>
+                        </li>
+
+                        <li>
+                            <span class="day">Tuesday</span>
+                            <span>11:00 AM - 10:00 PM</span>
+                        </li>
+
+                        <li>
+                            <span class="day">Wednesday</span>
+                            <span>11:00 AM - 10:00 PM</span>
+                        </li>
+
+                        <li>
+                            <span class="day">Thursday</span>
+                            <span>11:00 AM - 10:00 PM</span>
+                        </li>
+
+                        <li>
+                            <span class="day">Friday</span>
+                            <span>11:00 AM - 10:30 PM</span>
+                        </li>
+
+                    </ul>
+
+                </div>
+
+
+                <div class="hours-card">
+
+                    <h3>Weekend Hours</h3>
+
+                    <ul class="hours-list">
+
+                        <li>
+                            <span class="day">Saturday</span>
+                            <span>10:00 AM - 11:00 PM</span>
+                        </li>
+
+                        <li>
+                            <span class="day">Sunday</span>
+                            <span>10:00 AM - 10:00 PM</span>
+                        </li>
+
+                    </ul>
+
+                    <p style="margin-top: 18px;">
+                        We welcome families, friends, and
+                        food lovers throughout the week.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- Contact -->
+        <section class="contact-section" id="contact">
+
+            <h2>Visit Royal Taste</h2>
+
+            <p>
+                Chennai, Tamil Nadu, India
+            </p>
+
+            <p>
+                Phone: +91 98765 43210
+            </p>
+
+            <p>
+                Email:
+                <a href="mailto:info@royaltaste.example">
+                    info@royaltaste.example
+                </a>
+            </p>
+
+        </section>
+
+
+        <!-- Navigation -->
+        <div class="buttons">
+
+            <a href="css-55.html" class="btn secondary">
+                ← Previous Practical
+            </a>
+
+            <a href="index.html" class="btn">
+                CSS Programs
+            </a>
+
+            <a href="../index.html" class="btn">
+                Dashboard
+            </a>
+
+        </div>
+
+    </main>
+
+
+    <!-- Footer -->
+    <footer>
+
+        <div class="footer-container">
+
+            <div class="footer-grid">
+
+                <div class="footer-section">
+
+                    <h3>Royal Taste</h3>
+
+                    <p>
+                        A responsive restaurant webpage created
+                        using HTML5 and CSS3 for academic practical
+                        demonstration.
+                    </p>
+
+                </div>
+
+
+                <div class="footer-section">
+
+                    <h3>Quick Links</h3>
+
+                    <ul class="footer-links">
+
+                        <li>
+                            <a href="#home">Home</a>
+                        </li>
+
+                        <li>
+                            <a href="#about">About</a>
+                        </li>
+
+                        <li>
+                            <a href="#menu">Menu</a>
+                        </li>
+
+                        <li>
+                            <a href="#contact">Contact</a>
+                        </li>
+
+                    </ul>
+
+                </div>
+
+
+                <div class="footer-section">
+
+                    <h3>Contact</h3>
+
+                    <p>
+                        Chennai, Tamil Nadu, India
+                    </p>
+
+                    <p>
+                        +91 98765 43210
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="footer-bottom">
+
+                <p>
+                    © 2026 <strong>CSS Practical 56</strong>.
+                    All Rights Reserved.
+                </p>
+
+                <p>
+                    Created using HTML5 and CSS3
+                </p>
+
+            </div>
+
+        </div>
+
+    </footer>
+
+</body>
+</html>

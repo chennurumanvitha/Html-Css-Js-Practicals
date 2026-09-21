@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Practical 45 - Interactive Webpage</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: #f1f5f9;
+            color: #334155;
+            line-height: 1.6;
+            transition: 0.3s;
+        }
+
+        header {
+            background: #0f172a;
+            padding: 18px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: white;
+            font-size: 22px;
+            font-weight: 700;
+        }
+
+        nav a {
+            color: #cbd5e1;
+            text-decoration: none;
+            margin-left: 25px;
+            font-size: 15px;
+        }
+
+        nav a:hover {
+            color: white;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #1e3a8a, #2563eb);
+            color: white;
+            text-align: center;
+            padding: 65px 20px;
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 7px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        .hero h1 {
+            font-size: 38px;
+            margin-bottom: 10px;
+        }
+
+        .hero p {
+            font-size: 17px;
+            color: #dbeafe;
+        }
+
+        main {
+            width: 90%;
+            max-width: 1050px;
+            margin: 40px auto;
+        }
+
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 28px;
+            margin-bottom: 25px;
+            box-shadow: 0 5px 18px rgba(15, 23, 42, 0.08);
+            transition: 0.3s;
+        }
+
+        .objective {
+            border-left: 5px solid #2563eb;
+        }
+
+        .objective h2,
+        .card h2 {
+            color: #1e3a8a;
+            margin-bottom: 15px;
+        }
+
+        .card h2 {
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 8px;
+        }
+
+        .demo {
+            background: #eff6ff;
+            border: 2px dashed #93c5fd;
+            border-radius: 10px;
+            padding: 22px;
+            margin-top: 20px;
+        }
+
+        .clock {
+            text-align: center;
+            background: white;
+            border-radius: 10px;
+            padding: 18px;
+            margin-bottom: 20px;
+            border-left: 4px solid #2563eb;
+        }
+
+        .clock h3 {
+            color: #1e3a8a;
+            margin-bottom: 5px;
+        }
+
+        #clock {
+            font-size: 28px;
+            font-weight: 700;
+            color: #2563eb;
+        }
+
+        .controls {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin: 15px 0;
+        }
+
+        .action-btn {
+            background: #2563eb;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 7px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .action-btn:hover {
+            background: #1d4ed8;
+        }
+
+        .action-btn.secondary {
+            background: #475569;
+        }
+
+        .counter {
+            text-align: center;
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        #count {
+            display: block;
+            font-size: 42px;
+            font-weight: 700;
+            color: #1e3a8a;
+            margin-bottom: 10px;
+        }
+
+        .task-area {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .task-input {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .task-input input {
+            flex: 1;
+            padding: 11px 13px;
+            border: 1px solid #cbd5e1;
+            border-radius: 7px;
+            font-size: 15px;
+            outline: none;
+        }
+
+        .task-input input:focus {
+            border-color: #2563eb;
+        }
+
+        #taskList {
+            list-style: none;
+        }
+
+        #taskList li {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+            background: #f8fafc;
+            border-left: 4px solid #2563eb;
+            padding: 10px 12px;
+            margin: 8px 0;
+            border-radius: 6px;
+        }
+
+        .delete-btn {
+            background: #475569;
+            color: white;
+            border: none;
+            padding: 6px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .delete-btn:hover {
+            background: #334155;
+        }
+
+        .status {
+            text-align: center;
+            font-weight: 600;
+            margin-top: 15px;
+            color: #1e3a8a;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin: 35px 0;
+        }
+
+        .btn {
+            display: inline-block;
+            background: #2563eb;
+            color: white;
+            text-decoration: none;
+            padding: 11px 20px;
+            border-radius: 7px;
+            font-weight: 600;
+            transition: 0.2s;
+        }
+
+        .btn:hover {
+            background: #1d4ed8;
+            transform: translateY(-1px);
+        }
+
+        .btn.secondary {
+            background: #475569;
+        }
+
+        .btn.secondary:hover {
+            background: #334155;
+        }
+
+        footer {
+            background: #0f172a;
+            color: #cbd5e1;
+            text-align: center;
+            padding: 22px;
+            margin-top: 50px;
+            font-size: 14px;
+        }
+
+        /* Dark theme */
+        body.dark {
+            background: #111827;
+            color: #d1d5db;
+        }
+
+        body.dark .card,
+        body.dark .clock,
+        body.dark .counter,
+        body.dark .task-area,
+        body.dark .output {
+            background: #1f2937;
+        }
+
+        body.dark .demo {
+            background: #172554;
+            border-color: #3b82f6;
+        }
+
+        body.dark .card h2,
+        body.dark .objective h2,
+        body.dark .clock h3,
+        body.dark .status {
+            color: #93c5fd;
+        }
+
+        body.dark .card h2 {
+            border-color: #374151;
+        }
+
+        body.dark .task-input input {
+            background: #111827;
+            color: white;
+            border-color: #4b5563;
+        }
+
+        body.dark #taskList li {
+            background: #111827;
+        }
+
+        @media (max-width: 750px) {
+            header {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            nav a {
+                margin: 0 8px;
+            }
+
+            .hero h1 {
+                font-size: 30px;
+            }
+        }
+
+        @media (max-width: 650px) {
+            .card {
+                padding: 20px;
+            }
+
+            .demo {
+                padding: 15px;
+            }
+
+            .task-input {
+                flex-direction: column;
+            }
+
+            .hero {
+                padding: 50px 15px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="logo">JavaScript Lab</div>
+
+        <nav>
+<a href="../../index.html">Home</a>
+<a href="../index.html">JavaScript Programs</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="badge">JavaScript Practical 45</div>
+        <h1>Interactive Webpage</h1>
+        <p>Create a complete interactive webpage using HTML, CSS, and JavaScript</p>
+    </section>
+
+    <main>
+
+        <section class="card objective">
+            <h2>Objective</h2>
+            <p>
+                Create a complete interactive webpage using HTML, CSS, and JavaScript.
+            </p>
+        </section>
+
+        <section class="card">
+            <h2>Interactive Dashboard</h2>
+
+            <p>
+                This webpage combines HTML for structure, CSS for styling,
+                and JavaScript for interactive functionality.
+            </p>
+
+            <div class="demo">
+
+                <div class="clock">
+                    <h3>Live Clock</h3>
+                    <div id="clock">00:00:00</div>
+                </div>
+
+                <div class="counter">
+                    <h3>Interactive Counter</h3>
+
+                    <span id="count">0</span>
+
+                    <div class="controls">
+                        <button class="action-btn" onclick="changeCount(-1)">
+                            − Decrease
+                        </button>
+
+                        <button class="action-btn secondary" onclick="resetCount()">
+                            Reset
+                        </button>
+
+                        <button class="action-btn" onclick="changeCount(1)">
+                            + Increase
+                        </button>
+                    </div>
+                </div>
+
+                <div class="task-area">
+                    <h3>Task Manager</h3>
+
+                    <div class="task-input">
+                        <input
+                            type="text"
+                            id="taskInput"
+                            placeholder="Enter a task"
+                        >
+
+                        <button class="action-btn" onclick="addTask()">
+                            Add Task
+                        </button>
+                    </div>
+
+                    <ul id="taskList"></ul>
+                </div>
+
+                <div class="controls">
+                    <button class="action-btn secondary" onclick="toggleTheme()">
+                        Toggle Theme
+                    </button>
+                </div>
+
+                <div class="status" id="status">
+                    Interactive webpage loaded successfully.
+                </div>
+
+            </div>
+        </section>
+
+        <section class="card">
+            <h2>Result</h2>
+            <p id="result">
+                The webpage demonstrates HTML structure, CSS styling,
+                and JavaScript-based interactive features.
+            </p>
+        </section>
+
+        <div class="buttons">
+            <a href="loginvalidation.html" class="btn">← Previous Practical</a>
+            <a href="index.html" class="btn secondary">JavaScript Programs</a>
+            <a href="swapnumbers.html" class="btn">Next Practical →</a>
+        </div>
+
+    </main>
+
+    <footer>
+        <p>JavaScript Practical Lab &copy; 2026</p>
+    </footer>
+
+    <script>
+        let count = 0;
+
+        function updateClock() {
+            const now = new Date();
+
+            let hours = now.getHours();
+            let minutes = now.getMinutes();
+            let seconds = now.getSeconds();
+
+            hours = String(hours).padStart(2, "0");
+            minutes = String(minutes).padStart(2, "0");
+            seconds = String(seconds).padStart(2, "0");
+
+            document.getElementById("clock").textContent =
+                hours + ":" + minutes + ":" + seconds;
+        }
+
+        setInterval(updateClock, 1000);
+        updateClock();
+
+        function changeCount(value) {
+            count += value;
+
+            document.getElementById("count").textContent = count;
+
+            document.getElementById("status").textContent =
+                "Counter updated successfully.";
+        }
+
+        function resetCount() {
+            count = 0;
+
+            document.getElementById("count").textContent = count;
+
+            document.getElementById("status").textContent =
+                "Counter has been reset.";
+        }
+
+        function addTask() {
+            const input = document.getElementById("taskInput");
+            const taskText = input.value.trim();
+
+            if (taskText === "") {
+                document.getElementById("status").textContent =
+                    "Please enter a task.";
+                return;
+            }
+
+            const listItem = document.createElement("li");
+
+            const taskSpan = document.createElement("span");
+            taskSpan.textContent = taskText;
+
+            const deleteButton = document.createElement("button");
+            deleteButton.textContent = "Delete";
+            deleteButton.className = "delete-btn";
+
+            deleteButton.onclick = function () {
+                listItem.remove();
+
+                document.getElementById("status").textContent =
+                    "Task deleted successfully.";
+            };
+
+            listItem.appendChild(taskSpan);
+            listItem.appendChild(deleteButton);
+
+            document.getElementById("taskList").appendChild(listItem);
+
+            input.value = "";
+
+            document.getElementById("status").textContent =
+                "Task added successfully.";
+        }
+
+        function toggleTheme() {
+            document.body.classList.toggle("dark");
+
+            if (document.body.classList.contains("dark")) {
+                document.getElementById("status").textContent =
+                    "Dark theme enabled.";
+            } else {
+                document.getElementById("status").textContent =
+                    "Light theme enabled.";
+            }
+        }
+
+        document.getElementById("taskInput").addEventListener(
+            "keydown",
+            function (event) {
+                if (event.key === "Enter") {
+                    addTask();
+                }
+            }
+        );
+    </script>
+
+</body>
+</html>

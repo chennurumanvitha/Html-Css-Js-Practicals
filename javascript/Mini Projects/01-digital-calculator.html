@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Digital Calculator | JavaScript Mini Project</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Segoe UI", Arial, sans-serif;
+      background: #f1f5f9;
+      color: #334155;
+      line-height: 1.6;
+    }
+
+    header {
+      background: #0f172a;
+      padding: 18px 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      color: white;
+      font-size: 22px;
+      font-weight: bold;
+    }
+
+    nav a {
+      color: #cbd5e1;
+      text-decoration: none;
+      margin-left: 25px;
+      font-size: 15px;
+    }
+
+    nav a:hover {
+      color: white;
+    }
+
+    .hero {
+      background: linear-gradient(135deg, #1e3a8a, #2563eb);
+      color: white;
+      text-align: center;
+      padding: 65px 20px;
+    }
+
+    .badge {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.15);
+      padding: 7px 16px;
+      border-radius: 20px;
+      margin-bottom: 15px;
+      font-size: 14px;
+    }
+
+    .hero h1 {
+      font-size: 36px;
+      margin-bottom: 10px;
+    }
+
+    .hero p {
+      font-size: 17px;
+      opacity: 0.9;
+    }
+
+    main {
+      width: 90%;
+      max-width: 1050px;
+      margin: 40px auto;
+    }
+
+    .objective {
+      background: white;
+      padding: 22px;
+      border-left: 5px solid #2563eb;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
+      margin-bottom: 25px;
+    }
+
+    .objective h2 {
+      color: #1e3a8a;
+      margin-bottom: 8px;
+    }
+
+    .card {
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(15, 23, 42, 0.08);
+      margin-bottom: 25px;
+    }
+
+    .card h2 {
+      color: #1e3a8a;
+      margin-bottom: 25px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #e2e8f0;
+    }
+
+    .calculator-wrapper {
+      display: flex;
+      justify-content: center;
+    }
+
+    .calculator {
+      width: 100%;
+      max-width: 360px;
+      background: #0f172a;
+      padding: 20px;
+      border-radius: 16px;
+      box-shadow: 0 10px 25px rgba(15, 23, 42, 0.2);
+    }
+
+    .display {
+      width: 100%;
+      height: 85px;
+      background: #1e293b;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      margin-bottom: 15px;
+      padding: 15px;
+      text-align: right;
+      font-size: 32px;
+      font-weight: 600;
+      outline: none;
+    }
+
+    .display::placeholder {
+      color: #94a3b8;
+    }
+
+    .calculator-buttons {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+    }
+
+    .calc-btn {
+      height: 60px;
+      border: none;
+      border-radius: 9px;
+      background: #334155;
+      color: white;
+      font-size: 20px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .calc-btn:hover {
+      background: #475569;
+    }
+
+    .calc-btn.operator {
+      background: #2563eb;
+    }
+
+    .calc-btn.operator:hover {
+      background: #1d4ed8;
+    }
+
+    .calc-btn.clear {
+      background: #dc2626;
+    }
+
+    .calc-btn.clear:hover {
+      background: #b91c1c;
+    }
+
+    .calc-btn.delete {
+      background: #64748b;
+    }
+
+    .calc-btn.delete:hover {
+      background: #475569;
+    }
+
+    .calc-btn.equals {
+      background: #16a34a;
+    }
+
+    .calc-btn.equals:hover {
+      background: #15803d;
+    }
+
+    .wide {
+      grid-column: span 2;
+    }
+
+    .info-box {
+      margin-top: 25px;
+      padding: 18px;
+      background: #eff6ff;
+      border-left: 4px solid #2563eb;
+      border-radius: 7px;
+      color: #1e40af;
+    }
+
+    .navigation {
+      display: flex;
+      justify-content: space-between;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      border: none;
+      background: #2563eb;
+      color: white;
+      padding: 11px 20px;
+      border-radius: 7px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      transition: 0.2s;
+    }
+
+    .btn:hover {
+      background: #1d4ed8;
+    }
+
+    .btn.secondary {
+      background: #475569;
+    }
+
+    .btn.secondary:hover {
+      background: #334155;
+    }
+
+    footer {
+      background: #0f172a;
+      color: #cbd5e1;
+      text-align: center;
+      padding: 22px;
+      margin-top: 50px;
+    }
+
+    @media (max-width: 750px) {
+      header {
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      nav a {
+        margin: 0 8px;
+      }
+
+      .hero h1 {
+        font-size: 28px;
+      }
+
+      .card {
+        padding: 22px;
+      }
+    }
+
+    @media (max-width: 400px) {
+      main {
+        width: 94%;
+      }
+
+      .calculator {
+        padding: 14px;
+      }
+
+      .calc-btn {
+        height: 55px;
+        font-size: 18px;
+      }
+
+      .display {
+        height: 75px;
+        font-size: 27px;
+      }
+
+      .navigation {
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <div class="logo">JavaScript Mini Project</div>
+
+    <nav>
+     <a href="../../index.html">Home</a>
+<a href="../index.html">JavaScript Programs</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <span class="badge">Mini Projects — Project 1</span>
+    <h1>Digital Calculator</h1>
+    <p>A simple interactive calculator built using JavaScript</p>
+  </section>
+
+  <main>
+
+    <section class="objective">
+      <h2>Objective</h2>
+      <p>
+        To create a digital calculator that performs basic arithmetic
+        operations using HTML, CSS, and JavaScript.
+      </p>
+    </section>
+
+    <section class="card">
+      <h2>Calculator</h2>
+
+      <div class="calculator-wrapper">
+
+        <div class="calculator">
+
+          <input
+            type="text"
+            id="display"
+            class="display"
+            placeholder="0"
+            readonly
+            aria-label="Calculator display"
+          >
+
+          <div class="calculator-buttons">
+
+            <button class="calc-btn clear" data-action="clear">
+              AC
+            </button>
+
+            <button class="calc-btn delete" data-action="delete">
+              DEL
+            </button>
+
+            <button class="calc-btn operator" data-value="%">
+              %
+            </button>
+
+            <button class="calc-btn operator" data-value="/">
+              ÷
+            </button>
+
+            <button class="calc-btn" data-value="7">
+              7
+            </button>
+
+            <button class="calc-btn" data-value="8">
+              8
+            </button>
+
+            <button class="calc-btn" data-value="9">
+              9
+            </button>
+
+            <button class="calc-btn operator" data-value="*">
+              ×
+            </button>
+
+            <button class="calc-btn" data-value="4">
+              4
+            </button>
+
+            <button class="calc-btn" data-value="5">
+              5
+            </button>
+
+            <button class="calc-btn" data-value="6">
+              6
+            </button>
+
+            <button class="calc-btn operator" data-value="-">
+              −
+            </button>
+
+            <button class="calc-btn" data-value="1">
+              1
+            </button>
+
+            <button class="calc-btn" data-value="2">
+              2
+            </button>
+
+            <button class="calc-btn" data-value="3">
+              3
+            </button>
+
+            <button class="calc-btn operator" data-value="+">
+              +
+            </button>
+
+            <button class="calc-btn wide" data-value="0">
+              0
+            </button>
+
+            <button class="calc-btn" data-value=".">
+              .
+            </button>
+
+            <button class="calc-btn equals" data-action="calculate">
+              =
+            </button>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="info-box">
+        <strong>Keyboard Support:</strong>
+        You can also use the number keys, arithmetic operators,
+        Enter, Backspace, Delete, Escape, and the decimal point.
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Project Features</h2>
+
+      <p>• Addition, subtraction, multiplication, and division</p>
+      <p>• Percentage calculation</p>
+      <p>• Decimal number support</p>
+      <p>• Clear and delete functions</p>
+      <p>• Keyboard input support</p>
+      <p>• Responsive calculator interface</p>
+    </section>
+
+    <section class="card">
+      <h2>Navigation</h2>
+
+      <div class="navigation">
+        <a class="btn secondary" href="../index.html">
+          ← Home
+        </a>
+
+        <a class="btn" href="../Mini Projects/02-digital-clock.html">
+          Next Project →
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>JavaScript Mini Projects &copy; 2026</p>
+  </footer>
+
+  <script>
+    const display = document.getElementById("display");
+    const buttons = document.querySelectorAll(".calc-btn");
+
+    let expression = "";
+
+    function updateDisplay() {
+      display.value = expression;
+    }
+
+    function isOperator(value) {
+      return ["+", "-", "*", "/", "%"].includes(value);
+    }
+
+    function addValue(value) {
+      if (isOperator(value)) {
+        if (expression === "") {
+          if (value === "-") {
+            expression = "-";
+            updateDisplay();
+          }
+          return;
+        }
+
+        const lastCharacter =
+          expression.charAt(expression.length - 1);
+
+        if (isOperator(lastCharacter)) {
+          expression =
+            expression.slice(0, -1) + value;
+        } else {
+          expression += value;
+        }
+
+        updateDisplay();
+        return;
+      }
+
+      if (value === ".") {
+        const parts = expression.split(/[\+\-\*\/\%]/);
+        const currentNumber = parts[parts.length - 1];
+
+        if (currentNumber.includes(".")) {
+          return;
+        }
+
+        if (
+          currentNumber === "" ||
+          currentNumber === "-"
+        ) {
+          expression += "0.";
+        } else {
+          expression += ".";
+        }
+
+        updateDisplay();
+        return;
+      }
+
+      expression += value;
+      updateDisplay();
+    }
+
+    function calculate() {
+      if (expression === "") {
+        return;
+      }
+
+      const lastCharacter =
+        expression.charAt(expression.length - 1);
+
+      if (isOperator(lastCharacter)) {
+        expression = expression.slice(0, -1);
+      }
+
+      if (expression === "" || expression === "-") {
+        return;
+      }
+
+      try {
+        const safeExpression =
+          expression.replace(/%/g, "/100");
+
+        const result =
+          Function(
+            '"use strict"; return (' +
+            safeExpression +
+            ')'
+          )();
+
+        if (
+          typeof result !== "number" ||
+          !Number.isFinite(result)
+        ) {
+          throw new Error("Invalid calculation");
+        }
+
+        expression = String(
+          Number(result.toFixed(10))
+        );
+
+        updateDisplay();
+
+      } catch (error) {
+        display.value = "Error";
+        expression = "";
+
+        setTimeout(function () {
+          updateDisplay();
+        }, 1000);
+      }
+    }
+
+    function clearCalculator() {
+      expression = "";
+      updateDisplay();
+    }
+
+    function deleteLast() {
+      expression =
+        expression.slice(0, -1);
+
+      updateDisplay();
+    }
+
+    buttons.forEach(function (button) {
+      button.addEventListener("click", function () {
+
+        const value =
+          button.getAttribute("data-value");
+
+        const action =
+          button.getAttribute("data-action");
+
+        if (action === "clear") {
+          clearCalculator();
+          return;
+        }
+
+        if (action === "delete") {
+          deleteLast();
+          return;
+        }
+
+        if (action === "calculate") {
+          calculate();
+          return;
+        }
+
+        if (value !== null) {
+          addValue(value);
+        }
+      });
+    });
+
+    document.addEventListener("keydown", function (event) {
+
+      const key = event.key;
+
+      if (
+        (key >= "0" && key <= "9") ||
+        ["+", "-", "*", "/", "%", "."].includes(key)
+      ) {
+        addValue(key);
+        return;
+      }
+
+      if (key === "Enter" || key === "=") {
+        event.preventDefault();
+        calculate();
+        return;
+      }
+
+      if (key === "Backspace") {
+        deleteLast();
+        return;
+      }
+
+      if (key === "Escape" || key === "Delete") {
+        clearCalculator();
+      }
+    });
+
+    updateDisplay();
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tic-Tac-Toe | JavaScript Mini Project</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: #f1f5f9;
+            color: #334155;
+            line-height: 1.6;
+        }
+
+        header {
+            background: #0f172a;
+            padding: 18px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: white;
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        nav a {
+            color: #cbd5e1;
+            text-decoration: none;
+            margin-left: 25px;
+            font-size: 15px;
+        }
+
+        nav a:hover {
+            color: white;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #1e3a8a, #2563eb);
+            color: white;
+            text-align: center;
+            padding: 65px 20px;
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 7px 16px;
+            border-radius: 20px;
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+
+        .hero h1 {
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+
+        .hero p {
+            font-size: 17px;
+            opacity: 0.9;
+        }
+
+        main {
+            width: 90%;
+            max-width: 1050px;
+            margin: 40px auto;
+        }
+
+        .objective {
+            background: white;
+            padding: 22px;
+            border-left: 5px solid #2563eb;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
+            margin-bottom: 25px;
+        }
+
+        .objective h2 {
+            color: #1e3a8a;
+            margin-bottom: 8px;
+        }
+
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(15, 23, 42, 0.08);
+            margin-bottom: 25px;
+        }
+
+        .card h2 {
+            color: #1e3a8a;
+            margin-bottom: 25px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e2e8f0;
+        }
+
+        .game-box {
+            max-width: 500px;
+            margin: auto;
+            text-align: center;
+        }
+
+        .status {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 25px;
+            font-size: 18px;
+            font-weight: 600;
+            color: #1e3a8a;
+        }
+
+        .board {
+            width: 330px;
+            max-width: 100%;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+        }
+
+        .cell {
+            aspect-ratio: 1;
+            border: none;
+            border-radius: 10px;
+            background: #e2e8f0;
+            color: #1e3a8a;
+            font-size: 48px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .cell:hover:not(:disabled) {
+            background: #cbd5e1;
+        }
+
+        .cell:disabled {
+            cursor: default;
+        }
+
+        .cell.x {
+            color: #2563eb;
+        }
+
+        .cell.o {
+            color: #dc2626;
+        }
+
+        .cell.winner {
+            background: #dcfce7;
+            color: #15803d;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 25px;
+        }
+
+        .btn {
+            border: none;
+            background: #2563eb;
+            color: white;
+            padding: 11px 20px;
+            border-radius: 7px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .btn:hover {
+            background: #1d4ed8;
+        }
+
+        .btn.secondary {
+            background: #475569;
+        }
+
+        .btn.secondary:hover {
+            background: #334155;
+        }
+
+        .features {
+            padding-left: 20px;
+        }
+
+        .features li {
+            margin-bottom: 8px;
+        }
+
+        .navigation {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+
+        .navigation a {
+            text-decoration: none;
+            color: white;
+            background: #2563eb;
+            padding: 11px 20px;
+            border-radius: 7px;
+            font-weight: 600;
+        }
+
+        .navigation a:hover {
+            background: #1d4ed8;
+        }
+
+        footer {
+            background: #0f172a;
+            color: #cbd5e1;
+            text-align: center;
+            padding: 22px;
+            margin-top: 50px;
+        }
+
+        @media (max-width: 750px) {
+            header {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            nav a {
+                margin: 0 8px;
+            }
+
+            .hero h1 {
+                font-size: 28px;
+            }
+
+            .card {
+                padding: 22px;
+            }
+        }
+
+        @media (max-width: 550px) {
+            main {
+                width: 94%;
+            }
+
+            .hero {
+                padding: 50px 15px;
+            }
+
+            .cell {
+                font-size: 38px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="logo">JavaScript Mini Project</div>
+
+        <nav>
+           <a href="../../index.html">Home</a>
+<a href="../index.html">JavaScript Programs</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <span class="badge">Mini Projects — Project 9</span>
+        <h1>Tic-Tac-Toe Game</h1>
+        <p>Play the classic two-player game using JavaScript</p>
+    </section>
+
+    <main>
+
+        <section class="objective">
+            <h2>Objective</h2>
+            <p>
+                Create an interactive Tic-Tac-Toe game where two players
+                take turns placing X and O on a 3 × 3 game board.
+            </p>
+        </section>
+
+        <section class="card">
+            <h2>Play Tic-Tac-Toe</h2>
+
+            <div class="game-box">
+
+                <div class="status" id="status">
+                    Player X's Turn
+                </div>
+
+                <div class="board">
+                    <button class="cell" data-index="0"></button>
+                    <button class="cell" data-index="1"></button>
+                    <button class="cell" data-index="2"></button>
+
+                    <button class="cell" data-index="3"></button>
+                    <button class="cell" data-index="4"></button>
+                    <button class="cell" data-index="5"></button>
+
+                    <button class="cell" data-index="6"></button>
+                    <button class="cell" data-index="7"></button>
+                    <button class="cell" data-index="8"></button>
+                </div>
+
+                <div class="buttons">
+                    <button class="btn" onclick="resetGame()">
+                        New Game
+                    </button>
+                </div>
+
+            </div>
+        </section>
+
+        <section class="card">
+            <h2>Features</h2>
+
+            <ul class="features">
+                <li>Interactive 3 × 3 Tic-Tac-Toe board.</li>
+                <li>Two-player gameplay.</li>
+                <li>Alternates between Player X and Player O.</li>
+                <li>Detects all winning combinations.</li>
+                <li>Detects a draw when the board is full.</li>
+                <li>Highlights the winning cells.</li>
+                <li>Prevents moves after the game ends.</li>
+                <li>New Game button to restart the game.</li>
+                <li>Responsive design for different screen sizes.</li>
+            </ul>
+        </section>
+
+        <div class="navigation">
+            <a href="08-number-guessing.html">Previous</a>
+            <a href="../index.html">Home</a>
+            <a href="10-expense-tracker.html">Next</a>
+        </div>
+
+    </main>
+
+    <footer>
+        <p>JavaScript Mini Projects &copy; 2026</p>
+    </footer>
+
+    <script>
+        const cells = document.querySelectorAll(".cell");
+        const statusText = document.getElementById("status");
+
+        let board = ["", "", "", "", "", "", "", "", ""];
+        let currentPlayer = "X";
+        let gameActive = true;
+
+        const winningCombinations = [
+            [0, 1, 2],
+            [3, 4, 5],
+            [6, 7, 8],
+            [0, 3, 6],
+            [1, 4, 7],
+            [2, 5, 8],
+            [0, 4, 8],
+            [2, 4, 6]
+        ];
+
+        cells.forEach(function(cell) {
+            cell.addEventListener("click", function() {
+                const index = Number(cell.dataset.index);
+
+                if (board[index] !== "" || !gameActive) {
+                    return;
+                }
+
+                board[index] = currentPlayer;
+                cell.textContent = currentPlayer;
+                cell.classList.add(currentPlayer.toLowerCase());
+
+                checkGameResult();
+            });
+        });
+
+        function checkGameResult() {
+            let winningCombination = null;
+
+            for (let combination of winningCombinations) {
+                const a = combination[0];
+                const b = combination[1];
+                const c = combination[2];
+
+                if (
+                    board[a] !== "" &&
+                    board[a] === board[b] &&
+                    board[a] === board[c]
+                ) {
+                    winningCombination = combination;
+                    break;
+                }
+            }
+
+            if (winningCombination) {
+                gameActive = false;
+
+                winningCombination.forEach(function(index) {
+                    cells[index].classList.add("winner");
+                });
+
+                statusText.textContent =
+                    "Player " + currentPlayer + " Wins!";
+
+                disableBoard();
+                return;
+            }
+
+            if (!board.includes("")) {
+                gameActive = false;
+
+                statusText.textContent =
+                    "It's a Draw!";
+
+                disableBoard();
+                return;
+            }
+
+            currentPlayer = currentPlayer === "X" ? "O" : "X";
+
+            statusText.textContent =
+                "Player " + currentPlayer + "'s Turn";
+        }
+
+        function disableBoard() {
+            cells.forEach(function(cell) {
+                cell.disabled = true;
+            });
+        }
+
+        function resetGame() {
+            board = ["", "", "", "", "", "", "", "", ""];
+            currentPlayer = "X";
+            gameActive = true;
+
+            cells.forEach(function(cell) {
+                cell.textContent = "";
+                cell.disabled = false;
+                cell.classList.remove("x", "o", "winner");
+            });
+
+            statusText.textContent = "Player X's Turn";
+        }
+    </script>
+
+</body>
+</html>

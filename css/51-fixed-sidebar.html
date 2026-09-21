@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fixed Sidebar | CSS Practical 51</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: #f1f5f9;
+            color: #334155;
+            line-height: 1.6;
+        }
+
+        /* Fixed Sidebar */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 230px;
+            height: 100vh;
+            background: #0f172a;
+            color: white;
+            padding: 25px 18px;
+            z-index: 1000;
+            overflow-y: auto;
+        }
+
+        .sidebar-logo {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .sidebar-logo .logo {
+            width: 55px;
+            height: 55px;
+            margin: 0 auto 10px;
+            border-radius: 50%;
+            background: #2563eb;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            font-weight: 700;
+        }
+
+        .sidebar-logo h2 {
+            font-size: 19px;
+        }
+
+        .sidebar-logo p {
+            color: #94a3b8;
+            font-size: 13px;
+            margin-top: 3px;
+        }
+
+        .sidebar-nav {
+            list-style: none;
+        }
+
+        .sidebar-nav li {
+            margin-bottom: 8px;
+        }
+
+        .sidebar-nav a {
+            display: block;
+            color: #cbd5e1;
+            text-decoration: none;
+            padding: 12px 14px;
+            border-radius: 8px;
+            transition: 0.3s;
+        }
+
+        .sidebar-nav a:hover,
+        .sidebar-nav a.active {
+            background: #2563eb;
+            color: white;
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-left: 230px;
+            min-height: 100vh;
+        }
+
+        header {
+            background: #0f172a;
+            color: white;
+            padding: 18px 30px;
+            border-bottom: 1px solid #1e293b;
+        }
+
+        header h1 {
+            font-size: 24px;
+        }
+
+        header p {
+            color: #cbd5e1;
+            font-size: 14px;
+        }
+
+        /* Hero */
+        .hero {
+            background: linear-gradient(135deg, #1e3a8a, #2563eb);
+            color: white;
+            text-align: center;
+            padding: 65px 20px;
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 7px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            margin-bottom: 15px;
+        }
+
+        .hero h2 {
+            font-size: 34px;
+            margin-bottom: 10px;
+        }
+
+        .hero p {
+            max-width: 700px;
+            margin: auto;
+            color: #dbeafe;
+        }
+
+        /* Main Sections */
+        main {
+            width: 90%;
+            max-width: 1050px;
+            margin: 40px auto;
+        }
+
+        .objective,
+        .content-card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(15, 23, 42, 0.08);
+        }
+
+        .objective {
+            border-left: 5px solid #2563eb;
+            padding: 22px 25px;
+            margin-bottom: 25px;
+        }
+
+        .objective h3 {
+            color: #1e3a8a;
+            margin-bottom: 8px;
+        }
+
+        .content-card {
+            padding: 35px;
+            margin-bottom: 25px;
+        }
+
+        .content-card h3 {
+            color: #1e3a8a;
+            margin-bottom: 18px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #dbeafe;
+        }
+
+        .content-card p {
+            margin-bottom: 15px;
+        }
+
+        /* Fixed Sidebar Explanation */
+        .layout-demo {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+            margin-top: 20px;
+        }
+
+        .info-card {
+            background: #f8fafc;
+            border-left: 4px solid #2563eb;
+            border-radius: 10px;
+            padding: 20px;
+        }
+
+        .info-card h4 {
+            color: #1e3a8a;
+            margin-bottom: 8px;
+        }
+
+        /* Sidebar Demo */
+        .sidebar-demo {
+            position: relative;
+            min-height: 280px;
+            background: #e2e8f0;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-top: 20px;
+            border: 2px solid #cbd5e1;
+        }
+
+        .demo-sidebar {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 150px;
+            height: 100%;
+            background: #0f172a;
+            color: white;
+            padding: 20px 12px;
+        }
+
+        .demo-sidebar h4 {
+            color: white;
+            margin-bottom: 15px;
+        }
+
+        .demo-sidebar div {
+            background: #2563eb;
+            padding: 8px;
+            margin-bottom: 7px;
+            border-radius: 5px;
+            font-size: 13px;
+        }
+
+        .demo-content {
+            margin-left: 150px;
+            padding: 25px;
+        }
+
+        .demo-content h4 {
+            color: #1e3a8a;
+            margin-bottom: 10px;
+        }
+
+        .demo-box {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 12px;
+            border: 1px solid #cbd5e1;
+        }
+
+        /* Code Section */
+        .code-box {
+            background: #0f172a;
+            color: #dbeafe;
+            padding: 20px;
+            border-radius: 10px;
+            overflow-x: auto;
+            margin-top: 20px;
+        }
+
+        .code-box pre {
+            font-family: Consolas, monospace;
+            font-size: 14px;
+            line-height: 1.7;
+        }
+
+        /* Navigation Buttons */
+        .buttons {
+            text-align: center;
+            margin: 35px 0;
+        }
+
+        .btn {
+            display: inline-block;
+            background: #2563eb;
+            color: white;
+            text-decoration: none;
+            padding: 11px 20px;
+            border-radius: 7px;
+            margin: 5px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background: #1e3a8a;
+            transform: translateY(-2px);
+        }
+
+        .btn.secondary {
+            background: #e2e8f0;
+            color: #1e3a8a;
+        }
+
+        .btn.secondary:hover {
+            background: #cbd5e1;
+        }
+
+        /* Footer */
+        footer {
+            background: #0f172a;
+            color: #94a3b8;
+            text-align: center;
+            padding: 25px;
+        }
+
+        footer strong {
+            color: white;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 850px) {
+            .sidebar {
+                width: 190px;
+            }
+
+            .main-content {
+                margin-left: 190px;
+            }
+
+            .layout-demo {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 750px) {
+            .sidebar {
+                position: relative;
+                width: 100%;
+                height: auto;
+                padding: 20px;
+            }
+
+            .sidebar-logo {
+                margin-bottom: 15px;
+            }
+
+            .sidebar-nav {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 5px;
+            }
+
+            .sidebar-nav li {
+                margin-bottom: 0;
+            }
+
+            .main-content {
+                margin-left: 0;
+            }
+
+            .hero h2 {
+                font-size: 28px;
+            }
+
+            .content-card {
+                padding: 25px 20px;
+            }
+
+            .demo-sidebar {
+                position: relative;
+                width: 100%;
+                height: auto;
+            }
+
+            .demo-content {
+                margin-left: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Fixed Sidebar -->
+    <aside class="sidebar">
+
+        <div class="sidebar-logo">
+            <div class="logo">M</div>
+            <h2>CSS Practical</h2>
+            <p>Practical 51</p>
+        </div>
+
+        <ul class="sidebar-nav">
+            <li>
+                <a href="#home" class="active">Home</a>
+            </li>
+            <li>
+                <a href="#about">About</a>
+            </li>
+            <li>
+                <a href="#features">Features</a>
+            </li>
+            <li>
+                <a href="#technique">Technique</a>
+            </li>
+        </ul>
+
+    </aside>
+
+
+    <!-- Main Content -->
+    <div class="main-content">
+
+        <header id="home">
+            <h1>Fixed Sidebar</h1>
+            <p>CSS Practical 51</p>
+        </header>
+
+
+        <!-- Hero Section -->
+        <section class="hero">
+            <span class="badge">CSS PRACTICAL 51</span>
+
+            <h2>Fixed Sidebar</h2>
+
+            <p>
+                Create a webpage with a sidebar that remains fixed
+                while the main page content can be scrolled.
+            </p>
+        </section>
+
+
+        <main>
+
+            <!-- Objective -->
+            <section class="objective">
+                <h3>Objective</h3>
+
+                <p>
+                    To create a webpage using CSS fixed positioning
+                    where the sidebar remains in the same position
+                    while the main content is displayed beside it.
+                </p>
+            </section>
+
+
+            <!-- About -->
+            <section class="content-card" id="about">
+
+                <h3>Fixed Sidebar Using CSS</h3>
+
+                <p>
+                    A fixed sidebar remains attached to a specific
+                    position on the browser window even when the
+                    user scrolls the webpage.
+                </p>
+
+                <div class="layout-demo">
+
+                    <div class="info-card">
+                        <h4>position: fixed</h4>
+                        <p>
+                            Keeps the sidebar fixed relative to
+                            the browser window.
+                        </p>
+                    </div>
+
+                    <div class="info-card">
+                        <h4>height: 100vh</h4>
+                        <p>
+                            Makes the sidebar occupy the full
+                            height of the viewport.
+                        </p>
+                    </div>
+
+                    <div class="info-card">
+                        <h4>z-index</h4>
+                        <p>
+                            Keeps the sidebar above other page
+                            elements when necessary.
+                        </p>
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- Demonstration -->
+            <section class="content-card" id="features">
+
+                <h3>Fixed Sidebar Demonstration</h3>
+
+                <p>
+                    The example below shows how a fixed sidebar
+                    can be placed beside the main webpage content.
+                </p>
+
+                <div class="sidebar-demo">
+
+                    <div class="demo-sidebar">
+                        <h4>Sidebar</h4>
+                        <div>Home</div>
+                        <div>Profile</div>
+                        <div>Projects</div>
+                        <div>Contact</div>
+                    </div>
+
+                    <div class="demo-content">
+
+                        <h4>Main Content</h4>
+
+                        <p>
+                            The sidebar stays fixed while the
+                            main content occupies the remaining
+                            available space.
+                        </p>
+
+                        <div class="demo-box">
+                            Fixed sidebars are useful for
+                            dashboards, documentation pages,
+                            and administrative websites.
+                        </div>
+
+                        <div class="demo-box">
+                            The main content can contain text,
+                            cards, tables, images, or other
+                            webpage sections.
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+           
+
+            <!-- Navigation -->
+            <div class="buttons">
+
+                <a href="css-50.html" class="btn secondary">
+                    ← Previous Practical
+                </a>
+
+                <a href="index.html" class="btn">
+                    CSS Programs
+                </a>
+
+                <a href="../index.html" class="btn">
+                    Dashboard
+                </a>
+
+            </div>
+
+        </main>
+
+
+        <!-- Footer -->
+        <footer>
+            <p>
+                <strong>CSS Practical 51</strong> |
+                Fixed Sidebar
+            </p>
+
+            <p>
+                Created using HTML5 and CSS3
+            </p>
+        </footer>
+
+    </div>
+
+</body>
+</html>

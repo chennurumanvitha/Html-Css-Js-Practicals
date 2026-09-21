@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Positioning | Practical 07</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: #f1f5f9;
+            color: #334155;
+        }
+
+        header {
+            background: #0f172a;
+            color: white;
+            padding: 20px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        header h2 {
+            margin: 0;
+        }
+
+        nav a {
+            color: #cbd5e1;
+            text-decoration: none;
+            margin: 0 10px;
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            color: white;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #1e3a8a, #2563eb);
+            color: white;
+            text-align: center;
+            padding: 65px 20px;
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .hero h1 {
+            font-size: 42px;
+            margin: 10px 0;
+        }
+
+        .hero p {
+            font-size: 18px;
+            max-width: 750px;
+            margin: auto;
+            line-height: 1.6;
+        }
+
+        main {
+            width: 90%;
+            max-width: 1050px;
+            margin: 40px auto;
+        }
+
+        .objective,
+        .content-card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
+        }
+
+        .objective {
+            border-left: 5px solid #2563eb;
+            padding: 22px 25px;
+            margin-bottom: 25px;
+        }
+
+        .objective h2,
+        .content-card h2 {
+            color: #1e3a8a;
+        }
+
+        .objective p {
+            line-height: 1.7;
+        }
+
+        .content-card {
+            padding: 35px;
+            margin-bottom: 25px;
+        }
+
+        .content-card h2 {
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 12px;
+            margin-top: 0;
+        }
+
+        .position-card {
+            background: #f8fafc;
+            border-left: 4px solid #2563eb;
+            border-radius: 10px;
+            padding: 22px;
+            margin: 20px 0;
+        }
+
+        .position-card h3 {
+            color: #1e3a8a;
+            margin-top: 0;
+        }
+
+        .position-card p {
+            line-height: 1.6;
+        }
+
+        .demo-area {
+            background: #eff6ff;
+            border: 2px dashed #2563eb;
+            padding: 25px;
+            border-radius: 10px;
+            margin-top: 20px;
+            min-height: 180px;
+        }
+
+        .demo-box {
+            background: #dbeafe;
+            border: 3px solid #2563eb;
+            padding: 18px;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        /* Static Positioning */
+
+        .static-box {
+            position: static;
+        }
+
+        /* Relative Positioning */
+
+        .relative-container {
+            position: relative;
+            min-height: 180px;
+            background: #f8fafc;
+            border: 2px solid #cbd5e1;
+            border-radius: 8px;
+            padding: 20px;
+        }
+
+        .relative-box {
+            position: relative;
+            left: 40px;
+            top: 20px;
+            width: 220px;
+        }
+
+        /* Absolute Positioning */
+
+        .absolute-container {
+            position: relative;
+            height: 220px;
+            background: #f8fafc;
+            border: 2px solid #cbd5e1;
+            border-radius: 8px;
+            padding: 20px;
+        }
+
+        .absolute-box {
+            position: absolute;
+            right: 25px;
+            bottom: 25px;
+            width: 220px;
+        }
+
+        /* Fixed Positioning */
+
+        .fixed-box {
+            position: fixed;
+            right: 20px;
+            bottom: 20px;
+            background: #1e3a8a;
+            color: white;
+            border: none;
+            padding: 14px 20px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(15, 23, 42, 0.25);
+            z-index: 1000;
+        }
+
+        /* Sticky Positioning */
+
+        .sticky-container {
+            height: 300px;
+            overflow-y: auto;
+            background: #f8fafc;
+            border: 2px solid #cbd5e1;
+            border-radius: 8px;
+        }
+
+        .sticky-box {
+            position: sticky;
+            top: 0;
+            background: #2563eb;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            font-weight: 600;
+            z-index: 10;
+        }
+
+        .scroll-content {
+            padding: 20px;
+            line-height: 1.8;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin: 35px 0;
+        }
+
+        .btn {
+            display: inline-block;
+            text-decoration: none;
+            background: #2563eb;
+            color: white;
+            padding: 12px 22px;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background: #1d4ed8;
+            transform: translateY(-2px);
+        }
+
+        .secondary {
+            background: #475569;
+        }
+
+        .secondary:hover {
+            background: #334155;
+        }
+
+        footer {
+            background: #0f172a;
+            color: #cbd5e1;
+            text-align: center;
+            padding: 25px;
+            margin-top: 40px;
+        }
+
+        footer strong {
+            color: white;
+        }
+
+        @media (max-width: 750px) {
+
+            .hero h1 {
+                font-size: 32px;
+            }
+
+            .content-card {
+                padding: 22px;
+            }
+
+            .relative-box,
+            .absolute-box {
+                width: 180px;
+            }
+
+            .relative-box {
+                left: 20px;
+            }
+
+            header {
+                justify-content: center;
+                text-align: center;
+            }
+
+            nav {
+                width: 100%;
+            }
+
+            .fixed-box {
+                right: 10px;
+                bottom: 10px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+
+        <h2>Web Practicals</h2>
+
+        <nav>
+            <a href="../index.html">Home</a>
+            <a href="index.html">CSS Programs</a>
+        </nav>
+
+    </header>
+
+
+    <section class="hero">
+
+        <span class="badge">CSS PRACTICAL 07</span>
+
+        <h1>CSS Positioning</h1>
+
+        <p>
+            Demonstration of static, relative, absolute, fixed,
+            and sticky positioning using CSS.
+        </p>
+
+    </section>
+
+
+    <main>
+
+        <!-- Objective -->
+
+        <section class="objective">
+
+            <h2>Objective</h2>
+
+            <p>
+                To demonstrate different CSS positioning properties
+                including static, relative, absolute, fixed, and sticky.
+            </p>
+
+        </section>
+
+
+        <!-- Static -->
+
+        <section class="content-card">
+
+            <h2>Static Positioning</h2>
+
+            <div class="position-card">
+
+                <h3>position: static</h3>
+
+                <p>
+                    Static positioning is the default position of an
+                    HTML element. The element follows the normal flow
+                    of the webpage.
+                </p>
+
+                <div class="demo-area">
+
+                    <div class="demo-box static-box">
+                        Static Position
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- Relative -->
+
+        <section class="content-card">
+
+            <h2>Relative Positioning</h2>
+
+            <div class="position-card">
+
+                <h3>position: relative</h3>
+
+                <p>
+                    A relatively positioned element remains in the
+                    normal document flow but can be moved using
+                    top, bottom, left, or right properties.
+                </p>
+
+                <div class="relative-container">
+
+                    <div class="demo-box relative-box">
+                        Relative Position
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- Absolute -->
+
+        <section class="content-card">
+
+            <h2>Absolute Positioning</h2>
+
+            <div class="position-card">
+
+                <h3>position: absolute</h3>
+
+                <p>
+                    An absolutely positioned element is positioned
+                    relative to its nearest positioned ancestor.
+                </p>
+
+                <div class="absolute-container">
+
+                    <div class="demo-box absolute-box">
+                        Absolute Position
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- Fixed -->
+
+        <section class="content-card">
+
+            <h2>Fixed Positioning</h2>
+
+            <div class="position-card">
+
+                <h3>position: fixed</h3>
+
+                <p>
+                    A fixed element stays in the same position on
+                    the screen even when the webpage is scrolled.
+                </p>
+
+                <div class="demo-area">
+
+                    <div class="demo-box">
+                        Scroll the page to observe the fixed box.
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- Sticky -->
+
+        <section class="content-card">
+
+            <h2>Sticky Positioning</h2>
+
+            <div class="position-card">
+
+                <h3>position: sticky</h3>
+
+                <p>
+                    A sticky element behaves like a normally
+                    positioned element until a specified scroll
+                    position is reached.
+                </p>
+
+                <div class="sticky-container">
+
+                    <div class="sticky-box">
+                        Sticky Position
+                    </div>
+
+                    <div class="scroll-content">
+
+                        <p>
+                            Scroll inside this box to see the sticky
+                            heading remain at the top.
+                        </p>
+
+                        <p>
+                            CSS positioning allows developers to
+                            control where elements appear on a webpage.
+                        </p>
+
+                        <p>
+                            The sticky element remains visible while
+                            scrolling within its container.
+                        </p>
+
+                        <p>
+                            This is commonly used for navigation bars,
+                            headings, and other interface elements.
+                        </p>
+
+                        <p>
+                            Continue scrolling to observe the effect.
+                        </p>
+
+                        <p>
+                            Sticky positioning combines aspects of
+                            relative and fixed positioning.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- Fixed Element -->
+
+        <div class="fixed-box">
+            Fixed Element
+        </div>
+
+
+        <!-- Navigation -->
+
+        <div class="buttons">
+
+            <a href="css-06.html" class="btn secondary">
+                Previous Practical
+            </a>
+
+            <a href="index.html" class="btn">
+                CSS Programs
+            </a>
+
+            <a href="../index.html" class="btn">
+                Dashboard
+            </a>
+
+        </div>
+
+    </main>
+
+
+    <footer>
+
+        <strong>CSS Practical 07</strong> — CSS Positioning
+
+        <br>
+
+        Web Development Practicals
+
+    </footer>
+
+</body>
+</html>

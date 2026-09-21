@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>To-Do List | JavaScript Practical 31</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: #f1f5f9;
+            color: #334155;
+            line-height: 1.6;
+        }
+
+        header {
+            background: #0f172a;
+            color: white;
+            padding: 18px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            font-size: 22px;
+            font-weight: 700;
+        }
+
+        nav {
+            display: flex;
+            gap: 22px;
+        }
+
+        nav a {
+            color: #cbd5e1;
+            text-decoration: none;
+            font-size: 15px;
+        }
+
+        nav a:hover {
+            color: white;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #1e3a8a, #2563eb);
+            color: white;
+            text-align: center;
+            padding: 65px 20px;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 7px 14px;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.18);
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        .hero h1 {
+            margin: 0;
+            font-size: 38px;
+        }
+
+        .hero p {
+            margin: 10px 0 0;
+            font-size: 17px;
+            color: #dbeafe;
+        }
+
+        main {
+            width: 90%;
+            max-width: 1050px;
+            margin: 40px auto;
+        }
+
+        .card {
+            background: white;
+            padding: 28px;
+            margin-bottom: 25px;
+            border-radius: 12px;
+            box-shadow: 0 5px 18px rgba(15, 23, 42, 0.08);
+        }
+
+        .objective {
+            border-left: 5px solid #2563eb;
+        }
+
+        .card h2 {
+            margin-top: 0;
+            color: #1e3a8a;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 10px;
+        }
+
+        .todo-box {
+            max-width: 700px;
+            margin: auto;
+        }
+
+        .input-area {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        input[type="text"] {
+            flex: 1;
+            padding: 13px;
+            border: 1px solid #cbd5e1;
+            border-radius: 7px;
+            font-size: 16px;
+            outline: none;
+        }
+
+        input[type="text"]:focus {
+            border-color: #2563eb;
+        }
+
+        button {
+            border: none;
+            padding: 13px 20px;
+            border-radius: 7px;
+            background: #2563eb;
+            color: white;
+            font-size: 15px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #1d4ed8;
+        }
+
+        .task-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .task {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            padding: 12px 14px;
+            margin-bottom: 10px;
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 7px;
+        }
+
+        .task-text {
+            flex: 1;
+            word-break: break-word;
+        }
+
+        .completed .task-text {
+            text-decoration: line-through;
+            color: #64748b;
+        }
+
+        .task-buttons {
+            display: flex;
+            gap: 7px;
+        }
+
+        .complete-btn {
+            background: #16a34a;
+            padding: 8px 12px;
+            font-size: 13px;
+        }
+
+        .complete-btn:hover {
+            background: #15803d;
+        }
+
+        .delete-btn {
+            background: #dc2626;
+            padding: 8px 12px;
+            font-size: 13px;
+        }
+
+        .delete-btn:hover {
+            background: #b91c1c;
+        }
+
+        .empty-message {
+            text-align: center;
+            color: #64748b;
+            padding: 20px;
+            background: #eff6ff;
+            border: 1px dashed #93c5fd;
+            border-radius: 7px;
+        }
+
+        .output {
+            margin-top: 20px;
+            padding: 18px;
+            background: #eff6ff;
+            border: 1px dashed #93c5fd;
+            border-radius: 8px;
+            text-align: center;
+            color: #1e3a8a;
+            font-weight: 600;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 11px 20px;
+            border-radius: 7px;
+            background: #2563eb;
+            color: white;
+            text-decoration: none;
+            font-size: 15px;
+        }
+
+        .btn:hover {
+            background: #1d4ed8;
+        }
+
+        .secondary {
+            background: #475569;
+        }
+
+        .secondary:hover {
+            background: #334155;
+        }
+
+        footer {
+            background: #0f172a;
+            color: #94a3b8;
+            text-align: center;
+            padding: 22px;
+            margin-top: 50px;
+        }
+
+        @media (max-width: 650px) {
+            header {
+                justify-content: center;
+                gap: 12px;
+            }
+
+            nav {
+                gap: 15px;
+            }
+
+            .hero h1 {
+                font-size: 30px;
+            }
+
+            .card {
+                padding: 20px;
+            }
+
+            .input-area {
+                flex-direction: column;
+            }
+
+            .input-area button {
+                width: 100%;
+            }
+
+            .task {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+            .task-buttons {
+                width: 100%;
+            }
+
+            .task-buttons button {
+                flex: 1;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+
+    <div class="logo">JavaScript Practical</div>
+
+    <nav>
+        <a href="../../index.html">Home</a>
+<a href="../index.html">JavaScript Programs</a>
+    </nav>
+
+</header>
+
+
+<section class="hero">
+
+    <div class="badge">JavaScript Practical 31</div>
+
+    <h1>Create a To-Do List</h1>
+
+    <p>Add, complete and delete tasks using JavaScript</p>
+
+</section>
+
+
+<main>
+
+    <section class="card objective">
+
+        <h2>Objective</h2>
+
+        <p>
+            Create a to-do list using JavaScript.
+        </p>
+
+    </section>
+
+
+    <section class="card">
+
+        <h2>To-Do List</h2>
+
+        <div class="todo-box">
+
+            <div class="input-area">
+
+                <input
+                    type="text"
+                    id="taskInput"
+                    placeholder="Enter a task"
+                    onkeydown="handleKey(event)"
+                >
+
+                <button onclick="addTask()">Add Task</button>
+
+            </div>
+
+
+            <ul id="taskList" class="task-list">
+
+                <li class="task">
+                    <span class="task-text">Complete JavaScript practical</span>
+
+                    <div class="task-buttons">
+                        <button
+                            class="complete-btn"
+                            onclick="completeTask(this)"
+                        >
+                            Complete
+                        </button>
+
+                        <button
+                            class="delete-btn"
+                            onclick="deleteTask(this)"
+                        >
+                            Delete
+                        </button>
+                    </div>
+                </li>
+
+                <li class="task">
+                    <span class="task-text">Review JavaScript concepts</span>
+
+                    <div class="task-buttons">
+                        <button
+                            class="complete-btn"
+                            onclick="completeTask(this)"
+                        >
+                            Complete
+                        </button>
+
+                        <button
+                            class="delete-btn"
+                            onclick="deleteTask(this)"
+                        >
+                            Delete
+                        </button>
+                    </div>
+                </li>
+
+            </ul>
+
+
+            <div class="output" id="result">
+                Total Tasks: 2
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <div class="buttons">
+
+        <a href="fieldvalidation.html" class="btn">
+            ← Previous Practical
+        </a>
+
+        <a href="index.html" class="btn secondary">
+            JavaScript Programs
+        </a>
+
+        <a href="../index.html" class="btn">
+            Dashboard
+        </a>
+
+    </div>
+
+</main>
+
+
+<footer>
+
+    <p>JavaScript Practical Assignment</p>
+
+</footer>
+
+
+<script>
+
+    function addTask() {
+
+        const input = document.getElementById("taskInput");
+        const taskText = input.value.trim();
+
+        if (taskText === "") {
+            document.getElementById("result").textContent =
+                "Please enter a task.";
+            return;
+        }
+
+        const taskList = document.getElementById("taskList");
+
+        const task = document.createElement("li");
+        task.className = "task";
+
+        task.innerHTML = `
+            <span class="task-text">${taskText}</span>
+
+            <div class="task-buttons">
+
+                <button
+                    class="complete-btn"
+                    onclick="completeTask(this)"
+                >
+                    Complete
+                </button>
+
+                <button
+                    class="delete-btn"
+                    onclick="deleteTask(this)"
+                >
+                    Delete
+                </button>
+
+            </div>
+        `;
+
+        taskList.appendChild(task);
+
+        input.value = "";
+
+        updateTaskCount();
+
+        input.focus();
+    }
+
+
+    function completeTask(button) {
+
+        const task = button.parentElement.parentElement;
+
+        task.classList.toggle("completed");
+
+        if (task.classList.contains("completed")) {
+            button.textContent = "Undo";
+        } else {
+            button.textContent = "Complete";
+        }
+
+        updateTaskCount();
+    }
+
+
+    function deleteTask(button) {
+
+        const task = button.parentElement.parentElement;
+
+        task.remove();
+
+        updateTaskCount();
+    }
+
+
+    function updateTaskCount() {
+
+        const taskList = document.getElementById("taskList");
+        const result = document.getElementById("result");
+
+        const tasks = taskList.querySelectorAll(".task");
+
+        if (tasks.length === 0) {
+
+            taskList.innerHTML = `
+                <li class="empty-message">
+                    No tasks available. Add a new task.
+                </li>
+            `;
+
+            result.textContent = "Total Tasks: 0";
+
+            return;
+        }
+
+        result.textContent =
+            "Total Tasks: " + tasks.length;
+    }
+
+
+    function handleKey(event) {
+
+        if (event.key === "Enter") {
+            addTask();
+        }
+
+    }
+
+</script>
+
+</body>
+</html>

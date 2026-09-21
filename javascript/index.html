@@ -1,0 +1,1777 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>JavaScript Programs</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: #f1f5f9;
+            color: #334155;
+            line-height: 1.6;
+        }
+
+        header {
+            background: #0f172a;
+            color: white;
+            padding: 18px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            font-size: 22px;
+            font-weight: 700;
+        }
+
+        nav {
+            display: flex;
+            gap: 22px;
+        }
+
+        nav a {
+            color: #cbd5e1;
+            text-decoration: none;
+            font-size: 15px;
+        }
+
+        nav a:hover {
+            color: white;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #1e3a8a, #2563eb);
+            color: white;
+            text-align: center;
+            padding: 65px 20px;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 7px 14px;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.18);
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        .hero h1 {
+            margin: 0;
+            font-size: 38px;
+        }
+
+        .hero p {
+            margin: 10px 0 0;
+            font-size: 17px;
+            color: #dbeafe;
+        }
+
+        main {
+            width: 90%;
+            max-width: 1150px;
+            margin: 40px auto;
+        }
+
+        .card {
+            background: white;
+            padding: 28px;
+            margin-bottom: 25px;
+            border-radius: 12px;
+            box-shadow: 0 5px 18px rgba(15, 23, 42, 0.08);
+        }
+
+        .card h2 {
+            margin-top: 0;
+            color: #1e3a8a;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 10px;
+        }
+
+        .section-description {
+            color: #64748b;
+            margin-top: -5px;
+            margin-bottom: 20px;
+        }
+
+        .program-list {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+
+        .program {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 14px;
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            text-decoration: none;
+            color: #334155;
+            transition: 0.2s;
+        }
+
+        .program:hover {
+            background: #eff6ff;
+            border-color: #93c5fd;
+            transform: translateY(-2px);
+        }
+
+        .number {
+            min-width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #2563eb;
+            color: white;
+            border-radius: 50%;
+            font-weight: 700;
+            font-size: 13px;
+        }
+
+        .program-title {
+            font-weight: 600;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 11px 20px;
+            border-radius: 7px;
+            background: #2563eb;
+            color: white;
+            text-decoration: none;
+            font-size: 15px;
+        }
+
+        .btn:hover {
+            background: #1d4ed8;
+        }
+
+        .secondary {
+            background: #475569;
+        }
+
+        .secondary:hover {
+            background: #334155;
+        }
+
+        footer {
+            background: #0f172a;
+            color: #94a3b8;
+            text-align: center;
+            padding: 22px;
+            margin-top: 50px;
+        }
+
+        @media (max-width: 750px) {
+            header {
+                justify-content: center;
+                gap: 12px;
+            }
+
+            nav {
+                gap: 15px;
+            }
+
+            .hero h1 {
+                font-size: 30px;
+            }
+
+            .card {
+                padding: 20px;
+            }
+
+            .program-list {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+
+    <div class="logo">JavaScript Programs</div>
+
+    <nav>
+        <a href="../index.html">Home</a>
+        <a href="index.html">JavaScript Programs</a>
+    </nav>
+
+</header>
+
+
+<section class="hero">
+
+    <div class="badge">Practical Assignment</div>
+
+    <h1>JavaScript Programs</h1>
+
+    <p>JavaScript practical programs, DOM, events, forms, browser features and mini projects</p>
+
+</section>
+
+
+<main>
+
+
+    <!-- =====================================================
+         SECTION 1 - JAVASCRIPT
+    ====================================================== -->
+
+    <section class="card">
+
+        <h2>1. JavaScript</h2>
+
+        <p class="section-description">
+            Basic and advanced JavaScript programming exercises.
+        </p>
+
+        <div class="program-list">
+
+            <a href="01-helloworld.html" class="program">
+                <span class="number">01</span>
+                <span class="program-title">Display “Hello World”</span>
+            </a>
+
+            <a href="02-arithmeticoperations.html" class="program">
+                <span class="number">02</span>
+                <span class="program-title">Perform Arithmetic Operations</span>
+            </a>
+
+            <a href="03-largestofthree.html" class="program">
+                <span class="number">03</span>
+                <span class="program-title">Find Largest of Three Numbers</span>
+            </a>
+
+            <a href="04-evenodd.html" class="program">
+                <span class="number">04</span>
+                <span class="program-title">Check Even or Odd</span>
+            </a>
+
+            <a href="05-positiveornegative.html" class="program">
+                <span class="number">05</span>
+                <span class="program-title">Positive, Negative or Zero</span>
+            </a>
+
+            <a href="06-factorial.html" class="program">
+                <span class="number">06</span>
+                <span class="program-title">Find Factorial</span>
+            </a>
+
+            <a href="07-fibonacci.html" class="program">
+                <span class="number">07</span>
+                <span class="program-title">Generate Fibonacci Series</span>
+            </a>
+
+            <a href="08-primenumber.html" class="program">
+                <span class="number">08</span>
+                <span class="program-title">Check Prime Number</span>
+            </a>
+
+            <a href="09-palindrome.html" class="program">
+                <span class="number">09</span>
+                <span class="program-title">Check Palindrome Number</span>
+            </a>
+
+            <a href="10-reversenumber.html" class="program">
+                <span class="number">10</span>
+                <span class="program-title">Reverse a Number</span>
+            </a>
+
+            <a href="11-sumofdigits.html" class="program">
+                <span class="number">11</span>
+                <span class="program-title">Sum of Digits</span>
+            </a>
+
+            <a href="12-largestsmallestarray.html" class="program">
+                <span class="number">12</span>
+                <span class="program-title">Largest and Smallest Array Element</span>
+            </a>
+
+            <a href="13-sortarray.html" class="program">
+                <span class="number">13</span>
+                <span class="program-title">Sort an Array</span>
+            </a>
+
+            <a href="14-sumaveragearray.html" class="program">
+                <span class="number">14</span>
+                <span class="program-title">Sum and Average of Array Elements</span>
+            </a>
+
+            <a href="15-functions.html" class="program">
+                <span class="number">15</span>
+                <span class="program-title">JavaScript Functions</span>
+            </a>
+
+            <a href="16-arrowfunctions.html" class="program">
+                <span class="number">16</span>
+                <span class="program-title">Arrow Functions</span>
+            </a>
+
+            <a href="17-strings.html" class="program">
+                <span class="number">17</span>
+                <span class="program-title">Strings and String Methods</span>
+            </a>
+
+            <a href="18-arrays.html" class="program">
+                <span class="number">18</span>
+                <span class="program-title">Arrays and Array Methods</span>
+            </a>
+
+            <a href="19-objects.html" class="program">
+                <span class="number">19</span>
+                <span class="program-title">Objects in JavaScript</span>
+            </a>
+
+            <a href="20-dateandmath.html" class="program">
+                <span class="number">20</span>
+                <span class="program-title">Date and Math Objects</span>
+            </a>
+
+
+    <!-- =====================================================
+         SECTION 2 - DOM-Event-Based-Experiments
+    ====================================================== -->
+
+        </div>
+
+</section>
+
+
+<section class="card">
+
+    <h2>2. DOM-Event-Based-Experiments</h2>
+
+    <p class="section-description">
+        JavaScript programs using DOM manipulation and event-based programming.
+    </p>
+
+    <div class="program-list">
+        <!-- Keep your existing 21–65 programs here -->
+
+
+            <a href="DOM-Event-Based-Experiments/21-changetext.html" class="program">
+                <span class="number">21</span>
+                <span class="program-title">Change Text Using JavaScript</span>
+            </a>
+
+            <a href="DOM-Event-Based-Experiments/22-changebackground.html" class="program">
+                <span class="number">22</span>
+                <span class="program-title">Change Background Color</span>
+            </a>
+
+            <a href="DOM-Event-Based-Experiments/23-buttonclick.html" class="program">
+                <span class="number">23</span>
+                <span class="program-title">Button Click Event</span>
+            </a>
+
+            <a href="DOM-Event-Based-Experiments/24-showhide.html" class="program">
+                <span class="number">24</span>
+                <span class="program-title">Show / Hide HTML Element</span>
+            </a>
+
+            <a href="DOM-Event-Based-Experiments/25-changeimage.html" class="program">
+                <span class="number">25</span>
+                <span class="program-title">Change Image on Button Click</span>
+            </a>
+
+            <a href="DOM-Event-Based-Experiments/26-digitalclock.html" class="program">
+                <span class="number">26</span>
+                <span class="program-title">Digital Clock</span>
+            </a>
+
+            <a href="DOM-Event-Based-Experiments/27-calculator.html" class="program">
+                <span class="number">27</span>
+                <span class="program-title">Simple Calculator</span>
+            </a>
+
+            <a href="DOM-Event-Based-Experiments/28-guessinggame.html" class="program">
+                <span class="number">28</span>
+                <span class="program-title">Number Guessing Game</span>
+            </a>
+
+            <a href="DOM-Event-Based-Experiments/29-formvalidation.html" class="program">
+                <span class="number">29</span>
+                <span class="program-title">Form Validation</span>
+            </a>
+
+            <a href="DOM-Event-Based-Experiments/30-fieldvalidation.html" class="program">
+                <span class="number">30</span>
+                <span class="program-title">Name, Email, Phone & Password Validation</span>
+            </a>
+
+            <a href="DOM-Event-Based-Experiments/31-todolist.html" class="program">
+                <span class="number">31</span>
+                <span class="program-title">To-Do List</span>
+            </a>
+
+            <a href="DOM-Event-Based-Experiments/32-quiz.html" class="program">
+                <span class="number">32</span>
+                <span class="program-title">Simple Quiz Application</span>
+            </a>
+
+            <a href="DOM-Event-Based-Experiments/33-counter.html" class="program">
+                <span class="number">33</span>
+                <span class="program-title">Counter Application</span>
+            </a>
+
+            <a href="DOM-Event-Based-Experiments/34-stopwatch.html" class="program">
+                <span class="number">34</span>
+                <span class="program-title">Stopwatch</span>
+            </a>
+
+            <a href="DOM-Event-Based-Experiments/35-countdowntimer.html" class="program">
+                <span class="number">35</span>
+                <span class="program-title">Countdown Timer</span>
+            </a>
+
+            <a href="DOM-Event-Based-Experiments/36-es6features.html" class="program">
+                <span class="number">36</span>
+                <span class="program-title">ES6 Features</span>
+            </a>
+
+            <a href="DOM-Event-Based-Experiments/37-spreadrest.html" class="program">
+                <span class="number">37</span>
+                <span class="program-title">Spread and Rest Operators</span>
+            </a>
+
+            <a href="DOM-Event-Based-Experiments/38-classesobjects.html" class="program">
+                <span class="number">38</span>
+                <span class="program-title">Classes and Objects</span>
+            </a>
+
+            <a href="DOM-Event-Based-Experiments/39-inheritance.html" class="program">
+                <span class="number">39</span>
+                <span class="program-title">Inheritance</span>
+            </a>
+
+            <a href="DOM-Event-Based-Experiments/40-callbacks-promises-asyncawait.html" class="program">
+                <span class="number">40</span>
+                <span class="program-title">Callbacks, Promises & Async/Await</span>
+            </a>
+
+            <a href="DOM-Event-Based-Experiments/41-fetchapi.html" class="program">
+                <span class="number">41</span>
+                <span class="program-title">Fetch API</span>
+            </a>
+
+            <a href="DOM-Event-Based-Experiments/42-apidata.html" class="program">
+                <span class="number">42</span>
+                <span class="program-title">Display API Data Dynamically</span>
+            </a>
+
+            <a href="DOM-Event-Based-Experiments/43-localstorage.html" class="program">
+                <span class="number">43</span>
+                <span class="program-title">localStorage</span>
+            </a>
+
+            <a href="DOM-Event-Based-Experiments/44-loginvalidation.html" class="program">
+                <span class="number">44</span>
+                <span class="program-title">Responsive Login Form Validation</span>
+            </a>
+
+            <a href="DOM-Event-Based-Experiments/45-interactivewebpage.html" class="program">
+                <span class="number">45</span>
+                <span class="program-title">Complete Interactive Webpage</span>
+            </a>
+
+            <a href="DOM-Event-Based-Experiments/46-swapnumbers.html" class="program">
+                <span class="number">46</span>
+                <span class="program-title">Swap Two Numbers</span>
+            </a>
+
+            <a href="DOM-Event-Based-Experiments/47-gcd.html" class="program">
+                <span class="number">47</span>
+                <span class="program-title">Greatest Common Divisor</span>
+            </a>
+
+            <a href="DOM-Event-Based-Experiments/48-lcm.html" class="program">
+                <span class="number">48</span>
+                <span class="program-title">Least Common Multiple</span>
+            </a>
+
+            <a href="DOM-Event-Based-Experiments/49-armstrong.html" class="program">
+                <span class="number">49</span>
+                <span class="program-title">Armstrong Number</span>
+            </a>
+
+            <a href="DOM-Event-Based-Experiments/50-perfectnumber.html" class="program">
+                <span class="number">50</span>
+                <span class="program-title">Perfect Number</span>
+            </a>
+
+            <a href="DOM-Event-Based-Experiments/51-multiplicationtable.html" class="program">
+                <span class="number">51</span>
+                <span class="program-title">Multiplication Table</span>
+            </a>
+
+            <a href="DOM-Event-Based-Experiments/52-power.html" class="program">
+                <span class="number">52</span>
+                <span class="program-title">Power of a Number</span>
+            </a>
+
+            <a href="DOM-Event-Based-Experiments/53-countdigits.html" class="program">
+                <span class="number">53</span>
+                <span class="program-title">Count Number of Digits</span>
+            </a>
+
+            <a href="DOM-Event-Based-Experiments/54-secondlargest.html" class="program">
+                <span class="number">54</span>
+                <span class="program-title">Second-Largest Element</span>
+            </a>
+
+            <a href="DOM-Event-Based-Experiments/55-removeduplicates.html" class="program">
+                <span class="number">55</span>
+                <span class="program-title">Remove Duplicate Elements</span>
+            </a>
+
+            <a href="DOM-Event-Based-Experiments/56-mergearrays.html" class="program">
+                <span class="number">56</span>
+                <span class="program-title">Merge Two Arrays</span>
+            </a>
+
+            <a href="DOM-Event-Based-Experiments/57-arrayfrequency.html" class="program">
+                <span class="number">57</span>
+                <span class="program-title">Array Element Frequency</span>
+            </a>
+
+            <a href="DOM-Event-Based-Experiments/58-commonelements.html" class="program">
+                <span class="number">58</span>
+                <span class="program-title">Common Elements in Two Arrays</span>
+            </a>
+
+            <a href="DOM-Event-Based-Experiments/59-reversestring.html" class="program">
+                <span class="number">59</span>
+                <span class="program-title">Reverse a String</span>
+            </a>
+
+            <a href="DOM-Event-Based-Experiments/60-stringpalindrome.html" class="program">
+                <span class="number">60</span>
+                <span class="program-title">String Palindrome</span>
+            </a>
+
+            <a href="DOM-Event-Based-Experiments/61-vowelsconsonants.html" class="program">
+                <span class="number">61</span>
+                <span class="program-title">Vowels and Consonants</span>
+            </a>
+
+            <a href="DOM-Event-Based-Experiments/62-wordcount.html" class="program">
+                <span class="number">62</span>
+                <span class="program-title">Count Words in a String</span>
+            </a>
+
+            <a href="DOM-Event-Based-Experiments/63-characterfrequency.html" class="program">
+                <span class="number">63</span>
+                <span class="program-title">Character Frequency</span>
+            </a>
+
+            <a href="DOM-Event-Based-Experiments/64-regex.html" class="program">
+                <span class="number">64</span>
+                <span class="program-title">Regular Expressions</span>
+            </a>
+
+            <a href="DOM-Event-Based-Experiments/65-emailregex.html" class="program">
+                <span class="number">65</span>
+                <span class="program-title">Email Validation Using Regex</span>
+            </a>
+
+
+    <!-- =====================================================
+         SECTION 3 - DOM MANIPULATION
+    ====================================================== -->
+
+        </div>
+
+</section>
+
+
+<section class="card">
+
+    <h2>3. DOM Manipulation</h2>
+
+    <p class="section-description">
+        Programs for dynamically creating, modifying and removing HTML elements.
+    </p>
+
+    <div class="program-list">
+        <!-- Keep your existing DOM Manipulation programs here -->
+
+            <a href="DOM Manipulation/01-add-element.html" class="program">
+                <span class="number">01</span>
+                <span class="program-title">Add Elements Dynamically</span>
+            </a>
+
+            <a href="DOM Manipulation/02-remove-element.html" class="program">
+                <span class="number">02</span>
+                <span class="program-title">Remove HTML Elements</span>
+            </a>
+
+            <a href="DOM Manipulation/03-change-style.html" class="program">
+                <span class="number">03</span>
+                <span class="program-title">Change CSS Styles</span>
+            </a>
+
+            <a href="DOM Manipulation/04-change-multiple.html" class="program">
+                <span class="number">04</span>
+                <span class="program-title">Change Multiple HTML Elements</span>
+            </a>
+
+            <a href="DOM Manipulation/05-getelement.html" class="program">
+                <span class="number">05</span>
+                <span class="program-title">getElementById & getElementsByClassName</span>
+            </a>
+
+            <a href="DOM Manipulation/06-queryselector.html" class="program">
+                <span class="number">06</span>
+                <span class="program-title">querySelector & querySelectorAll</span>
+            </a>
+
+            <a href="DOM Manipulation/07-cssclasses.html" class="program">
+                <span class="number">07</span>
+                <span class="program-title">Create and Remove CSS Classes</span>
+            </a>
+
+            <a href="DOM Manipulation/08-dynamic-table.html" class="program">
+                <span class="number">08</span>
+                <span class="program-title">Dynamic Table</span>
+            </a>
+
+            <a href="DOM Manipulation/09-add-delete-table-rows.html" class="program">
+                <span class="number">09</span>
+                <span class="program-title">Add and Delete Table Rows</span>
+            </a>
+
+            <a href="DOM Manipulation/10-search-filtertable.html" class="program">
+                <span class="number">10</span>
+                <span class="program-title">Search and Filter Table</span>
+            </a>
+
+            <a href="DOM Manipulation/11-charactercounter.html" class="program">
+                <span class="number">11</span>
+                <span class="program-title">Live Character Counter</span>
+            </a>
+
+            <a href="DOM Manipulation/12-password.html" class="program">
+                <span class="number">12</span>
+                <span class="program-title">Show / Hide Password</span>
+            </a>
+
+            <a href="DOM Manipulation/13-dropdown.html" class="program">
+                <span class="number">13</span>
+                <span class="program-title">Dynamic Dropdown List</span>
+            </a>
+
+            <a href="DOM Manipulation/14-dependent-dropdown.html" class="program">
+                <span class="number">14</span>
+                <span class="program-title">Country → State → City Dropdown</span>
+            </a>
+
+            <a href="DOM Manipulation/15-slideshow.html" class="program">
+                <span class="number">15</span>
+                <span class="program-title">Image Slideshow / Carousel</span>
+            </a>
+
+             <a href="DOM Manipulation/16-text-content.html" class="program">
+                <span class="number">16</span>
+                <span class="program-title">Change Text Content</span>
+            </a>
+
+            <a href="DOM Manipulation/17-innerhtml.html" class="program">
+                <span class="number">17</span>
+                <span class="program-title">Change HTML Content</span>
+            </a>
+
+            <a href="DOM Manipulation/18-style.html" class="program">
+                <span class="number">18</span>
+                <span class="program-title">Change Element Style</span>
+            </a>
+
+            <a href="DOM Manipulation/19-background.html" class="program">
+                <span class="number">19</span>
+                <span class="program-title">Change Background Color</span>
+            </a>
+
+            <a href="DOM Manipulation/20-create-element.html" class="program">
+                <span class="number">20</span>
+                <span class="program-title">Create HTML Element</span>
+            </a>
+
+            <a href="DOM Manipulation/21-remove-element.html" class="program">
+                <span class="number">21</span>
+                <span class="program-title">Remove HTML Element</span>
+            </a>
+
+            <a href="DOM Manipulation/22-replace-element.html" class="program">
+                <span class="number">22</span>
+                <span class="program-title">Replace HTML Element</span>
+            </a>
+
+            <a href="DOM Manipulation/23-css-classes.html" class="program">
+                <span class="number">23</span>
+                <span class="program-title">Add and Remove CSS Classes</span>
+            </a>
+
+            <a href="DOM Manipulation/24-toggle-class.html" class="program">
+                <span class="number">24</span>
+                <span class="program-title">Toggle CSS Class</span>
+            </a>
+
+            <a href="DOM Manipulation/25-attributes.html" class="program">
+                <span class="number">25</span>
+                <span class="program-title">Change HTML Attributes</span>
+            </a>
+
+            <a href="DOM Manipulation/26-dynamic-unordered-list.html" class="program">
+                <span class="number">26</span>
+                <span class="program-title">Create Dynamic Unordered List</span>
+            </a>
+
+            <a href="DOM Manipulation/27-dynamic-ordered-list.html" class="program">
+                <span class="number">27</span>
+                <span class="program-title">Create Dynamic Ordered List</span>
+            </a>
+
+            <a href="DOM Manipulation/28-dynamic-student-table.html" class="program">
+                <span class="number">28</span>
+                <span class="program-title">Create Dynamic Student Table</span>
+            </a>
+
+            <a href="DOM Manipulation/29-dynamic-add-table-row.html" class="program">
+                <span class="number">29</span>
+                <span class="program-title">Add Table Rows Dynamically</span>
+            </a>
+
+            <a href="DOM Manipulation/30-dynamic-delete-table-row.html" class="program">
+                <span class="number">30</span>
+                <span class="program-title">Delete Selected Table Row</span>
+            </a>
+
+            <a href="DOM Manipulation/31-dynamic-edit-table.html" class="program">
+                <span class="number">31</span>
+                <span class="program-title">Edit Table Data</span>
+            </a>
+
+            <a href="DOM Manipulation/32-dynamic-search-table.html" class="program">
+                <span class="number">32</span>
+                <span class="program-title">Searchable Table</span>
+            </a>
+
+            <a href="DOM Manipulation/33-dynamic-sort-table.html" class="program">
+                <span class="number">33</span>
+                <span class="program-title">Sort Table Records</span>
+            </a>
+
+
+            <a href="DOM Manipulation/34-dynamic-dropdown.html" class="program">
+                <span class="number">34</span>
+                <span class="program-title">Create Dynamic Dropdown Menu</span>
+            </a>
+
+            <a href="DOM Manipulation/35-dynamic-add-options.html" class="program">
+                <span class="number">35</span>
+                <span class="program-title">Add Options to Select</span>
+            </a>
+
+            <a href="DOM Manipulation/36-dynamic-dependent-dropdown.html" class="program">
+                <span class="number">36</span>
+                <span class="program-title">Dependent Dropdown</span>
+            </a>
+
+            <a href="DOM Manipulation/37-dynamic-image-gallery.html" class="program">
+                <span class="number">37</span>
+                <span class="program-title">Dynamic Image Gallery</span>
+            </a>
+
+            <a href="DOM Manipulation/38-dynamic-slideshow.html" class="program">
+                <span class="number">38</span>
+                <span class="program-title">Image Slideshow</span>
+            </a>
+
+            <a href="DOM Manipulation/39-dynamic-password.html" class="program">
+                <span class="number">39</span>
+                <span class="program-title">Show/Hide Password</span>
+            </a>
+
+            <a href="DOM Manipulation/40-dynamic-show-hide.html" class="program">
+                <span class="number">40</span>
+                <span class="program-title">Show/Hide Content</span>
+            </a>
+
+            <a href="DOM Manipulation/41-dynamic-tabs.html" class="program">
+                <span class="number">41</span>
+                <span class="program-title">Tabs Interface</span>
+            </a>
+
+            <a href="DOM Manipulation/42-dynamic-accordion.html" class="program">
+                <span class="number">42</span>
+                <span class="program-title">Accordion</span>
+            </a>
+
+            <a href="DOM Manipulation/43-dynamic-modal.html" class="program">
+                <span class="number">43</span>
+                <span class="program-title">Modal Popup</span>
+            </a>
+
+            <a href="DOM Manipulation/44-dynamic-tooltip.html" class="program">
+                <span class="number">44</span>
+                <span class="program-title">Dynamic Tooltip</span>
+            </a>
+
+            <a href="DOM Manipulation/45-dynamic-character-counter.html" class="program">
+                <span class="number">45</span>
+                <span class="program-title">Live Character Counter</span>
+            </a>
+
+            <a href="DOM Manipulation/46-dynamic-word-counter.html" class="program">
+                <span class="number">46</span>
+                <span class="program-title">Live Word Counter</span>
+            </a>
+
+            <a href="DOM Manipulation/47-dynamic-datetime.html" class="program">
+                <span class="number">47</span>
+                <span class="program-title">Current Date and Time</span>
+            </a>
+
+            <a href="DOM Manipulation/48-dynamic-todo.html" class="program">
+                <span class="number">48</span>
+                <span class="program-title">To-Do List</span>
+            </a>
+
+            <a href="DOM Manipulation/49-dynamic-todo-crud.html" class="program">
+                <span class="number">49</span>
+                <span class="program-title">Add, Edit and Delete To-Do Items</span>
+            </a>
+
+            <a href="DOM Manipulation/50-dynamic-dom-methods.html" class="program">
+                <span class="number">50</span>
+                <span class="program-title">Demonstrate DOM Methods</span>
+            </a>
+
+           
+    <!-- =====================================================
+         SECTION 4 - JAVASCRIPT EVENTS
+    ====================================================== -->
+
+        </div>
+
+</section>
+
+
+<section class="card">
+
+    <h2>4. JavaScript Events</h2>
+
+    <p class="section-description">
+        Programs demonstrating mouse, keyboard, form and other JavaScript events.
+    </p>
+
+    <div class="program-list">
+        <!-- Keep your existing JavaScript Events programs here -->
+
+   
+            <a href="JavaScript Events/01-mouse.html" class="program">
+                <span class="number">01</span>
+                <span class="program-title">Mouse Events</span>
+            </a>
+
+            <a href="JavaScript Events/02-keyboard.html" class="program">
+                <span class="number">02</span>
+                <span class="program-title">Keyboard Events</span>
+            </a>
+
+            <a href="JavaScript Events/03-form.html" class="program">
+                <span class="number">03</span>
+                <span class="program-title">Form Events</span>
+            </a>
+
+            <a href="JavaScript Events/04-doubleclick.html" class="program">
+                <span class="number">04</span>
+                <span class="program-title">Double-Click Event</span>
+            </a>
+
+            <a href="JavaScript Events/05-bubbling-capturing.html" class="program">
+                <span class="number">05</span>
+                <span class="program-title">Event Bubbling and Capturing</span>
+            </a>
+
+            <a href="JavaScript Events/06-delegation.html" class="program">
+                <span class="number">06</span>
+                <span class="program-title">Event Delegation</span>
+            </a>
+
+            <a href="JavaScript Events/07-keyboardgame.html" class="program">
+                <span class="number">07</span>
+                <span class="program-title">Keyboard-Controlled Game</span>
+            </a>
+
+            <a href="JavaScript Events/08-dragdrop.html" class="program">
+                <span class="number">08</span>
+                <span class="program-title">Drag and Drop Application</span>
+            </a>
+
+            <a href="JavaScript Events/09-onclick.html" class="program">
+                <span class="number">09</span>
+                <span class="program-title">onclick Event</span>
+            </a>
+
+            <a href="JavaScript Events/10-ondblclick.html" class="program">
+                <span class="number">10</span>
+                <span class="program-title">ondblclick Event</span>
+            </a>
+
+            <a href="JavaScript Events/11-mouseover.html" class="program">
+                <span class="number">11</span>
+                <span class="program-title">mouseover and mouseout</span>
+            </a>
+
+            <a href="JavaScript Events/12-mousedown.html" class="program">
+                <span class="number">12</span>
+                <span class="program-title">mousedown and mouseup</span>
+            </a>
+
+            <a href="JavaScript Events/13-mousemove.html" class="program">
+                <span class="number">13</span>
+                <span class="program-title">mousemove Event</span>
+            </a>
+
+            <a href="JavaScript Events/14-keydown.html" class="program">
+                <span class="number">14</span>
+                <span class="program-title">keydown Event</span>
+            </a>
+
+            <a href="JavaScript Events/15-keyup.html" class="program">
+                <span class="number">15</span>
+                <span class="program-title">keyup Event</span>
+            </a>
+
+            <a href="JavaScript Events/16-keypressed.html" class="program">
+                <span class="number">16</span>
+                <span class="program-title">Display Key Pressed</span>
+            </a>
+
+            <a href="JavaScript Events/17-keycounter.html" class="program">
+                <span class="number">17</span>
+                <span class="program-title">Keyboard Key Press Counter</span>
+            </a>
+
+            <a href="JavaScript Events/18-focusblur.html" class="program">
+                <span class="number">18</span>
+                <span class="program-title">Focus and Blur Events</span>
+            </a>
+
+            <a href="JavaScript Events/19-change.html" class="program">
+                <span class="number">19</span>
+                <span class="program-title">change Event</span>
+            </a>
+
+            <a href="JavaScript Events/20-input.html" class="program">
+                <span class="number">20</span>
+                <span class="program-title">input Event</span>
+            </a>
+
+            <a href="JavaScript Events/21-submit.html" class="program">
+                <span class="number">21</span>
+                <span class="program-title">submit Event</span>
+            </a>
+
+            <a href="JavaScript Events/22-reset.html" class="program">
+                <span class="number">22</span>
+                <span class="program-title">reset Event</span>
+            </a>
+
+            <a href="JavaScript Events/23-background.html" class="program">
+                <span class="number">23</span>
+                <span class="program-title">Change Background on Click</span>
+            </a>
+
+            <a href="JavaScript Events/24-fontsize.html" class="program">
+                <span class="number">24</span>
+                <span class="program-title">Change Font Size</span>
+            </a>
+
+            <a href="JavaScript Events/25-multiplebuttons.html" class="program">
+                <span class="number">25</span>
+                <span class="program-title">Multiple Button Events</span>
+            </a>
+
+            <a href="JavaScript Events/26-addeventlistener.html" class="program">
+                <span class="number">26</span>
+                <span class="program-title">addEventListener()</span>
+            </a>
+
+            <a href="JavaScript Events/27-multiplelisteners.html" class="program">
+                <span class="number">27</span>
+                <span class="program-title">Multiple Event Listeners</span>
+            </a>
+
+            <a href="JavaScript Events/28-removeeventlistener.html" class="program">
+                <span class="number">28</span>
+                <span class="program-title">removeEventListener()</span>
+            </a>
+
+            <a href="JavaScript Events/29-bubbling.html" class="program">
+                <span class="number">29</span>
+                <span class="program-title">Demonstrate Event Bubbling</span>
+            </a>
+
+            <a href="JavaScript Events/30-event-capturing.html" class="program">
+                <span class="number">30</span>
+                <span class="program-title">Demonstrate Event Capturing</span>
+            </a>
+
+            <a href="JavaScript Events/31-event-delegation.html" class="program">
+                <span class="number">31</span>
+                <span class="program-title">Demonstrate Event Delegation</span>
+            </a>
+
+            <a href="JavaScript Events/32-drag-drop.html" class="program">
+                <span class="number">32</span>
+                <span class="program-title">Create a Drag-and-Drop Application</span>
+            </a>
+
+            <a href="JavaScript Events/33-mouse-coordinate.html" class="program">
+                <span class="number">33</span>
+                <span class="program-title">Mouse Coordinate Tracker</span>
+            </a>
+
+            <a href="JavaScript Events/34-keyboard-object.html" class="program">
+                <span class="number">34</span>
+                <span class="program-title">Keyboard-Controlled Moving Object</span>
+            </a>
+
+            <a href="JavaScript Events/35-click-counter.html" class="program">
+                <span class="number">35</span>
+                <span class="program-title">Click Counter</span>
+            </a>
+
+            <a href="JavaScript Events/36-double-click-counter.html" class="program">
+                <span class="number">36</span>
+                <span class="program-title">Double-Click Counter</span>
+            </a>
+
+            <a href="JavaScript Events/37-reaction-game.html" class="program">
+                <span class="number">37</span>
+                <span class="program-title">Reaction-Time Game</span>
+            </a>
+
+            <a href="JavaScript Events/38-typing-test.html" class="program">
+                <span class="number">38</span>
+                <span class="program-title">Keyboard Typing Test</span>
+            </a>
+
+
+    
+           <!-- =====================================================
+                      SECTION 5 - FORMS AND VALIDATION
+            ====================================================== -->
+
+                </div>
+
+</section>
+
+
+<section class="card">
+
+    <h2>5. Forms and Validation</h2>
+
+    <p class="section-description">
+        Form handling, input validation and validation techniques using JavaScript.
+    </p>
+
+    <div class="program-list">
+        <!-- Keep your existing Forms and Validation programs here -->
+
+
+            <a href="Forms and Validation/01-student-registration.html" class="program">
+                <span class="number">1</span>
+                <span class="program-title">Student Registration Form with JavaScript Validation</span>
+            </a>
+
+            <a href="Forms and Validation/02-login-validation.html" class="program">
+                <span class="number">2</span>
+                <span class="program-title">Login Form with Username and Password Validation</span>
+            </a>
+
+            <a href="Forms and Validation/03-password-strength.html" class="program">
+                <span class="number">3</span>
+                <span class="program-title">Password Strength Checker</span>
+            </a>
+
+            <a href="Forms and Validation/04-signup-confirmation.html" class="program">
+                <span class="number">4</span>
+                <span class="program-title">Signup Form with Password Confirmation</span>
+            </a>
+
+            <a href="Forms and Validation/05-feedback-validation.html" class="program">
+                <span class="number">5</span>
+                <span class="program-title">Feedback Form with Validation</span>
+            </a>
+
+            <a href="Forms and Validation/06-college-admission.html" class="program">
+                <span class="number">6</span>
+                <span class="program-title">College Admission Form with JavaScript Validation</span>
+            </a>
+
+            <a href="Forms and Validation/07-dynamic-validation.html" class="program">
+                <span class="number">7</span>
+                <span class="program-title">Dynamic Validation Error Messages</span>
+            </a>
+                            
+
+            <a href="Forms and Validation/08-name-validation.html" class="program">
+                <span class="number">8</span>
+                <span class="program-title">Name Field Validation Using Alphabets Only</span>
+            </a>
+
+            <a href="Forms and Validation/09-age-validation.html" class="program">
+                <span class="number">9</span>
+                <span class="program-title">Age Field Validation</span>
+            </a>
+
+            <a href="Forms and Validation/10-mobile-validation.html" class="program">
+                <span class="number">10</span>
+                <span class="program-title">Mobile Phone Number Validation</span>
+            </a>
+
+            <a href="Forms and Validation/11-email-validation.html" class="program">
+                <span class="number">11</span>
+                <span class="program-title">Email Address Validation</span>
+            </a>
+
+            <a href="Forms and Validation/12-password-length.html" class="program">
+                <span class="number">12</span>
+                <span class="program-title">Password Validation Using Minimum Length</span>
+            </a>
+
+            <a href="Forms and Validation/13-strong-password.html" class="program">
+                <span class="number">13</span>
+                <span class="program-title">Strong Password Validator</span>
+            </a>
+
+            <a href="Forms and Validation/14-confirm-password.html" class="program">
+                <span class="number">14</span>
+                <span class="program-title">Password and Confirm Password Validation</span>
+            </a>
+
+            <a href="Forms and Validation/15-date-of-birth.html" class="program">
+                <span class="number">15</span>
+                <span class="program-title">Date of Birth Validation</span>
+            </a>
+
+            <a href="Forms and Validation/16-gender-validation.html" class="program">
+                <span class="number">16</span>
+                <span class="program-title">Gender Selection Validation</span>
+            </a>
+
+            <a href="Forms and Validation/17-radio-validation.html" class="program">
+                <span class="number">17</span>
+                <span class="program-title">Radio Button Validation</span>
+            </a>
+
+            <a href="Forms and Validation/18-checkbox-validation.html" class="program">
+                <span class="number">18</span>
+                <span class="program-title">Checkbox Selection Validation</span>
+            </a>
+
+            <a href="Forms and Validation/19-select-validation.html" class="program">
+                <span class="number">19</span>
+                <span class="program-title">Dropdown / Select Box Validation</span>
+            </a>
+
+            <a href="Forms and Validation/20-textarea-validation.html" class="program">
+                <span class="number">20</span>
+                <span class="program-title">Textarea Validation</span>
+            </a>
+
+            <a href="Forms and Validation/21-required-fields.html" class="program">
+                <span class="number">21</span>
+                <span class="program-title">Required-Field Validation</span>
+            </a>
+
+            <a href="Forms and Validation/22-field-errors.html" class="program">
+                <span class="number">22</span>
+                <span class="program-title">Display Error Messages Beside Form Fields</span>
+            </a>
+
+            <a href="Forms and Validation/23-success-message.html" class="program">
+                <span class="number">23</span>
+                <span class="program-title">Success Message After Form Submission</span>
+            </a>
+
+            <a href="Forms and Validation/24-prevent-submit.html" class="program">
+                <span class="number">24</span>
+                <span class="program-title">Prevent Form Submission When Validation Fails</span>
+            </a>
+
+            <a href="Forms and Validation/25-regex-validation.html" class="program">
+                <span class="number">25</span>
+                <span class="program-title">Form Validation Using Regular Expressions</span>
+            </a>
+
+            <a href="Forms and Validation/26-regex-email.html" class="program">
+                <span class="number">26</span>
+                <span class="program-title">Email Validation Using Regular Expression</span>
+            </a>
+
+            <a href="Forms and Validation/27-regex-phone.html" class="program">
+                <span class="number">27</span>
+                <span class="program-title">Phone Number Validation Using Regular Expression</span>
+            </a>
+
+            <a href="Forms and Validation/28-regex-password.html" class="program">
+                <span class="number">28</span>
+                <span class="program-title">Password Validation Using Regular Expression</span>
+            </a>
+
+            <a href="Forms and Validation/29-realtime-validation.html" class="program">
+                <span class="number">29</span>
+                <span class="program-title">Real-Time Form Validation System</span>
+            </a>
+
+            <a href="Forms and Validation/30-form-events-validation.html" class="program">
+                <span class="number">30</span>
+                <span class="program-title">Validation Using Input, Change, Focus and Blur Events</span>
+            </a>
+
+            <a href="Forms and Validation/31-password-strength-meter.html" class="program">
+                <span class="number">31</span>
+                <span class="program-title">Password Strength Meter</span>
+            </a>
+
+            <a href="Forms and Validation/32-show-hide-password.html" class="program">
+                <span class="number">32</span>
+                <span class="program-title">Show / Hide Password</span>
+            </a>
+
+            <a href="Forms and Validation/33-registration-confirmation.html" class="program">
+                <span class="number">33</span>
+                <span class="program-title">Registration Form with Password Confirmation</span>
+            </a>
+
+            <a href="Forms and Validation/34-college-admission.html" class="program">
+                <span class="number">34</span>
+                <span class="program-title">College Admission Form with Complete Validation</span>
+            </a>
+
+            <a href="Forms and Validation/35-job-application.html" class="program">
+                <span class="number">35</span>
+                <span class="program-title">Job Application Form with Validation</span>
+            </a>
+
+            <a href="Forms and Validation/36-feedback-validation.html" class="program">
+                <span class="number">36</span>
+                <span class="program-title">Feedback Form with Validation</span>
+            </a>
+
+            <a href="Forms and Validation/37-contact-validation.html" class="program">
+                <span class="number">37</span>
+                <span class="program-title">Contact Form with Validation</span>
+            </a>
+
+            <a href="Forms and Validation/38-multi-step-registration.html" class="program">
+                <span class="number">38</span>
+                <span class="program-title">Multi-Step Registration Form</span>
+            </a>
+
+            <a href="Forms and Validation/39-form-preview.html" class="program">
+                <span class="number">39</span>
+                <span class="program-title">Form Preview Before Submission</span>
+            </a>
+
+            <a href="Forms and Validation/40-age-calculator.html" class="program">
+                <span class="number">40</span>
+                <span class="program-title">Calculate Age from Date of Birth</span>
+            </a>
+
+            <a href="Forms and Validation/41-marks-calculator.html" class="program">
+                <span class="number">41</span>
+                <span class="program-title">Marks Entry Form with Total, Average and Grade</span>
+            </a>
+
+            <a href="Forms and Validation/42-salary-calculator.html" class="program">
+                <span class="number">42</span>
+                <span class="program-title">Employee Salary Details Calculator</span>
+            </a>
+
+            <a href="Forms and Validation/43-shopping-order.html" class="program">
+                <span class="number">43</span>
+                <span class="program-title">Shopping Order Form with Total Price</span>
+            </a>
+
+            <a href="Forms and Validation/44-dynamic-fields.html" class="program">
+                <span class="number">44</span>
+                <span class="program-title">Form with Dynamic Fields</span>
+            </a>
+
+            <a href="Forms and Validation/45-validation-no-reload.html" class="program">
+                <span class="number">45</span>
+                <span class="program-title">Form Validation Without Page Reload</span>
+            </a>
+
+
+    <!-- =====================================================
+         SECTION 6 - Browser and Storage
+    ====================================================== -->
+
+        </div>
+
+</section>
+
+
+<section class="card">
+
+    <h2>6. Browser and Storage</h2>
+
+    <p class="section-description">
+        Browser features, browser storage and storage-based programs.
+    </p>
+
+    <div class="program-list">
+        <!-- Keep existing Browser and Storage links here -->
+
+
+            <a href="Browser and Storage/01-window-object.html" class="program">
+                <span class="number">1</span>
+                <span class="program-title">Demonstrate the Window Object</span>
+            </a>
+
+            <a href="Browser and Storage/02-navigator-object.html" class="program">
+                <span class="number">2</span>
+                <span class="program-title">Demonstrate the Navigator Object</span>
+            </a>
+
+            <a href="Browser and Storage/03-location-object.html" class="program">
+                <span class="number">3</span>
+                <span class="program-title">Demonstrate the Location Object</span>
+            </a>
+
+            <a href="Browser and Storage/04-history-object.html" class="program">
+                <span class="number">4</span>
+                <span class="program-title">Demonstrate the History Object</span>
+            </a>
+
+
+             <a href="Browser and Storage/05-local-storage.html" class="program">
+                <span class="number">5</span>
+                <span class="program-title">Create a Program Using localStorage</span>
+            </a>
+
+            <a href="Browser and Storage/06-session-storage.html" class="program">
+                <span class="number">6</span>
+                <span class="program-title">Create a Program Using sessionStorage</span>
+            </a>
+
+            <a href="Browser and Storage/07-shopping-cart-local-storage.html" class="program">
+                <span class="number">7</span>
+                <span class="program-title">Create a Shopping Cart Using localStorage</span>
+            </a>
+
+            <a href="Browser and Storage/08-theme-switcher-local-storage.html" class="program">
+                <span class="number">8</span>
+                <span class="program-title">Create a Theme Switcher Using localStorage</span>
+            </a>
+
+          <!-- =====================================================
+                    SECTION 7 - Browser Objects and Browser Features
+          ====================================================== -->
+
+
+              </div>
+
+</section>
+
+
+<section class="card">
+
+    <h2>7. Browser Objects and Browser Features</h2>
+
+    <p class="section-description">
+        JavaScript programs using browser objects and browser APIs.
+    </p>
+
+    <div class="program-list">
+        <!-- Keep existing Browser Objects links here -->
+
+            <a href="Browser Objects and Browser Features/01-window-object.html" class="program">
+                <span class="number">1</span>
+                <span class="program-title">Demonstrate the Window Object</span>
+            </a>
+
+            <a href="Browser Objects and Browser Features/02-alert-confirm-prompt.html" class="program">
+                <span class="number">2</span>
+                <span class="program-title">Demonstrate alert(), confirm(), and prompt()</span>
+            </a>
+
+            <a href="Browser Objects and Browser Features/03-settimeout.html" class="program">
+                <span class="number">3</span>
+                <span class="program-title">Create a Program Using setTimeout()</span>
+            </a>
+
+            <a href="Browser Objects and Browser Features/04-setinterval.html" class="program">
+                <span class="number">4</span>
+                <span class="program-title">Create a Program Using setInterval()</span>
+            </a>
+
+            <a href="Browser Objects and Browser Features/05-digital-clock.html" class="program">
+                <span class="number">5</span>
+                <span class="program-title">Create a Digital Clock Using setInterval()</span>
+            </a>
+
+            <a href="Browser Objects and Browser Features/06-countdown-timer.html" class="program">
+                <span class="number">6</span>
+                <span class="program-title">Create a Countdown Timer</span>
+            </a>
+
+            <a href="Browser Objects and Browser Features/07-stopwatch.html" class="program">
+                <span class="number">7</span>
+                <span class="program-title">Create a Stopwatch</span>
+            </a>
+
+            <a href="Browser Objects and Browser Features/08-location-object.html" class="program">
+                <span class="number">8</span>
+                <span class="program-title">Demonstrate the Location Object</span>
+            </a>
+
+            <a href="Browser Objects and Browser Features/09-redirect-webpage.html" class="program">
+                <span class="number">9</span>
+                <span class="program-title">Create a Button to Redirect the User to Another Webpage</span>
+            </a>
+
+            <a href="Browser Objects and Browser Features/10-current-url.html" class="program">
+                <span class="number">10</span>
+                <span class="program-title">Display the Current Webpage URL Using JavaScript</span>
+            </a>
+
+            <a href="Browser Objects and Browser Features/11-history-object.html" class="program">
+                <span class="number">11</span>
+                <span class="program-title">Demonstrate the History Object</span>
+            </a>
+
+            <a href="Browser Objects and Browser Features/12-history-buttons.html" class="program">
+                <span class="number">12</span>
+                <span class="program-title">Create Buttons for Back, Forward, and Reload Browser Operations</span>
+            </a>
+
+            <a href="Browser Objects and Browser Features/13-navigator-object.html" class="program">
+                <span class="number">13</span>
+                <span class="program-title">Demonstrate the Navigator Object</span>
+            </a>
+
+            <a href="Browser Objects and Browser Features/14-browser-information.html" class="program">
+                <span class="number">14</span>
+                <span class="program-title">Display Browser Information Using JavaScript</span>
+            </a>
+
+            <a href="Browser Objects and Browser Features/15-screen-dimensions.html" class="program">
+                <span class="number">15</span>
+                <span class="program-title">Display the User's Screen Width and Height</span>
+            </a>
+
+            <a href="Browser Objects and Browser Features/16-online-offline-detection.html" class="program">
+                <span class="number">16</span>
+                <span class="program-title">Detect Whether the Browser Is Online or Offline</span>
+            </a>
+
+            <a href="Browser Objects and Browser Features/17-browser-language.html" class="program">
+                <span class="number">17</span>
+                <span class="program-title">Display the Current Browser Language</span>
+            </a>
+
+            <a href="Browser Objects and Browser Features/18-geolocation.html" class="program">
+                <span class="number">18</span>
+                <span class="program-title">Demonstrate Browser Geolocation</span>
+            </a>
+
+            <a href="Browser Objects and Browser Features/19-geographical-coordinates.html" class="program">
+                <span class="number">19</span>
+                <span class="program-title">Display the User's Current Geographical Coordinates</span>
+            </a>
+
+            <a href="Browser Objects and Browser Features/20-online-offline-update.html" class="program">
+                <span class="number">20</span>
+                <span class="program-title">Create a Webpage That Updates Information When the Browser Goes Online/Offline</span>
+            </a>
+
+    
+        <!-- =====================================================
+                    SECTION 8 - Mini projects
+        ====================================================== -->
+
+
+            </div>
+
+</section>
+
+
+<section class="card">
+
+    <h2>8. Mini Projects</h2>
+
+    <p class="section-description">
+        Practical JavaScript mini projects and interactive applications.
+    </p>
+
+    <div class="program-list">
+        <!-- Keep your existing Mini Project links here -->
+
+
+
+            <a href="Mini Projects/01-digital-calculator.html" class="program">
+                <span class="number">1</span>
+                <span class="program-title">Create a Digital Calculator</span>
+            </a>
+
+            <a href="Mini Projects/02-digital-clock.html" class="program">
+                <span class="number">2</span>
+                <span class="program-title">Create a Digital Clock</span>
+            </a>
+
+            <a href="Mini Projects/03-stopwatch.html" class="program">
+                <span class="number">3</span>
+                <span class="program-title">Create a Stopwatch</span>
+            </a>
+
+            <a href="Mini Projects/04-countdown-timer.html" class="program">
+                <span class="number">4</span>
+                <span class="program-title">Create a Countdown Timer</span>
+            </a>
+
+            <a href="Mini Projects/05-todo-list.html" class="program">
+                <span class="number">5</span>
+                <span class="program-title">Create a To-Do List Application</span>
+            </a>
+
+            <a href="Mini Projects/06-weather-api.html" class="program">
+                <span class="number">6</span>
+                <span class="program-title">Create a Weather Application Using an API</span>
+            </a>
+
+            <a href="Mini Projects/07-quiz-application.html" class="program">
+                <span class="number">7</span>
+                <span class="program-title">Create a Quiz Application</span>
+            </a>
+
+            <a href="Mini Projects/08-number-guessing-game.html" class="program">
+                <span class="number">8</span>
+                <span class="program-title">Create a Number Guessing Game</span>
+            </a>
+
+            <a href="Mini Projects/09-tic-tac-toe.html" class="program">
+                <span class="number">9</span>
+                <span class="program-title">Create a Tic-Tac-Toe Game</span>
+            </a>
+
+            <a href="Mini Projects/10-expense-tracker.html" class="program">
+                <span class="number">10</span>
+                <span class="program-title">Create a Simple Expense Tracker</span>
+            </a>
+
+            <a href="Mini Projects/11-marks-grade-calculator.html" class="program">
+                <span class="number">11</span>
+                <span class="program-title">Create a Student Marks/Grade Calculator</span>
+            </a>
+
+            <a href="Mini Projects/12-shopping-cart.html" class="program">
+                <span class="number">12</span>
+                <span class="program-title">Create a Simple Shopping Cart</span>
+            </a>
+
+            <a href="Mini Projects/13-notes-localstorage.html" class="program">
+                <span class="number">13</span>
+                <span class="program-title">Create a Notes Application Using localStorage</span>
+            </a>
+
+            <a href="Mini Projects/14-random-password-generator.html" class="program">
+                <span class="number">14</span>
+                <span class="program-title">Create a Random Password Generator</span>
+            </a>
+
+            <a href="Mini Projects/15-bmi-calculator.html" class="program">
+                <span class="number">15</span>
+                <span class="program-title">Create a BMI Calculator</span>
+            </a>
+
+            <a href="Mini Projects/16-currency-converter-api.html" class="program">
+                <span class="number">16</span>
+                <span class="program-title">Create a Currency Converter Using an API</span>
+            </a>
+
+            <a href="Mini Projects/17-interactive-portfolio.html" class="program">
+                <span class="number">17</span>
+                <span class="program-title">Create a Complete Interactive Portfolio Website</span>
+            </a>
+
+         
+         
+            <!-- =====================================================
+                    SECTION 9 - Web Storage 
+        ====================================================== -->
+
+            </div>
+
+</section>
+
+
+<section class="card">
+
+    <h2>9. Web Storage</h2>
+
+    <p class="section-description">
+        Programs using localStorage and sessionStorage.
+    </p>
+
+    <div class="program-list">
+        <!-- Keep your existing Web Storage links here -->
+
+
+
+            <a href="Web Storage/01-store-username-localstorage.html" class="program">
+                <span class="number">1</span>
+                <span class="program-title">Store a Username Using localStorage</span>
+            </a>
+
+            <a href="Web Storage/02-retrieve-localstorage.html" class="program">
+                <span class="number">2</span>
+                <span class="program-title">Retrieve and Display Data from localStorage</span>
+            </a>
+
+            <a href="Web Storage/03-update-localstorage.html" class="program">
+                <span class="number">3</span>
+                <span class="program-title">Update Data Stored in localStorage</span>
+            </a>
+
+            <a href="Web Storage/04-delete-localstorage.html" class="program">
+                <span class="number">4</span>
+                <span class="program-title">Delete an Item from localStorage</span>
+            </a>
+
+            <a href="Web Storage/05-clear-localstorage.html" class="program">
+                <span class="number">5</span>
+                <span class="program-title">Clear All localStorage Data</span>
+            </a>
+
+            <a href="Web Storage/06-multiple-values-localstorage.html" class="program">
+                <span class="number">6</span>
+                <span class="program-title">Store Multiple Values Using localStorage</span>
+            </a>
+
+            <a href="Web Storage/07-array-localstorage.html" class="program">
+                <span class="number">7</span>
+                <span class="program-title">Store an Array in localStorage Using JSON</span>
+            </a>
+
+            <a href="Web Storage/08-object-localstorage.html" class="program">
+                <span class="number">8</span>
+                <span class="program-title">Store a JavaScript Object in localStorage</span>
+            </a>
+
+            <a href="Web Storage/09-student-record-localstorage.html" class="program">
+                <span class="number">9</span>
+                <span class="program-title">Create a Student Record System Using localStorage</span>
+            </a>
+
+            <a href="Web Storage/10-todo-localstorage.html" class="program">
+                <span class="number">10</span>
+                <span class="program-title">Create a To-Do List Using localStorage</span>
+            </a>
+
+            <a href="Web Storage/11-notes-localstorage.html" class="program">
+                <span class="number">11</span>
+                <span class="program-title">Create a Notes Application Using localStorage</span>
+            </a>
+
+            <a href="Web Storage/12-shopping-cart-localstorage.html" class="program">
+                <span class="number">12</span>
+                <span class="program-title">Create a Shopping Cart Using localStorage</span>
+            </a>
+
+            <a href="Web Storage/13-login-preference-localstorage.html" class="program">
+                <span class="number">13</span>
+                <span class="program-title">Create a Login Preference System Using localStorage</span>
+            </a>
+
+            <a href="Web Storage/14-theme-switcher-localstorage.html" class="program">
+                <span class="number">14</span>
+                <span class="program-title">Create a Dark/Light Theme Switcher Using localStorage</span>
+            </a>
+
+            <a href="Web Storage/15-font-size-localstorage.html" class="program">
+                <span class="number">15</span>
+                <span class="program-title">Save the User's Preferred Font Size Using localStorage</span>
+            </a>
+
+            <a href="Web Storage/16-recently-viewed-localstorage.html" class="program">
+                <span class="number">16</span>
+                <span class="program-title">Create a Recently Viewed Items Feature Using localStorage</span>
+            </a>
+
+            <a href="Web Storage/17-visitor-counter.html" class="program">
+                <span class="number">17</span>
+                <span class="program-title">Create a Visitor Counter Using Browser Storage</span>
+            </a>
+
+            <a href="Web Storage/18-localstorage-vs-sessionstorage.html" class="program">
+                <span class="number">18</span>
+                <span class="program-title">Compare localStorage and sessionStorage</span>
+            </a>
+
+            <a href="Web Storage/19-temporary-form-sessionstorage.html" class="program">
+                <span class="number">19</span>
+                <span class="program-title">Store Temporary Form Data Using sessionStorage</span>
+            </a>
+
+            <a href="Web Storage/20-multipage-form-sessionstorage.html" class="program">
+                <span class="number">20</span>
+                <span class="program-title">Create a Multi-Page Form Using sessionStorage</span>
+            </a>
+
+            <a href="Web Storage/21-auto-save-localstorage.html" class="program">
+                <span class="number">21</span>
+                <span class="program-title">Save Form Data Automatically Using localStorage</span>
+            </a>
+
+            <a href="Web Storage/22-restore-form-data.html" class="program">
+                <span class="number">22</span>
+                <span class="program-title">Restore Previously Entered Form Data After Refreshing</span>
+            </a>
+
+            <a href="Web Storage/23-persistent-shopping-cart.html" class="program">
+                <span class="number">23</span>
+                <span class="program-title">Create a Shopping Cart That Persists After Page Refresh</span>
+            </a>
+
+            <a href="Web Storage/24-student-marks-database.html" class="program">
+                <span class="number">24</span>
+                <span class="program-title">Create a Student Marks Database Using localStorage</span>
+            </a>
+
+            <a href="Web Storage/25-crud-localstorage.html" class="program">
+                <span class="number">25</span>
+                <span class="program-title">Create a CRUD Application Using localStorage</span>
+            </a>
+
+     </div>
+
+</section>           

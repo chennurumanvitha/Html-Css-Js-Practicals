@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Practical 34 - Keyboard Controlled Moving Object</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: #f1f5f9;
+            color: #334155;
+            line-height: 1.6;
+        }
+
+        header {
+            background: #0f172a;
+            padding: 18px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .logo {
+            color: white;
+            font-size: 22px;
+            font-weight: 700;
+        }
+
+        nav a {
+            color: #cbd5e1;
+            text-decoration: none;
+            margin-left: 22px;
+            font-size: 15px;
+        }
+
+        nav a:hover {
+            color: white;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #1e3a8a, #2563eb);
+            color: white;
+            text-align: center;
+            padding: 65px 20px;
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        .hero h1 {
+            margin: 0 0 10px;
+            font-size: 36px;
+        }
+
+        .hero p {
+            margin: 0;
+            opacity: 0.9;
+        }
+
+        main {
+            width: 90%;
+            max-width: 1050px;
+            margin: 40px auto;
+        }
+
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 28px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 15px rgba(15, 23, 42, 0.08);
+        }
+
+        .objective {
+            border-left: 5px solid #2563eb;
+        }
+
+        .card h2 {
+            color: #1e3a8a;
+            margin-top: 0;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 10px;
+        }
+
+        .demo-area {
+            text-align: center;
+        }
+
+        .game-area {
+            position: relative;
+            width: 100%;
+            max-width: 750px;
+            height: 350px;
+            margin: 25px auto;
+            background: #eff6ff;
+            border: 3px solid #2563eb;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .player {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            background: #2563eb;
+            border-radius: 8px;
+            left: 20px;
+            top: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-weight: 700;
+            user-select: none;
+            transition: left 0.05s, top 0.05s;
+        }
+
+        .instructions {
+            background: #f8fafc;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            padding: 15px;
+            max-width: 600px;
+            margin: 20px auto;
+        }
+
+        .key {
+            display: inline-block;
+            background: #e2e8f0;
+            border: 1px solid #94a3b8;
+            border-radius: 5px;
+            padding: 3px 8px;
+            margin: 2px;
+            font-weight: 600;
+            color: #1e293b;
+        }
+
+        .event-output {
+            background: #eff6ff;
+            border: 2px dashed #60a5fa;
+            border-radius: 10px;
+            padding: 18px;
+            margin-top: 20px;
+            min-height: 90px;
+        }
+
+        .event-output strong {
+            color: #1e3a8a;
+        }
+
+        button {
+            border: none;
+            background: #2563eb;
+            color: white;
+            padding: 11px 20px;
+            border-radius: 7px;
+            font-size: 15px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        button:hover {
+            background: #1d4ed8;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin: 30px 0;
+        }
+
+        .btn-link {
+            display: inline-block;
+            background: #2563eb;
+            color: white;
+            padding: 11px 20px;
+            border-radius: 7px;
+            text-decoration: none;
+            font-size: 15px;
+            transition: 0.2s;
+        }
+
+        .btn-link:hover {
+            background: #1d4ed8;
+        }
+
+        .secondary {
+            background: #475569;
+        }
+
+        .secondary:hover {
+            background: #334155;
+        }
+
+        footer {
+            background: #0f172a;
+            color: #cbd5e1;
+            text-align: center;
+            padding: 22px;
+            margin-top: 50px;
+        }
+
+        @media (max-width: 750px) {
+            header {
+                justify-content: center;
+                text-align: center;
+            }
+
+            nav a {
+                margin: 0 8px;
+            }
+
+            .hero h1 {
+                font-size: 30px;
+            }
+
+            .card {
+                padding: 20px;
+            }
+
+            .game-area {
+                height: 300px;
+            }
+        }
+
+        @media (max-width: 550px) {
+            .hero {
+                padding: 45px 15px;
+            }
+
+            .hero h1 {
+                font-size: 26px;
+            }
+
+            .game-area {
+                height: 250px;
+            }
+
+            .buttons {
+                flex-direction: column;
+            }
+
+            .btn-link {
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="logo">JavaScript Events</div>
+
+        <nav>
+           <a href="../../index.html">Home</a>
+<a href="../index.html">JavaScript Programs</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="badge">Practical 34</div>
+        <h1>Keyboard Controlled Moving Object</h1>
+        <p>Control an object using keyboard events.</p>
+    </section>
+
+    <main>
+
+        <section class="card objective">
+            <h2>Objective</h2>
+            <p>
+                To create a keyboard-controlled moving object using JavaScript
+                keyboard events.
+            </p>
+        </section>
+
+        <section class="card">
+            <h2>Keyboard Movement Demonstration</h2>
+
+            <div class="demo-area">
+
+                <p>
+                    Click the game area and use the keyboard to move the object.
+                </p>
+
+                <div class="instructions">
+                    Use
+                    <span class="key">↑</span>
+                    <span class="key">↓</span>
+                    <span class="key">←</span>
+                    <span class="key">→</span>
+                    or
+                    <span class="key">W</span>
+                    <span class="key">A</span>
+                    <span class="key">S</span>
+                    <span class="key">D</span>
+                    to move the object.
+                </div>
+
+                <div class="game-area" id="gameArea" tabindex="0">
+
+                    <div class="player" id="player">
+                        ★
+                    </div>
+
+                </div>
+
+                <div class="event-output" id="output">
+                    <strong>Keyboard Status:</strong>
+                    Use the arrow keys or W/A/S/D to move the object.
+                </div>
+
+                <br>
+
+                <button id="resetButton">Reset Position</button>
+
+            </div>
+        </section>
+
+        <div class="buttons">
+
+            <a href="33-mouse-coordinate-tracker.html" class="btn-link">
+                ← Previous Practical
+            </a>
+
+            <a href="index.html" class="btn-link secondary">
+                Events Programs
+            </a>
+
+            <a href="35-next.html" class="btn-link">
+                Next Practical →
+            </a>
+
+        </div>
+
+    </main>
+
+    <footer>
+        <p>JavaScript Events Practical Programs</p>
+    </footer>
+
+    <script>
+        const gameArea = document.getElementById("gameArea");
+        const player = document.getElementById("player");
+        const output = document.getElementById("output");
+        const resetButton = document.getElementById("resetButton");
+
+        let playerX = 20;
+        let playerY = 20;
+
+        const movement = 10;
+
+        function updatePlayerPosition() {
+            player.style.left = playerX + "px";
+            player.style.top = playerY + "px";
+        }
+
+        gameArea.addEventListener("keydown", function (event) {
+
+            const maxX = gameArea.clientWidth - player.offsetWidth;
+            const maxY = gameArea.clientHeight - player.offsetHeight;
+
+            let moved = false;
+
+            if (event.key === "ArrowUp" || event.key.toLowerCase() === "w") {
+                playerY -= movement;
+                moved = true;
+            }
+
+            if (event.key === "ArrowDown" || event.key.toLowerCase() === "s") {
+                playerY += movement;
+                moved = true;
+            }
+
+            if (event.key === "ArrowLeft" || event.key.toLowerCase() === "a") {
+                playerX -= movement;
+                moved = true;
+            }
+
+            if (event.key === "ArrowRight" || event.key.toLowerCase() === "d") {
+                playerX += movement;
+                moved = true;
+            }
+
+            if (moved) {
+                event.preventDefault();
+
+                playerX = Math.max(0, Math.min(playerX, maxX));
+                playerY = Math.max(0, Math.min(playerY, maxY));
+
+                updatePlayerPosition();
+
+                output.innerHTML =
+                    "<strong>Keyboard Event:</strong> " +
+                    "Key pressed: " + event.key +
+                    " | Position: X = " + playerX +
+                    " px, Y = " + playerY + " px";
+            }
+        });
+
+        gameArea.addEventListener("click", function () {
+            gameArea.focus();
+        });
+
+        resetButton.addEventListener("click", function () {
+
+            playerX = 20;
+            playerY = 20;
+
+            updatePlayerPosition();
+
+            output.innerHTML =
+                "<strong>Keyboard Status:</strong> " +
+                "Use the arrow keys or W/A/S/D to move the object.";
+
+            gameArea.focus();
+        });
+    </script>
+
+</body>
+</html>

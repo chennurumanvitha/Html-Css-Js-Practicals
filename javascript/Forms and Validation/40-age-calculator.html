@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Age Calculation from Date of Birth</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Segoe UI", Arial, sans-serif;
+      background: #f1f5f9;
+      color: #334155;
+      line-height: 1.6;
+    }
+
+    header {
+      background: #0f172a;
+      padding: 18px 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      color: white;
+      font-size: 22px;
+      font-weight: bold;
+    }
+
+    nav a {
+      color: #cbd5e1;
+      text-decoration: none;
+      margin-left: 25px;
+      font-size: 15px;
+    }
+
+    nav a:hover {
+      color: white;
+    }
+
+    .hero {
+      background: linear-gradient(135deg, #1e3a8a, #2563eb);
+      color: white;
+      text-align: center;
+      padding: 65px 20px;
+    }
+
+    .badge {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.15);
+      padding: 7px 16px;
+      border-radius: 20px;
+      margin-bottom: 15px;
+      font-size: 14px;
+    }
+
+    .hero h1 {
+      font-size: 36px;
+      margin-bottom: 10px;
+    }
+
+    .hero p {
+      font-size: 17px;
+      opacity: 0.9;
+    }
+
+    main {
+      width: 90%;
+      max-width: 1050px;
+      margin: 40px auto;
+    }
+
+    .objective {
+      background: white;
+      padding: 22px;
+      border-left: 5px solid #2563eb;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
+      margin-bottom: 25px;
+    }
+
+    .objective h2 {
+      color: #1e3a8a;
+      margin-bottom: 8px;
+    }
+
+    .card {
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(15, 23, 42, 0.08);
+    }
+
+    .card h2 {
+      color: #1e3a8a;
+      margin-bottom: 25px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #e2e8f0;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 7px;
+    }
+
+    input {
+      width: 100%;
+      padding: 11px 13px;
+      border: 1px solid #cbd5e1;
+      border-radius: 7px;
+      font-size: 15px;
+      font-family: inherit;
+      outline: none;
+      transition: 0.2s;
+    }
+
+    input:focus {
+      border-color: #2563eb;
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+    }
+
+    .error {
+      color: #dc2626;
+      font-size: 13px;
+      margin-top: 5px;
+      min-height: 18px;
+    }
+
+    .invalid {
+      border-color: #dc2626;
+      background: #fff7f7;
+    }
+
+    .valid {
+      border-color: #16a34a;
+      background: #f0fdf4;
+    }
+
+    .calculate-btn {
+      width: 100%;
+      border: none;
+      background: #2563eb;
+      color: white;
+      padding: 13px 20px;
+      border-radius: 7px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .calculate-btn:hover {
+      background: #1d4ed8;
+    }
+
+    .result {
+      display: none;
+      margin-top: 25px;
+      padding: 25px;
+      background: #eff6ff;
+      border: 1px solid #93c5fd;
+      border-radius: 10px;
+      text-align: center;
+    }
+
+    .result h3 {
+      color: #1e3a8a;
+      margin-bottom: 10px;
+    }
+
+    .age-value {
+      font-size: 30px;
+      font-weight: bold;
+      color: #2563eb;
+      margin: 10px 0;
+    }
+
+    .result-details {
+      color: #475569;
+      font-size: 15px;
+    }
+
+    .success-message {
+      display: none;
+      background: #ecfdf5;
+      color: #166534;
+      border: 1px solid #86efac;
+      padding: 15px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      text-align: center;
+      font-weight: 600;
+    }
+
+    .buttons {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      flex-wrap: wrap;
+      margin-top: 30px;
+    }
+
+    .btn-link {
+      text-decoration: none;
+      background: #2563eb;
+      color: white;
+      padding: 11px 20px;
+      border-radius: 7px;
+      font-weight: 600;
+    }
+
+    .btn-link:hover {
+      background: #1d4ed8;
+    }
+
+    .btn-link.secondary {
+      background: #475569;
+    }
+
+    .btn-link.secondary:hover {
+      background: #334155;
+    }
+
+    footer {
+      background: #0f172a;
+      color: #cbd5e1;
+      text-align: center;
+      padding: 22px;
+      margin-top: 50px;
+    }
+
+    @media (max-width: 750px) {
+      header {
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      nav a {
+        margin: 0 8px;
+      }
+
+      .hero h1 {
+        font-size: 28px;
+      }
+
+      .card {
+        padding: 22px;
+      }
+    }
+
+    @media (max-width: 550px) {
+      main {
+        width: 94%;
+      }
+
+      .hero {
+        padding: 50px 15px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <div class="logo">JavaScript Practical</div>
+
+    <nav>
+      <a href="../../index.html">Home</a>
+<a href="../index.html">JavaScript Programs</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <span class="badge">Practice 40</span>
+    <h1>Age Calculator</h1>
+    <p>Calculate age from the entered date of birth.</p>
+  </section>
+
+  <main>
+
+    <section class="objective">
+      <h2>Objective</h2>
+      <p>
+        To create a form that accepts a date of birth and uses
+        JavaScript to calculate and display the person's current age.
+      </p>
+    </section>
+
+    <section class="card">
+
+      <h2>Calculate Age</h2>
+
+      <div class="success-message" id="successMessage">
+        Age calculated successfully!
+      </div>
+
+      <form id="ageForm" novalidate>
+
+        <div class="form-group">
+          <label for="dob">Date of Birth</label>
+
+          <input
+            type="date"
+            id="dob"
+          >
+
+          <div class="error" id="dobError"></div>
+        </div>
+
+        <button
+          type="submit"
+          class="calculate-btn"
+        >
+          Calculate Age
+        </button>
+
+      </form>
+
+      <div class="result" id="result">
+
+        <h3>Your Age</h3>
+
+        <div class="age-value" id="ageValue">
+          0 Years
+        </div>
+
+        <div class="result-details" id="ageDetails">
+        </div>
+
+      </div>
+
+    </section>
+
+    <div class="buttons">
+
+      <a href="39-form-preview.html" class="btn-link">
+        ← Previous Practical
+      </a>
+
+      <a href="index.html" class="btn-link secondary">
+        Forms &amp; Validation
+      </a>
+
+      <a href="41-marks-calculation.html" class="btn-link">
+        Next Practical →
+      </a>
+
+    </div>
+
+  </main>
+
+  <footer>
+    <p>&copy; 2026 JavaScript Practical — Forms &amp; Validation</p>
+  </footer>
+
+  <script>
+    const ageForm = document.getElementById("ageForm");
+    const dob = document.getElementById("dob");
+    const dobError = document.getElementById("dobError");
+    const result = document.getElementById("result");
+    const ageValue = document.getElementById("ageValue");
+    const ageDetails = document.getElementById("ageDetails");
+    const successMessage =
+      document.getElementById("successMessage");
+
+    // Prevent selecting a future date
+    function setMaximumDate() {
+      const today = new Date();
+
+      const year = today.getFullYear();
+      const month = String(today.getMonth() + 1).padStart(2, "0");
+      const day = String(today.getDate()).padStart(2, "0");
+
+      dob.max = `${year}-${month}-${day}`;
+    }
+
+    setMaximumDate();
+
+    function validateDOB() {
+      const value = dob.value;
+
+      dob.classList.remove("valid", "invalid");
+      dobError.textContent = "";
+
+      if (value === "") {
+        dob.classList.add("invalid");
+        dobError.textContent =
+          "Date of birth is required.";
+        return false;
+      }
+
+      const birthDate = new Date(value + "T00:00:00");
+      const today = new Date();
+
+      if (birthDate > today) {
+        dob.classList.add("invalid");
+        dobError.textContent =
+          "Date of birth cannot be in the future.";
+        return false;
+      }
+
+      dob.classList.add("valid");
+      return true;
+    }
+
+    function calculateAge(birthDate) {
+      const today = new Date();
+
+      let years =
+        today.getFullYear() -
+        birthDate.getFullYear();
+
+      let months =
+        today.getMonth() -
+        birthDate.getMonth();
+
+      let days =
+        today.getDate() -
+        birthDate.getDate();
+
+      if (days < 0) {
+        months--;
+
+        const previousMonth =
+          new Date(
+            today.getFullYear(),
+            today.getMonth(),
+            0
+          );
+
+        days += previousMonth.getDate();
+      }
+
+      if (months < 0) {
+        years--;
+        months += 12;
+      }
+
+      return {
+        years: years,
+        months: months,
+        days: days
+      };
+    }
+
+    dob.addEventListener("change", function () {
+      successMessage.style.display = "none";
+      result.style.display = "none";
+      validateDOB();
+    });
+
+    ageForm.addEventListener("submit", function (event) {
+      event.preventDefault();
+
+      result.style.display = "none";
+      successMessage.style.display = "none";
+
+      if (!validateDOB()) {
+        return;
+      }
+
+      const birthDate =
+        new Date(dob.value + "T00:00:00");
+
+      const age = calculateAge(birthDate);
+
+      ageValue.textContent =
+        age.years + " Years";
+
+      ageDetails.textContent =
+        age.months +
+        " Months and " +
+        age.days +
+        " Days";
+
+      result.style.display = "block";
+      successMessage.style.display = "block";
+    });
+  </script>
+
+</body>
+</html>

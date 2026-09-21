@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Tooltip Using CSS | CSS Practical 41</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: #f1f5f9;
+            color: #334155;
+            line-height: 1.6;
+        }
+
+        /* Header */
+        header {
+            background: #0f172a;
+            color: white;
+            padding: 18px 6%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        header nav {
+            display: flex;
+            gap: 25px;
+        }
+
+        header nav a {
+            color: #cbd5e1;
+            text-decoration: none;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+
+        header nav a:hover {
+            color: white;
+        }
+
+        /* Hero */
+        .hero {
+            background: linear-gradient(135deg, #1e3a8a, #2563eb);
+            color: white;
+            text-align: center;
+            padding: 65px 20px;
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 8px 18px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .hero h1 {
+            font-size: 38px;
+            margin-bottom: 10px;
+        }
+
+        .hero p {
+            font-size: 17px;
+            opacity: 0.95;
+        }
+
+        /* Main */
+        main {
+            width: 90%;
+            max-width: 1050px;
+            margin: 40px auto;
+        }
+
+        /* Objective */
+        .objective {
+            background: white;
+            border-left: 5px solid #2563eb;
+            border-radius: 12px;
+            padding: 22px 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 15px rgba(15, 23, 42, 0.08);
+        }
+
+        .objective h2 {
+            color: #1e3a8a;
+            margin-bottom: 8px;
+        }
+
+        /* Content Card */
+        .content-card {
+            background: white;
+            border-radius: 12px;
+            padding: 35px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 15px rgba(15, 23, 42, 0.08);
+        }
+
+        .content-card h2 {
+            color: #1e3a8a;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #dbeafe;
+        }
+
+        /* Tooltip Area */
+        .tooltip-area {
+            background: #f8fafc;
+            border-left: 4px solid #2563eb;
+            border-radius: 10px;
+            padding: 50px 30px;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .tooltip-area p {
+            margin-bottom: 35px;
+        }
+
+        /* Basic Tooltip */
+        .tooltip {
+            position: relative;
+            display: inline-block;
+            cursor: pointer;
+        }
+
+        .tooltip-text {
+            visibility: hidden;
+            width: 180px;
+            background: #0f172a;
+            color: white;
+            text-align: center;
+            padding: 10px 12px;
+            border-radius: 7px;
+
+            position: absolute;
+            z-index: 10;
+            bottom: 135%;
+            left: 50%;
+            transform: translateX(-50%);
+
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .tooltip-text::after {
+            content: "";
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            margin-left: -6px;
+
+            border-width: 6px;
+            border-style: solid;
+            border-color: #0f172a transparent transparent transparent;
+        }
+
+        .tooltip:hover .tooltip-text {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        .tooltip-button {
+            background: #2563eb;
+            color: white;
+            border: none;
+            padding: 13px 24px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        /* Tooltip Cards */
+        .tooltip-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .tooltip-card {
+            background: #f8fafc;
+            border-left: 4px solid #2563eb;
+            border-radius: 10px;
+            padding: 25px;
+            text-align: center;
+        }
+
+        .tooltip-card h3 {
+            color: #1e3a8a;
+            margin-bottom: 15px;
+        }
+
+        .tooltip-card .tooltip-text {
+            width: 160px;
+            font-size: 14px;
+        }
+
+        /* Bottom Tooltip */
+        .bottom-tooltip {
+            position: relative;
+            display: inline-block;
+            cursor: pointer;
+            color: #2563eb;
+            font-weight: 700;
+        }
+
+        .bottom-tooltip .tooltip-text {
+            top: 135%;
+            bottom: auto;
+        }
+
+        .bottom-tooltip .tooltip-text::after {
+            top: auto;
+            bottom: 100%;
+            border-color: transparent transparent #0f172a transparent;
+        }
+
+        /* Code Box */
+        .code-box {
+            background: #0f172a;
+            color: #e2e8f0;
+            padding: 20px;
+            border-radius: 10px;
+            overflow-x: auto;
+            margin-top: 20px;
+        }
+
+        .code-box pre {
+            font-family: Consolas, monospace;
+            font-size: 14px;
+        }
+
+        /* Navigation Buttons */
+        .buttons {
+            text-align: center;
+            margin: 35px 0;
+        }
+
+        .btn {
+            display: inline-block;
+            background: #2563eb;
+            color: white;
+            text-decoration: none;
+            padding: 12px 22px;
+            border-radius: 8px;
+            margin: 5px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background: #1e3a8a;
+            transform: translateY(-2px);
+        }
+
+        .secondary {
+            background: #64748b;
+        }
+
+        .secondary:hover {
+            background: #475569;
+        }
+
+        /* Footer */
+        footer {
+            background: #0f172a;
+            color: #cbd5e1;
+            text-align: center;
+            padding: 25px;
+            margin-top: 40px;
+        }
+
+        footer strong {
+            color: white;
+        }
+
+        /* Responsive */
+        @media (max-width: 750px) {
+            header {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            header nav {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 15px;
+            }
+
+            .hero h1 {
+                font-size: 30px;
+            }
+
+            .content-card {
+                padding: 25px 20px;
+            }
+
+            .tooltip-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="logo">Web Development Practical</div>
+
+        <nav>
+            <a href="../index.html">Home</a>
+            <a href="index.html">CSS Programs</a>
+        </nav>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero">
+        <span class="badge">CSS PRACTICAL 41</span>
+
+        <h1>Tooltip Using CSS</h1>
+
+        <p>Create interactive tooltips using CSS positioning and hover effects.</p>
+    </section>
+
+    <!-- Main Content -->
+    <main>
+
+        <!-- Objective -->
+        <section class="objective">
+            <h2>Objective</h2>
+
+            <p>
+                To create a tooltip using CSS and demonstrate how positioning,
+                pseudo-elements, visibility, opacity, and hover effects can
+                be used to display additional information.
+            </p>
+        </section>
+
+        <!-- Basic Tooltip -->
+        <section class="content-card">
+
+            <h2>Basic Tooltip</h2>
+
+            <div class="tooltip-area">
+
+                <p>
+                    Hover over the button to display the tooltip.
+                </p>
+
+                <div class="tooltip">
+
+                    <button class="tooltip-button">
+                        Hover Me
+                    </button>
+
+                    <span class="tooltip-text">
+                        This is a CSS tooltip!
+                    </span>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- Different Tooltips -->
+        <section class="content-card">
+
+            <h2>Different Tooltip Examples</h2>
+
+            <div class="tooltip-grid">
+
+                <div class="tooltip-card">
+
+                    <h3>Information</h3>
+
+                    <div class="tooltip">
+
+                        <button class="tooltip-button">
+                            Info
+                        </button>
+
+                        <span class="tooltip-text">
+                            More information is available here.
+                        </span>
+
+                    </div>
+
+                </div>
+
+                <div class="tooltip-card">
+
+                    <h3>Help</h3>
+
+                    <div class="tooltip">
+
+                        <button class="tooltip-button">
+                            Help
+                        </button>
+
+                        <span class="tooltip-text">
+                            Hover over elements to see helpful details.
+                        </span>
+
+                    </div>
+
+                </div>
+
+                <div class="tooltip-card">
+
+                    <h3>Contact</h3>
+
+                    <div class="tooltip">
+
+                        <button class="tooltip-button">
+                            Contact
+                        </button>
+
+                        <span class="tooltip-text">
+                            Click the contact section for more details.
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- Bottom Tooltip -->
+        <section class="content-card">
+
+            <h2>Tooltip Below an Element</h2>
+
+            <div class="tooltip-area">
+
+                <p>
+                    The tooltip can also be displayed below the element.
+                </p>
+
+                <span class="bottom-tooltip">
+
+                    Hover over this text
+
+                    <span class="tooltip-text">
+                        This tooltip appears below the text.
+                    </span>
+
+                </span>
+
+            </div>
+
+        </section>
+
+        
+
+        <!-- Navigation -->
+        <div class="buttons">
+
+            <a href="css-40.html" class="btn">
+                ← Previous Practical
+            </a>
+
+            <a href="index.html" class="btn secondary">
+                CSS Programs
+            </a>
+
+            <a href="../index.html" class="btn">
+                Dashboard
+            </a>
+
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer>
+
+        <p>
+            <strong>CSS Practical 41</strong> | Tooltip using CSS
+        </p>
+
+        <p>
+            Web Development Practical Assignment
+        </p>
+
+    </footer>
+
+</body>
+</html>

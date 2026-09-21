@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Practical 6 - Event Delegation</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: #f1f5f9;
+            color: #334155;
+            line-height: 1.6;
+        }
+
+        header {
+            background: #0f172a;
+            color: white;
+            padding: 18px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        nav a {
+            color: #cbd5e1;
+            text-decoration: none;
+            margin-left: 25px;
+            font-size: 15px;
+        }
+
+        nav a:hover {
+            color: white;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #1e3a8a, #2563eb);
+            color: white;
+            text-align: center;
+            padding: 65px 20px;
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.18);
+            padding: 7px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            margin-bottom: 12px;
+        }
+
+        .hero h1 {
+            margin: 5px 0;
+            font-size: 36px;
+        }
+
+        .hero p {
+            margin: 8px 0 0;
+            opacity: 0.9;
+        }
+
+        main {
+            width: 90%;
+            max-width: 1050px;
+            margin: 40px auto;
+        }
+
+        .card {
+            background: white;
+            padding: 28px;
+            margin-bottom: 25px;
+            border-radius: 12px;
+            box-shadow: 0 5px 18px rgba(15, 23, 42, 0.08);
+        }
+
+        .objective {
+            border-left: 5px solid #2563eb;
+        }
+
+        .card h2 {
+            color: #1e3a8a;
+            margin-top: 0;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 10px;
+        }
+
+        .demo {
+            text-align: center;
+        }
+
+        .demo p {
+            margin-bottom: 18px;
+        }
+
+        .item-list {
+            max-width: 500px;
+            margin: 20px auto;
+            padding: 0;
+            list-style: none;
+        }
+
+        .item-list li {
+            background: #eff6ff;
+            border: 1px solid #bfdbfe;
+            padding: 14px 18px;
+            margin: 10px 0;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .item-list li:hover {
+            background: #dbeafe;
+            transform: translateY(-1px);
+        }
+
+        .item-list li.selected {
+            background: #2563eb;
+            color: white;
+            border-color: #1d4ed8;
+        }
+
+        .output {
+            background: #eff6ff;
+            border: 2px dashed #93c5fd;
+            border-radius: 10px;
+            padding: 18px;
+            max-width: 600px;
+            margin: 25px auto 0;
+            text-align: left;
+        }
+
+        .output strong {
+            color: #1e3a8a;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin: 30px 0;
+        }
+
+        .btn-link {
+            display: inline-block;
+            background: #2563eb;
+            color: white;
+            text-decoration: none;
+            padding: 10px 18px;
+            border-radius: 7px;
+            font-weight: 600;
+            transition: 0.2s;
+        }
+
+        .btn-link:hover {
+            background: #1d4ed8;
+        }
+
+        .btn-link.secondary {
+            background: #475569;
+        }
+
+        .btn-link.secondary:hover {
+            background: #334155;
+        }
+
+        footer {
+            background: #0f172a;
+            color: #cbd5e1;
+            text-align: center;
+            padding: 20px;
+            margin-top: 50px;
+        }
+
+        @media (max-width: 750px) {
+            header {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            nav a {
+                margin: 0 8px;
+            }
+
+            .hero h1 {
+                font-size: 30px;
+            }
+        }
+
+        @media (max-width: 550px) {
+            main {
+                width: 94%;
+            }
+
+            .card {
+                padding: 20px;
+            }
+
+            .hero {
+                padding: 45px 15px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="logo">JavaScript Practical</div>
+
+        <nav>
+            <a href="../../index.html">Home</a>
+<a href="../index.html">JavaScript Programs</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="badge">Events Practical 6</div>
+        <h1>Event Delegation</h1>
+        <p>Handle events from multiple child elements using a single parent listener</p>
+    </section>
+
+    <main>
+
+        <section class="card objective">
+            <h2>Objective</h2>
+            <p>
+                To demonstrate event delegation by attaching a single event listener
+                to a parent element and handling events from its child elements.
+            </p>
+        </section>
+
+        <section class="card demo">
+            <h2>Event Delegation Demonstration</h2>
+
+            <p>
+                Click any item below. A single event listener on the list
+                handles all item clicks.
+            </p>
+
+            <ul class="item-list" id="itemList">
+                <li data-item="HTML">HTML</li>
+                <li data-item="CSS">CSS</li>
+                <li data-item="JavaScript">JavaScript</li>
+                <li data-item="DOM">DOM</li>
+                <li data-item="Events">Events</li>
+            </ul>
+
+            <div class="output">
+                <strong>Event Output</strong>
+                <p id="output">Click an item to see the delegated event.</p>
+            </div>
+        </section>
+
+        <div class="buttons">
+            <a href="05-event-bubbling-capturing.html" class="btn-link">
+                ← Previous Practical
+            </a>
+
+            <a href="index.html" class="btn-link secondary">
+                Events Programs
+            </a>
+
+            <a href="07-next.html" class="btn-link">
+                Next Practical →
+            </a>
+        </div>
+
+    </main>
+
+    <footer>
+        <p>JavaScript Practical Assignment</p>
+    </footer>
+
+    <script>
+        const itemList = document.getElementById("itemList");
+        const output = document.getElementById("output");
+
+        itemList.addEventListener("click", function(event) {
+
+            if (event.target.tagName === "LI") {
+
+                const selectedItem = event.target.dataset.item;
+
+                document.querySelectorAll("#itemList li").forEach(function(item) {
+                    item.classList.remove("selected");
+                });
+
+                event.target.classList.add("selected");
+
+                output.textContent =
+                    "Event delegated successfully. You clicked: " + selectedItem;
+            }
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Form Preview Before Submission</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Segoe UI", Arial, sans-serif;
+      background: #f1f5f9;
+      color: #334155;
+      line-height: 1.6;
+    }
+
+    header {
+      background: #0f172a;
+      padding: 18px 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      color: white;
+      font-size: 22px;
+      font-weight: bold;
+    }
+
+    nav a {
+      color: #cbd5e1;
+      text-decoration: none;
+      margin-left: 25px;
+      font-size: 15px;
+    }
+
+    nav a:hover {
+      color: white;
+    }
+
+    .hero {
+      background: linear-gradient(135deg, #1e3a8a, #2563eb);
+      color: white;
+      text-align: center;
+      padding: 65px 20px;
+    }
+
+    .badge {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.15);
+      padding: 7px 16px;
+      border-radius: 20px;
+      margin-bottom: 15px;
+      font-size: 14px;
+    }
+
+    .hero h1 {
+      font-size: 36px;
+      margin-bottom: 10px;
+    }
+
+    .hero p {
+      font-size: 17px;
+      opacity: 0.9;
+    }
+
+    main {
+      width: 90%;
+      max-width: 1050px;
+      margin: 40px auto;
+    }
+
+    .objective {
+      background: white;
+      padding: 22px;
+      border-left: 5px solid #2563eb;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
+      margin-bottom: 25px;
+    }
+
+    .objective h2 {
+      color: #1e3a8a;
+      margin-bottom: 8px;
+    }
+
+    .card {
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(15, 23, 42, 0.08);
+      margin-bottom: 25px;
+    }
+
+    .card h2 {
+      color: #1e3a8a;
+      margin-bottom: 25px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #e2e8f0;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 7px;
+    }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      padding: 11px 13px;
+      border: 1px solid #cbd5e1;
+      border-radius: 7px;
+      font-size: 15px;
+      font-family: inherit;
+      outline: none;
+      transition: 0.2s;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      border-color: #2563eb;
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+    }
+
+    textarea {
+      min-height: 110px;
+      resize: vertical;
+    }
+
+    .error {
+      color: #dc2626;
+      font-size: 13px;
+      margin-top: 5px;
+      min-height: 18px;
+    }
+
+    .invalid {
+      border-color: #dc2626;
+      background: #fff7f7;
+    }
+
+    .valid {
+      border-color: #16a34a;
+      background: #f0fdf4;
+    }
+
+    .preview {
+      display: none;
+      background: #f8fafc;
+      border: 1px solid #cbd5e1;
+      border-radius: 10px;
+      padding: 25px;
+      margin-top: 25px;
+    }
+
+    .preview h3 {
+      color: #1e3a8a;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #e2e8f0;
+    }
+
+    .preview-row {
+      display: grid;
+      grid-template-columns: 180px 1fr;
+      gap: 15px;
+      padding: 11px 0;
+      border-bottom: 1px solid #e2e8f0;
+    }
+
+    .preview-row:last-child {
+      border-bottom: none;
+    }
+
+    .preview-label {
+      font-weight: 600;
+      color: #475569;
+    }
+
+    .preview-value {
+      color: #1e293b;
+      word-break: break-word;
+    }
+
+    .success-message {
+      display: none;
+      background: #ecfdf5;
+      color: #166534;
+      border: 1px solid #86efac;
+      padding: 15px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      text-align: center;
+      font-weight: 600;
+    }
+
+    .buttons {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      flex-wrap: wrap;
+      margin-top: 30px;
+    }
+
+    .form-buttons {
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+      margin-top: 25px;
+    }
+
+    .submit-btn,
+    .preview-btn,
+    .edit-btn {
+      border: none;
+      color: white;
+      padding: 12px 20px;
+      border-radius: 7px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .preview-btn {
+      background: #2563eb;
+    }
+
+    .preview-btn:hover {
+      background: #1d4ed8;
+    }
+
+    .submit-btn {
+      background: #16a34a;
+    }
+
+    .submit-btn:hover {
+      background: #15803d;
+    }
+
+    .edit-btn {
+      background: #475569;
+    }
+
+    .edit-btn:hover {
+      background: #334155;
+    }
+
+    .btn-link {
+      text-decoration: none;
+      background: #2563eb;
+      color: white;
+      padding: 11px 20px;
+      border-radius: 7px;
+      font-weight: 600;
+    }
+
+    .btn-link:hover {
+      background: #1d4ed8;
+    }
+
+    .btn-link.secondary {
+      background: #475569;
+    }
+
+    .btn-link.secondary:hover {
+      background: #334155;
+    }
+
+    footer {
+      background: #0f172a;
+      color: #cbd5e1;
+      text-align: center;
+      padding: 22px;
+      margin-top: 50px;
+    }
+
+    @media (max-width: 750px) {
+      header {
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      nav a {
+        margin: 0 8px;
+      }
+
+      .hero h1 {
+        font-size: 28px;
+      }
+
+      .card {
+        padding: 22px;
+      }
+
+      .preview-row {
+        grid-template-columns: 1fr;
+        gap: 3px;
+      }
+    }
+
+    @media (max-width: 550px) {
+      main {
+        width: 94%;
+      }
+
+      .hero {
+        padding: 50px 15px;
+      }
+
+      .form-buttons {
+        flex-direction: column;
+      }
+
+      .preview-btn,
+      .submit-btn,
+      .edit-btn {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <div class="logo">JavaScript Practical</div>
+
+    <nav>
+     <a href="../../index.html">Home</a>
+<a href="../index.html">JavaScript Programs</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <span class="badge">Practice 39</span>
+    <h1>Form Preview</h1>
+    <p>Review entered information before final submission.</p>
+  </section>
+
+  <main>
+
+    <section class="objective">
+      <h2>Objective</h2>
+      <p>
+        To create a form that validates user input and displays a
+        preview of the entered information before final submission.
+      </p>
+    </section>
+
+    <section class="card">
+
+      <h2>Registration Form</h2>
+
+      <div class="success-message" id="successMessage">
+        Form submitted successfully!
+      </div>
+
+      <form id="registrationForm" novalidate>
+
+        <div class="form-group">
+          <label for="fullName">Full Name</label>
+
+          <input
+            type="text"
+            id="fullName"
+            placeholder="Enter your full name"
+            autocomplete="off"
+          >
+
+          <div class="error" id="fullNameError"></div>
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email Address</label>
+
+          <input
+            type="email"
+            id="email"
+            placeholder="Enter your email address"
+            autocomplete="off"
+          >
+
+          <div class="error" id="emailError"></div>
+        </div>
+
+        <div class="form-group">
+          <label for="mobile">Mobile Number</label>
+
+          <input
+            type="text"
+            id="mobile"
+            maxlength="10"
+            inputmode="numeric"
+            placeholder="Enter 10-digit mobile number"
+            autocomplete="off"
+          >
+
+          <div class="error" id="mobileError"></div>
+        </div>
+
+        <div class="form-group">
+          <label for="course">Course</label>
+
+          <select id="course">
+            <option value="">-- Select Course --</option>
+            <option value="BCA">BCA</option>
+            <option value="BSc Computer Science">
+              BSc Computer Science
+            </option>
+            <option value="BTech">BTech</option>
+            <option value="MCA">MCA</option>
+          </select>
+
+          <div class="error" id="courseError"></div>
+        </div>
+
+        <div class="form-group">
+          <label for="message">Message</label>
+
+          <textarea
+            id="message"
+            maxlength="500"
+            placeholder="Enter your message"
+          ></textarea>
+
+          <div class="error" id="messageError"></div>
+
+          <div
+            id="characterCount"
+            style="font-size:13px;color:#64748b;margin-top:5px;"
+          >
+            0 / 500 characters
+          </div>
+        </div>
+
+        <div class="form-buttons">
+
+          <button
+            type="button"
+            class="preview-btn"
+            id="previewButton"
+          >
+            Preview Information
+          </button>
+
+        </div>
+
+      </form>
+
+      <div class="preview" id="previewSection">
+
+        <h3>Information Preview</h3>
+
+        <div class="preview-row">
+          <div class="preview-label">Full Name</div>
+          <div class="preview-value" id="previewName"></div>
+        </div>
+
+        <div class="preview-row">
+          <div class="preview-label">Email Address</div>
+          <div class="preview-value" id="previewEmail"></div>
+        </div>
+
+        <div class="preview-row">
+          <div class="preview-label">Mobile Number</div>
+          <div class="preview-value" id="previewMobile"></div>
+        </div>
+
+        <div class="preview-row">
+          <div class="preview-label">Course</div>
+          <div class="preview-value" id="previewCourse"></div>
+        </div>
+
+        <div class="preview-row">
+          <div class="preview-label">Message</div>
+          <div class="preview-value" id="previewMessage"></div>
+        </div>
+
+        <div class="form-buttons">
+
+          <button
+            type="button"
+            class="edit-btn"
+            id="editButton"
+          >
+            ← Edit Information
+          </button>
+
+          <button
+            type="button"
+            class="submit-btn"
+            id="confirmButton"
+          >
+            Confirm &amp; Submit
+          </button>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <div class="buttons">
+
+      <a href="38-multi-step-registration.html" class="btn-link">
+        ← Previous Practical
+      </a>
+
+      <a href="index.html" class="btn-link secondary">
+        Forms &amp; Validation
+      </a>
+
+      <a href="40-age-calculation.html" class="btn-link">
+        Next Practical →
+      </a>
+
+    </div>
+
+  </main>
+
+  <footer>
+    <p>&copy; 2026 JavaScript Practical — Forms &amp; Validation</p>
+  </footer>
+
+  <script>
+    const registrationForm =
+      document.getElementById("registrationForm");
+
+    const fullName =
+      document.getElementById("fullName");
+
+    const email =
+      document.getElementById("email");
+
+    const mobile =
+      document.getElementById("mobile");
+
+    const course =
+      document.getElementById("course");
+
+    const message =
+      document.getElementById("message");
+
+    const previewButton =
+      document.getElementById("previewButton");
+
+    const editButton =
+      document.getElementById("editButton");
+
+    const confirmButton =
+      document.getElementById("confirmButton");
+
+    const previewSection =
+      document.getElementById("previewSection");
+
+    const successMessage =
+      document.getElementById("successMessage");
+
+    const characterCount =
+      document.getElementById("characterCount");
+
+    const nameRegex = /^[A-Za-z ]+$/;
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const mobileRegex = /^\d{10}$/;
+
+    function validateFullName() {
+      const value = fullName.value.trim();
+      const error =
+        document.getElementById("fullNameError");
+
+      fullName.classList.remove("valid", "invalid");
+      error.textContent = "";
+
+      if (value === "") {
+        fullName.classList.add("invalid");
+        error.textContent = "Full name is required.";
+        return false;
+      }
+
+      if (!nameRegex.test(value)) {
+        fullName.classList.add("invalid");
+        error.textContent =
+          "Name can contain only alphabets and spaces.";
+        return false;
+      }
+
+      fullName.classList.add("valid");
+      return true;
+    }
+
+    function validateEmail() {
+      const value = email.value.trim();
+      const error =
+        document.getElementById("emailError");
+
+      email.classList.remove("valid", "invalid");
+      error.textContent = "";
+
+      if (value === "") {
+        email.classList.add("invalid");
+        error.textContent =
+          "Email address is required.";
+        return false;
+      }
+
+      if (!emailRegex.test(value)) {
+        email.classList.add("invalid");
+        error.textContent =
+          "Enter a valid email address.";
+        return false;
+      }
+
+      email.classList.add("valid");
+      return true;
+    }
+
+    function validateMobile() {
+      const value = mobile.value.trim();
+      const error =
+        document.getElementById("mobileError");
+
+      mobile.classList.remove("valid", "invalid");
+      error.textContent = "";
+
+      if (value === "") {
+        mobile.classList.add("invalid");
+        error.textContent =
+          "Mobile number is required.";
+        return false;
+      }
+
+      if (!mobileRegex.test(value)) {
+        mobile.classList.add("invalid");
+        error.textContent =
+          "Mobile number must contain exactly 10 digits.";
+        return false;
+      }
+
+      mobile.classList.add("valid");
+      return true;
+    }
+
+    function validateCourse() {
+      const error =
+        document.getElementById("courseError");
+
+      course.classList.remove("valid", "invalid");
+      error.textContent = "";
+
+      if (course.value === "") {
+        course.classList.add("invalid");
+        error.textContent =
+          "Please select a course.";
+        return false;
+      }
+
+      course.classList.add("valid");
+      return true;
+    }
+
+    function validateMessage() {
+      const value = message.value.trim();
+      const error =
+        document.getElementById("messageError");
+
+      message.classList.remove("valid", "invalid");
+      error.textContent = "";
+
+      characterCount.textContent =
+        message.value.length + " / 500 characters";
+
+      if (value === "") {
+        message.classList.add("invalid");
+        error.textContent =
+          "Message is required.";
+        return false;
+      }
+
+      if (value.length < 10) {
+        message.classList.add("invalid");
+        error.textContent =
+          "Message must contain at least 10 characters.";
+        return false;
+      }
+
+      message.classList.add("valid");
+      return true;
+    }
+
+    function validateForm() {
+      const validName = validateFullName();
+      const validEmail = validateEmail();
+      const validMobile = validateMobile();
+      const validCourse = validateCourse();
+      const validMessage = validateMessage();
+
+      return (
+        validName &&
+        validEmail &&
+        validMobile &&
+        validCourse &&
+        validMessage
+      );
+    }
+
+    // Real-time validation
+    fullName.addEventListener("input", function () {
+      successMessage.style.display = "none";
+      previewSection.style.display = "none";
+      validateFullName();
+    });
+
+    email.addEventListener("input", function () {
+      successMessage.style.display = "none";
+      previewSection.style.display = "none";
+      validateEmail();
+    });
+
+    mobile.addEventListener("input", function () {
+      successMessage.style.display = "none";
+      previewSection.style.display = "none";
+      validateMobile();
+    });
+
+    course.addEventListener("change", function () {
+      successMessage.style.display = "none";
+      previewSection.style.display = "none";
+      validateCourse();
+    });
+
+    message.addEventListener("input", function () {
+      successMessage.style.display = "none";
+      previewSection.style.display = "none";
+      validateMessage();
+    });
+
+    // Display preview
+    previewButton.addEventListener("click", function () {
+
+      if (!validateForm()) {
+        previewSection.style.display = "none";
+        return;
+      }
+
+      document.getElementById("previewName").textContent =
+        fullName.value.trim();
+
+      document.getElementById("previewEmail").textContent =
+        email.value.trim();
+
+      document.getElementById("previewMobile").textContent =
+        mobile.value.trim();
+
+      document.getElementById("previewCourse").textContent =
+        course.options[course.selectedIndex].text;
+
+      document.getElementById("previewMessage").textContent =
+        message.value.trim();
+
+      previewSection.style.display = "block";
+
+      previewSection.scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+      });
+    });
+
+    // Edit information
+    editButton.addEventListener("click", function () {
+
+      previewSection.style.display = "none";
+
+      fullName.focus();
+
+      window.scrollTo({
+        top: registrationForm.offsetTop - 20,
+        behavior: "smooth"
+      });
+    });
+
+    // Confirm and submit
+    confirmButton.addEventListener("click", function () {
+
+      if (!validateForm()) {
+        previewSection.style.display = "none";
+        return;
+      }
+
+      successMessage.style.display = "block";
+      previewSection.style.display = "none";
+
+      registrationForm.reset();
+
+      fullName.classList.remove("valid", "invalid");
+      email.classList.remove("valid", "invalid");
+      mobile.classList.remove("valid", "invalid");
+      course.classList.remove("valid", "invalid");
+      message.classList.remove("valid", "invalid");
+
+      document.getElementById("fullNameError").textContent = "";
+      document.getElementById("emailError").textContent = "";
+      document.getElementById("mobileError").textContent = "";
+      document.getElementById("courseError").textContent = "";
+      document.getElementById("messageError").textContent = "";
+
+      characterCount.textContent = "0 / 500 characters";
+
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+    });
+  </script>
+
+</body>
+</html>

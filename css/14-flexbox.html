@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Flexbox | Practical 14</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: #f1f5f9;
+            color: #334155;
+            line-height: 1.6;
+        }
+
+        header {
+            background: #0f172a;
+            color: white;
+            padding: 18px 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header .logo {
+            font-size: 22px;
+            font-weight: 700;
+        }
+
+        header nav a {
+            color: #cbd5e1;
+            text-decoration: none;
+            margin-left: 25px;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+
+        header nav a:hover {
+            color: white;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #1e3a8a, #2563eb);
+            color: white;
+            text-align: center;
+            padding: 65px 20px;
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 7px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .hero h1 {
+            font-size: 40px;
+            margin-bottom: 10px;
+        }
+
+        .hero p {
+            font-size: 17px;
+            color: #dbeafe;
+        }
+
+        main {
+            width: 90%;
+            max-width: 1050px;
+            margin: 40px auto;
+        }
+
+        .objective {
+            background: white;
+            border-left: 5px solid #2563eb;
+            border-radius: 12px;
+            padding: 22px 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 15px rgba(15, 23, 42, 0.06);
+        }
+
+        .objective h2 {
+            color: #1e3a8a;
+            margin-bottom: 8px;
+        }
+
+        .content-card {
+            background: white;
+            border-radius: 12px;
+            padding: 35px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 15px rgba(15, 23, 42, 0.06);
+        }
+
+        .content-card h2 {
+            color: #1e3a8a;
+            margin-bottom: 10px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #dbeafe;
+        }
+
+        .content-card p {
+            margin-bottom: 15px;
+        }
+
+        .demo-area {
+            background: #f8fafc;
+            border-left: 4px solid #2563eb;
+            border-radius: 10px;
+            padding: 25px;
+            margin-top: 20px;
+        }
+
+        .demo-title {
+            color: #1e3a8a;
+            font-size: 18px;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        /* Basic Flexbox */
+        .flex-container {
+            display: flex;
+            gap: 15px;
+            padding: 20px;
+            background: #dbeafe;
+            border: 2px dashed #2563eb;
+            border-radius: 10px;
+        }
+
+        .flex-item {
+            background: #2563eb;
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: 600;
+            flex: 1;
+        }
+
+        /* Flex Direction */
+        .direction-row {
+            display: flex;
+            flex-direction: row;
+            gap: 12px;
+            padding: 20px;
+            background: #eff6ff;
+            border-radius: 10px;
+        }
+
+        .direction-column {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            padding: 20px;
+            background: #eff6ff;
+            border-radius: 10px;
+            max-width: 300px;
+        }
+
+        .direction-item {
+            background: #1e3a8a;
+            color: white;
+            padding: 15px;
+            border-radius: 7px;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        /* Justify Content */
+        .justify-demo {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+            padding: 20px;
+            background: #eff6ff;
+            border-radius: 10px;
+        }
+
+        .justify-item {
+            background: #2563eb;
+            color: white;
+            padding: 15px 25px;
+            border-radius: 7px;
+            font-weight: 600;
+        }
+
+        /* Align Items */
+        .align-demo {
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            min-height: 180px;
+            background: #eff6ff;
+            border-radius: 10px;
+            padding: 20px;
+        }
+
+        .align-item {
+            background: #1e3a8a;
+            color: white;
+            padding: 15px 25px;
+            border-radius: 7px;
+            font-weight: 600;
+        }
+
+        .align-item.tall {
+            padding: 35px 25px;
+        }
+
+        /* Flex Wrap */
+        .wrap-demo {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            padding: 20px;
+            background: #eff6ff;
+            border-radius: 10px;
+        }
+
+        .wrap-item {
+            flex: 1 1 180px;
+            background: #2563eb;
+            color: white;
+            padding: 18px;
+            border-radius: 7px;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        /* Card Layout */
+        .card-flex {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .student-card {
+            flex: 1 1 200px;
+            background: #f8fafc;
+            border-left: 4px solid #2563eb;
+            border-radius: 10px;
+            padding: 20px;
+        }
+
+        .student-card h3 {
+            color: #1e3a8a;
+            margin-bottom: 8px;
+        }
+
+        .student-card p {
+            margin-bottom: 0;
+        }
+
+        .buttons {
+            text-align: center;
+            margin: 30px 0;
+        }
+
+        .btn {
+            display: inline-block;
+            background: #2563eb;
+            color: white;
+            text-decoration: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            margin: 5px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background: #1e3a8a;
+            transform: translateY(-2px);
+        }
+
+        .btn.secondary {
+            background: #64748b;
+        }
+
+        .btn.secondary:hover {
+            background: #475569;
+        }
+
+        footer {
+            background: #0f172a;
+            color: #cbd5e1;
+            text-align: center;
+            padding: 25px;
+            margin-top: 40px;
+        }
+
+        footer strong {
+            color: white;
+        }
+
+        @media (max-width: 750px) {
+            header {
+                flex-direction: column;
+                gap: 12px;
+                text-align: center;
+                padding: 20px;
+            }
+
+            header nav a {
+                margin: 0 8px;
+            }
+
+            .hero h1 {
+                font-size: 30px;
+            }
+
+            .content-card {
+                padding: 25px 20px;
+            }
+
+            .flex-container,
+            .direction-row,
+            .justify-demo,
+            .align-demo {
+                flex-direction: column;
+            }
+
+            .direction-column {
+                max-width: 100%;
+            }
+
+            .align-demo {
+                align-items: stretch;
+            }
+
+            .flex-item,
+            .justify-item,
+            .align-item {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="logo">Web Practicals</div>
+
+        <nav>
+            <a href="../index.html">Home</a>
+            <a href="index.html">CSS Programs</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <span class="badge">CSS PRACTICAL 14</span>
+        <h1>CSS Flexbox</h1>
+        <p>Demonstrating flexible layouts using CSS Flexbox</p>
+    </section>
+
+    <main>
+
+        <section class="objective">
+            <h2>Objective</h2>
+            <p>
+                To create a webpage demonstrating CSS Flexbox properties such as
+                display, flex-direction, justify-content, align-items, flex-wrap,
+                gap, and flexible sizing.
+            </p>
+        </section>
+
+        <section class="content-card">
+            <h2>Basic Flexbox</h2>
+            <p>
+                The <strong>display: flex</strong> property creates a Flexbox
+                container. Its child elements automatically become flexible items.
+            </p>
+
+            <div class="demo-area">
+                <div class="demo-title">Flex Container</div>
+
+                <div class="flex-container">
+                    <div class="flex-item">Item 1</div>
+                    <div class="flex-item">Item 2</div>
+                    <div class="flex-item">Item 3</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-card">
+            <h2>Flex Direction</h2>
+            <p>
+                The <strong>flex-direction</strong> property controls the direction
+                in which flex items are arranged.
+            </p>
+
+            <div class="demo-area">
+                <div class="demo-title">Row Direction</div>
+
+                <div class="direction-row">
+                    <div class="direction-item">Item 1</div>
+                    <div class="direction-item">Item 2</div>
+                    <div class="direction-item">Item 3</div>
+                </div>
+            </div>
+
+            <div class="demo-area">
+                <div class="demo-title">Column Direction</div>
+
+                <div class="direction-column">
+                    <div class="direction-item">Item 1</div>
+                    <div class="direction-item">Item 2</div>
+                    <div class="direction-item">Item 3</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-card">
+            <h2>Justify Content</h2>
+            <p>
+                The <strong>justify-content</strong> property controls the alignment
+                of flex items along the main axis.
+            </p>
+
+            <div class="demo-area">
+                <div class="demo-title">Space Between</div>
+
+                <div class="justify-demo">
+                    <div class="justify-item">Home</div>
+                    <div class="justify-item">About</div>
+                    <div class="justify-item">Contact</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-card">
+            <h2>Align Items</h2>
+            <p>
+                The <strong>align-items</strong> property controls the alignment
+                of flex items along the cross axis.
+            </p>
+
+            <div class="demo-area">
+                <div class="demo-title">Center Alignment</div>
+
+                <div class="align-demo">
+                    <div class="align-item">Item 1</div>
+                    <div class="align-item tall">Item 2</div>
+                    <div class="align-item">Item 3</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-card">
+            <h2>Flex Wrap</h2>
+            <p>
+                The <strong>flex-wrap</strong> property allows flex items to move
+                onto multiple lines when there is not enough space.
+            </p>
+
+            <div class="demo-area">
+                <div class="demo-title">Wrapping Flex Items</div>
+
+                <div class="wrap-demo">
+                    <div class="wrap-item">HTML</div>
+                    <div class="wrap-item">CSS</div>
+                    <div class="wrap-item">JavaScript</div>
+                    <div class="wrap-item">Bootstrap</div>
+                    <div class="wrap-item">Flexbox</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-card">
+            <h2>Flexbox Card Layout</h2>
+            <p>
+                Flexbox can be used to create responsive layouts containing
+                multiple cards.
+            </p>
+
+            <div class="card-flex">
+
+                <div class="student-card">
+                    <h3>HTML</h3>
+                    <p>Used to structure webpages and their content.</p>
+                </div>
+
+                <div class="student-card">
+                    <h3>CSS</h3>
+                    <p>Used to style webpages and create flexible layouts.</p>
+                </div>
+
+                <div class="student-card">
+                    <h3>JavaScript</h3>
+                    <p>Used to add interactivity and dynamic behavior.</p>
+                </div>
+
+            </div>
+        </section>
+
+        <div class="buttons">
+            <a href="css-13.html" class="btn secondary">Previous Practical</a>
+            <a href="index.html" class="btn">CSS Programs</a>
+            <a href="../index.html" class="btn">Dashboard</a>
+        </div>
+
+    </main>
+
+    <footer>
+        <p><strong>CSS Practical 14</strong> | Web Practicals Assignment</p>
+        <p>Designed using HTML5 and CSS3</p>
+    </footer>
+
+</body>
+</html>

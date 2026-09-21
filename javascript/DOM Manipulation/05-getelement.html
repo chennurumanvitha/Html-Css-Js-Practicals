@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM Manipulation - getElementById and getElementsByClassName</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: #f1f5f9;
+            color: #334155;
+            line-height: 1.6;
+        }
+
+        header {
+            background: #0f172a;
+            padding: 18px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: white;
+            font-size: 22px;
+            font-weight: 700;
+        }
+
+        nav a {
+            color: #cbd5e1;
+            text-decoration: none;
+            margin-left: 25px;
+            font-size: 15px;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #1e3a8a, #2563eb);
+            color: white;
+            text-align: center;
+            padding: 65px 20px;
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 7px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        .hero h1 {
+            font-size: 34px;
+            margin-bottom: 8px;
+        }
+
+        main {
+            width: 90%;
+            max-width: 1050px;
+            margin: 40px auto;
+        }
+
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 28px;
+            margin-bottom: 25px;
+            box-shadow: 0 5px 18px rgba(15, 23, 42, 0.08);
+        }
+
+        .objective {
+            border-left: 5px solid #2563eb;
+        }
+
+        .objective h2,
+        .card h2 {
+            color: #1e3a8a;
+            margin-bottom: 15px;
+        }
+
+        .card h2 {
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 8px;
+        }
+
+        .demo {
+            background: #eff6ff;
+            border: 2px dashed #93c5fd;
+            border-radius: 10px;
+            padding: 22px;
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .demo-box {
+            background: white;
+            border: 2px solid #cbd5e1;
+            border-radius: 8px;
+            padding: 18px;
+            margin: 12px 0;
+            transition: 0.3s;
+        }
+
+        .demo-box h3 {
+            color: #1e3a8a;
+            margin-bottom: 6px;
+        }
+
+        .btn {
+            border: none;
+            background: #2563eb;
+            color: white;
+            padding: 11px 20px;
+            border-radius: 7px;
+            font-weight: 600;
+            cursor: pointer;
+            margin: 5px;
+        }
+
+        .btn:hover {
+            opacity: 0.9;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin: 35px 0;
+        }
+
+        .btn-link {
+            display: inline-block;
+            background: #2563eb;
+            color: white;
+            padding: 11px 20px;
+            border-radius: 7px;
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        .btn-link.secondary {
+            background: #475569;
+        }
+
+        footer {
+            background: #0f172a;
+            color: #cbd5e1;
+            text-align: center;
+            padding: 22px;
+            margin-top: 50px;
+            font-size: 14px;
+        }
+
+        @media (max-width: 750px) {
+            header {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            nav a {
+                margin: 0 8px;
+            }
+
+            .hero h1 {
+                font-size: 30px;
+            }
+        }
+
+        @media (max-width: 650px) {
+            .card {
+                padding: 20px;
+            }
+
+            .hero {
+                padding: 50px 15px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="logo">JavaScript Practical</div>
+
+        <nav>
+            <a href="../../index.html">Home</a>
+<a href="../index.html">JavaScript Programs</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="badge">DOM Manipulation - Practical 5</div>
+        <h1>getElementById() &amp; getElementsByClassName()</h1>
+        <p>Selecting HTML elements using JavaScript</p>
+    </section>
+
+    <main>
+
+        <section class="card objective">
+            <h2>Objective</h2>
+            <p>
+                To demonstrate how JavaScript uses
+                <strong>getElementById()</strong> and
+                <strong>getElementsByClassName()</strong>
+                to select and modify HTML elements.
+            </p>
+        </section>
+
+        <section class="card">
+            <h2>Program Demonstration</h2>
+
+            <div class="demo">
+
+                <div class="demo-box" id="uniqueElement">
+                    <h3>Element with ID</h3>
+                    <p>This element has a unique ID.</p>
+                </div>
+
+                <div class="demo-box classElement">
+                    <h3>Class Element 1</h3>
+                    <p>This element belongs to the same class.</p>
+                </div>
+
+                <div class="demo-box classElement">
+                    <h3>Class Element 2</h3>
+                    <p>This element belongs to the same class.</p>
+                </div>
+
+                <div class="demo-box classElement">
+                    <h3>Class Element 3</h3>
+                    <p>This element belongs to the same class.</p>
+                </div>
+
+                <button class="btn" onclick="useGetElementById()">
+                    Use getElementById()
+                </button>
+
+                <button class="btn" onclick="useGetElementsByClassName()">
+                    Use getElementsByClassName()
+                </button>
+
+                <button class="btn" onclick="resetElements()">
+                    Reset
+                </button>
+
+            </div>
+        </section>
+
+        <div class="buttons">
+            <a href="dom-multiple-elements.html" class="btn-link">
+                ← Previous Practical
+            </a>
+
+            <a href="index.html" class="btn-link secondary">
+                JavaScript Programs
+            </a>
+
+            <a href="dom-background.html" class="btn-link">
+                Next Practical →
+            </a>
+        </div>
+
+    </main>
+
+    <footer>
+        <p>JavaScript Practical Assignment</p>
+    </footer>
+
+    <script>
+        function useGetElementById() {
+            const element = document.getElementById("uniqueElement");
+
+            element.style.backgroundColor = "#dbeafe";
+            element.style.borderColor = "#2563eb";
+            element.querySelector("h3").textContent =
+                "Selected using getElementById()";
+        }
+
+        function useGetElementsByClassName() {
+            const elements = document.getElementsByClassName("classElement");
+
+            for (let i = 0; i < elements.length; i++) {
+                elements[i].style.backgroundColor = "#dbeafe";
+                elements[i].style.borderColor = "#2563eb";
+                elements[i].querySelector("h3").textContent =
+                    "Selected using getElementsByClassName()";
+            }
+        }
+
+        function resetElements() {
+            const uniqueElement = document.getElementById("uniqueElement");
+            const classElements =
+                document.getElementsByClassName("classElement");
+
+            uniqueElement.style.backgroundColor = "white";
+            uniqueElement.style.borderColor = "#cbd5e1";
+            uniqueElement.querySelector("h3").textContent = "Element with ID";
+
+            const originalTitles = [
+                "Class Element 1",
+                "Class Element 2",
+                "Class Element 3"
+            ];
+
+            for (let i = 0; i < classElements.length; i++) {
+                classElements[i].style.backgroundColor = "white";
+                classElements[i].style.borderColor = "#cbd5e1";
+                classElements[i].querySelector("h3").textContent =
+                    originalTitles[i];
+            }
+        }
+    </script>
+
+</body>
+</html>

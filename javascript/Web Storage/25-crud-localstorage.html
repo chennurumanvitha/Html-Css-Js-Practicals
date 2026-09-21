@@ -1,0 +1,906 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CRUD Application using localStorage</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Segoe UI", Arial, sans-serif;
+      background: #f1f5f9;
+      color: #334155;
+      line-height: 1.6;
+    }
+
+    header {
+      background: #0f172a;
+      padding: 18px 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      color: white;
+      font-size: 22px;
+      font-weight: bold;
+    }
+
+    nav a {
+      color: #cbd5e1;
+      text-decoration: none;
+      margin-left: 25px;
+      font-size: 15px;
+    }
+
+    nav a:hover {
+      color: white;
+    }
+
+    .hero {
+      background: linear-gradient(135deg, #1e3a8a, #2563eb);
+      color: white;
+      text-align: center;
+      padding: 65px 20px;
+    }
+
+    .badge {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.15);
+      padding: 7px 16px;
+      border-radius: 20px;
+      margin-bottom: 15px;
+      font-size: 14px;
+    }
+
+    .hero h1 {
+      font-size: 36px;
+      margin-bottom: 10px;
+    }
+
+    .hero p {
+      font-size: 17px;
+      opacity: 0.9;
+    }
+
+    main {
+      width: 90%;
+      max-width: 1050px;
+      margin: 40px auto;
+    }
+
+    .objective {
+      background: white;
+      padding: 22px;
+      border-left: 5px solid #2563eb;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
+      margin-bottom: 25px;
+    }
+
+    .objective h2 {
+      color: #1e3a8a;
+      margin-bottom: 8px;
+    }
+
+    .card {
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(15, 23, 42, 0.08);
+      margin-bottom: 25px;
+    }
+
+    .card h2 {
+      color: #1e3a8a;
+      margin-bottom: 25px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #e2e8f0;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .form-group label {
+      font-weight: 600;
+      margin-bottom: 7px;
+      color: #334155;
+    }
+
+    .form-group input,
+    .form-group select {
+      width: 100%;
+      padding: 11px 12px;
+      border: 1px solid #cbd5e1;
+      border-radius: 7px;
+      font-size: 15px;
+      outline: none;
+      background: white;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus {
+      border-color: #2563eb;
+    }
+
+    .buttons {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      flex-wrap: wrap;
+      margin-top: 25px;
+    }
+
+    .btn {
+      border: none;
+      background: #2563eb;
+      color: white;
+      padding: 11px 20px;
+      border-radius: 7px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      background: #1d4ed8;
+    }
+
+    .btn.secondary {
+      background: #475569;
+    }
+
+    .btn.secondary:hover {
+      background: #334155;
+    }
+
+    .btn.danger {
+      background: #dc2626;
+    }
+
+    .btn.danger:hover {
+      background: #b91c1c;
+    }
+
+    .message {
+      text-align: center;
+      margin-top: 15px;
+      min-height: 24px;
+      font-weight: 600;
+    }
+
+    .record-count {
+      background: #eff6ff;
+      color: #1e3a8a;
+      padding: 12px;
+      border-radius: 7px;
+      margin-bottom: 20px;
+      text-align: center;
+      font-weight: 600;
+    }
+
+    .table-container {
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 700px;
+    }
+
+    th,
+    td {
+      padding: 12px;
+      border-bottom: 1px solid #e2e8f0;
+      text-align: center;
+    }
+
+    th {
+      background: #1e3a8a;
+      color: white;
+    }
+
+    tr:nth-child(even) {
+      background: #f8fafc;
+    }
+
+    .edit-btn {
+      border: none;
+      background: #f59e0b;
+      color: white;
+      padding: 7px 10px;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-right: 5px;
+    }
+
+    .edit-btn:hover {
+      background: #d97706;
+    }
+
+    .delete-btn {
+      border: none;
+      background: #dc2626;
+      color: white;
+      padding: 7px 10px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .delete-btn:hover {
+      background: #b91c1c;
+    }
+
+    .empty {
+      text-align: center;
+      color: #64748b;
+      padding: 25px;
+    }
+
+    .navigation {
+      display: flex;
+      justify-content: space-between;
+      gap: 15px;
+      margin-top: 35px;
+    }
+
+    .navigation a {
+      text-decoration: none;
+      background: #2563eb;
+      color: white;
+      padding: 11px 20px;
+      border-radius: 7px;
+      font-weight: 600;
+      font-size: 14px;
+    }
+
+    .navigation a:hover {
+      background: #1d4ed8;
+    }
+
+    footer {
+      background: #0f172a;
+      color: #cbd5e1;
+      text-align: center;
+      padding: 22px;
+      margin-top: 50px;
+    }
+
+    @media (max-width: 750px) {
+      header {
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      nav a {
+        margin: 0 8px;
+      }
+
+      .hero h1 {
+        font-size: 28px;
+      }
+
+      .card {
+        padding: 22px;
+      }
+
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .navigation {
+        flex-direction: column;
+      }
+
+      .navigation a {
+        text-align: center;
+      }
+    }
+
+    @media (max-width: 550px) {
+      main {
+        width: 94%;
+      }
+
+      .hero {
+        padding: 50px 15px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <div class="logo">Web Storage Practical</div>
+
+    <nav>
+      <a href="../../index.html">Home</a>
+<a href="../index.html">JavaScript Programs</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div class="badge">Practical 25</div>
+    <h1>CRUD Application</h1>
+    <p>Create, Read, Update and Delete records using localStorage</p>
+  </section>
+
+  <main>
+
+    <section class="objective">
+      <h2>Objective</h2>
+      <p>
+        To create a CRUD application using localStorage for
+        creating, reading, updating and deleting records.
+      </p>
+    </section>
+
+    <section class="card">
+
+      <h2>Record Form</h2>
+
+      <form id="recordForm">
+
+        <div class="form-grid">
+
+          <div class="form-group">
+            <label for="recordId">Record ID</label>
+            <input
+              type="text"
+              id="recordId"
+              placeholder="Enter record ID"
+              required
+            >
+          </div>
+
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input
+              type="text"
+              id="name"
+              placeholder="Enter name"
+              required
+            >
+          </div>
+
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input
+              type="email"
+              id="email"
+              placeholder="Enter email"
+              required
+            >
+          </div>
+
+          <div class="form-group">
+            <label for="course">Course</label>
+            <select id="course" required>
+              <option value="">Select Course</option>
+              <option value="BCA">BCA</option>
+              <option value="B.Sc Computer Science">
+                B.Sc Computer Science
+              </option>
+              <option value="B.Com">B.Com</option>
+              <option value="BBA">BBA</option>
+              <option value="BA">BA</option>
+            </select>
+          </div>
+
+        </div>
+
+        <div class="buttons">
+
+          <button
+            type="submit"
+            class="btn"
+            id="saveButton"
+          >
+            Create Record
+          </button>
+
+          <button
+            type="button"
+            class="btn secondary"
+            onclick="resetForm()"
+          >
+            Reset
+          </button>
+
+        </div>
+
+      </form>
+
+      <div
+        class="message"
+        id="message"
+      ></div>
+
+    </section>
+
+    <section class="card">
+
+      <h2>Records</h2>
+
+      <div class="record-count">
+        Total Records:
+        <span id="recordCount">0</span>
+      </div>
+
+      <div class="table-container">
+
+        <table>
+
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Course</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+
+          <tbody id="recordsTableBody"></tbody>
+
+        </table>
+
+      </div>
+
+      <div class="buttons">
+
+        <button
+          type="button"
+          class="btn secondary"
+          onclick="loadRecords()"
+        >
+          Refresh Records
+        </button>
+
+        <button
+          type="button"
+          class="btn danger"
+          onclick="clearRecords()"
+        >
+          Clear All Records
+        </button>
+
+      </div>
+
+    </section>
+
+    <div class="navigation">
+      <a href="24-student-marks-database-localstorage.html">
+        ← Previous
+      </a>
+
+      <a href="../index.html">
+        Home
+      </a>
+
+      <a href="../index.html">
+        Back to Practicals →
+      </a>
+    </div>
+
+  </main>
+
+  <footer>
+    Web Storage Practicals &copy; 2026
+  </footer>
+
+  <script>
+    let records = [];
+    let editIndex = -1;
+
+    const recordForm =
+      document.getElementById("recordForm");
+
+    const recordId =
+      document.getElementById("recordId");
+
+    const nameInput =
+      document.getElementById("name");
+
+    const email =
+      document.getElementById("email");
+
+    const course =
+      document.getElementById("course");
+
+    const saveButton =
+      document.getElementById("saveButton");
+
+    const recordsTableBody =
+      document.getElementById("recordsTableBody");
+
+    const recordCount =
+      document.getElementById("recordCount");
+
+    const message =
+      document.getElementById("message");
+
+    function loadRecords() {
+
+      const savedRecords =
+        localStorage.getItem("crudRecords");
+
+      if (!savedRecords) {
+        records = [];
+        displayRecords();
+        return;
+      }
+
+      try {
+
+        records = JSON.parse(savedRecords);
+
+        if (!Array.isArray(records)) {
+          records = [];
+        }
+
+        displayRecords();
+
+      } catch (error) {
+
+        records = [];
+
+        localStorage.removeItem("crudRecords");
+
+        displayRecords();
+      }
+    }
+
+    function saveRecords() {
+
+      localStorage.setItem(
+        "crudRecords",
+        JSON.stringify(records)
+      );
+    }
+
+    recordForm.addEventListener(
+      "submit",
+      function(event) {
+
+        event.preventDefault();
+
+        const id =
+          recordId.value.trim();
+
+        const studentName =
+          nameInput.value.trim();
+
+        const studentEmail =
+          email.value.trim();
+
+        const studentCourse =
+          course.value;
+
+        if (
+          id === "" ||
+          studentName === "" ||
+          studentEmail === "" ||
+          studentCourse === ""
+        ) {
+
+          showMessage(
+            "Please fill in all fields.",
+            "#dc2626"
+          );
+
+          return;
+        }
+
+        const duplicateIndex =
+          records.findIndex(function(record, index) {
+            return (
+              record.id.toLowerCase() === id.toLowerCase() &&
+              index !== editIndex
+            );
+          });
+
+        if (duplicateIndex !== -1) {
+
+          showMessage(
+            "Record ID already exists.",
+            "#dc2626"
+          );
+
+          return;
+        }
+
+        const newRecord = {
+          id: id,
+          name: studentName,
+          email: studentEmail,
+          course: studentCourse
+        };
+
+        if (editIndex === -1) {
+
+          // CREATE
+          records.push(newRecord);
+
+          showMessage(
+            "Record created successfully.",
+            "#16a34a"
+          );
+
+        } else {
+
+          // UPDATE
+          records[editIndex] = newRecord;
+
+          showMessage(
+            "Record updated successfully.",
+            "#16a34a"
+          );
+
+          editIndex = -1;
+          saveButton.textContent = "Create Record";
+        }
+
+        saveRecords();
+        displayRecords();
+        resetForm();
+
+      }
+    );
+
+    function displayRecords() {
+
+      recordsTableBody.innerHTML = "";
+
+      recordCount.textContent =
+        records.length;
+
+      if (records.length === 0) {
+
+        const row =
+          document.createElement("tr");
+
+        const cell =
+          document.createElement("td");
+
+        cell.colSpan = 5;
+        cell.className = "empty";
+        cell.textContent =
+          "No records found.";
+
+        row.appendChild(cell);
+        recordsTableBody.appendChild(row);
+
+        return;
+      }
+
+      records.forEach(
+        function(record, index) {
+
+          const row =
+            document.createElement("tr");
+
+          const idCell =
+            document.createElement("td");
+
+          idCell.textContent =
+            record.id;
+
+          const nameCell =
+            document.createElement("td");
+
+          nameCell.textContent =
+            record.name;
+
+          const emailCell =
+            document.createElement("td");
+
+          emailCell.textContent =
+            record.email;
+
+          const courseCell =
+            document.createElement("td");
+
+          courseCell.textContent =
+            record.course;
+
+          const actionCell =
+            document.createElement("td");
+
+          const editButton =
+            document.createElement("button");
+
+          editButton.type = "button";
+          editButton.className = "edit-btn";
+          editButton.textContent = "Edit";
+
+          editButton.addEventListener(
+            "click",
+            function() {
+              editRecord(index);
+            }
+          );
+
+          const deleteButton =
+            document.createElement("button");
+
+          deleteButton.type = "button";
+          deleteButton.className = "delete-btn";
+          deleteButton.textContent = "Delete";
+
+          deleteButton.addEventListener(
+            "click",
+            function() {
+              deleteRecord(index);
+            }
+          );
+
+          actionCell.appendChild(editButton);
+          actionCell.appendChild(deleteButton);
+
+          row.appendChild(idCell);
+          row.appendChild(nameCell);
+          row.appendChild(emailCell);
+          row.appendChild(courseCell);
+          row.appendChild(actionCell);
+
+          recordsTableBody.appendChild(row);
+        }
+      );
+    }
+
+    function editRecord(index) {
+
+      const record =
+        records[index];
+
+      if (!record) {
+        return;
+      }
+
+      recordId.value =
+        record.id;
+
+      nameInput.value =
+        record.name;
+
+      email.value =
+        record.email;
+
+      course.value =
+        record.course;
+
+      editIndex = index;
+
+      saveButton.textContent =
+        "Update Record";
+
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+    }
+
+    function deleteRecord(index) {
+
+      const record =
+        records[index];
+
+      if (!record) {
+        return;
+      }
+
+      const confirmed =
+        confirm(
+          "Are you sure you want to delete this record?"
+        );
+
+      if (!confirmed) {
+        return;
+      }
+
+      records.splice(index, 1);
+
+      saveRecords();
+      displayRecords();
+
+      if (editIndex === index) {
+        resetForm();
+      }
+
+      showMessage(
+        "Record deleted successfully.",
+        "#16a34a"
+      );
+    }
+
+    function clearRecords() {
+
+      if (records.length === 0) {
+
+        showMessage(
+          "There are no records to clear.",
+          "#64748b"
+        );
+
+        return;
+      }
+
+      const confirmed =
+        confirm(
+          "Are you sure you want to delete all records?"
+        );
+
+      if (!confirmed) {
+        return;
+      }
+
+      records = [];
+
+      localStorage.removeItem(
+        "crudRecords"
+      );
+
+      editIndex = -1;
+
+      saveButton.textContent =
+        "Create Record";
+
+      displayRecords();
+      resetForm();
+
+      showMessage(
+        "All records deleted successfully.",
+        "#16a34a"
+      );
+    }
+
+    function resetForm() {
+
+      recordForm.reset();
+
+      editIndex = -1;
+
+      saveButton.textContent =
+        "Create Record";
+    }
+
+    function showMessage(text, color) {
+
+      message.textContent =
+        text;
+
+      message.style.color =
+        color;
+
+      setTimeout(
+        function() {
+          message.textContent = "";
+        },
+        2500
+      );
+    }
+
+    // READ
+    loadRecords();
+  </script>
+
+</body>
+</html>

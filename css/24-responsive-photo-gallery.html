@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Photo Gallery | CSS Practical 24</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: #f1f5f9;
+            color: #334155;
+        }
+
+        /* Header */
+        header {
+            background: #0f172a;
+            color: white;
+            padding: 18px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header .logo {
+            font-size: 22px;
+            font-weight: 700;
+        }
+
+        header nav a {
+            color: #cbd5e1;
+            text-decoration: none;
+            margin-left: 25px;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+
+        header nav a:hover {
+            color: white;
+        }
+
+        /* Hero */
+        .hero {
+            background: linear-gradient(135deg, #1e3a8a, #2563eb);
+            color: white;
+            text-align: center;
+            padding: 65px 20px;
+        }
+
+        .hero .badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .hero h1 {
+            font-size: 38px;
+            margin-bottom: 10px;
+        }
+
+        .hero p {
+            font-size: 17px;
+            color: #dbeafe;
+        }
+
+        /* Main */
+        main {
+            width: 90%;
+            max-width: 1050px;
+            margin: 40px auto;
+        }
+
+        /* Objective */
+        .objective {
+            background: white;
+            border-left: 5px solid #2563eb;
+            border-radius: 12px;
+            padding: 22px 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
+        }
+
+        .objective h2 {
+            color: #1e3a8a;
+            margin-bottom: 8px;
+        }
+
+        /* Content Card */
+        .content-card {
+            background: white;
+            border-radius: 12px;
+            padding: 35px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
+        }
+
+        .content-card h2 {
+            color: #1e3a8a;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #dbeafe;
+        }
+
+        /* Gallery Header - Flexbox */
+        .gallery-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+            background: #f8fafc;
+            border-left: 4px solid #2563eb;
+            padding: 18px 20px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+        }
+
+        .gallery-header h3 {
+            color: #1e3a8a;
+        }
+
+        .gallery-header span {
+            color: #64748b;
+            font-size: 14px;
+        }
+
+        /* Photo Gallery - CSS Grid */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+        }
+
+        .gallery-item {
+            position: relative;
+            height: 220px;
+            overflow: hidden;
+            border-radius: 10px;
+            background: #e2e8f0;
+            box-shadow: 0 5px 12px rgba(15, 23, 42, 0.10);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: 0.4s;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.08);
+        }
+
+        /* Image Caption */
+        .caption {
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(15, 23, 42, 0.82);
+            color: white;
+            padding: 12px 15px;
+            font-size: 14px;
+            font-weight: 600;
+            transform: translateY(100%);
+            transition: 0.3s;
+        }
+
+        .gallery-item:hover .caption {
+            transform: translateY(0);
+        }
+
+        /* Navigation Buttons */
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-block;
+            background: #2563eb;
+            color: white;
+            text-decoration: none;
+            padding: 12px 22px;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background: #1e3a8a;
+            transform: translateY(-2px);
+        }
+
+        .secondary {
+            background: #64748b;
+        }
+
+        .secondary:hover {
+            background: #475569;
+        }
+
+        /* Footer */
+        footer {
+            background: #0f172a;
+            color: #cbd5e1;
+            text-align: center;
+            padding: 25px;
+            margin-top: 40px;
+        }
+
+        footer strong {
+            color: white;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 750px) {
+
+            header {
+                flex-direction: column;
+                gap: 12px;
+                text-align: center;
+                padding: 20px;
+            }
+
+            header nav a {
+                margin: 0 8px;
+            }
+
+            .hero h1 {
+                font-size: 30px;
+            }
+
+            main {
+                width: 92%;
+            }
+
+            .content-card {
+                padding: 25px 20px;
+            }
+
+            .gallery-header {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .gallery {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .gallery-item {
+                height: 200px;
+            }
+
+            .buttons {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 500px) {
+
+            .gallery {
+                grid-template-columns: 1fr;
+            }
+
+            .gallery-item {
+                height: 240px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="logo">Web Practicals</div>
+
+        <nav>
+            <a href="../index.html">Home</a>
+            <a href="index.html">CSS Programs</a>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <span class="badge">CSS PRACTICAL 24</span>
+        <h1>Responsive Photo Gallery</h1>
+        <p>A responsive photo gallery designed using CSS Grid and Flexbox</p>
+    </section>
+
+    <main>
+
+        <!-- Objective -->
+        <section class="objective">
+            <h2>Objective</h2>
+            <p>
+                To create a responsive photo gallery using CSS Grid and
+                Flexbox that adapts to different screen sizes.
+            </p>
+        </section>
+
+        <!-- Photo Gallery -->
+        <section class="content-card">
+
+            <h2>Photo Gallery</h2>
+
+            <div class="gallery-header">
+                <h3>My Photo Collection</h3>
+                <span>Responsive Grid Layout</span>
+            </div>
+
+            <div class="gallery">
+
+                <!-- Photo 1 -->
+                <div class="gallery-item">
+                    <img
+                        src="https://images.unsplash.com/photo-1497250681960-ef046c08a56e?auto=format&fit=crop&w=800&q=80"
+                        alt="Green leaves"
+                    >
+                    <div class="caption">Nature</div>
+                </div>
+
+                <!-- Photo 2 -->
+                <div class="gallery-item">
+                    <img
+                        src="https://images.unsplash.com/photo-1500534623283-312aade485b7?auto=format&fit=crop&w=800&q=80"
+                        alt="Mountain landscape"
+                    >
+                    <div class="caption">Mountain Landscape</div>
+                </div>
+
+                <!-- Photo 3 -->
+                <div class="gallery-item">
+                    <img
+                        src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80"
+                        alt="Beach"
+                    >
+                    <div class="caption">Beach</div>
+                </div>
+
+                <!-- Photo 4 -->
+                <div class="gallery-item">
+                    <img
+                        src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=800&q=80"
+                        alt="Forest"
+                    >
+                    <div class="caption">Forest</div>
+                </div>
+
+                <!-- Photo 5 -->
+                <div class="gallery-item">
+                    <img
+                        src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=800&q=80"
+                        alt="Lake and mountains"
+                    >
+                    <div class="caption">Lake View</div>
+                </div>
+
+                <!-- Photo 6 -->
+                <div class="gallery-item">
+                    <img
+                        src="https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=800&q=80"
+                        alt="Mountain scenery"
+                    >
+                    <div class="caption">Scenery</div>
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- Navigation -->
+        <div class="buttons">
+
+            <a href="css-23.html" class="btn secondary">
+                Previous Practical
+            </a>
+
+            <a href="index.html" class="btn">
+                CSS Programs
+            </a>
+
+            <a href="../index.html" class="btn">
+                Dashboard
+            </a>
+
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>
+            <strong>CSS Practical 24</strong> |
+            Responsive Photo Gallery using CSS Grid and Flexbox
+        </p>
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Login and Signup Page | CSS Practical 53</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: #f1f5f9;
+            color: #334155;
+            line-height: 1.6;
+        }
+
+        /* Header */
+        header {
+            background: #0f172a;
+            color: white;
+            padding: 18px 30px;
+        }
+
+        .header-container {
+            width: 90%;
+            max-width: 1050px;
+            margin: auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 22px;
+            font-weight: 700;
+        }
+
+        nav a {
+            color: #cbd5e1;
+            text-decoration: none;
+            margin-left: 22px;
+            font-size: 15px;
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            color: white;
+        }
+
+        /* Hero */
+        .hero {
+            background: linear-gradient(135deg, #1e3a8a, #2563eb);
+            color: white;
+            text-align: center;
+            padding: 65px 20px;
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 7px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            margin-bottom: 15px;
+        }
+
+        .hero h1 {
+            font-size: 34px;
+            margin-bottom: 10px;
+        }
+
+        .hero p {
+            max-width: 700px;
+            margin: auto;
+            color: #dbeafe;
+        }
+
+        /* Main */
+        main {
+            width: 90%;
+            max-width: 1050px;
+            margin: 40px auto;
+        }
+
+        .objective,
+        .content-card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(15, 23, 42, 0.08);
+        }
+
+        .objective {
+            border-left: 5px solid #2563eb;
+            padding: 22px 25px;
+            margin-bottom: 25px;
+        }
+
+        .objective h2 {
+            color: #1e3a8a;
+            margin-bottom: 8px;
+        }
+
+        .content-card {
+            padding: 35px;
+            margin-bottom: 25px;
+        }
+
+        .content-card h2 {
+            color: #1e3a8a;
+            margin-bottom: 18px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #dbeafe;
+        }
+
+        /* Login and Signup Layout */
+        .auth-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+            margin-top: 20px;
+        }
+
+        .auth-card {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 30px;
+        }
+
+        .auth-card h3 {
+            color: #1e3a8a;
+            text-align: center;
+            margin-bottom: 8px;
+        }
+
+        .auth-card > p {
+            text-align: center;
+            color: #64748b;
+            font-size: 14px;
+            margin-bottom: 22px;
+        }
+
+        .avatar {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 15px;
+            border-radius: 50%;
+            background: #2563eb;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 23px;
+            font-weight: 700;
+        }
+
+        /* Forms */
+        .auth-form {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            color: #1e3a8a;
+            font-weight: 600;
+            margin-bottom: 7px;
+            font-size: 14px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px 14px;
+            border: 2px solid #cbd5e1;
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 15px;
+            color: #334155;
+            background: white;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        .form-group input:focus {
+            border-color: #2563eb;
+            box-shadow: 0 0 0 3px #dbeafe;
+        }
+
+        .form-options {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+            font-size: 13px;
+        }
+
+        .remember {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .remember input {
+            accent-color: #2563eb;
+        }
+
+        .form-options a {
+            color: #2563eb;
+            text-decoration: none;
+        }
+
+        .form-options a:hover {
+            text-decoration: underline;
+        }
+
+        .auth-button {
+            width: 100%;
+            border: none;
+            background: #2563eb;
+            color: white;
+            padding: 12px;
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .auth-button:hover {
+            background: #1e3a8a;
+            transform: translateY(-2px);
+        }
+
+        .terms {
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            font-size: 13px;
+            color: #64748b;
+        }
+
+        .terms input {
+            margin-top: 5px;
+            accent-color: #2563eb;
+        }
+
+        .auth-link {
+            text-align: center;
+            margin-top: 15px;
+            font-size: 14px;
+            color: #64748b;
+        }
+
+        .auth-link a {
+            color: #2563eb;
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        .auth-link a:hover {
+            text-decoration: underline;
+        }
+
+        /* Features */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+        }
+
+        .feature-card {
+            background: #f8fafc;
+            border-left: 4px solid #2563eb;
+            border-radius: 10px;
+            padding: 20px;
+        }
+
+        .feature-card h3 {
+            color: #1e3a8a;
+            margin-bottom: 8px;
+        }
+
+        .feature-card p {
+            font-size: 14px;
+        }
+
+        /* Navigation Buttons */
+        .buttons {
+            text-align: center;
+            margin: 35px 0;
+        }
+
+        .btn {
+            display: inline-block;
+            background: #2563eb;
+            color: white;
+            text-decoration: none;
+            padding: 11px 20px;
+            border-radius: 7px;
+            margin: 5px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background: #1e3a8a;
+            transform: translateY(-2px);
+        }
+
+        .btn.secondary {
+            background: #e2e8f0;
+            color: #1e3a8a;
+        }
+
+        .btn.secondary:hover {
+            background: #cbd5e1;
+        }
+
+        /* Footer */
+        footer {
+            background: #0f172a;
+            color: #94a3b8;
+            text-align: center;
+            padding: 25px;
+        }
+
+        footer strong {
+            color: white;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 800px) {
+            .auth-container {
+                grid-template-columns: 1fr;
+            }
+
+            .features {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 750px) {
+            .header-container {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            nav {
+                text-align: center;
+            }
+
+            nav a {
+                margin: 0 8px;
+            }
+
+            .hero h1 {
+                font-size: 28px;
+            }
+
+            .content-card {
+                padding: 25px 20px;
+            }
+
+            .auth-card {
+                padding: 25px 20px;
+            }
+
+            .form-options {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+
+            <div class="logo">
+                CSS Practical
+            </div>
+
+            <nav>
+                <a href="../index.html">Home</a>
+                <a href="index.html">CSS Programs</a>
+            </nav>
+
+        </div>
+    </header>
+
+
+    <!-- Hero Section -->
+    <section class="hero">
+
+        <span class="badge">CSS PRACTICAL 53</span>
+
+        <h1>Responsive Login and Signup Page</h1>
+
+        <p>
+            Create responsive login and signup forms using
+            HTML and CSS for different screen sizes.
+        </p>
+
+    </section>
+
+
+    <main>
+
+        <!-- Objective -->
+        <section class="objective">
+
+            <h2>Objective</h2>
+
+            <p>
+                To create responsive login and signup pages using
+                HTML form elements and CSS media queries so that
+                the forms adapt properly to desktop, tablet,
+                and mobile screen sizes.
+            </p>
+
+        </section>
+
+
+        <!-- Login and Signup -->
+        <section class="content-card">
+
+            <h2>Login and Signup Forms</h2>
+
+            <div class="auth-container">
+
+                <!-- Login -->
+                <div class="auth-card">
+
+                    <div class="avatar">M</div>
+
+                    <h3>Login</h3>
+
+                    <p>Sign in to your account</p>
+
+                    <form class="auth-form">
+
+                        <div class="form-group">
+                            <label for="login-email">
+                                Email Address
+                            </label>
+
+                            <input
+                                type="email"
+                                id="login-email"
+                                placeholder="Enter your email"
+                                required
+                            >
+                        </div>
+
+                        <div class="form-group">
+                            <label for="login-password">
+                                Password
+                            </label>
+
+                            <input
+                                type="password"
+                                id="login-password"
+                                placeholder="Enter your password"
+                                required
+                            >
+                        </div>
+
+                        <div class="form-options">
+
+                            <label class="remember">
+                                <input type="checkbox">
+                                Remember me
+                            </label>
+
+                            <a href="#">
+                                Forgot Password?
+                            </a>
+
+                        </div>
+
+                        <button type="submit" class="auth-button">
+                            Login
+                        </button>
+
+                    </form>
+
+                    <p class="auth-link">
+                        Don't have an account?
+                        <a href="#signup">Sign Up</a>
+                    </p>
+
+                </div>
+
+
+                <!-- Signup -->
+                <div class="auth-card" id="signup">
+
+                    <div class="avatar">+</div>
+
+                    <h3>Sign Up</h3>
+
+                    <p>Create a new account</p>
+
+                    <form class="auth-form">
+
+                        <div class="form-group">
+                            <label for="full-name">
+                                Full Name
+                            </label>
+
+                            <input
+                                type="text"
+                                id="full-name"
+                                placeholder="Enter your name"
+                                required
+                            >
+                        </div>
+
+                        <div class="form-group">
+                            <label for="signup-email">
+                                Email Address
+                            </label>
+
+                            <input
+                                type="email"
+                                id="signup-email"
+                                placeholder="Enter your email"
+                                required
+                            >
+                        </div>
+
+                        <div class="form-group">
+                            <label for="signup-password">
+                                Password
+                            </label>
+
+                            <input
+                                type="password"
+                                id="signup-password"
+                                placeholder="Create a password"
+                                required
+                            >
+                        </div>
+
+                        <div class="form-group">
+                            <label for="confirm-password">
+                                Confirm Password
+                            </label>
+
+                            <input
+                                type="password"
+                                id="confirm-password"
+                                placeholder="Confirm your password"
+                                required
+                            >
+                        </div>
+
+                        <label class="terms">
+                            <input type="checkbox" required>
+
+                            <span>
+                                I agree to the terms and conditions.
+                            </span>
+                        </label>
+
+                        <button type="submit" class="auth-button">
+                            Create Account
+                        </button>
+
+                    </form>
+
+                    <p class="auth-link">
+                        Already have an account?
+                        <a href="#login">Login</a>
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- Responsive Features -->
+        <section class="content-card">
+
+            <h2>Responsive Design Features</h2>
+
+            <div class="features">
+
+                <div class="feature-card">
+                    <h3>Flexible Layout</h3>
+
+                    <p>
+                        CSS Grid creates a two-column layout on
+                        larger screens and a single-column layout
+                        on smaller screens.
+                    </p>
+                </div>
+
+                <div class="feature-card">
+                    <h3>Mobile Friendly</h3>
+
+                    <p>
+                        Media queries adjust spacing, navigation,
+                        and form layout for mobile devices.
+                    </p>
+                </div>
+
+                <div class="feature-card">
+                    <h3>Form Styling</h3>
+
+                    <p>
+                        Input fields, buttons, labels, and form
+                        controls are styled using CSS.
+                    </p>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- Navigation -->
+        <div class="buttons">
+
+            <a href="css-52.html" class="btn secondary">
+                ← Previous Practical
+            </a>
+
+            <a href="index.html" class="btn">
+                CSS Programs
+            </a>
+
+            <a href="../index.html" class="btn">
+                Dashboard
+            </a>
+
+        </div>
+
+    </main>
+
+
+    <!-- Footer -->
+    <footer>
+
+        <p>
+            <strong>CSS Practical 53</strong> |
+            Responsive Login and Signup Page
+        </p>
+
+        <p>
+            Created using HTML5 and CSS3
+        </p>
+
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Border-Radius Shapes | Practical 33</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: #f1f5f9;
+            color: #334155;
+            line-height: 1.6;
+        }
+
+        /* Header */
+        header {
+            background: #0f172a;
+            padding: 18px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: #ffffff;
+            font-size: 22px;
+            font-weight: 700;
+        }
+
+        nav a {
+            color: #cbd5e1;
+            text-decoration: none;
+            margin-left: 25px;
+            font-weight: 500;
+        }
+
+        nav a:hover {
+            color: #ffffff;
+        }
+
+        /* Hero */
+        .hero {
+            background: linear-gradient(135deg, #1e3a8a, #2563eb);
+            color: #ffffff;
+            text-align: center;
+            padding: 65px 20px;
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 7px 15px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .hero h1 {
+            font-size: 38px;
+            margin-bottom: 10px;
+        }
+
+        .hero p {
+            font-size: 17px;
+            color: #dbeafe;
+        }
+
+        /* Main */
+        main {
+            width: 90%;
+            max-width: 1050px;
+            margin: 40px auto;
+        }
+
+        /* Objective */
+        .objective {
+            background: #ffffff;
+            border-left: 5px solid #2563eb;
+            padding: 22px 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(15, 23, 42, 0.08);
+            margin-bottom: 25px;
+        }
+
+        .objective h2 {
+            color: #1e3a8a;
+            margin-bottom: 8px;
+        }
+
+        /* Content Card */
+        .content-card {
+            background: #ffffff;
+            padding: 35px;
+            margin-bottom: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(15, 23, 42, 0.08);
+        }
+
+        .content-card h2 {
+            color: #1e3a8a;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #dbeafe;
+        }
+
+        /* Shape Grid */
+        .shape-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        .shape-card {
+            background: #f8fafc;
+            border-left: 4px solid #2563eb;
+            border-radius: 10px;
+            padding: 25px;
+            text-align: center;
+        }
+
+        .shape-card h3 {
+            color: #1e3a8a;
+            margin-bottom: 15px;
+        }
+
+        .shape {
+            width: 130px;
+            height: 130px;
+            margin: 15px auto;
+            background: #2563eb;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffffff;
+            font-weight: 700;
+        }
+
+        /* Different Border Radius Shapes */
+        .rounded-square {
+            border-radius: 20px;
+        }
+
+        .circle {
+            border-radius: 50%;
+        }
+
+        .pill {
+            width: 180px;
+            height: 90px;
+            border-radius: 50px;
+        }
+
+        .top-rounded {
+            border-radius: 50px 50px 0 0;
+        }
+
+        .bottom-rounded {
+            border-radius: 0 0 50px 50px;
+        }
+
+        .left-rounded {
+            border-radius: 60px 0 0 60px;
+        }
+
+        .right-rounded {
+            border-radius: 0 60px 60px 0;
+        }
+
+        .ellipse {
+            width: 180px;
+            height: 110px;
+            border-radius: 50%;
+        }
+
+        .custom-shape {
+            border-radius: 10px 50px 10px 50px;
+        }
+
+        /* Border Radius Demonstration */
+        .radius-demo {
+            background: #eff6ff;
+            border: 2px dashed #2563eb;
+            padding: 30px;
+            border-radius: 15px;
+            margin-top: 20px;
+        }
+
+        .demo-row {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .demo-box {
+            width: 140px;
+            height: 100px;
+            background: #1e3a8a;
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+        }
+
+        .radius-10 {
+            border-radius: 10px;
+        }
+
+        .radius-25 {
+            border-radius: 25px;
+        }
+
+        .radius-50 {
+            border-radius: 50px;
+        }
+
+        .radius-circle {
+            width: 110px;
+            height: 110px;
+            border-radius: 50%;
+        }
+
+        /* Navigation Buttons */
+        .buttons {
+            text-align: center;
+            margin: 35px 0;
+        }
+
+        .btn {
+            display: inline-block;
+            background: #2563eb;
+            color: #ffffff;
+            text-decoration: none;
+            padding: 12px 22px;
+            border-radius: 8px;
+            margin: 5px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background: #1e3a8a;
+            transform: translateY(-2px);
+        }
+
+        .secondary {
+            background: #e2e8f0;
+            color: #1e3a8a;
+        }
+
+        .secondary:hover {
+            background: #cbd5e1;
+        }
+
+        /* Footer */
+        footer {
+            background: #0f172a;
+            color: #cbd5e1;
+            text-align: center;
+            padding: 25px;
+            margin-top: 40px;
+        }
+
+        footer strong {
+            color: #ffffff;
+        }
+
+        /* Responsive */
+        @media (max-width: 750px) {
+            header {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            nav a {
+                margin: 0 8px;
+                font-size: 14px;
+            }
+
+            .hero h1 {
+                font-size: 30px;
+            }
+
+            .content-card {
+                padding: 25px 20px;
+            }
+
+            .shape-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .demo-row {
+                gap: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="logo">Web Practicals</div>
+
+        <nav>
+            <a href="../index.html">Home</a>
+            <a href="index.html">CSS Programs</a>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="badge">CSS PRACTICAL 33</div>
+        <h1>Border-Radius Shapes</h1>
+        <p>Creating different shapes using the CSS border-radius property</p>
+    </section>
+
+    <main>
+
+        <!-- Objective -->
+        <section class="objective">
+            <h2>Objective</h2>
+            <p>
+                To create different shapes using the CSS
+                <strong>border-radius</strong> property and understand
+                how rounded corners can be applied to HTML elements.
+            </p>
+        </section>
+
+        <!-- Different Shapes -->
+        <section class="content-card">
+            <h2>Different Border-Radius Shapes</h2>
+
+            <div class="shape-grid">
+
+                <div class="shape-card">
+                    <h3>Rounded Square</h3>
+                    <div class="shape rounded-square">20px</div>
+                    <p>Uses <strong>border-radius: 20px</strong></p>
+                </div>
+
+                <div class="shape-card">
+                    <h3>Circle</h3>
+                    <div class="shape circle">50%</div>
+                    <p>Uses <strong>border-radius: 50%</strong></p>
+                </div>
+
+                <div class="shape-card">
+                    <h3>Pill Shape</h3>
+                    <div class="shape pill">Pill</div>
+                    <p>Large radius creates a pill shape.</p>
+                </div>
+
+                <div class="shape-card">
+                    <h3>Top Rounded</h3>
+                    <div class="shape top-rounded">Top</div>
+                    <p>Rounded top-left and top-right corners.</p>
+                </div>
+
+                <div class="shape-card">
+                    <h3>Bottom Rounded</h3>
+                    <div class="shape bottom-rounded">Bottom</div>
+                    <p>Rounded bottom-left and bottom-right corners.</p>
+                </div>
+
+                <div class="shape-card">
+                    <h3>Left Rounded</h3>
+                    <div class="shape left-rounded">Left</div>
+                    <p>Rounded corners on the left side.</p>
+                </div>
+
+                <div class="shape-card">
+                    <h3>Right Rounded</h3>
+                    <div class="shape right-rounded">Right</div>
+                    <p>Rounded corners on the right side.</p>
+                </div>
+
+                <div class="shape-card">
+                    <h3>Ellipse</h3>
+                    <div class="shape ellipse">Ellipse</div>
+                    <p>Different width and height create an ellipse.</p>
+                </div>
+
+                <div class="shape-card">
+                    <h3>Custom Shape</h3>
+                    <div class="shape custom-shape">Custom</div>
+                    <p>Different radius values create a custom shape.</p>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Border Radius Demonstration -->
+        <section class="content-card">
+            <h2>Border-Radius Demonstration</h2>
+
+            <div class="radius-demo">
+                <div class="demo-row">
+
+                    <div class="demo-box radius-10">
+                        10px
+                    </div>
+
+                    <div class="demo-box radius-25">
+                        25px
+                    </div>
+
+                    <div class="demo-box radius-50">
+                        50px
+                    </div>
+
+                    <div class="demo-box radius-circle">
+                        50%
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Navigation -->
+        <div class="buttons">
+            <a href="css-32.html" class="btn secondary">← Previous Practical</a>
+            <a href="index.html" class="btn">CSS Programs</a>
+            <a href="../index.html" class="btn">Dashboard</a>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>
+            <strong>CSS Practical 33</strong> | Web Practicals
+        </p>
+        <p>Demonstrating border-radius and different CSS shapes</p>
+    </footer>
+
+</body>
+</html>

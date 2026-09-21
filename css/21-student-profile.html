@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>College Student Profile | Practical 21</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: #f1f5f9;
+            color: #334155;
+            line-height: 1.6;
+        }
+
+        header {
+            background: #0f172a;
+            color: white;
+            padding: 18px 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header .logo {
+            font-size: 22px;
+            font-weight: 700;
+        }
+
+        header nav a {
+            color: #cbd5e1;
+            text-decoration: none;
+            margin-left: 25px;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+
+        header nav a:hover {
+            color: white;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #1e3a8a, #2563eb);
+            color: white;
+            text-align: center;
+            padding: 65px 20px;
+        }
+
+        .profile-icon {
+            width: 100px;
+            height: 100px;
+            background: white;
+            color: #2563eb;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 38px;
+            font-weight: 700;
+            border: 5px solid #dbeafe;
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 7px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .hero h1 {
+            font-size: 40px;
+            margin-bottom: 8px;
+        }
+
+        .hero h2 {
+            font-size: 21px;
+            font-weight: 500;
+            color: #dbeafe;
+            margin-bottom: 8px;
+        }
+
+        .hero p {
+            font-size: 16px;
+            color: #dbeafe;
+        }
+
+        main {
+            width: 90%;
+            max-width: 1050px;
+            margin: 40px auto;
+        }
+
+        .content-card {
+            background: white;
+            border-radius: 12px;
+            padding: 35px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 15px rgba(15, 23, 42, 0.06);
+        }
+
+        .content-card h2 {
+            color: #1e3a8a;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #dbeafe;
+        }
+
+        .content-card p {
+            margin-bottom: 12px;
+        }
+
+        /* Profile Details */
+        .profile-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .profile-item {
+            background: #f8fafc;
+            border-left: 4px solid #2563eb;
+            border-radius: 10px;
+            padding: 18px 20px;
+        }
+
+        .profile-item strong {
+            display: block;
+            color: #1e3a8a;
+            margin-bottom: 4px;
+        }
+
+        /* Education */
+        .education-box {
+            background: #eff6ff;
+            border-left: 4px solid #2563eb;
+            border-radius: 10px;
+            padding: 22px;
+            margin-top: 15px;
+        }
+
+        .education-box h3 {
+            color: #1e3a8a;
+            margin-bottom: 8px;
+        }
+
+        /* Skills */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .skill-card {
+            background: #f8fafc;
+            border-left: 4px solid #2563eb;
+            border-radius: 10px;
+            padding: 20px;
+        }
+
+        .skill-card h3 {
+            color: #1e3a8a;
+            margin-bottom: 8px;
+        }
+
+        /* Interests */
+        .interest-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        .interest {
+            background: #dbeafe;
+            color: #1e3a8a;
+            padding: 9px 17px;
+            border-radius: 20px;
+            font-weight: 600;
+        }
+
+        /* Academic Table */
+        .table-container {
+            overflow-x: auto;
+            margin-top: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        th {
+            background: #1e3a8a;
+            color: white;
+            padding: 14px;
+            text-align: left;
+        }
+
+        td {
+            padding: 13px 14px;
+            border-bottom: 1px solid #cbd5e1;
+        }
+
+        tr:nth-child(even) {
+            background: #f8fafc;
+        }
+
+        tr:hover {
+            background: #dbeafe;
+        }
+
+        /* Achievements */
+        .achievement-list {
+            margin-top: 15px;
+            padding-left: 25px;
+        }
+
+        .achievement-list li {
+            margin-bottom: 10px;
+            padding: 8px 12px;
+            background: #f8fafc;
+            border-radius: 6px;
+        }
+
+        /* Career Goal */
+        .goal-box {
+            background: #eff6ff;
+            border-left: 5px solid #2563eb;
+            border-radius: 10px;
+            padding: 25px;
+            margin-top: 15px;
+        }
+
+        .goal-box h3 {
+            color: #1e3a8a;
+            margin-bottom: 8px;
+        }
+
+        .buttons {
+            text-align: center;
+            margin: 30px 0;
+        }
+
+        .btn {
+            display: inline-block;
+            background: #2563eb;
+            color: white;
+            text-decoration: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            margin: 5px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background: #1e3a8a;
+            transform: translateY(-2px);
+        }
+
+        .btn.secondary {
+            background: #64748b;
+        }
+
+        .btn.secondary:hover {
+            background: #475569;
+        }
+
+        footer {
+            background: #0f172a;
+            color: #cbd5e1;
+            text-align: center;
+            padding: 25px;
+            margin-top: 40px;
+        }
+
+        footer strong {
+            color: white;
+        }
+
+        @media (max-width: 750px) {
+
+            header {
+                flex-direction: column;
+                gap: 12px;
+                text-align: center;
+                padding: 20px;
+            }
+
+            header nav a {
+                margin: 0 8px;
+            }
+
+            .hero {
+                padding: 50px 20px;
+            }
+
+            .hero h1 {
+                font-size: 30px;
+            }
+
+            .hero h2 {
+                font-size: 18px;
+            }
+
+            .content-card {
+                padding: 25px 20px;
+            }
+
+            .profile-grid,
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .profile-item {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="logo">College Profile</div>
+
+        <nav>
+            <a href="../index.html">Home</a>
+            <a href="index.html">CSS Programs</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+
+        <span class="badge">CSS PRACTICAL 21</span>
+
+        <div class="profile-icon">
+            M
+        </div>
+
+        <h1>Chennuru Manvitha Reddy</h1>
+
+        <h2>Computing and Data Science Student</h2>
+
+        <p>
+            Sai University | Artificial Intelligence and Machine Learning
+        </p>
+
+    </section>
+
+    <main>
+
+        <section class="content-card">
+            <h2>Student Profile</h2>
+
+            <div class="profile-grid">
+
+                <div class="profile-item">
+                    <strong>Name</strong>
+                    Chennuru Manvitha Reddy
+                </div>
+
+                <div class="profile-item">
+                    <strong>Course</strong>
+                    Computing and Data Science
+                </div>
+
+                <div class="profile-item">
+                    <strong>Institution</strong>
+                    Sai University
+                </div>
+
+                <div class="profile-item">
+                    <strong>Specialization</strong>
+                    Artificial Intelligence and Machine Learning
+                </div>
+
+                <div class="profile-item">
+                    <strong>Department</strong>
+                    Computing and Data Science
+                </div>
+
+                <div class="profile-item">
+                    <strong>Student Status</strong>
+                    Undergraduate Student
+                </div>
+
+            </div>
+        </section>
+
+        <section class="content-card">
+            <h2>About the Student</h2>
+
+            <p>
+                Chennuru Manvitha Reddy is a Computing and Data Science
+                student interested in technology, programming and
+                emerging areas of computer science.
+            </p>
+
+            <p>
+                Her areas of interest include Artificial Intelligence,
+                Machine Learning, Data Science and Web Development.
+                She enjoys learning new technologies and developing
+                practical programming skills.
+            </p>
+        </section>
+
+        <section class="content-card">
+            <h2>Education</h2>
+
+            <div class="education-box">
+                <h3>Computing and Data Science</h3>
+
+                <p>
+                    <strong>Institution:</strong> Sai University
+                </p>
+
+                <p>
+                    <strong>Area of Study:</strong>
+                    Artificial Intelligence and Machine Learning
+                </p>
+
+                <p>
+                    <strong>Focus Areas:</strong>
+                    Programming, Data Science, Artificial Intelligence
+                    and Machine Learning
+                </p>
+            </div>
+        </section>
+
+        <section class="content-card">
+            <h2>Academic Information</h2>
+
+            <div class="table-container">
+
+                <table>
+
+                    <tr>
+                        <th>Category</th>
+                        <th>Details</th>
+                    </tr>
+
+                    <tr>
+                        <td>Program</td>
+                        <td>Computing and Data Science</td>
+                    </tr>
+
+                    <tr>
+                        <td>Institution</td>
+                        <td>Sai University</td>
+                    </tr>
+
+                    <tr>
+                        <td>Specialization</td>
+                        <td>Artificial Intelligence and Machine Learning</td>
+                    </tr>
+
+                    <tr>
+                        <td>Primary Interest</td>
+                        <td>Artificial Intelligence and Data Science</td>
+                    </tr>
+
+                    <tr>
+                        <td>Learning Focus</td>
+                        <td>Programming and Web Development</td>
+                    </tr>
+
+                </table>
+
+            </div>
+        </section>
+
+        <section class="content-card">
+            <h2>Technical Skills</h2>
+
+            <div class="skills-grid">
+
+                <div class="skill-card">
+                    <h3>HTML</h3>
+                    <p>
+                        Creating structured webpages using HTML elements.
+                    </p>
+                </div>
+
+                <div class="skill-card">
+                    <h3>CSS</h3>
+                    <p>
+                        Designing responsive and attractive webpages.
+                    </p>
+                </div>
+
+                <div class="skill-card">
+                    <h3>JavaScript</h3>
+                    <p>
+                        Developing interactive and dynamic webpages.
+                    </p>
+                </div>
+
+                <div class="skill-card">
+                    <h3>Python</h3>
+                    <p>
+                        Learning programming and computational problem solving.
+                    </p>
+                </div>
+
+                <div class="skill-card">
+                    <h3>Data Science</h3>
+                    <p>
+                        Exploring data analysis and visualization concepts.
+                    </p>
+                </div>
+
+                <div class="skill-card">
+                    <h3>Machine Learning</h3>
+                    <p>
+                        Learning machine learning concepts and techniques.
+                    </p>
+                </div>
+
+            </div>
+        </section>
+
+        <section class="content-card">
+            <h2>Areas of Interest</h2>
+
+            <div class="interest-list">
+
+                <span class="interest">Artificial Intelligence</span>
+                <span class="interest">Machine Learning</span>
+                <span class="interest">Data Science</span>
+                <span class="interest">Programming</span>
+                <span class="interest">Web Development</span>
+
+            </div>
+        </section>
+
+        <section class="content-card">
+            <h2>Achievements and Activities</h2>
+
+            <ul class="achievement-list">
+
+                <li>
+                    Developing practical webpages using HTML and CSS.
+                </li>
+
+                <li>
+                    Exploring programming and problem-solving concepts.
+                </li>
+
+                <li>
+                    Learning Artificial Intelligence and Machine Learning.
+                </li>
+
+                <li>
+                    Building technical knowledge through academic projects
+                    and practical assignments.
+                </li>
+
+            </ul>
+        </section>
+
+        <section class="content-card">
+            <h2>Career Goal</h2>
+
+            <div class="goal-box">
+
+                <h3>Future Objective</h3>
+
+                <p>
+                    To build strong technical and problem-solving skills
+                    and explore career opportunities in Artificial
+                    Intelligence, Machine Learning and Data Science.
+                </p>
+
+            </div>
+        </section>
+
+        <div class="buttons">
+            <a href="css-20.html" class="btn secondary">Previous Practical</a>
+            <a href="index.html" class="btn">CSS Programs</a>
+            <a href="../index.html" class="btn">Dashboard</a>
+        </div>
+
+    </main>
+
+    <footer>
+        <p>
+            <strong>CSS Practical 21</strong> |
+            College / Student Profile
+        </p>
+
+        <p>
+            Designed using HTML5 and CSS3
+        </p>
+    </footer>
+
+</body>
+</html>

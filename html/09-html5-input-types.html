@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="description"
+        content="HTML5 input types demonstration using email, date, number and password."
+    >
+
+    <title>HTML5 Input Types | Practical 09</title>
+
+    <style>
+        /* =========================================
+           GLOBAL STYLES
+        ========================================== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: #f1f5f9;
+            color: #334155;
+            line-height: 1.6;
+        }
+
+        /* =========================================
+           NAVIGATION BAR
+        ========================================== */
+        nav {
+            background: #0f172a;
+            padding: 16px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: #ffffff;
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        nav a {
+            color: #cbd5e1;
+            text-decoration: none;
+            margin-left: 25px;
+            font-size: 14px;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: #ffffff;
+        }
+
+        /* =========================================
+           HERO SECTION
+        ========================================== */
+        .hero {
+            background: linear-gradient(135deg, #1e3a8a, #2563eb);
+            color: #ffffff;
+            text-align: center;
+            padding: 65px 20px;
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 6px 15px;
+            border-radius: 20px;
+            font-size: 13px;
+            margin-bottom: 15px;
+        }
+
+        .hero h1 {
+            font-size: 42px;
+            margin-bottom: 10px;
+        }
+
+        .hero p {
+            font-size: 18px;
+            color: #dbeafe;
+        }
+
+        /* =========================================
+           MAIN CONTENT
+        ========================================== */
+        main {
+            width: 90%;
+            max-width: 1050px;
+            margin: 40px auto;
+        }
+
+        .objective,
+        .content-card {
+            background: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(15, 23, 42, 0.06);
+        }
+
+        /* Objective */
+        .objective {
+            border-left: 5px solid #2563eb;
+            padding: 22px 25px;
+            margin-bottom: 30px;
+        }
+
+        .objective h2 {
+            color: #1e3a8a;
+            font-size: 20px;
+            margin-bottom: 6px;
+        }
+
+        /* Content Cards */
+        .content-card {
+            padding: 35px;
+            margin-bottom: 25px;
+        }
+
+        .content-card h2 {
+            color: #1e3a8a;
+            margin-bottom: 12px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e2e8f0;
+        }
+
+        .content-card > p {
+            margin-bottom: 20px;
+        }
+
+        /* =========================================
+           FORM SECTION
+        ========================================== */
+        .form-container {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 30px;
+            margin-top: 25px;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group.full {
+            grid-column: 1 / -1;
+        }
+
+        .form-group label {
+            color: #1e3a8a;
+            font-weight: 600;
+            margin-bottom: 7px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px 14px;
+            border: 1px solid #cbd5e1;
+            border-radius: 7px;
+            font-size: 14px;
+            font-family: inherit;
+            outline: none;
+            background: #ffffff;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus {
+            border-color: #2563eb;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+        }
+
+        .form-group input::placeholder {
+            color: #94a3b8;
+        }
+
+        /* =========================================
+           FORM BUTTONS
+        ========================================== */
+        .form-buttons {
+            display: flex;
+            gap: 12px;
+            margin-top: 25px;
+        }
+
+        .form-button {
+            border: none;
+            padding: 11px 22px;
+            border-radius: 7px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .submit-button {
+            background: #2563eb;
+            color: #ffffff;
+        }
+
+        .submit-button:hover {
+            background: #1d4ed8;
+        }
+
+        .reset-button {
+            background: #475569;
+            color: #ffffff;
+        }
+
+        .reset-button:hover {
+            background: #334155;
+        }
+
+        /* =========================================
+           INPUT TYPES SECTION
+        ========================================== */
+        .input-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 18px;
+            margin-top: 25px;
+        }
+
+        .input-card {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-left: 4px solid #2563eb;
+            border-radius: 8px;
+            padding: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .input-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 16px rgba(15, 23, 42, 0.07);
+        }
+
+        .input-card h3 {
+            color: #1e3a8a;
+            margin-bottom: 8px;
+        }
+
+        .input-card p {
+            font-size: 14px;
+            color: #64748b;
+        }
+
+        
+        /* =========================================
+           NAVIGATION BUTTONS
+        ========================================== */
+        .buttons {
+            text-align: center;
+            margin: 35px 0;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 22px;
+            margin: 5px;
+            background: #2563eb;
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 7px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            background: #1d4ed8;
+            transform: translateY(-2px);
+        }
+
+        .secondary {
+            background: #475569;
+        }
+
+        .secondary:hover {
+            background: #334155;
+        }
+
+        /* =========================================
+           FOOTER
+        ========================================== */
+        footer {
+            background: #0f172a;
+            color: #94a3b8;
+            text-align: center;
+            padding: 25px 15px;
+            margin-top: 50px;
+        }
+
+        footer strong {
+            color: #ffffff;
+        }
+
+        footer p + p {
+            margin-top: 5px;
+            font-size: 14px;
+        }
+
+        /* =========================================
+           RESPONSIVE DESIGN
+        ========================================== */
+        @media (max-width: 750px) {
+
+            nav {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            nav a {
+                margin: 0 8px;
+            }
+
+            .hero h1 {
+                font-size: 30px;
+            }
+
+            .hero p {
+                font-size: 16px;
+            }
+
+            .content-card {
+                padding: 22px;
+            }
+
+            .form-container {
+                padding: 20px;
+            }
+
+            .form-grid,
+            .input-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .form-group.full {
+                grid-column: auto;
+            }
+
+            .form-buttons {
+                flex-direction: column;
+            }
+
+            .form-button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- =========================================
+         NAVIGATION BAR
+    ========================================== -->
+    <nav>
+
+        <div class="logo">
+            Web Practicals
+        </div>
+
+        <div>
+            <a href="../index.html">Home</a>
+            <a href="index.html">HTML Programs</a>
+        </div>
+
+    </nav>
+
+
+    <!-- =========================================
+         HERO SECTION
+    ========================================== -->
+    <section class="hero">
+
+        <div class="badge">
+            HTML PRACTICAL 09
+        </div>
+
+        <h1>HTML5 Input Types</h1>
+
+        <p>
+            Using Modern HTML5 Form Input Elements
+        </p>
+
+    </section>
+
+
+    <!-- =========================================
+         MAIN CONTENT
+    ========================================== -->
+    <main>
+
+        <!-- OBJECTIVE -->
+        <section class="objective">
+
+            <h2>Objective</h2>
+
+            <p>
+                To create a webpage using HTML5 input types such as
+                email, date, number, and password.
+            </p>
+
+        </section>
+
+
+        <!-- =====================================
+             FORM DEMONSTRATION
+        ====================================== -->
+        <section class="content-card">
+
+            <h2>1. HTML5 Input Types Demonstration</h2>
+
+            <p>
+                HTML5 provides several input types that make forms
+                easier to use and provide built-in browser validation.
+                The following form demonstrates email, date, number,
+                and password input types.
+            </p>
+
+
+            <div class="form-container">
+
+                <form action="#" method="post">
+
+                    <div class="form-grid">
+
+                        <!-- Text Input -->
+                        <div class="form-group">
+
+                            <label for="student-name">
+                                Student Name
+                            </label>
+
+                            <input
+                                type="text"
+                                id="student-name"
+                                name="student-name"
+                                placeholder="Enter your name"
+                                required
+                            >
+
+                        </div>
+
+
+                        <!-- Email Input -->
+                        <div class="form-group">
+
+                            <label for="email">
+                                Email Address
+                            </label>
+
+                            <input
+                                type="email"
+                                id="email"
+                                name="email"
+                                placeholder="example@email.com"
+                                required
+                            >
+
+                        </div>
+
+
+                        <!-- Date Input -->
+                        <div class="form-group">
+
+                            <label for="date-of-birth">
+                                Date of Birth
+                            </label>
+
+                            <input
+                                type="date"
+                                id="date-of-birth"
+                                name="date-of-birth"
+                                required
+                            >
+
+                        </div>
+
+
+                        <!-- Number Input -->
+                        <div class="form-group">
+
+                            <label for="age">
+                                Age
+                            </label>
+
+                            <input
+                                type="number"
+                                id="age"
+                                name="age"
+                                min="1"
+                                max="100"
+                                placeholder="Enter your age"
+                                required
+                            >
+
+                        </div>
+
+
+                        <!-- Password Input -->
+                        <div class="form-group full">
+
+                            <label for="password">
+                                Password
+                            </label>
+
+                            <input
+                                type="password"
+                                id="password"
+                                name="password"
+                                minlength="6"
+                                placeholder="Enter your password"
+                                required
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Form Buttons -->
+                    <div class="form-buttons">
+
+                        <button
+                            type="submit"
+                            class="form-button submit-button">
+                            Submit
+                        </button>
+
+                        <button
+                            type="reset"
+                            class="form-button reset-button">
+                            Reset
+                        </button>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================
+             INPUT TYPES SECTION
+        ====================================== -->
+        <section class="content-card">
+
+            <h2>2. HTML5 Input Types Used</h2>
+
+            <p>
+                The following HTML5 input types are demonstrated
+                in the form above.
+            </p>
+
+            <div class="input-grid">
+
+                <!-- Email -->
+                <div class="input-card">
+
+                    <h3>
+                        Email Input
+                    </h3>
+
+                    <p>
+                        The <code>type="email"</code> input is used
+                        to collect an email address and provides
+                        basic browser validation.
+                    </p>
+
+                </div>
+
+
+                <!-- Date -->
+                <div class="input-card">
+
+                    <h3>
+                        Date Input
+                    </h3>
+
+                    <p>
+                        The <code>type="date"</code> input allows
+                        the user to select a date using a
+                        browser date picker.
+                    </p>
+
+                </div>
+
+
+                <!-- Number -->
+                <div class="input-card">
+
+                    <h3>
+                        Number Input
+                    </h3>
+
+                    <p>
+                        The <code>type="number"</code> input is
+                        used to enter numerical values. The
+                        minimum and maximum values can be specified.
+                    </p>
+
+                </div>
+
+
+                <!-- Password -->
+                <div class="input-card">
+
+                    <h3>
+                        Password Input
+                    </h3>
+
+                    <p>
+                        The <code>type="password"</code> input
+                        hides the characters entered by the user.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =====================================
+             NAVIGATION BUTTONS
+        ====================================== -->
+        <div class="buttons">
+
+            <a
+                href="index.html"
+                class="btn">
+                ← HTML Programs
+            </a>
+
+            <a
+                href="html-08.html"
+                class="btn secondary">
+                Previous Practical
+            </a>
+
+            <a
+                href="../index.html"
+                class="btn secondary">
+                Dashboard
+            </a>
+
+        </div>
+
+    </main>
+
+
+    <!-- =========================================
+         FOOTER
+    ========================================== -->
+    <footer>
+
+        <p>
+            <strong>Web Practicals</strong> |
+            HTML Practical 09
+        </p>
+
+        <p>
+            HTML5 • Input Types • Forms • Validation
+        </p>
+
+    </footer>
+
+</body>
+
+</html>

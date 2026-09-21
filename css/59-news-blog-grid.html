@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>News and Blog Layout | CSS Practical 59</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: #f1f5f9;
+            color: #334155;
+            line-height: 1.6;
+        }
+
+        header {
+            background: #0f172a;
+            color: white;
+            padding: 18px 6%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 3px 12px rgba(15, 23, 42, 0.18);
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: white;
+        }
+
+        nav a {
+            color: #cbd5e1;
+            text-decoration: none;
+            margin-left: 25px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            color: white;
+        }
+
+        /* Hero */
+
+        .hero {
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(30, 58, 138, 0.95),
+                    rgba(37, 99, 235, 0.9)
+                );
+            color: white;
+            text-align: center;
+            padding: 65px 20px;
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.18);
+            padding: 8px 18px;
+            border-radius: 30px;
+            margin-bottom: 15px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .hero h1 {
+            font-size: 44px;
+            margin-bottom: 12px;
+        }
+
+        .hero p {
+            font-size: 18px;
+            max-width: 750px;
+            margin: auto;
+        }
+
+        main {
+            width: 90%;
+            max-width: 1100px;
+            margin: 40px auto;
+        }
+
+        .objective,
+        .content-card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(15, 23, 42, 0.08);
+        }
+
+        .objective {
+            border-left: 5px solid #2563eb;
+            padding: 22px 25px;
+            margin-bottom: 25px;
+        }
+
+        .objective h2 {
+            color: #1e3a8a;
+            margin-bottom: 8px;
+        }
+
+        .content-card {
+            padding: 35px;
+            margin-bottom: 25px;
+        }
+
+        .content-card > h2 {
+            color: #1e3a8a;
+            border-bottom: 2px solid #dbeafe;
+            padding-bottom: 10px;
+            margin-bottom: 25px;
+        }
+
+        /* Main News Grid */
+
+        .news-layout {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 25px;
+        }
+
+        /* Featured Article */
+
+        .featured-article {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            overflow: hidden;
+            transition: 0.3s;
+        }
+
+        .featured-article:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(15, 23, 42, 0.12);
+        }
+
+        .featured-article img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .article-content {
+            padding: 25px;
+        }
+
+        .category {
+            color: #2563eb;
+            font-size: 13px;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-bottom: 7px;
+        }
+
+        .article-content h3 {
+            color: #1e3a8a;
+            font-size: 25px;
+            margin-bottom: 10px;
+        }
+
+        .article-content p {
+            color: #64748b;
+            margin-bottom: 15px;
+        }
+
+        .article-meta {
+            color: #94a3b8;
+            font-size: 13px;
+            margin-bottom: 15px;
+        }
+
+        .read-more {
+            display: inline-block;
+            background: #2563eb;
+            color: white;
+            text-decoration: none;
+            padding: 10px 18px;
+            border-radius: 7px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .read-more:hover {
+            background: #1e3a8a;
+        }
+
+        /* Side Articles */
+
+        .side-news {
+            display: grid;
+            gap: 18px;
+        }
+
+        .side-article {
+            background: #f8fafc;
+            border-left: 4px solid #2563eb;
+            border-radius: 10px;
+            padding: 18px;
+            transition: 0.3s;
+        }
+
+        .side-article:hover {
+            transform: translateX(4px);
+            box-shadow: 0 6px 15px rgba(15, 23, 42, 0.1);
+        }
+
+        .side-article h3 {
+            color: #1e3a8a;
+            font-size: 17px;
+            margin-bottom: 7px;
+        }
+
+        .side-article p {
+            color: #64748b;
+            font-size: 14px;
+        }
+
+        .side-meta {
+            color: #94a3b8;
+            font-size: 12px;
+            margin-top: 8px;
+        }
+
+        /* Blog Grid */
+
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 22px;
+        }
+
+        .blog-card {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            overflow: hidden;
+            transition: 0.3s;
+        }
+
+        .blog-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(15, 23, 42, 0.12);
+        }
+
+        .blog-card img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .blog-content {
+            padding: 20px;
+        }
+
+        .blog-content h3 {
+            color: #1e3a8a;
+            margin: 7px 0;
+        }
+
+        .blog-content p {
+            color: #64748b;
+            font-size: 14px;
+        }
+
+        /* Categories */
+
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+        }
+
+        .category-box {
+            background: #eff6ff;
+            border-left: 4px solid #2563eb;
+            padding: 18px;
+            border-radius: 9px;
+            text-align: center;
+            font-weight: 600;
+            color: #1e3a8a;
+            transition: 0.3s;
+        }
+
+        .category-box:hover {
+            transform: translateY(-3px);
+            background: #dbeafe;
+        }
+
+        /* Grid Technique */
+
+        .technique {
+            background: #0f172a;
+            color: #e2e8f0;
+            padding: 25px;
+            border-radius: 10px;
+            overflow-x: auto;
+        }
+
+        .technique h3 {
+            color: white;
+            margin-bottom: 12px;
+        }
+
+        .technique pre {
+            font-family: Consolas, monospace;
+            font-size: 14px;
+            line-height: 1.7;
+            white-space: pre-wrap;
+        }
+
+        /* Navigation Buttons */
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 35px 0;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 11px 22px;
+            background: #2563eb;
+            color: white;
+            text-decoration: none;
+            border-radius: 7px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background: #1e3a8a;
+            transform: translateY(-2px);
+        }
+
+        .secondary {
+            background: #64748b;
+        }
+
+        .secondary:hover {
+            background: #475569;
+        }
+
+        footer {
+            background: #0f172a;
+            color: #cbd5e1;
+            text-align: center;
+            padding: 25px;
+            margin-top: 40px;
+        }
+
+        footer strong {
+            color: white;
+        }
+
+        /* Responsive Design */
+
+        @media (max-width: 850px) {
+            .news-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .blog-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .category-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 750px) {
+            header {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            nav a {
+                margin: 0 8px;
+                font-size: 14px;
+            }
+
+            .hero h1 {
+                font-size: 34px;
+            }
+
+            .content-card {
+                padding: 25px;
+            }
+
+            .featured-article img {
+                height: 230px;
+            }
+
+            .blog-grid,
+            .category-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header -->
+
+    <header>
+
+        <div class="logo">DailyBlog</div>
+
+        <nav>
+            <a href="../index.html">Home</a>
+            <a href="index.html">CSS Programs</a>
+        </nav>
+
+    </header>
+
+    <!-- Hero -->
+
+    <section class="hero">
+
+        <div class="badge">CSS PRACTICAL 59</div>
+
+        <h1>News &amp; Blog</h1>
+
+        <p>
+            A modern news and blog webpage layout created using
+            CSS Grid for organized and responsive content.
+        </p>
+
+    </section>
+
+    <main>
+
+        <!-- Objective -->
+
+        <section class="objective">
+
+            <h2>Objective</h2>
+
+            <p>
+                To create a news and blog webpage layout using CSS Grid
+                by arranging featured articles, recent news, blog cards,
+                and categories in a responsive grid-based design.
+            </p>
+
+        </section>
+
+        <!-- News Layout -->
+
+        <section class="content-card">
+
+            <h2>Latest News</h2>
+
+            <div class="news-layout">
+
+                <!-- Featured News -->
+
+                <article class="featured-article">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?auto=format&fit=crop&w=1000&q=80"
+                        alt="News and newspaper"
+                    >
+
+                    <div class="article-content">
+
+                        <div class="category">
+                            Technology
+                        </div>
+
+                        <h3>
+                            Technology Continues to Transform
+                            Modern Education
+                        </h3>
+
+                        <div class="article-meta">
+                            Posted on September 10, 2026 | 5 min read
+                        </div>
+
+                        <p>
+                            New digital tools and technologies are changing
+                            the way students learn, collaborate, and access
+                            educational resources.
+                        </p>
+
+                        <a href="#" class="read-more">
+                            Read Article
+                        </a>
+
+                    </div>
+
+                </article>
+
+                <!-- Recent News -->
+
+                <div class="side-news">
+
+                    <article class="side-article">
+
+                        <div class="category">
+                            Science
+                        </div>
+
+                        <h3>
+                            New Discoveries Expand Our Understanding
+                            of Space
+                        </h3>
+
+                        <p>
+                            Scientists continue to explore new questions
+                            about our universe.
+                        </p>
+
+                        <div class="side-meta">
+                            3 hours ago
+                        </div>
+
+                    </article>
+
+                    <article class="side-article">
+
+                        <div class="category">
+                            Education
+                        </div>
+
+                        <h3>
+                            Digital Learning Becomes More Accessible
+                        </h3>
+
+                        <p>
+                            Online learning platforms provide students
+                            with new ways to study.
+                        </p>
+
+                        <div class="side-meta">
+                            6 hours ago
+                        </div>
+
+                    </article>
+
+                    <article class="side-article">
+
+                        <div class="category">
+                            Environment
+                        </div>
+
+                        <h3>
+                            Sustainable Ideas for a Greener Future
+                        </h3>
+
+                        <p>
+                            Communities are exploring innovative approaches
+                            to sustainability.
+                        </p>
+
+                        <div class="side-meta">
+                            1 day ago
+                        </div>
+
+                    </article>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- Blog Articles -->
+
+        <section class="content-card">
+
+            <h2>Featured Blog Posts</h2>
+
+            <div class="blog-grid">
+
+                <article class="blog-card">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=800&q=80"
+                        alt="Student using laptop"
+                    >
+
+                    <div class="blog-content">
+
+                        <div class="category">
+                            Technology
+                        </div>
+
+                        <h3>
+                            The Future of Artificial Intelligence
+                        </h3>
+
+                        <p>
+                            Explore how artificial intelligence is
+                            influencing modern technology and education.
+                        </p>
+
+                    </div>
+
+                </article>
+
+                <article class="blog-card">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1499750310107-5fef28a66643?auto=format&fit=crop&w=800&q=80"
+                        alt="Person writing a blog"
+                    >
+
+                    <div class="blog-content">
+
+                        <div class="category">
+                            Lifestyle
+                        </div>
+
+                        <h3>
+                            Building Better Digital Habits
+                        </h3>
+
+                        <p>
+                            Simple ideas for maintaining productive and
+                            balanced digital habits.
+                        </p>
+
+                    </div>
+
+                </article>
+
+                <article class="blog-card">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1500534623283-312aade485b7?auto=format&fit=crop&w=800&q=80"
+                        alt="Mountain landscape"
+                    >
+
+                    <div class="blog-content">
+
+                        <div class="category">
+                            Travel
+                        </div>
+
+                        <h3>
+                            Exploring New Places and Cultures
+                        </h3>
+
+                        <p>
+                            Discover the value of exploring new destinations
+                            and experiencing different cultures.
+                        </p>
+
+                    </div>
+
+                </article>
+
+                <article class="blog-card">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=800&q=80"
+                        alt="Team discussion"
+                    >
+
+                    <div class="blog-content">
+
+                        <div class="category">
+                            Business
+                        </div>
+
+                        <h3>
+                            Ideas That Shape Modern Businesses
+                        </h3>
+
+                        <p>
+                            Learn how creativity and innovation can support
+                            modern business development.
+                        </p>
+
+                    </div>
+
+                </article>
+
+                <article class="blog-card">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=800&q=80"
+                        alt="Computer programming"
+                    >
+
+                    <div class="blog-content">
+
+                        <div class="category">
+                            Programming
+                        </div>
+
+                        <h3>
+                            Learning Web Development
+                        </h3>
+
+                        <p>
+                            Understand the importance of HTML, CSS,
+                            JavaScript, and responsive design.
+                        </p>
+
+                    </div>
+
+                </article>
+
+                <article class="blog-card">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1535378917042-10a22c95931a?auto=format&fit=crop&w=800&q=80"
+                        alt="Robot technology"
+                    >
+
+                    <div class="blog-content">
+
+                        <div class="category">
+                            Innovation
+                        </div>
+
+                        <h3>
+                            Emerging Technologies to Watch
+                        </h3>
+
+                        <p>
+                            Explore some of the technologies influencing
+                            the future of digital innovation.
+                        </p>
+
+                    </div>
+
+                </article>
+
+            </div>
+
+        </section>
+
+        <!-- Categories -->
+
+        <section class="content-card">
+
+            <h2>Browse Categories</h2>
+
+            <div class="category-grid">
+
+                <div class="category-box">
+                    Technology
+                </div>
+
+                <div class="category-box">
+                    Science
+                </div>
+
+                <div class="category-box">
+                    Education
+                </div>
+
+                <div class="category-box">
+                    Travel
+                </div>
+
+                <div class="category-box">
+                    Business
+                </div>
+
+                <div class="category-box">
+                    Lifestyle
+                </div>
+
+                <div class="category-box">
+                    Programming
+                </div>
+
+                <div class="category-box">
+                    Innovation
+                </div>
+
+            </div>
+
+        </section>
+
+        
+
+        <!-- Navigation -->
+
+        <div class="buttons">
+
+            <a href="css-58.html" class="btn">
+                Previous Practical
+            </a>
+
+            <a href="index.html" class="btn">
+                CSS Programs
+            </a>
+
+            <a href="../index.html" class="btn secondary">
+                Dashboard
+            </a>
+
+        </div>
+
+    </main>
+
+    <footer>
+
+        <p>
+            <strong>CSS Practical 59</strong> |
+            News/Blog Webpage Layout
+        </p>
+
+        <p>
+            Designed using HTML5 and CSS3 Grid
+        </p>
+
+    </footer>
+
+</body>
+</html>

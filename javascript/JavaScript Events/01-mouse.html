@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Events Practical 1 - Mouse Events</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: #f1f5f9;
+            color: #334155;
+            line-height: 1.6;
+        }
+
+        header {
+            background: #0f172a;
+            padding: 18px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: white;
+            font-size: 22px;
+            font-weight: 700;
+        }
+
+        nav a {
+            color: #cbd5e1;
+            text-decoration: none;
+            margin-left: 24px;
+            font-size: 15px;
+        }
+
+        nav a:hover {
+            color: white;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #1e3a8a, #2563eb);
+            color: white;
+            text-align: center;
+            padding: 65px 20px;
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.18);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        .hero h1 {
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+
+        .hero p {
+            font-size: 17px;
+        }
+
+        main {
+            width: 90%;
+            max-width: 1050px;
+            margin: 40px auto;
+        }
+
+        .objective {
+            background: white;
+            padding: 22px;
+            border-radius: 12px;
+            border-left: 5px solid #2563eb;
+            box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
+            margin-bottom: 25px;
+        }
+
+        .objective h2 {
+            color: #1e3a8a;
+            margin-bottom: 8px;
+        }
+
+        .card {
+            background: white;
+            padding: 28px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
+        }
+
+        .card h2 {
+            color: #1e3a8a;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 10px;
+            margin-bottom: 22px;
+        }
+
+        .event-box {
+            background: #dbeafe;
+            border: 2px dashed #2563eb;
+            border-radius: 10px;
+            padding: 45px 20px;
+            text-align: center;
+            margin-bottom: 22px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .event-box h3 {
+            color: #1e3a8a;
+            margin-bottom: 8px;
+        }
+
+        .event-box p {
+            color: #475569;
+        }
+
+        .event-button {
+            background: #2563eb;
+            color: white;
+            border: none;
+            padding: 12px 22px;
+            border-radius: 7px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 15px;
+        }
+
+        .event-button:hover {
+            background: #1d4ed8;
+        }
+
+        .output {
+            background: #eff6ff;
+            border: 1px dashed #93c5fd;
+            padding: 18px;
+            border-radius: 8px;
+        }
+
+        .output p {
+            margin: 5px 0;
+        }
+
+        .status {
+            color: #1e3a8a;
+            font-weight: 600;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        .btn-link {
+            display: inline-block;
+            text-decoration: none;
+            background: #2563eb;
+            color: white;
+            padding: 11px 20px;
+            border-radius: 7px;
+            font-weight: 600;
+        }
+
+        .btn-link:hover {
+            background: #1d4ed8;
+        }
+
+        .secondary {
+            background: #475569;
+        }
+
+        .secondary:hover {
+            background: #334155;
+        }
+
+        footer {
+            background: #0f172a;
+            color: #cbd5e1;
+            text-align: center;
+            padding: 20px;
+            margin-top: 50px;
+            font-size: 14px;
+        }
+
+        @media (max-width: 750px) {
+            header {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            nav a {
+                margin: 0 8px;
+            }
+
+            .hero h1 {
+                font-size: 29px;
+            }
+        }
+
+        @media (max-width: 550px) {
+            main {
+                width: 94%;
+            }
+
+            .card {
+                padding: 20px;
+            }
+
+            .buttons {
+                flex-direction: column;
+            }
+
+            .btn-link {
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="logo">JavaScript Practicals</div>
+
+        <nav>
+           <a href="../../index.html">Home</a>
+<a href="../index.html">JavaScript Programs</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="badge">Events - Practical 1</div>
+        <h1>Mouse Events</h1>
+        <p>Demonstrating Mouse Events Using JavaScript</p>
+    </section>
+
+    <main>
+
+        <section class="objective">
+            <h2>Objective</h2>
+            <p>
+                To demonstrate different mouse events such as click,
+                double click, mouseover, mouseout, and mousemove
+                using JavaScript.
+            </p>
+        </section>
+
+        <section class="card">
+
+            <h2>Interactive Mouse Events</h2>
+
+            <div
+                class="event-box"
+                id="mouseBox"
+                onclick="handleClick()"
+                ondblclick="handleDoubleClick()"
+                onmouseover="handleMouseOver()"
+                onmouseout="handleMouseOut()"
+                onmousemove="handleMouseMove(event)"
+            >
+                <h3>Move or Click Your Mouse Here</h3>
+                <p>
+                    Try clicking, double-clicking, hovering,
+                    leaving, and moving the mouse inside this box.
+                </p>
+            </div>
+
+            <button class="event-button" onclick="resetEvents()">
+                Reset Event Status
+            </button>
+
+            <div class="output">
+                <p>
+                    Last Event:
+                    <span id="eventName" class="status">
+                        No mouse event detected yet.
+                    </span>
+                </p>
+
+                <p>
+                    Mouse Position:
+                    <span id="mousePosition" class="status">
+                        Not available
+                    </span>
+                </p>
+            </div>
+
+        </section>
+
+        <div class="buttons">
+
+            <a href="index.html" class="btn-link secondary">
+                Events Programs
+            </a>
+
+            <a href="02-keyboard-events.html" class="btn-link">
+                Next Practical →
+            </a>
+
+        </div>
+
+    </main>
+
+    <footer>
+        JavaScript Practical Programs &copy; 2026
+    </footer>
+
+    <script>
+        const eventName = document.getElementById("eventName");
+        const mousePosition = document.getElementById("mousePosition");
+        const mouseBox = document.getElementById("mouseBox");
+
+        function handleClick() {
+            eventName.textContent = "Click event occurred.";
+        }
+
+        function handleDoubleClick() {
+            eventName.textContent = "Double-click event occurred.";
+        }
+
+        function handleMouseOver() {
+            eventName.textContent = "Mouseover event occurred.";
+        }
+
+        function handleMouseOut() {
+            eventName.textContent = "Mouseout event occurred.";
+        }
+
+        function handleMouseMove(event) {
+            const rect = mouseBox.getBoundingClientRect();
+
+            const x = Math.round(event.clientX - rect.left);
+            const y = Math.round(event.clientY - rect.top);
+
+            mousePosition.textContent =
+                "X: " + x + " px, Y: " + y + " px";
+
+            eventName.textContent = "Mousemove event occurred.";
+        }
+
+        function resetEvents() {
+            eventName.textContent =
+                "No mouse event detected yet.";
+
+            mousePosition.textContent =
+                "Not available";
+        }
+    </script>
+
+</body>
+</html>

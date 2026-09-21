@@ -1,0 +1,1036 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Multi-Step Registration Form</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Segoe UI", Arial, sans-serif;
+      background: #f1f5f9;
+      color: #334155;
+      line-height: 1.6;
+    }
+
+    header {
+      background: #0f172a;
+      padding: 18px 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      color: white;
+      font-size: 22px;
+      font-weight: bold;
+    }
+
+    nav a {
+      color: #cbd5e1;
+      text-decoration: none;
+      margin-left: 25px;
+      font-size: 15px;
+    }
+
+    nav a:hover {
+      color: white;
+    }
+
+    .hero {
+      background: linear-gradient(135deg, #1e3a8a, #2563eb);
+      color: white;
+      text-align: center;
+      padding: 65px 20px;
+    }
+
+    .badge {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.15);
+      padding: 7px 16px;
+      border-radius: 20px;
+      margin-bottom: 15px;
+      font-size: 14px;
+    }
+
+    .hero h1 {
+      font-size: 36px;
+      margin-bottom: 10px;
+    }
+
+    .hero p {
+      font-size: 17px;
+      opacity: 0.9;
+    }
+
+    main {
+      width: 90%;
+      max-width: 1050px;
+      margin: 40px auto;
+    }
+
+    .objective {
+      background: white;
+      padding: 22px;
+      border-left: 5px solid #2563eb;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
+      margin-bottom: 25px;
+    }
+
+    .objective h2 {
+      color: #1e3a8a;
+      margin-bottom: 8px;
+    }
+
+    .card {
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(15, 23, 42, 0.08);
+    }
+
+    .card h2 {
+      color: #1e3a8a;
+      margin-bottom: 25px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #e2e8f0;
+    }
+
+    .progress-container {
+      margin-bottom: 30px;
+    }
+
+    .progress-steps {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .progress-step {
+      flex: 1;
+      text-align: center;
+      font-size: 14px;
+      font-weight: 600;
+      color: #94a3b8;
+    }
+
+    .progress-step.active {
+      color: #2563eb;
+    }
+
+    .progress-bar {
+      height: 7px;
+      background: #e2e8f0;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 33.33%;
+      background: #2563eb;
+      border-radius: 10px;
+      transition: width 0.3s ease;
+    }
+
+    .form-step {
+      display: none;
+    }
+
+    .form-step.active {
+      display: block;
+    }
+
+    .form-step h3 {
+      color: #1e3a8a;
+      margin-bottom: 20px;
+      font-size: 21px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 7px;
+    }
+
+    input,
+    select {
+      width: 100%;
+      padding: 11px 13px;
+      border: 1px solid #cbd5e1;
+      border-radius: 7px;
+      font-size: 15px;
+      font-family: inherit;
+      outline: none;
+      transition: 0.2s;
+    }
+
+    input:focus,
+    select:focus {
+      border-color: #2563eb;
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+    }
+
+    .error {
+      color: #dc2626;
+      font-size: 13px;
+      margin-top: 5px;
+      min-height: 18px;
+    }
+
+    .invalid {
+      border-color: #dc2626;
+      background: #fff7f7;
+    }
+
+    .valid {
+      border-color: #16a34a;
+      background: #f0fdf4;
+    }
+
+    .checkbox-group {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .checkbox-group input {
+      width: auto;
+      margin-top: 5px;
+    }
+
+    .checkbox-group label {
+      font-weight: 500;
+      margin: 0;
+    }
+
+    .success-message {
+      display: none;
+      background: #ecfdf5;
+      color: #166534;
+      border: 1px solid #86efac;
+      padding: 15px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      text-align: center;
+      font-weight: 600;
+    }
+
+    .step-buttons {
+      display: flex;
+      justify-content: space-between;
+      gap: 15px;
+      margin-top: 30px;
+    }
+
+    .form-btn {
+      border: none;
+      background: #2563eb;
+      color: white;
+      padding: 12px 24px;
+      border-radius: 7px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .form-btn:hover {
+      background: #1d4ed8;
+    }
+
+    .form-btn.secondary {
+      background: #475569;
+    }
+
+    .form-btn.secondary:hover {
+      background: #334155;
+    }
+
+    .buttons {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      flex-wrap: wrap;
+      margin-top: 30px;
+    }
+
+    .btn-link {
+      text-decoration: none;
+      background: #2563eb;
+      color: white;
+      padding: 11px 20px;
+      border-radius: 7px;
+      font-weight: 600;
+    }
+
+    .btn-link:hover {
+      background: #1d4ed8;
+    }
+
+    .btn-link.secondary {
+      background: #475569;
+    }
+
+    .btn-link.secondary:hover {
+      background: #334155;
+    }
+
+    footer {
+      background: #0f172a;
+      color: #cbd5e1;
+      text-align: center;
+      padding: 22px;
+      margin-top: 50px;
+    }
+
+    @media (max-width: 750px) {
+      header {
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      nav a {
+        margin: 0 8px;
+      }
+
+      .hero h1 {
+        font-size: 28px;
+      }
+
+      .card {
+        padding: 22px;
+      }
+
+      .progress-step {
+        font-size: 12px;
+      }
+    }
+
+    @media (max-width: 550px) {
+      main {
+        width: 94%;
+      }
+
+      .hero {
+        padding: 50px 15px;
+      }
+
+      .step-buttons {
+        flex-direction: column;
+      }
+
+      .form-btn {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <div class="logo">JavaScript Practical</div>
+
+    <nav>
+      <a href="../../index.html">Home</a>
+<a href="../index.html">JavaScript Programs</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <span class="badge">Practice 38</span>
+    <h1>Multi-Step Registration Form</h1>
+    <p>Complete registration using multiple validated steps.</p>
+  </section>
+
+  <main>
+
+    <section class="objective">
+      <h2>Objective</h2>
+      <p>
+        To create a multi-step registration form using JavaScript
+        where each step is validated before moving to the next step.
+      </p>
+    </section>
+
+    <section class="card">
+
+      <h2>Registration Form</h2>
+
+      <div class="progress-container">
+
+        <div class="progress-steps">
+          <div class="progress-step active" id="stepLabel1">
+            1. Personal
+          </div>
+
+          <div class="progress-step" id="stepLabel2">
+            2. Account
+          </div>
+
+          <div class="progress-step" id="stepLabel3">
+            3. Confirmation
+          </div>
+        </div>
+
+        <div class="progress-bar">
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+
+      </div>
+
+      <div class="success-message" id="successMessage">
+        Registration completed successfully!
+      </div>
+
+      <form id="registrationForm" novalidate>
+
+        <!-- STEP 1 -->
+        <div class="form-step active" id="step1">
+
+          <h3>Personal Information</h3>
+
+          <div class="form-group">
+            <label for="fullName">Full Name</label>
+
+            <input
+              type="text"
+              id="fullName"
+              placeholder="Enter your full name"
+              autocomplete="off"
+            >
+
+            <div class="error" id="fullNameError"></div>
+          </div>
+
+          <div class="form-group">
+            <label for="email">Email Address</label>
+
+            <input
+              type="email"
+              id="email"
+              placeholder="Enter your email address"
+              autocomplete="off"
+            >
+
+            <div class="error" id="emailError"></div>
+          </div>
+
+          <div class="form-group">
+            <label for="mobile">Mobile Number</label>
+
+            <input
+              type="text"
+              id="mobile"
+              maxlength="10"
+              inputmode="numeric"
+              placeholder="Enter 10-digit mobile number"
+              autocomplete="off"
+            >
+
+            <div class="error" id="mobileError"></div>
+          </div>
+
+          <div class="step-buttons">
+            <span></span>
+
+            <button
+              type="button"
+              class="form-btn"
+              id="nextButton1"
+            >
+              Next →
+            </button>
+          </div>
+
+        </div>
+
+        <!-- STEP 2 -->
+        <div class="form-step" id="step2">
+
+          <h3>Account Information</h3>
+
+          <div class="form-group">
+            <label for="username">Username</label>
+
+            <input
+              type="text"
+              id="username"
+              placeholder="Enter a username"
+              autocomplete="off"
+            >
+
+            <div class="error" id="usernameError"></div>
+          </div>
+
+          <div class="form-group">
+            <label for="password">Password</label>
+
+            <input
+              type="password"
+              id="password"
+              placeholder="Enter a password"
+              autocomplete="new-password"
+            >
+
+            <div class="error" id="passwordError"></div>
+          </div>
+
+          <div class="form-group">
+            <label for="confirmPassword">Confirm Password</label>
+
+            <input
+              type="password"
+              id="confirmPassword"
+              placeholder="Confirm your password"
+              autocomplete="new-password"
+            >
+
+            <div class="error" id="confirmPasswordError"></div>
+          </div>
+
+          <div class="step-buttons">
+
+            <button
+              type="button"
+              class="form-btn secondary"
+              id="previousButton2"
+            >
+              ← Previous
+            </button>
+
+            <button
+              type="button"
+              class="form-btn"
+              id="nextButton2"
+            >
+              Next →
+            </button>
+
+          </div>
+
+        </div>
+
+        <!-- STEP 3 -->
+        <div class="form-step" id="step3">
+
+          <h3>Confirmation</h3>
+
+          <div class="form-group">
+            <label for="course">Select Course</label>
+
+            <select id="course">
+              <option value="">-- Select Course --</option>
+              <option value="BCA">BCA</option>
+              <option value="BSc Computer Science">
+                BSc Computer Science
+              </option>
+              <option value="BTech">BTech</option>
+              <option value="MCA">MCA</option>
+            </select>
+
+            <div class="error" id="courseError"></div>
+          </div>
+
+          <div class="checkbox-group">
+
+            <input
+              type="checkbox"
+              id="terms"
+            >
+
+            <label for="terms">
+              I confirm that the information entered in this form
+              is correct.
+            </label>
+
+          </div>
+
+          <div class="error" id="termsError"></div>
+
+          <div class="step-buttons">
+
+            <button
+              type="button"
+              class="form-btn secondary"
+              id="previousButton3"
+            >
+              ← Previous
+            </button>
+
+            <button
+              type="submit"
+              class="form-btn"
+            >
+              Complete Registration
+            </button>
+
+          </div>
+
+        </div>
+
+      </form>
+
+    </section>
+
+    <div class="buttons">
+
+      <a href="37-contact-validation.html" class="btn-link">
+        ← Previous Practical
+      </a>
+
+      <a href="index.html" class="btn-link secondary">
+        Forms &amp; Validation
+      </a>
+
+      <a href="39-form-preview.html" class="btn-link">
+        Next Practical →
+      </a>
+
+    </div>
+
+  </main>
+
+  <footer>
+    <p>&copy; 2026 JavaScript Practical — Forms &amp; Validation</p>
+  </footer>
+
+  <script>
+    const registrationForm =
+      document.getElementById("registrationForm");
+
+    const step1 =
+      document.getElementById("step1");
+
+    const step2 =
+      document.getElementById("step2");
+
+    const step3 =
+      document.getElementById("step3");
+
+    const progressFill =
+      document.getElementById("progressFill");
+
+    const stepLabel1 =
+      document.getElementById("stepLabel1");
+
+    const stepLabel2 =
+      document.getElementById("stepLabel2");
+
+    const stepLabel3 =
+      document.getElementById("stepLabel3");
+
+    const successMessage =
+      document.getElementById("successMessage");
+
+    let currentStep = 1;
+
+    const fullName =
+      document.getElementById("fullName");
+
+    const email =
+      document.getElementById("email");
+
+    const mobile =
+      document.getElementById("mobile");
+
+    const username =
+      document.getElementById("username");
+
+    const password =
+      document.getElementById("password");
+
+    const confirmPassword =
+      document.getElementById("confirmPassword");
+
+    const course =
+      document.getElementById("course");
+
+    const terms =
+      document.getElementById("terms");
+
+    const nameRegex = /^[A-Za-z ]+$/;
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const mobileRegex = /^\d{10}$/;
+    const usernameRegex = /^[A-Za-z0-9_]+$/;
+
+    function showStep(stepNumber) {
+      step1.classList.remove("active");
+      step2.classList.remove("active");
+      step3.classList.remove("active");
+
+      stepLabel1.classList.remove("active");
+      stepLabel2.classList.remove("active");
+      stepLabel3.classList.remove("active");
+
+      if (stepNumber === 1) {
+        step1.classList.add("active");
+        stepLabel1.classList.add("active");
+        progressFill.style.width = "33.33%";
+      }
+
+      if (stepNumber === 2) {
+        step2.classList.add("active");
+        stepLabel2.classList.add("active");
+        progressFill.style.width = "66.66%";
+      }
+
+      if (stepNumber === 3) {
+        step3.classList.add("active");
+        stepLabel3.classList.add("active");
+        progressFill.style.width = "100%";
+      }
+
+      currentStep = stepNumber;
+    }
+
+    function validateFullName() {
+      const value = fullName.value.trim();
+      const error = document.getElementById("fullNameError");
+
+      fullName.classList.remove("valid", "invalid");
+      error.textContent = "";
+
+      if (value === "") {
+        fullName.classList.add("invalid");
+        error.textContent = "Full name is required.";
+        return false;
+      }
+
+      if (!nameRegex.test(value)) {
+        fullName.classList.add("invalid");
+        error.textContent =
+          "Name can contain only alphabets and spaces.";
+        return false;
+      }
+
+      fullName.classList.add("valid");
+      return true;
+    }
+
+    function validateEmail() {
+      const value = email.value.trim();
+      const error = document.getElementById("emailError");
+
+      email.classList.remove("valid", "invalid");
+      error.textContent = "";
+
+      if (value === "") {
+        email.classList.add("invalid");
+        error.textContent = "Email address is required.";
+        return false;
+      }
+
+      if (!emailRegex.test(value)) {
+        email.classList.add("invalid");
+        error.textContent =
+          "Enter a valid email address.";
+        return false;
+      }
+
+      email.classList.add("valid");
+      return true;
+    }
+
+    function validateMobile() {
+      const value = mobile.value.trim();
+      const error = document.getElementById("mobileError");
+
+      mobile.classList.remove("valid", "invalid");
+      error.textContent = "";
+
+      if (value === "") {
+        mobile.classList.add("invalid");
+        error.textContent = "Mobile number is required.";
+        return false;
+      }
+
+      if (!mobileRegex.test(value)) {
+        mobile.classList.add("invalid");
+        error.textContent =
+          "Mobile number must contain exactly 10 digits.";
+        return false;
+      }
+
+      mobile.classList.add("valid");
+      return true;
+    }
+
+    function validateStep1() {
+      const validName = validateFullName();
+      const validEmail = validateEmail();
+      const validMobile = validateMobile();
+
+      return validName && validEmail && validMobile;
+    }
+
+    function validateUsername() {
+      const value = username.value.trim();
+      const error =
+        document.getElementById("usernameError");
+
+      username.classList.remove("valid", "invalid");
+      error.textContent = "";
+
+      if (value === "") {
+        username.classList.add("invalid");
+        error.textContent = "Username is required.";
+        return false;
+      }
+
+      if (value.length < 3) {
+        username.classList.add("invalid");
+        error.textContent =
+          "Username must contain at least 3 characters.";
+        return false;
+      }
+
+      if (!usernameRegex.test(value)) {
+        username.classList.add("invalid");
+        error.textContent =
+          "Username can contain letters, numbers, and underscores only.";
+        return false;
+      }
+
+      username.classList.add("valid");
+      return true;
+    }
+
+    function validatePassword() {
+      const value = password.value;
+      const error =
+        document.getElementById("passwordError");
+
+      password.classList.remove("valid", "invalid");
+      error.textContent = "";
+
+      if (value === "") {
+        password.classList.add("invalid");
+        error.textContent = "Password is required.";
+        return false;
+      }
+
+      if (value.length < 8) {
+        password.classList.add("invalid");
+        error.textContent =
+          "Password must contain at least 8 characters.";
+        return false;
+      }
+
+      password.classList.add("valid");
+      return true;
+    }
+
+    function validateConfirmPassword() {
+      const value = confirmPassword.value;
+      const error =
+        document.getElementById("confirmPasswordError");
+
+      confirmPassword.classList.remove("valid", "invalid");
+      error.textContent = "";
+
+      if (value === "") {
+        confirmPassword.classList.add("invalid");
+        error.textContent =
+          "Please confirm your password.";
+        return false;
+      }
+
+      if (value !== password.value) {
+        confirmPassword.classList.add("invalid");
+        error.textContent =
+          "Passwords do not match.";
+        return false;
+      }
+
+      confirmPassword.classList.add("valid");
+      return true;
+    }
+
+    function validateStep2() {
+      const validUsername = validateUsername();
+      const validPassword = validatePassword();
+      const validConfirm = validateConfirmPassword();
+
+      return (
+        validUsername &&
+        validPassword &&
+        validConfirm
+      );
+    }
+
+    function validateCourse() {
+      const error =
+        document.getElementById("courseError");
+
+      course.classList.remove("valid", "invalid");
+      error.textContent = "";
+
+      if (course.value === "") {
+        course.classList.add("invalid");
+        error.textContent = "Please select a course.";
+        return false;
+      }
+
+      course.classList.add("valid");
+      return true;
+    }
+
+    function validateTerms() {
+      const error =
+        document.getElementById("termsError");
+
+      error.textContent = "";
+
+      if (!terms.checked) {
+        error.textContent =
+          "You must confirm the information before submitting.";
+        return false;
+      }
+
+      return true;
+    }
+
+    function validateStep3() {
+      const validCourse = validateCourse();
+      const validTerms = validateTerms();
+
+      return validCourse && validTerms;
+    }
+
+    // Step 1 events
+    fullName.addEventListener("input", function () {
+      successMessage.style.display = "none";
+      validateFullName();
+    });
+
+    email.addEventListener("input", function () {
+      successMessage.style.display = "none";
+      validateEmail();
+    });
+
+    mobile.addEventListener("input", function () {
+      successMessage.style.display = "none";
+      validateMobile();
+    });
+
+    // Step 2 events
+    username.addEventListener("input", function () {
+      successMessage.style.display = "none";
+      validateUsername();
+    });
+
+    password.addEventListener("input", function () {
+      successMessage.style.display = "none";
+      validatePassword();
+
+      if (confirmPassword.value !== "") {
+        validateConfirmPassword();
+      }
+    });
+
+    confirmPassword.addEventListener("input", function () {
+      successMessage.style.display = "none";
+      validateConfirmPassword();
+    });
+
+    // Step 3 events
+    course.addEventListener("change", function () {
+      successMessage.style.display = "none";
+      validateCourse();
+    });
+
+    terms.addEventListener("change", function () {
+      successMessage.style.display = "none";
+      validateTerms();
+    });
+
+    // Next button from Step 1
+    document
+      .getElementById("nextButton1")
+      .addEventListener("click", function () {
+
+        if (validateStep1()) {
+          showStep(2);
+        }
+      });
+
+    // Previous button from Step 2
+    document
+      .getElementById("previousButton2")
+      .addEventListener("click", function () {
+        showStep(1);
+      });
+
+    // Next button from Step 2
+    document
+      .getElementById("nextButton2")
+      .addEventListener("click", function () {
+
+        if (validateStep2()) {
+          showStep(3);
+        }
+      });
+
+    // Previous button from Step 3
+    document
+      .getElementById("previousButton3")
+      .addEventListener("click", function () {
+        showStep(2);
+      });
+
+    // Final form submission
+    registrationForm.addEventListener("submit", function (event) {
+
+      event.preventDefault();
+
+      if (currentStep !== 3) {
+        return;
+      }
+
+      if (!validateStep3()) {
+        return;
+      }
+
+      successMessage.style.display = "block";
+
+      registrationForm.reset();
+
+      fullName.classList.remove("valid", "invalid");
+      email.classList.remove("valid", "invalid");
+      mobile.classList.remove("valid", "invalid");
+      username.classList.remove("valid", "invalid");
+      password.classList.remove("valid", "invalid");
+      confirmPassword.classList.remove("valid", "invalid");
+      course.classList.remove("valid", "invalid");
+
+      document.getElementById("fullNameError").textContent = "";
+      document.getElementById("emailError").textContent = "";
+      document.getElementById("mobileError").textContent = "";
+      document.getElementById("usernameError").textContent = "";
+      document.getElementById("passwordError").textContent = "";
+      document.getElementById("confirmPasswordError").textContent = "";
+      document.getElementById("courseError").textContent = "";
+      document.getElementById("termsError").textContent = "";
+
+      showStep(1);
+    });
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM Manipulation - Modal Popup</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: #f1f5f9;
+            color: #334155;
+            line-height: 1.6;
+        }
+
+        header {
+            background: #0f172a;
+            padding: 18px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: white;
+            font-size: 22px;
+            font-weight: 700;
+        }
+
+        nav a {
+            color: #cbd5e1;
+            text-decoration: none;
+            margin-left: 25px;
+            font-size: 15px;
+        }
+
+        nav a:hover {
+            color: white;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #1e3a8a, #2563eb);
+            color: white;
+            text-align: center;
+            padding: 65px 20px;
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 7px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        .hero h1 {
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+
+        .hero p {
+            font-size: 16px;
+            opacity: 0.9;
+        }
+
+        main {
+            width: 90%;
+            max-width: 1050px;
+            margin: 40px auto;
+        }
+
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 28px;
+            margin-bottom: 25px;
+            box-shadow: 0 5px 18px rgba(15, 23, 42, 0.08);
+        }
+
+        .objective {
+            border-left: 5px solid #2563eb;
+        }
+
+        .objective h2,
+        .card h2 {
+            color: #1e3a8a;
+            margin-bottom: 15px;
+        }
+
+        .card h2 {
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 8px;
+        }
+
+        .demo {
+            background: #eff6ff;
+            border: 2px dashed #93c5fd;
+            border-radius: 10px;
+            padding: 35px 25px;
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .instruction {
+            margin-bottom: 25px;
+            color: #475569;
+        }
+
+        .open-btn,
+        .close-btn {
+            border: none;
+            cursor: pointer;
+            border-radius: 7px;
+            font-size: 15px;
+            font-weight: 600;
+        }
+
+        .open-btn {
+            background: #2563eb;
+            color: white;
+            padding: 12px 24px;
+        }
+
+        .open-btn:hover {
+            background: #1e3a8a;
+        }
+
+        .status {
+            margin-top: 20px;
+            padding: 12px;
+            background: white;
+            border: 1px solid #bfdbfe;
+            border-radius: 8px;
+            color: #1e3a8a;
+            font-weight: 600;
+        }
+
+        /* Modal background */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(15, 23, 42, 0.65);
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .modal.show {
+            display: flex;
+        }
+
+        /* Modal box */
+        .modal-content {
+            background: white;
+            width: 100%;
+            max-width: 520px;
+            border-radius: 12px;
+            padding: 28px;
+            position: relative;
+            box-shadow: 0 15px 40px rgba(15, 23, 42, 0.25);
+            animation: modalOpen 0.25s ease;
+        }
+
+        @keyframes modalOpen {
+            from {
+                opacity: 0;
+                transform: translateY(-25px) scale(0.97);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .modal-content h3 {
+            color: #1e3a8a;
+            font-size: 24px;
+            margin-bottom: 12px;
+        }
+
+        .modal-content p {
+            color: #475569;
+            margin-bottom: 22px;
+        }
+
+        .close-btn {
+            background: #2563eb;
+            color: white;
+            padding: 10px 22px;
+        }
+
+        .close-btn:hover {
+            background: #1e3a8a;
+        }
+
+        .close-icon {
+            position: absolute;
+            right: 18px;
+            top: 12px;
+            border: none;
+            background: transparent;
+            color: #64748b;
+            font-size: 28px;
+            cursor: pointer;
+            line-height: 1;
+        }
+
+        .close-icon:hover {
+            color: #1e3a8a;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin: 35px 0;
+        }
+
+        .btn-link {
+            display: inline-block;
+            background: #2563eb;
+            color: white;
+            text-decoration: none;
+            padding: 11px 20px;
+            border-radius: 7px;
+            font-size: 15px;
+        }
+
+        .btn-link:hover {
+            background: #1e3a8a;
+        }
+
+        .btn-link.secondary {
+            background: #0f172a;
+        }
+
+        .btn-link.secondary:hover {
+            background: #1e293b;
+        }
+
+        footer {
+            background: #0f172a;
+            color: #cbd5e1;
+            text-align: center;
+            padding: 22px;
+            margin-top: 50px;
+            font-size: 14px;
+        }
+
+        @media (max-width: 750px) {
+            header {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            nav a {
+                margin: 0 8px;
+            }
+
+            .hero h1 {
+                font-size: 30px;
+            }
+
+            .card {
+                padding: 22px;
+            }
+        }
+
+        @media (max-width: 550px) {
+            .hero {
+                padding: 50px 15px;
+            }
+
+            .demo {
+                padding: 25px 18px;
+            }
+
+            .modal-content {
+                padding: 24px 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="logo">Practical Programs</div>
+
+        <nav>
+            <a href="../../index.html">Home</a>
+<a href="../index.html">JavaScript Programs</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="badge">DOM Manipulation • Practical 43</div>
+        <h1>Modal Popup</h1>
+        <p>Create a modal popup using JavaScript</p>
+    </section>
+
+    <main>
+
+        <section class="card objective">
+            <h2>Objective</h2>
+            <p>
+                To create a modal popup using JavaScript that can
+                be opened and closed dynamically through DOM
+                manipulation and event handling.
+            </p>
+        </section>
+
+        <section class="card">
+            <h2>Interactive Demonstration</h2>
+
+            <div class="demo">
+
+                <p class="instruction">
+                    Click the button below to open the modal popup.
+                </p>
+
+                <button class="open-btn" onclick="openModal()">
+                    Open Modal Popup
+                </button>
+
+                <div class="status" id="status">
+                    Modal is currently closed.
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Modal -->
+        <div class="modal" id="modal">
+
+            <div class="modal-content">
+
+                <button class="close-icon"
+                        onclick="closeModal()"
+                        aria-label="Close modal">
+                    &times;
+                </button>
+
+                <h3>Welcome!</h3>
+
+                <p>
+                    This is a modal popup created using JavaScript.
+                    The popup appears above the webpage and can
+                    be closed using the close button.
+                </p>
+
+                <button class="close-btn" onclick="closeModal()">
+                    Close Modal
+                </button>
+
+            </div>
+
+        </div>
+
+        <div class="buttons">
+
+            <a href="42-accordion.html" class="btn-link">
+                ← Previous Practical
+            </a>
+
+            <a href="index.html" class="btn-link secondary">
+                DOM Programs
+            </a>
+
+            <a href="44-tooltip.html" class="btn-link">
+                Next Practical →
+            </a>
+
+        </div>
+
+    </main>
+
+    <footer>
+        <p>JavaScript Practical Programs | DOM Manipulation</p>
+    </footer>
+
+    <script>
+        const modal = document.getElementById("modal");
+        const status = document.getElementById("status");
+
+        function openModal() {
+            modal.classList.add("show");
+            status.textContent = "Modal is currently open.";
+        }
+
+        function closeModal() {
+            modal.classList.remove("show");
+            status.textContent = "Modal is currently closed.";
+        }
+
+        // Close modal when clicking outside the modal content
+        modal.addEventListener("click", function(event) {
+            if (event.target === modal) {
+                closeModal();
+            }
+        });
+
+        // Close modal using the Escape key
+        document.addEventListener("keydown", function(event) {
+            if (event.key === "Escape" && modal.classList.contains("show")) {
+                closeModal();
+            }
+        });
+    </script>
+
+</body>
+</html>

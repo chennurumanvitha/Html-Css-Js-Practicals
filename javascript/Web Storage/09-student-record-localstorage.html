@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Record System using localStorage</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: #f1f5f9;
+            color: #334155;
+            line-height: 1.6;
+        }
+
+        header {
+            background: #0f172a;
+            padding: 18px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: white;
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        nav a {
+            color: #cbd5e1;
+            text-decoration: none;
+            margin-left: 25px;
+            font-size: 15px;
+        }
+
+        nav a:hover {
+            color: white;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #1e3a8a, #2563eb);
+            color: white;
+            text-align: center;
+            padding: 65px 20px;
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 7px 16px;
+            border-radius: 20px;
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+
+        .hero h1 {
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+
+        .hero p {
+            font-size: 17px;
+            opacity: 0.9;
+        }
+
+        main {
+            width: 90%;
+            max-width: 1050px;
+            margin: 40px auto;
+        }
+
+        .objective {
+            background: white;
+            padding: 22px;
+            border-left: 5px solid #2563eb;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
+            margin-bottom: 25px;
+        }
+
+        .objective h2 {
+            color: #1e3a8a;
+            margin-bottom: 8px;
+        }
+
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(15, 23, 42, 0.08);
+            margin-bottom: 25px;
+        }
+
+        .card h2 {
+            color: #1e3a8a;
+            margin-bottom: 25px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e2e8f0;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 7px;
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 11px 13px;
+            border: 1px solid #cbd5e1;
+            border-radius: 7px;
+            font-size: 15px;
+            outline: none;
+            background: white;
+        }
+
+        input:focus,
+        select:focus {
+            border-color: #2563eb;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+
+        .btn {
+            border: none;
+            background: #2563eb;
+            color: white;
+            padding: 11px 20px;
+            border-radius: 7px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .btn:hover {
+            background: #1d4ed8;
+        }
+
+        .btn.secondary {
+            background: #475569;
+        }
+
+        .btn.secondary:hover {
+            background: #334155;
+        }
+
+        .btn.danger {
+            background: #dc2626;
+        }
+
+        .btn.danger:hover {
+            background: #b91c1c;
+        }
+
+        .btn.small {
+            padding: 7px 12px;
+            font-size: 13px;
+            margin: 2px;
+        }
+
+        .table-container {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        th,
+        td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        th {
+            background: #1e3a8a;
+            color: white;
+        }
+
+        tr:hover td {
+            background: #f8fafc;
+        }
+
+        .message {
+            min-height: 25px;
+            margin-top: 15px;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .success {
+            color: #15803d;
+        }
+
+        .warning {
+            color: #b45309;
+        }
+
+        .empty {
+            text-align: center;
+            padding: 20px;
+            color: #64748b;
+        }
+
+        footer {
+            background: #0f172a;
+            color: #cbd5e1;
+            text-align: center;
+            padding: 22px;
+            margin-top: 50px;
+        }
+
+        @media (max-width: 750px) {
+            header {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            nav a {
+                margin: 0 8px;
+            }
+
+            .hero h1 {
+                font-size: 28px;
+            }
+
+            .card {
+                padding: 22px;
+            }
+        }
+
+        @media (max-width: 550px) {
+            main {
+                width: 94%;
+            }
+
+            .hero {
+                padding: 50px 15px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="logo">Web Storage Practical</div>
+
+        <nav>
+            <a href="../../index.html">Home</a>
+<a href="../index.html">JavaScript Programs</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <span class="badge">Practical 09</span>
+        <h1>Student Record System using localStorage</h1>
+        <p>Store and manage student records using browser storage</p>
+    </section>
+
+    <main>
+
+        <section class="objective">
+            <h2>Objective</h2>
+            <p>
+                To create a student record system using
+                <strong>localStorage</strong> to store, display,
+                update, and delete student records.
+            </p>
+        </section>
+
+        <section class="card">
+            <h2>Student Record</h2>
+
+            <div class="form-group">
+                <label for="studentId">Student ID</label>
+                <input type="text" id="studentId"
+                    placeholder="Enter student ID">
+            </div>
+
+            <div class="form-group">
+                <label for="studentName">Student Name</label>
+                <input type="text" id="studentName"
+                    placeholder="Enter student name">
+            </div>
+
+            <div class="form-group">
+                <label for="course">Course</label>
+                <input type="text" id="course"
+                    placeholder="Enter course">
+            </div>
+
+            <div class="form-group">
+                <label for="year">Year</label>
+                <select id="year">
+                    <option value="">Select year</option>
+                    <option value="1st Year">1st Year</option>
+                    <option value="2nd Year">2nd Year</option>
+                    <option value="3rd Year">3rd Year</option>
+                    <option value="4th Year">4th Year</option>
+                </select>
+            </div>
+
+            <div class="buttons">
+                <button class="btn" onclick="saveRecord()">
+                    Save Record
+                </button>
+
+                <button class="btn secondary" onclick="resetForm()">
+                    Clear Form
+                </button>
+
+                <button class="btn danger" onclick="clearRecords()">
+                    Clear All Records
+                </button>
+            </div>
+
+            <p class="message" id="message"></p>
+        </section>
+
+        <section class="card">
+            <h2>Student Records</h2>
+
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Student ID</th>
+                            <th>Name</th>
+                            <th>Course</th>
+                            <th>Year</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="recordTable">
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <div class="buttons">
+            <button class="btn secondary"
+                onclick="window.location.href='08-object-localstorage.html'">
+                Previous
+            </button>
+
+            <button class="btn"
+                onclick="window.location.href='../index.html'">
+                Home
+            </button>
+
+            <button class="btn"
+                onclick="window.location.href='10-todo-list-localstorage.html'">
+                Next
+            </button>
+        </div>
+
+    </main>
+
+    <footer>
+        Web Storage Practicals &copy; 2026
+    </footer>
+
+    <script>
+        let records = [];
+        let editIndex = -1;
+
+        function loadRecords() {
+            const storedRecords = localStorage.getItem("studentRecords");
+
+            if (storedRecords) {
+                records = JSON.parse(storedRecords);
+            } else {
+                records = [];
+            }
+
+            displayRecords();
+        }
+
+        function saveRecord() {
+            const id = document.getElementById("studentId").value.trim();
+            const name = document.getElementById("studentName").value.trim();
+            const course = document.getElementById("course").value.trim();
+            const year = document.getElementById("year").value;
+            const message = document.getElementById("message");
+
+            if (id === "" || name === "" || course === "" || year === "") {
+                message.textContent = "Please fill in all fields.";
+                message.className = "message warning";
+                return;
+            }
+
+            const student = {
+                id: id,
+                name: name,
+                course: course,
+                year: year
+            };
+
+            if (editIndex === -1) {
+                records.push(student);
+                message.textContent = "Student record saved successfully.";
+            } else {
+                records[editIndex] = student;
+                editIndex = -1;
+                message.textContent = "Student record updated successfully.";
+            }
+
+            localStorage.setItem(
+                "studentRecords",
+                JSON.stringify(records)
+            );
+
+            message.className = "message success";
+
+            resetForm(false);
+            displayRecords();
+        }
+
+        function displayRecords() {
+            const table = document.getElementById("recordTable");
+
+            table.innerHTML = "";
+
+            if (records.length === 0) {
+                table.innerHTML = `
+                    <tr>
+                        <td colspan="5" class="empty">
+                            No student records found.
+                        </td>
+                    </tr>
+                `;
+                return;
+            }
+
+            records.forEach(function(record, index) {
+                const row = document.createElement("tr");
+
+                row.innerHTML = `
+                    <td>${escapeHTML(record.id)}</td>
+                    <td>${escapeHTML(record.name)}</td>
+                    <td>${escapeHTML(record.course)}</td>
+                    <td>${escapeHTML(record.year)}</td>
+                    <td>
+                        <button class="btn small"
+                            onclick="editRecord(${index})">
+                            Edit
+                        </button>
+
+                        <button class="btn danger small"
+                            onclick="deleteRecord(${index})">
+                            Delete
+                        </button>
+                    </td>
+                `;
+
+                table.appendChild(row);
+            });
+        }
+
+        function editRecord(index) {
+            const record = records[index];
+
+            document.getElementById("studentId").value = record.id;
+            document.getElementById("studentName").value = record.name;
+            document.getElementById("course").value = record.course;
+            document.getElementById("year").value = record.year;
+
+            editIndex = index;
+
+            document.getElementById("message").textContent =
+                "Edit the record and click Save Record.";
+
+            document.getElementById("message").className =
+                "message warning";
+
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+        }
+
+        function deleteRecord(index) {
+            records.splice(index, 1);
+
+            localStorage.setItem(
+                "studentRecords",
+                JSON.stringify(records)
+            );
+
+            displayRecords();
+
+            document.getElementById("message").textContent =
+                "Student record deleted successfully.";
+
+            document.getElementById("message").className =
+                "message success";
+        }
+
+        function clearRecords() {
+            localStorage.removeItem("studentRecords");
+
+            records = [];
+            editIndex = -1;
+
+            displayRecords();
+            resetForm(false);
+
+            document.getElementById("message").textContent =
+                "All student records cleared successfully.";
+
+            document.getElementById("message").className =
+                "message success";
+        }
+
+        function resetForm(clearMessage = true) {
+            document.getElementById("studentId").value = "";
+            document.getElementById("studentName").value = "";
+            document.getElementById("course").value = "";
+            document.getElementById("year").value = "";
+
+            editIndex = -1;
+
+            if (clearMessage) {
+                document.getElementById("message").textContent = "";
+                document.getElementById("message").className = "message";
+            }
+        }
+
+        function escapeHTML(value) {
+            return String(value)
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;");
+        }
+
+        loadRecords();
+    </script>
+
+</body>
+</html>

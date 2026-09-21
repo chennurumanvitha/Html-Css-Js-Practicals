@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delete Item from localStorage</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: #f1f5f9;
+            color: #334155;
+            line-height: 1.6;
+        }
+
+        header {
+            background: #0f172a;
+            padding: 18px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: white;
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        nav a {
+            color: #cbd5e1;
+            text-decoration: none;
+            margin-left: 25px;
+            font-size: 15px;
+        }
+
+        nav a:hover {
+            color: white;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #1e3a8a, #2563eb);
+            color: white;
+            text-align: center;
+            padding: 65px 20px;
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 7px 16px;
+            border-radius: 20px;
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+
+        .hero h1 {
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+
+        .hero p {
+            font-size: 17px;
+            opacity: 0.9;
+        }
+
+        main {
+            width: 90%;
+            max-width: 1050px;
+            margin: 40px auto;
+        }
+
+        .objective {
+            background: white;
+            padding: 22px;
+            border-left: 5px solid #2563eb;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
+            margin-bottom: 25px;
+        }
+
+        .objective h2 {
+            color: #1e3a8a;
+            margin-bottom: 8px;
+        }
+
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(15, 23, 42, 0.08);
+            margin-bottom: 25px;
+        }
+
+        .card h2 {
+            color: #1e3a8a;
+            margin-bottom: 25px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e2e8f0;
+        }
+
+        .storage-box {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            padding: 22px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .storage-box h3 {
+            color: #1e3a8a;
+            margin-bottom: 12px;
+        }
+
+        .data-display {
+            background: #e0f2fe;
+            border: 1px solid #bae6fd;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            font-weight: 600;
+            color: #0c4a6e;
+            word-break: break-word;
+        }
+
+        .message {
+            min-height: 25px;
+            margin-top: 15px;
+            font-weight: 600;
+        }
+
+        .success {
+            color: #15803d;
+        }
+
+        .warning {
+            color: #b45309;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+
+        .btn {
+            border: none;
+            background: #2563eb;
+            color: white;
+            padding: 11px 20px;
+            border-radius: 7px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .btn:hover {
+            background: #1d4ed8;
+        }
+
+        .btn.danger {
+            background: #dc2626;
+        }
+
+        .btn.danger:hover {
+            background: #b91c1c;
+        }
+
+        .btn.secondary {
+            background: #475569;
+        }
+
+        .btn.secondary:hover {
+            background: #334155;
+        }
+
+        .info {
+            background: #eff6ff;
+            border-left: 4px solid #2563eb;
+            padding: 15px;
+            border-radius: 7px;
+            margin-top: 20px;
+        }
+
+        footer {
+            background: #0f172a;
+            color: #cbd5e1;
+            text-align: center;
+            padding: 22px;
+            margin-top: 50px;
+        }
+
+        @media (max-width: 750px) {
+            header {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            nav a {
+                margin: 0 8px;
+            }
+
+            .hero h1 {
+                font-size: 28px;
+            }
+
+            .card {
+                padding: 22px;
+            }
+        }
+
+        @media (max-width: 550px) {
+            main {
+                width: 94%;
+            }
+
+            .hero {
+                padding: 50px 15px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="logo">Web Storage Practical</div>
+
+        <nav>
+           <a href="../../index.html">Home</a>
+<a href="../index.html">JavaScript Programs</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <span class="badge">Practical 04</span>
+        <h1>Delete an Item from localStorage</h1>
+        <p>Remove stored data using JavaScript and localStorage</p>
+    </section>
+
+    <main>
+
+        <section class="objective">
+            <h2>Objective</h2>
+            <p>
+                To delete an individual item stored in the browser's
+                <strong>localStorage</strong> using the
+                <strong>removeItem()</strong> method.
+            </p>
+        </section>
+
+        <section class="card">
+            <h2>Delete Stored Username</h2>
+
+            <div class="storage-box">
+
+                <h3>Current Stored Username</h3>
+
+                <div class="data-display" id="usernameDisplay">
+                    Checking localStorage...
+                </div>
+
+                <div class="buttons">
+                    <button class="btn danger" onclick="deleteUsername()">
+                        Delete Username
+                    </button>
+
+                    <button class="btn secondary" onclick="loadUsername()">
+                        Refresh
+                    </button>
+                </div>
+
+                <p class="message" id="message"></p>
+
+            </div>
+
+            <div class="info">
+                <strong>Method Used:</strong>
+                <code>localStorage.removeItem("username")</code>
+                removes only the item associated with the specified key.
+            </div>
+        </section>
+
+        <section class="card">
+            <h2>How It Works</h2>
+
+            <p>
+                The program first checks whether a username is stored in
+                localStorage. When the Delete Username button is clicked,
+                the <strong>removeItem()</strong> method removes the
+                username using its key.
+            </p>
+
+            <div class="buttons">
+                <button class="btn secondary"
+                    onclick="window.location.href='03-update-localstorage.html'">
+                    Previous
+                </button>
+
+                <button class="btn"
+                    onclick="window.location.href='../index.html'">
+                    Home
+                </button>
+
+                <button class="btn"
+                    onclick="window.location.href='05-clear-localstorage.html'">
+                    Next
+                </button>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        Web Storage Practicals &copy; 2026
+    </footer>
+
+    <script>
+        function loadUsername() {
+            const username = localStorage.getItem("username");
+            const display = document.getElementById("usernameDisplay");
+            const message = document.getElementById("message");
+
+            if (username) {
+                display.textContent = username;
+                message.textContent = "";
+                message.className = "message";
+            } else {
+                display.textContent = "No username found in localStorage.";
+                message.textContent = "";
+                message.className = "message warning";
+            }
+        }
+
+        function deleteUsername() {
+            const username = localStorage.getItem("username");
+            const display = document.getElementById("usernameDisplay");
+            const message = document.getElementById("message");
+
+            if (username) {
+                localStorage.removeItem("username");
+
+                display.textContent = "No username found in localStorage.";
+                message.textContent = "Username deleted successfully.";
+                message.className = "message success";
+            } else {
+                message.textContent = "There is no username to delete.";
+                message.className = "message warning";
+            }
+        }
+
+        loadUsername();
+    </script>
+
+</body>
+</html>

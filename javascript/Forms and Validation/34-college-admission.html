@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>College Admission Form</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Segoe UI", Arial, sans-serif;
+      background: #f1f5f9;
+      color: #334155;
+      line-height: 1.6;
+    }
+
+    header {
+      background: #0f172a;
+      padding: 18px 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      color: white;
+      font-size: 22px;
+      font-weight: bold;
+    }
+
+    nav a {
+      color: #cbd5e1;
+      text-decoration: none;
+      margin-left: 25px;
+      font-size: 15px;
+    }
+
+    nav a:hover {
+      color: white;
+    }
+
+    .hero {
+      background: linear-gradient(135deg, #1e3a8a, #2563eb);
+      color: white;
+      text-align: center;
+      padding: 65px 20px;
+    }
+
+    .badge {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.15);
+      padding: 7px 16px;
+      border-radius: 20px;
+      margin-bottom: 15px;
+      font-size: 14px;
+    }
+
+    .hero h1 {
+      font-size: 36px;
+      margin-bottom: 10px;
+    }
+
+    .hero p {
+      font-size: 17px;
+      opacity: 0.9;
+    }
+
+    main {
+      width: 90%;
+      max-width: 1050px;
+      margin: 40px auto;
+    }
+
+    .objective {
+      background: white;
+      padding: 22px;
+      border-left: 5px solid #2563eb;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
+      margin-bottom: 25px;
+    }
+
+    .objective h2 {
+      color: #1e3a8a;
+      margin-bottom: 8px;
+    }
+
+    .card {
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(15, 23, 42, 0.08);
+    }
+
+    .card h2 {
+      color: #1e3a8a;
+      margin-bottom: 25px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #e2e8f0;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 7px;
+    }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      padding: 11px 13px;
+      border: 1px solid #cbd5e1;
+      border-radius: 7px;
+      font-size: 15px;
+      font-family: inherit;
+      outline: none;
+      transition: 0.2s;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      border-color: #2563eb;
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+    }
+
+    textarea {
+      min-height: 100px;
+      resize: vertical;
+    }
+
+    .radio-group {
+      display: flex;
+      gap: 25px;
+      flex-wrap: wrap;
+      padding: 8px 0;
+    }
+
+    .radio-option {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      font-weight: normal;
+    }
+
+    .radio-option input {
+      width: auto;
+    }
+
+    .checkbox-option {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      font-weight: normal;
+    }
+
+    .checkbox-option input {
+      width: auto;
+      margin-top: 5px;
+    }
+
+    .error {
+      color: #dc2626;
+      font-size: 13px;
+      margin-top: 5px;
+      min-height: 18px;
+    }
+
+    .valid {
+      border-color: #16a34a;
+      background: #f0fdf4;
+    }
+
+    .invalid {
+      border-color: #dc2626;
+      background: #fff7f7;
+    }
+
+    .success-message {
+      display: none;
+      background: #ecfdf5;
+      color: #166534;
+      border: 1px solid #86efac;
+      padding: 15px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      text-align: center;
+      font-weight: 600;
+    }
+
+    .submit-btn {
+      width: 100%;
+      border: none;
+      background: #2563eb;
+      color: white;
+      padding: 13px 20px;
+      border-radius: 7px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .submit-btn:hover {
+      background: #1d4ed8;
+    }
+
+    .buttons {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      flex-wrap: wrap;
+      margin-top: 30px;
+    }
+
+    .btn-link {
+      text-decoration: none;
+      background: #2563eb;
+      color: white;
+      padding: 11px 20px;
+      border-radius: 7px;
+      font-weight: 600;
+    }
+
+    .btn-link:hover {
+      background: #1d4ed8;
+    }
+
+    .btn-link.secondary {
+      background: #475569;
+    }
+
+    .btn-link.secondary:hover {
+      background: #334155;
+    }
+
+    footer {
+      background: #0f172a;
+      color: #cbd5e1;
+      text-align: center;
+      padding: 22px;
+      margin-top: 50px;
+    }
+
+    @media (max-width: 750px) {
+      header {
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      nav a {
+        margin: 0 8px;
+      }
+
+      .hero h1 {
+        font-size: 28px;
+      }
+
+      .card {
+        padding: 22px;
+      }
+    }
+
+    @media (max-width: 550px) {
+      main {
+        width: 94%;
+      }
+
+      .hero {
+        padding: 50px 15px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <div class="logo">JavaScript Practical</div>
+
+    <nav>
+      <a href="../../index.html">Home</a>
+<a href="../index.html">JavaScript Programs</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <span class="badge">Practice 34</span>
+    <h1>College Admission Form</h1>
+    <p>Complete JavaScript validation for college admission details.</p>
+  </section>
+
+  <main>
+
+    <section class="objective">
+      <h2>Objective</h2>
+      <p>
+        To create a college admission form and validate all required fields
+        using JavaScript before accepting the form.
+      </p>
+    </section>
+
+    <section class="card">
+      <h2>Admission Application</h2>
+
+      <div class="success-message" id="successMessage">
+        Admission form submitted successfully!
+      </div>
+
+      <form id="admissionForm" novalidate>
+
+        <div class="form-group">
+          <label for="studentName">Student Name</label>
+
+          <input
+            type="text"
+            id="studentName"
+            placeholder="Enter student name"
+            autocomplete="off"
+          >
+
+          <div class="error" id="studentNameError"></div>
+        </div>
+
+        <div class="form-group">
+          <label for="dob">Date of Birth</label>
+
+          <input type="date" id="dob">
+
+          <div class="error" id="dobError"></div>
+        </div>
+
+        <div class="form-group">
+          <label>Gender</label>
+
+          <div class="radio-group">
+            <label class="radio-option">
+              <input type="radio" name="gender" value="Male">
+              Male
+            </label>
+
+            <label class="radio-option">
+              <input type="radio" name="gender" value="Female">
+              Female
+            </label>
+
+            <label class="radio-option">
+              <input type="radio" name="gender" value="Other">
+              Other
+            </label>
+          </div>
+
+          <div class="error" id="genderError"></div>
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email Address</label>
+
+          <input
+            type="email"
+            id="email"
+            placeholder="Enter email address"
+            autocomplete="off"
+          >
+
+          <div class="error" id="emailError"></div>
+        </div>
+
+        <div class="form-group">
+          <label for="mobile">Mobile Number</label>
+
+          <input
+            type="text"
+            id="mobile"
+            maxlength="10"
+            inputmode="numeric"
+            placeholder="Enter 10-digit mobile number"
+            autocomplete="off"
+          >
+
+          <div class="error" id="mobileError"></div>
+        </div>
+
+        <div class="form-group">
+          <label for="course">Select Course</label>
+
+          <select id="course">
+            <option value="">-- Select Course --</option>
+            <option value="BCA">BCA</option>
+            <option value="BSc Computer Science">
+              BSc Computer Science
+            </option>
+            <option value="BTech">BTech</option>
+            <option value="MCA">MCA</option>
+          </select>
+
+          <div class="error" id="courseError"></div>
+        </div>
+
+        <div class="form-group">
+          <label for="percentage">Previous Exam Percentage</label>
+
+          <input
+            type="number"
+            id="percentage"
+            min="0"
+            max="100"
+            step="0.01"
+            placeholder="Enter percentage"
+          >
+
+          <div class="error" id="percentageError"></div>
+        </div>
+
+        <div class="form-group">
+          <label for="city">City</label>
+
+          <input
+            type="text"
+            id="city"
+            placeholder="Enter your city"
+            autocomplete="off"
+          >
+
+          <div class="error" id="cityError"></div>
+        </div>
+
+        <div class="form-group">
+          <label for="address">Address</label>
+
+          <textarea
+            id="address"
+            placeholder="Enter your complete address"
+          ></textarea>
+
+          <div class="error" id="addressError"></div>
+        </div>
+
+        <div class="form-group">
+          <label class="checkbox-option">
+            <input type="checkbox" id="declaration">
+
+            <span>
+              I confirm that the information entered in this admission form
+              is correct.
+            </span>
+          </label>
+
+          <div class="error" id="declarationError"></div>
+        </div>
+
+        <button type="submit" class="submit-btn">
+          Submit Admission Form
+        </button>
+
+      </form>
+    </section>
+
+    <div class="buttons">
+      <a href="33-registration-password-confirmation.html" class="btn-link">
+        ← Previous Practical
+      </a>
+
+      <a href="index.html" class="btn-link secondary">
+        Forms &amp; Validation
+      </a>
+
+      <a href="35-job-application-validation.html" class="btn-link">
+        Next Practical →
+      </a>
+    </div>
+
+  </main>
+
+  <footer>
+    <p>&copy; 2026 JavaScript Practical — Forms &amp; Validation</p>
+  </footer>
+
+  <script>
+    const admissionForm = document.getElementById("admissionForm");
+
+    const studentName = document.getElementById("studentName");
+    const dob = document.getElementById("dob");
+    const email = document.getElementById("email");
+    const mobile = document.getElementById("mobile");
+    const course = document.getElementById("course");
+    const percentage = document.getElementById("percentage");
+    const city = document.getElementById("city");
+    const address = document.getElementById("address");
+    const declaration = document.getElementById("declaration");
+
+    const studentNameError =
+      document.getElementById("studentNameError");
+    const dobError =
+      document.getElementById("dobError");
+    const genderError =
+      document.getElementById("genderError");
+    const emailError =
+      document.getElementById("emailError");
+    const mobileError =
+      document.getElementById("mobileError");
+    const courseError =
+      document.getElementById("courseError");
+    const percentageError =
+      document.getElementById("percentageError");
+    const cityError =
+      document.getElementById("cityError");
+    const addressError =
+      document.getElementById("addressError");
+    const declarationError =
+      document.getElementById("declarationError");
+
+    const successMessage =
+      document.getElementById("successMessage");
+
+    const nameRegex = /^[A-Za-z ]+$/;
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const mobileRegex = /^\d{10}$/;
+    const cityRegex = /^[A-Za-z ]+$/;
+
+    // Set today's date as the maximum allowed date
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = String(today.getMonth() + 1).padStart(2, "0");
+    const day = String(today.getDate()).padStart(2, "0");
+
+    dob.max = `${year}-${month}-${day}`;
+
+    function validateStudentName() {
+      const value = studentName.value.trim();
+
+      studentName.classList.remove("valid", "invalid");
+      studentNameError.textContent = "";
+
+      if (value === "") {
+        studentName.classList.add("invalid");
+        studentNameError.textContent =
+          "Student name is required.";
+        return false;
+      }
+
+      if (!nameRegex.test(value)) {
+        studentName.classList.add("invalid");
+        studentNameError.textContent =
+          "Name can contain only alphabets and spaces.";
+        return false;
+      }
+
+      studentName.classList.add("valid");
+      return true;
+    }
+
+    function validateDob() {
+      const value = dob.value;
+
+      dob.classList.remove("valid", "invalid");
+      dobError.textContent = "";
+
+      if (value === "") {
+        dob.classList.add("invalid");
+        dobError.textContent =
+          "Date of birth is required.";
+        return false;
+      }
+
+      const selectedDate = new Date(value + "T00:00:00");
+      const currentDate = new Date();
+
+      currentDate.setHours(0, 0, 0, 0);
+
+      if (selectedDate > currentDate) {
+        dob.classList.add("invalid");
+        dobError.textContent =
+          "Date of birth cannot be a future date.";
+        return false;
+      }
+
+      dob.classList.add("valid");
+      return true;
+    }
+
+    function validateGender() {
+      const selectedGender =
+        document.querySelector('input[name="gender"]:checked');
+
+      genderError.textContent = "";
+
+      if (!selectedGender) {
+        genderError.textContent =
+          "Please select a gender.";
+        return false;
+      }
+
+      return true;
+    }
+
+    function validateEmail() {
+      const value = email.value.trim();
+
+      email.classList.remove("valid", "invalid");
+      emailError.textContent = "";
+
+      if (value === "") {
+        email.classList.add("invalid");
+        emailError.textContent =
+          "Email address is required.";
+        return false;
+      }
+
+      if (!emailRegex.test(value)) {
+        email.classList.add("invalid");
+        emailError.textContent =
+          "Enter a valid email address.";
+        return false;
+      }
+
+      email.classList.add("valid");
+      return true;
+    }
+
+    function validateMobile() {
+      const value = mobile.value.trim();
+
+      mobile.classList.remove("valid", "invalid");
+      mobileError.textContent = "";
+
+      if (value === "") {
+        mobile.classList.add("invalid");
+        mobileError.textContent =
+          "Mobile number is required.";
+        return false;
+      }
+
+      if (!mobileRegex.test(value)) {
+        mobile.classList.add("invalid");
+        mobileError.textContent =
+          "Mobile number must contain exactly 10 digits.";
+        return false;
+      }
+
+      mobile.classList.add("valid");
+      return true;
+    }
+
+    function validateCourse() {
+      course.classList.remove("valid", "invalid");
+      courseError.textContent = "";
+
+      if (course.value === "") {
+        course.classList.add("invalid");
+        courseError.textContent =
+          "Please select a course.";
+        return false;
+      }
+
+      course.classList.add("valid");
+      return true;
+    }
+
+    function validatePercentage() {
+      const value = percentage.value.trim();
+
+      percentage.classList.remove("valid", "invalid");
+      percentageError.textContent = "";
+
+      if (value === "") {
+        percentage.classList.add("invalid");
+        percentageError.textContent =
+          "Previous exam percentage is required.";
+        return false;
+      }
+
+      const numberValue = Number(value);
+
+      if (
+        !Number.isFinite(numberValue) ||
+        numberValue < 0 ||
+        numberValue > 100
+      ) {
+        percentage.classList.add("invalid");
+        percentageError.textContent =
+          "Percentage must be between 0 and 100.";
+        return false;
+      }
+
+      percentage.classList.add("valid");
+      return true;
+    }
+
+    function validateCity() {
+      const value = city.value.trim();
+
+      city.classList.remove("valid", "invalid");
+      cityError.textContent = "";
+
+      if (value === "") {
+        city.classList.add("invalid");
+        cityError.textContent =
+          "City is required.";
+        return false;
+      }
+
+      if (!cityRegex.test(value)) {
+        city.classList.add("invalid");
+        cityError.textContent =
+          "City can contain only alphabets and spaces.";
+        return false;
+      }
+
+      city.classList.add("valid");
+      return true;
+    }
+
+    function validateAddress() {
+      const value = address.value.trim();
+
+      address.classList.remove("valid", "invalid");
+      addressError.textContent = "";
+
+      if (value === "") {
+        address.classList.add("invalid");
+        addressError.textContent =
+          "Address is required.";
+        return false;
+      }
+
+      if (value.length < 10) {
+        address.classList.add("invalid");
+        addressError.textContent =
+          "Address must contain at least 10 characters.";
+        return false;
+      }
+
+      address.classList.add("valid");
+      return true;
+    }
+
+    function validateDeclaration() {
+      declarationError.textContent = "";
+
+      if (!declaration.checked) {
+        declarationError.textContent =
+          "Please accept the declaration.";
+        return false;
+      }
+
+      return true;
+    }
+
+    // Real-time validation
+    studentName.addEventListener("input", function () {
+      successMessage.style.display = "none";
+      validateStudentName();
+    });
+
+    dob.addEventListener("change", function () {
+      successMessage.style.display = "none";
+      validateDob();
+    });
+
+    document
+      .querySelectorAll('input[name="gender"]')
+      .forEach(function (radio) {
+        radio.addEventListener("change", function () {
+          successMessage.style.display = "none";
+          validateGender();
+        });
+      });
+
+    email.addEventListener("input", function () {
+      successMessage.style.display = "none";
+      validateEmail();
+    });
+
+    mobile.addEventListener("input", function () {
+      successMessage.style.display = "none";
+      validateMobile();
+    });
+
+    course.addEventListener("change", function () {
+      successMessage.style.display = "none";
+      validateCourse();
+    });
+
+    percentage.addEventListener("input", function () {
+      successMessage.style.display = "none";
+      validatePercentage();
+    });
+
+    city.addEventListener("input", function () {
+      successMessage.style.display = "none";
+      validateCity();
+    });
+
+    address.addEventListener("input", function () {
+      successMessage.style.display = "none";
+      validateAddress();
+    });
+
+    declaration.addEventListener("change", function () {
+      successMessage.style.display = "none";
+      validateDeclaration();
+    });
+
+    // Form submission
+    admissionForm.addEventListener("submit", function (event) {
+      event.preventDefault();
+
+      const validName = validateStudentName();
+      const validDob = validateDob();
+      const validGender = validateGender();
+      const validEmail = validateEmail();
+      const validMobile = validateMobile();
+      const validCourse = validateCourse();
+      const validPercentage = validatePercentage();
+      const validCity = validateCity();
+      const validAddress = validateAddress();
+      const validDeclaration = validateDeclaration();
+
+      const formIsValid =
+        validName &&
+        validDob &&
+        validGender &&
+        validEmail &&
+        validMobile &&
+        validCourse &&
+        validPercentage &&
+        validCity &&
+        validAddress &&
+        validDeclaration;
+
+      if (!formIsValid) {
+        successMessage.style.display = "none";
+        return;
+      }
+
+      successMessage.style.display = "block";
+
+      admissionForm.reset();
+
+      studentName.classList.remove("valid", "invalid");
+      dob.classList.remove("valid", "invalid");
+      email.classList.remove("valid", "invalid");
+      mobile.classList.remove("valid", "invalid");
+      course.classList.remove("valid", "invalid");
+      percentage.classList.remove("valid", "invalid");
+      city.classList.remove("valid", "invalid");
+      address.classList.remove("valid", "invalid");
+
+      studentNameError.textContent = "";
+      dobError.textContent = "";
+      genderError.textContent = "";
+      emailError.textContent = "";
+      mobileError.textContent = "";
+      courseError.textContent = "";
+      percentageError.textContent = "";
+      cityError.textContent = "";
+      addressError.textContent = "";
+      declarationError.textContent = "";
+    });
+  </script>
+
+</body>
+</html>

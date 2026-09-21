@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Practical 24 - Show and Hide Element</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: #f1f5f9;
+            color: #334155;
+            line-height: 1.6;
+        }
+
+        header {
+            background: #0f172a;
+            padding: 18px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: white;
+            font-size: 22px;
+            font-weight: 700;
+        }
+
+        nav a {
+            color: #cbd5e1;
+            text-decoration: none;
+            margin-left: 22px;
+            font-size: 15px;
+        }
+
+        nav a:hover {
+            color: white;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #1e3a8a, #2563eb);
+            color: white;
+            text-align: center;
+            padding: 65px 20px;
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.18);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        .hero h1 {
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+
+        .hero p {
+            font-size: 17px;
+            opacity: 0.9;
+        }
+
+        main {
+            width: 90%;
+            max-width: 1050px;
+            margin: 40px auto;
+        }
+
+        .card {
+            background: white;
+            padding: 28px;
+            margin-bottom: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(15, 23, 42, 0.08);
+        }
+
+        .objective {
+            border-left: 5px solid #2563eb;
+        }
+
+        .card h2 {
+            color: #1e3a8a;
+            margin-bottom: 18px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e2e8f0;
+        }
+
+        .demo {
+            text-align: center;
+        }
+
+        #message {
+            background: #dbeafe;
+            border: 1px solid #93c5fd;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            color: #1e3a8a;
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .btn {
+            display: inline-block;
+            background: #2563eb;
+            color: white;
+            text-decoration: none;
+            border: none;
+            padding: 11px 20px;
+            border-radius: 7px;
+            font-size: 15px;
+            cursor: pointer;
+            transition: 0.2s;
+            margin: 5px;
+        }
+
+        .btn:hover {
+            background: #1d4ed8;
+        }
+
+        .hide-btn {
+            background: #dc2626;
+        }
+
+        .hide-btn:hover {
+            background: #b91c1c;
+        }
+
+        .show-btn {
+            background: #16a34a;
+        }
+
+        .show-btn:hover {
+            background: #15803d;
+        }
+
+        .output {
+            background: #eff6ff;
+            border: 2px dashed #93c5fd;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        #result {
+            font-size: 20px;
+            font-weight: 600;
+            color: #1e3a8a;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+
+        .secondary {
+            background: #475569;
+        }
+
+        .secondary:hover {
+            background: #334155;
+        }
+
+        footer {
+            background: #0f172a;
+            color: #cbd5e1;
+            text-align: center;
+            padding: 22px;
+            margin-top: 50px;
+        }
+
+        @media (max-width: 750px) {
+            header {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            nav a {
+                margin: 0 8px;
+            }
+
+            .hero h1 {
+                font-size: 28px;
+            }
+
+            .card {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="logo">JavaScript Practical</div>
+
+        <nav>
+            <a href="../../index.html">Home</a>
+<a href="../index.html">JavaScript Programs</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="badge">JavaScript Practical 24</div>
+        <h1>Show / Hide HTML Element</h1>
+        <p>Show or hide an HTML element using JavaScript</p>
+    </section>
+
+    <main>
+
+        <section class="card objective">
+            <h2>Objective</h2>
+            <p>
+                Create a program to show and hide an HTML element using JavaScript.
+            </p>
+        </section>
+
+        <section class="card">
+            <h2>Demonstration</h2>
+
+            <div class="demo">
+
+                <div id="message">
+                    This HTML element can be shown or hidden using JavaScript.
+                </div>
+
+                <button class="btn hide-btn" onclick="hideElement()">
+                    Hide Element
+                </button>
+
+                <button class="btn show-btn" onclick="showElement()">
+                    Show Element
+                </button>
+
+            </div>
+        </section>
+
+        <section class="card">
+            <h2>Output</h2>
+
+            <div class="output">
+                <p id="result">Element is currently visible.</p>
+            </div>
+        </section>
+
+        <div class="buttons">
+            <a href="javascript-23.html" class="btn">← Previous Practical</a>
+            <a href="index.html" class="btn secondary">JavaScript Programs</a>
+            <a href="../index.html" class="btn">Dashboard</a>
+        </div>
+
+    </main>
+
+    <footer>
+        <p>JavaScript Practical Programs</p>
+    </footer>
+
+    <script>
+        function hideElement() {
+            document.getElementById("message").style.display = "none";
+
+            document.getElementById("result").textContent =
+                "Element is currently hidden.";
+        }
+
+        function showElement() {
+            document.getElementById("message").style.display = "block";
+
+            document.getElementById("result").textContent =
+                "Element is currently visible.";
+        }
+    </script>
+
+</body>
+</html>

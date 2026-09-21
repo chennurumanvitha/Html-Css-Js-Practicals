@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HTML Practicals</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Segoe UI", Arial, sans-serif;
+      background: #f1f5f9;
+      color: #334155;
+      line-height: 1.6;
+    }
+
+    header {
+      background: #0f172a;
+      padding: 18px 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      color: white;
+      font-size: 22px;
+      font-weight: bold;
+    }
+
+    nav a {
+      color: #cbd5e1;
+      text-decoration: none;
+      margin-left: 25px;
+      font-size: 15px;
+    }
+
+    nav a:hover {
+      color: white;
+    }
+
+    .hero {
+      background: linear-gradient(135deg, #1e3a8a, #2563eb);
+      color: white;
+      text-align: center;
+      padding: 65px 20px;
+    }
+
+    .badge {
+      display: inline-block;
+      background: rgba(255,255,255,.15);
+      padding: 7px 16px;
+      border-radius: 20px;
+      margin-bottom: 15px;
+      font-size: 14px;
+    }
+
+    .hero h1 {
+      font-size: 36px;
+      margin-bottom: 10px;
+    }
+
+    .hero p {
+      font-size: 17px;
+      opacity: .9;
+    }
+
+    main {
+      width: 90%;
+      max-width: 1050px;
+      margin: 40px auto;
+    }
+
+    .objective {
+      background: white;
+      padding: 22px;
+      border-left: 5px solid #2563eb;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(15,23,42,.08);
+      margin-bottom: 25px;
+    }
+
+    .objective h2 {
+      color: #1e3a8a;
+      margin-bottom: 8px;
+    }
+
+    .card {
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(15,23,42,.08);
+    }
+
+    .card h2 {
+      color: #1e3a8a;
+      margin-bottom: 25px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #e2e8f0;
+    }
+
+    .program-list {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
+    }
+
+    .program {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      padding: 16px;
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      text-decoration: none;
+      color: #334155;
+      transition: .2s;
+    }
+
+    .program:hover {
+      background: #eff6ff;
+      border-color: #2563eb;
+      transform: translateY(-2px);
+    }
+
+    .number {
+      min-width: 42px;
+      height: 42px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #2563eb;
+      color: white;
+      border-radius: 7px;
+      font-weight: bold;
+    }
+
+    .program-title {
+      font-size: 15px;
+      font-weight: 600;
+    }
+
+    footer {
+      background: #0f172a;
+      color: #cbd5e1;
+      text-align: center;
+      padding: 22px;
+      margin-top: 50px;
+    }
+
+    @media (max-width: 750px) {
+      header {
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      nav a {
+        margin: 0 8px;
+      }
+
+      .hero h1 {
+        font-size: 28px;
+      }
+
+      .program-list {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 550px) {
+      main {
+        width: 94%;
+      }
+
+      .hero {
+        padding: 50px 15px;
+      }
+
+      .card {
+        padding: 22px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <div class="logo">HTML Practicals</div>
+
+    <nav>
+      <a href="../index.html">Home</a>
+      <a href="index.html">HTML</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <span class="badge">HTML Practical Programs</span>
+    <h1>HTML Practicals</h1>
+    <p>Web Development Laboratory Programs</p>
+  </section>
+
+  <main>
+
+    <section class="objective">
+      <h2>Objective</h2>
+      <p>
+        To practice HTML5 elements, forms, tables, multimedia,
+        semantic elements, CSS styling, responsive design,
+        Bootstrap components, and basic webpage development.
+      </p>
+    </section>
+
+    <section class="card">
+      <h2>Practical Programs</h2>
+
+      <div class="program-list">
+
+        <a href="01-basic-html.html" class="program">
+          <span class="number">01</span>
+          <span class="program-title">
+            Basic HTML Webpage
+          </span>
+        </a>
+
+        <a href="02-lists.html" class="program">
+          <span class="number">02</span>
+          <span class="program-title">
+            Ordered, Unordered and Description Lists
+          </span>
+        </a>
+
+        <a href="03-tables.html" class="program">
+          <span class="number">03</span>
+          <span class="program-title">
+            HTML Tables and Merged Cells
+          </span>
+        </a>
+
+        <a href="04-images-hyperlinks.html" class="program">
+          <span class="number">04</span>
+          <span class="program-title">
+            Images and Hyperlinks
+          </span>
+        </a>
+
+        <a href="05-student-registration-form.html" class="program">
+          <span class="number">05</span>
+          <span class="program-title">
+            Student Registration Form
+          </span>
+        </a>
+
+        <a href="06-audio-video.html" class="program">
+          <span class="number">06</span>
+          <span class="program-title">
+            Audio and Video Elements
+          </span>
+        </a>
+
+        <a href="07-frames-iframes.html" class="program">
+          <span class="number">07</span>
+          <span class="program-title">
+            Frames and Iframes
+          </span>
+        </a>
+
+        <a href="08-semantic-elements.html" class="program">
+          <span class="number">08</span>
+          <span class="program-title">
+            HTML5 Semantic Elements
+          </span>
+        </a>
+
+        <a href="09-html5-input-types.html" class="program">
+          <span class="number">09</span>
+          <span class="program-title">
+            HTML5 Input Types
+          </span>
+        </a>
+
+        <a href="10-college-timetable.html" class="program">
+          <span class="number">10</span>
+          <span class="program-title">
+            College Timetable
+          </span>
+        </a>
+
+        <a href="11-internal-external-css.html" class="program">
+          <span class="number">11</span>
+          <span class="program-title">
+            Internal and External CSS
+          </span>
+        </a>
+
+        <a href="12-css-selectors-colors-fonts.html" class="program">
+          <span class="number">12</span>
+          <span class="program-title">
+            CSS Selectors, Colors, Fonts, Margins and Borders
+          </span>
+        </a>
+
+        <a href="13-responsive-media-queries.html" class="program">
+          <span class="number">13</span>
+          <span class="program-title">
+            Responsive Webpage Using Media Queries
+          </span>
+        </a>
+
+        <a href="14-bootstrap-components.html" class="program">
+          <span class="number">14</span>
+          <span class="program-title">
+            Bootstrap Components
+          </span>
+        </a>
+
+        <a href="15-personal-portfolio.html" class="program">
+          <span class="number">15</span>
+          <span class="program-title">
+            Personal Portfolio Webpage
+          </span>
+        </a>
+
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    HTML Practicals &copy; 2026
+  </footer>
+
+</body>
+</html>

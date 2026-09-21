@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Image Hover Effect | CSS Practical 40</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: #f1f5f9;
+            color: #334155;
+            line-height: 1.6;
+        }
+
+        /* Header */
+        header {
+            background: #0f172a;
+            color: white;
+            padding: 18px 6%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        header nav {
+            display: flex;
+            gap: 25px;
+        }
+
+        header nav a {
+            color: #cbd5e1;
+            text-decoration: none;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+
+        header nav a:hover {
+            color: white;
+        }
+
+        /* Hero */
+        .hero {
+            background: linear-gradient(135deg, #1e3a8a, #2563eb);
+            color: white;
+            text-align: center;
+            padding: 65px 20px;
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 8px 18px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .hero h1 {
+            font-size: 38px;
+            margin-bottom: 10px;
+        }
+
+        .hero p {
+            font-size: 17px;
+            opacity: 0.95;
+        }
+
+        /* Main */
+        main {
+            width: 90%;
+            max-width: 1050px;
+            margin: 40px auto;
+        }
+
+        /* Objective */
+        .objective {
+            background: white;
+            border-left: 5px solid #2563eb;
+            border-radius: 12px;
+            padding: 22px 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 15px rgba(15, 23, 42, 0.08);
+        }
+
+        .objective h2 {
+            color: #1e3a8a;
+            margin-bottom: 8px;
+        }
+
+        /* Content Card */
+        .content-card {
+            background: white;
+            border-radius: 12px;
+            padding: 35px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 15px rgba(15, 23, 42, 0.08);
+        }
+
+        .content-card h2 {
+            color: #1e3a8a;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #dbeafe;
+        }
+
+        /* Image Grid */
+        .image-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .image-card {
+            overflow: hidden;
+            border-radius: 12px;
+            background: #f8fafc;
+            box-shadow: 0 4px 12px rgba(15, 23, 42, 0.1);
+        }
+
+        .image-card img {
+            display: block;
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+        }
+
+        .image-card p {
+            padding: 15px;
+            text-align: center;
+            font-weight: 600;
+            color: #1e3a8a;
+        }
+
+        /* Zoom Effect */
+        .zoom-effect img {
+            transition: transform 0.5s ease;
+        }
+
+        .zoom-effect:hover img {
+            transform: scale(1.12);
+        }
+
+        /* Brightness Effect */
+        .brightness-effect img {
+            transition: filter 0.5s ease;
+        }
+
+        .brightness-effect:hover img {
+            filter: brightness(1.3);
+        }
+
+        /* Grayscale Effect */
+        .grayscale-effect img {
+            filter: grayscale(100%);
+            transition: filter 0.5s ease;
+        }
+
+        .grayscale-effect:hover img {
+            filter: grayscale(0%);
+        }
+
+        /* Overlay Effect */
+        .overlay-container {
+            position: relative;
+            overflow: hidden;
+            border-radius: 12px;
+        }
+
+        .overlay-container img {
+            display: block;
+            width: 100%;
+            height: 280px;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(30, 58, 138, 0.75);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .overlay span {
+            color: white;
+            font-size: 22px;
+            font-weight: 700;
+        }
+
+        .overlay-container:hover img {
+            transform: scale(1.08);
+        }
+
+        .overlay-container:hover .overlay {
+            opacity: 1;
+        }
+
+        /* Rounded Hover */
+        .rounded-image {
+            width: 220px;
+            height: 220px;
+            object-fit: cover;
+            border-radius: 10px;
+            transition: 0.5s ease;
+            display: block;
+            margin: 20px auto;
+        }
+
+        .rounded-image:hover {
+            border-radius: 50%;
+            transform: rotate(3deg) scale(1.05);
+            box-shadow: 0 10px 25px rgba(37, 99, 235, 0.3);
+        }
+
+        /* Code Box */
+        .code-box {
+            background: #0f172a;
+            color: #e2e8f0;
+            padding: 20px;
+            border-radius: 10px;
+            overflow-x: auto;
+            margin-top: 20px;
+        }
+
+        .code-box pre {
+            font-family: Consolas, monospace;
+            font-size: 14px;
+        }
+
+        /* Navigation Buttons */
+        .buttons {
+            text-align: center;
+            margin: 35px 0;
+        }
+
+        .btn {
+            display: inline-block;
+            background: #2563eb;
+            color: white;
+            text-decoration: none;
+            padding: 12px 22px;
+            border-radius: 8px;
+            margin: 5px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background: #1e3a8a;
+            transform: translateY(-2px);
+        }
+
+        .secondary {
+            background: #64748b;
+        }
+
+        .secondary:hover {
+            background: #475569;
+        }
+
+        /* Footer */
+        footer {
+            background: #0f172a;
+            color: #cbd5e1;
+            text-align: center;
+            padding: 25px;
+            margin-top: 40px;
+        }
+
+        footer strong {
+            color: white;
+        }
+
+        /* Responsive */
+        @media (max-width: 750px) {
+            header {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            header nav {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 15px;
+            }
+
+            .hero h1 {
+                font-size: 30px;
+            }
+
+            .content-card {
+                padding: 25px 20px;
+            }
+
+            .image-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="logo">Web Development Practical</div>
+
+        <nav>
+            <a href="../index.html">Home</a>
+            <a href="index.html">CSS Programs</a>
+        </nav>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero">
+        <span class="badge">CSS PRACTICAL 40</span>
+
+        <h1>Image Hover Effect</h1>
+
+        <p>Create interactive image effects using CSS.</p>
+    </section>
+
+    <!-- Main Content -->
+    <main>
+
+        <!-- Objective -->
+        <section class="objective">
+            <h2>Objective</h2>
+
+            <p>
+                To create different image hover effects using CSS properties
+                such as transform, transition, filter, opacity, and border-radius.
+            </p>
+        </section>
+
+        <!-- Basic Hover Effects -->
+        <section class="content-card">
+
+            <h2>Different Image Hover Effects</h2>
+
+            <div class="image-grid">
+
+                <!-- Zoom -->
+                <div class="image-card zoom-effect">
+                    <img
+                        src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=800&q=80"
+                        alt="Web development workspace"
+                    >
+
+                    <p>Zoom Effect</p>
+                </div>
+
+                <!-- Brightness -->
+                <div class="image-card brightness-effect">
+                    <img
+                        src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=800&q=80"
+                        alt="Laptop workspace"
+                    >
+
+                    <p>Brightness Effect</p>
+                </div>
+
+                <!-- Grayscale -->
+                <div class="image-card grayscale-effect">
+                    <img
+                        src="https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=800&q=80"
+                        alt="Modern workspace"
+                    >
+
+                    <p>Grayscale Effect</p>
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- Overlay Effect -->
+        <section class="content-card">
+
+            <h2>Image Overlay Hover Effect</h2>
+
+            <div class="overlay-container">
+
+                <img
+                    src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1200&q=80"
+                    alt="Creative workspace"
+                >
+
+                <div class="overlay">
+                    <span>Explore More</span>
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- Border Radius -->
+        <section class="content-card">
+
+            <h2>Image Border-Radius Hover Effect</h2>
+
+            <img
+                class="rounded-image"
+                src="https://images.unsplash.com/photo-1515879218367-8466d910aaa4?auto=format&fit=crop&w=800&q=80"
+                alt="Programming workspace"
+            >
+
+        </section>
+
+        <!-- CSS Technique -->
+        <section class="content-card">
+
+            <h2>CSS Hover Technique</h2>
+
+            <div class="code-box">
+<pre>
+.image img {
+    transition: transform 0.5s ease;
+}
+
+.image:hover img {
+    transform: scale(1.1);
+}
+</pre>
+            </div>
+
+        </section>
+
+        <!-- Navigation -->
+        <div class="buttons">
+
+            <a href="css-39.html" class="btn">
+                ← Previous Practical
+            </a>
+
+            <a href="index.html" class="btn secondary">
+                CSS Programs
+            </a>
+
+            <a href="../index.html" class="btn">
+                Dashboard
+            </a>
+
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer>
+
+        <p>
+            <strong>CSS Practical 40</strong> | Image Hover Effect using CSS
+        </p>
+
+        <p>
+            Web Development Practical Assignment
+        </p>
+
+    </footer>
+
+</body>
+</html>

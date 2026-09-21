@@ -1,0 +1,1126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Practice 06 - College Admission Form</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: #f1f5f9;
+            color: #334155;
+            line-height: 1.6;
+        }
+
+        header {
+            background: #0f172a;
+            padding: 18px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: white;
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        nav a {
+            color: #cbd5e1;
+            text-decoration: none;
+            margin-left: 25px;
+            font-size: 15px;
+        }
+
+        nav a:hover {
+            color: white;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #1e3a8a, #2563eb);
+            color: white;
+            text-align: center;
+            padding: 65px 20px;
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 7px 16px;
+            border-radius: 20px;
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+
+        .hero h1 {
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+
+        .hero p {
+            font-size: 17px;
+            opacity: 0.9;
+        }
+
+        main {
+            width: 90%;
+            max-width: 1050px;
+            margin: 40px auto;
+        }
+
+        .objective {
+            background: white;
+            padding: 22px;
+            border-left: 5px solid #2563eb;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
+            margin-bottom: 25px;
+        }
+
+        .objective h2 {
+            color: #1e3a8a;
+            margin-bottom: 8px;
+        }
+
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(15, 23, 42, 0.08);
+        }
+
+        .card h2 {
+            color: #1e3a8a;
+            margin-bottom: 25px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e2e8f0;
+        }
+
+        .section-title {
+            color: #1e3a8a;
+            font-size: 18px;
+            margin: 25px 0 15px;
+            padding-bottom: 7px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 7px;
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            padding: 11px 13px;
+            border: 1px solid #cbd5e1;
+            border-radius: 7px;
+            font-size: 15px;
+            font-family: inherit;
+            outline: none;
+            transition: 0.2s;
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+            border-color: #2563eb;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .radio-group,
+        .checkbox-group {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .radio-option,
+        .checkbox-option {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            font-weight: normal;
+        }
+
+        .radio-option input,
+        .checkbox-option input {
+            width: auto;
+        }
+
+        .error {
+            color: #dc2626;
+            font-size: 13px;
+            margin-top: 5px;
+            min-height: 18px;
+        }
+
+        .invalid {
+            border-color: #dc2626;
+            background: #fff7f7;
+        }
+
+        .valid {
+            border-color: #16a34a;
+        }
+
+        .success-message {
+            display: none;
+            background: #ecfdf5;
+            color: #166534;
+            border: 1px solid #86efac;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .submit-btn {
+            width: 100%;
+            border: none;
+            background: #2563eb;
+            color: white;
+            padding: 13px 20px;
+            border-radius: 7px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+            margin-top: 10px;
+        }
+
+        .submit-btn:hover {
+            background: #1d4ed8;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+
+        .btn-link {
+            text-decoration: none;
+            background: #2563eb;
+            color: white;
+            padding: 11px 20px;
+            border-radius: 7px;
+            font-weight: 600;
+        }
+
+        .btn-link:hover {
+            background: #1d4ed8;
+        }
+
+        .btn-link.secondary {
+            background: #475569;
+        }
+
+        .btn-link.secondary:hover {
+            background: #334155;
+        }
+
+        footer {
+            background: #0f172a;
+            color: #cbd5e1;
+            text-align: center;
+            padding: 22px;
+            margin-top: 50px;
+        }
+
+        @media (max-width: 750px) {
+            header {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            nav a {
+                margin: 0 8px;
+            }
+
+            .hero h1 {
+                font-size: 28px;
+            }
+
+            .card {
+                padding: 22px;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+                gap: 0;
+            }
+        }
+
+        @media (max-width: 550px) {
+            .radio-group,
+            .checkbox-group {
+                flex-direction: column;
+                gap: 8px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="logo">JavaScript Practical</div>
+
+        <nav>
+            <a href="../../index.html">Home</a>
+<a href="../index.html">JavaScript Programs</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="badge">Practice 06</div>
+        <h1>College Admission Form</h1>
+        <p>Complete Form Validation using JavaScript</p>
+    </section>
+
+    <main>
+
+        <section class="objective">
+            <h2>Objective</h2>
+            <p>
+                To create a college admission form and validate the student's
+                personal, academic and contact details using JavaScript.
+            </p>
+        </section>
+
+        <section class="card">
+
+            <h2>College Admission Form</h2>
+
+            <div id="successMessage"
+                 class="success-message"
+                 aria-live="polite">
+                Admission form submitted successfully!
+            </div>
+
+            <form id="admissionForm" novalidate>
+
+                <h3 class="section-title">
+                    Personal Information
+                </h3>
+
+                <div class="form-row">
+
+                    <div class="form-group">
+                        <label for="studentName">
+                            Student Name
+                        </label>
+
+                        <input
+                            type="text"
+                            id="studentName"
+                            placeholder="Enter student name"
+                        >
+
+                        <div id="studentNameError"
+                             class="error"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="dob">
+                            Date of Birth
+                        </label>
+
+                        <input
+                            type="date"
+                            id="dob"
+                        >
+
+                        <div id="dobError"
+                             class="error"></div>
+                    </div>
+
+                </div>
+
+                <div class="form-group">
+
+                    <label>Gender</label>
+
+                    <div class="radio-group">
+
+                        <label class="radio-option">
+                            <input
+                                type="radio"
+                                name="gender"
+                                value="Male"
+                            >
+                            Male
+                        </label>
+
+                        <label class="radio-option">
+                            <input
+                                type="radio"
+                                name="gender"
+                                value="Female"
+                            >
+                            Female
+                        </label>
+
+                        <label class="radio-option">
+                            <input
+                                type="radio"
+                                name="gender"
+                                value="Other"
+                            >
+                            Other
+                        </label>
+
+                    </div>
+
+                    <div id="genderError"
+                         class="error"></div>
+
+                </div>
+
+
+                <h3 class="section-title">
+                    Contact Information
+                </h3>
+
+                <div class="form-row">
+
+                    <div class="form-group">
+                        <label for="email">
+                            Email Address
+                        </label>
+
+                        <input
+                            type="text"
+                            id="email"
+                            placeholder="Enter email address"
+                        >
+
+                        <div id="emailError"
+                             class="error"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="mobile">
+                            Mobile Number
+                        </label>
+
+                        <input
+                            type="text"
+                            id="mobile"
+                            placeholder="Enter 10-digit mobile number"
+                        >
+
+                        <div id="mobileError"
+                             class="error"></div>
+                    </div>
+
+                </div>
+
+                <div class="form-group">
+                    <label for="address">
+                        Address
+                    </label>
+
+                    <textarea
+                        id="address"
+                        placeholder="Enter your address"
+                    ></textarea>
+
+                    <div id="addressError"
+                         class="error"></div>
+                </div>
+
+
+                <h3 class="section-title">
+                    Academic Information
+                </h3>
+
+                <div class="form-row">
+
+                    <div class="form-group">
+
+                        <label for="course">
+                            Course
+                        </label>
+
+                        <select id="course">
+
+                            <option value="">
+                                -- Select Course --
+                            </option>
+
+                            <option value="BCA">
+                                BCA
+                            </option>
+
+                            <option value="BSc Computer Science">
+                                BSc Computer Science
+                            </option>
+
+                            <option value="BCom">
+                                BCom
+                            </option>
+
+                            <option value="BBA">
+                                BBA
+                            </option>
+
+                            <option value="BA">
+                                BA
+                            </option>
+
+                        </select>
+
+                        <div id="courseError"
+                             class="error"></div>
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label for="percentage">
+                            Previous Exam Percentage
+                        </label>
+
+                        <input
+                            type="number"
+                            id="percentage"
+                            placeholder="Enter percentage"
+                            min="0"
+                            max="100"
+                            step="0.01"
+                        >
+
+                        <div id="percentageError"
+                             class="error"></div>
+
+                    </div>
+
+                </div>
+
+
+                <h3 class="section-title">
+                    Address Information
+                </h3>
+
+                <div class="form-group">
+
+                    <label for="city">
+                        City
+                    </label>
+
+                    <input
+                        type="text"
+                        id="city"
+                        placeholder="Enter city"
+                    >
+
+                    <div id="cityError"
+                         class="error"></div>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <div class="checkbox-group">
+
+                        <label class="checkbox-option">
+
+                            <input
+                                type="checkbox"
+                                id="declaration"
+                            >
+
+                            I confirm that the information entered
+                            above is correct.
+
+                        </label>
+
+                    </div>
+
+                    <div id="declarationError"
+                         class="error"></div>
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="submit-btn"
+                >
+                    Submit Admission Form
+                </button>
+
+            </form>
+
+        </section>
+
+
+        <div class="buttons">
+
+            <a href="05-feedback-validation.html"
+               class="btn-link">
+                ← Previous Practical
+            </a>
+
+            <a href="index.html"
+               class="btn-link secondary">
+                Forms &amp; Validation
+            </a>
+
+            <a href="07-age-validation.html"
+               class="btn-link">
+                Next Practical →
+            </a>
+
+        </div>
+
+    </main>
+
+
+    <footer>
+        <p>JavaScript Practical &copy; 2026</p>
+    </footer>
+
+
+    <script>
+
+        const admissionForm =
+            document.getElementById("admissionForm");
+
+        const successMessage =
+            document.getElementById("successMessage");
+
+
+        function setError(input, errorElement, message) {
+
+            if (input) {
+                input.classList.remove("valid");
+                input.classList.add("invalid");
+            }
+
+            errorElement.textContent = message;
+        }
+
+
+        function setValid(input, errorElement) {
+
+            input.classList.remove("invalid");
+            input.classList.add("valid");
+
+            errorElement.textContent = "";
+        }
+
+
+        function validateStudentName() {
+
+            const input =
+                document.getElementById("studentName");
+
+            const error =
+                document.getElementById("studentNameError");
+
+            const value = input.value.trim();
+
+            if (value === "") {
+
+                setError(
+                    input,
+                    error,
+                    "Student name is required."
+                );
+
+                return false;
+            }
+
+            if (!/^[A-Za-z ]+$/.test(value)) {
+
+                setError(
+                    input,
+                    error,
+                    "Name must contain alphabets and spaces only."
+                );
+
+                return false;
+            }
+
+            setValid(input, error);
+
+            return true;
+        }
+
+
+        function validateDOB() {
+
+            const input =
+                document.getElementById("dob");
+
+            const error =
+                document.getElementById("dobError");
+
+            if (input.value === "") {
+
+                setError(
+                    input,
+                    error,
+                    "Date of birth is required."
+                );
+
+                return false;
+            }
+
+            const selectedDate =
+                new Date(input.value);
+
+            const today = new Date();
+
+            if (selectedDate > today) {
+
+                setError(
+                    input,
+                    error,
+                    "Date of birth cannot be in the future."
+                );
+
+                return false;
+            }
+
+            setValid(input, error);
+
+            return true;
+        }
+
+
+        function validateGender() {
+
+            const error =
+                document.getElementById("genderError");
+
+            const selected =
+                document.querySelector(
+                    'input[name="gender"]:checked'
+                );
+
+            if (!selected) {
+
+                error.textContent =
+                    "Please select a gender.";
+
+                return false;
+            }
+
+            error.textContent = "";
+
+            return true;
+        }
+
+
+        function validateEmail() {
+
+            const input =
+                document.getElementById("email");
+
+            const error =
+                document.getElementById("emailError");
+
+            const value = input.value.trim();
+
+            const emailPattern =
+                /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+            if (value === "") {
+
+                setError(
+                    input,
+                    error,
+                    "Email address is required."
+                );
+
+                return false;
+            }
+
+            if (!emailPattern.test(value)) {
+
+                setError(
+                    input,
+                    error,
+                    "Enter a valid email address."
+                );
+
+                return false;
+            }
+
+            setValid(input, error);
+
+            return true;
+        }
+
+
+        function validateMobile() {
+
+            const input =
+                document.getElementById("mobile");
+
+            const error =
+                document.getElementById("mobileError");
+
+            const value = input.value.trim();
+
+            if (value === "") {
+
+                setError(
+                    input,
+                    error,
+                    "Mobile number is required."
+                );
+
+                return false;
+            }
+
+            if (!/^\d{10}$/.test(value)) {
+
+                setError(
+                    input,
+                    error,
+                    "Mobile number must contain exactly 10 digits."
+                );
+
+                return false;
+            }
+
+            setValid(input, error);
+
+            return true;
+        }
+
+
+        function validateAddress() {
+
+            const input =
+                document.getElementById("address");
+
+            const error =
+                document.getElementById("addressError");
+
+            const value = input.value.trim();
+
+            if (value === "") {
+
+                setError(
+                    input,
+                    error,
+                    "Address is required."
+                );
+
+                return false;
+            }
+
+            if (value.length < 10) {
+
+                setError(
+                    input,
+                    error,
+                    "Address must contain at least 10 characters."
+                );
+
+                return false;
+            }
+
+            setValid(input, error);
+
+            return true;
+        }
+
+
+        function validateCourse() {
+
+            const input =
+                document.getElementById("course");
+
+            const error =
+                document.getElementById("courseError");
+
+            if (input.value === "") {
+
+                setError(
+                    input,
+                    error,
+                    "Please select a course."
+                );
+
+                return false;
+            }
+
+            setValid(input, error);
+
+            return true;
+        }
+
+
+        function validatePercentage() {
+
+            const input =
+                document.getElementById("percentage");
+
+            const error =
+                document.getElementById("percentageError");
+
+            const value = input.value.trim();
+            const percentage = Number(value);
+
+            if (value === "") {
+
+                setError(
+                    input,
+                    error,
+                    "Percentage is required."
+                );
+
+                return false;
+            }
+
+            if (
+                !Number.isFinite(percentage) ||
+                percentage < 0 ||
+                percentage > 100
+            ) {
+
+                setError(
+                    input,
+                    error,
+                    "Percentage must be between 0 and 100."
+                );
+
+                return false;
+            }
+
+            setValid(input, error);
+
+            return true;
+        }
+
+
+        function validateCity() {
+
+            const input =
+                document.getElementById("city");
+
+            const error =
+                document.getElementById("cityError");
+
+            const value = input.value.trim();
+
+            if (value === "") {
+
+                setError(
+                    input,
+                    error,
+                    "City is required."
+                );
+
+                return false;
+            }
+
+            if (!/^[A-Za-z ]+$/.test(value)) {
+
+                setError(
+                    input,
+                    error,
+                    "City must contain alphabets and spaces only."
+                );
+
+                return false;
+            }
+
+            setValid(input, error);
+
+            return true;
+        }
+
+
+        function validateDeclaration() {
+
+            const checkbox =
+                document.getElementById("declaration");
+
+            const error =
+                document.getElementById("declarationError");
+
+            if (!checkbox.checked) {
+
+                error.textContent =
+                    "Please confirm the declaration.";
+
+                return false;
+            }
+
+            error.textContent = "";
+
+            return true;
+        }
+
+
+        document
+            .getElementById("studentName")
+            .addEventListener(
+                "input",
+                validateStudentName
+            );
+
+
+        document
+            .getElementById("dob")
+            .addEventListener(
+                "change",
+                validateDOB
+            );
+
+
+        document
+            .querySelectorAll('input[name="gender"]')
+            .forEach(function(radio) {
+
+                radio.addEventListener(
+                    "change",
+                    validateGender
+                );
+
+            });
+
+
+        document
+            .getElementById("email")
+            .addEventListener(
+                "input",
+                validateEmail
+            );
+
+
+        document
+            .getElementById("mobile")
+            .addEventListener(
+                "input",
+                validateMobile
+            );
+
+
+        document
+            .getElementById("address")
+            .addEventListener(
+                "input",
+                validateAddress
+            );
+
+
+        document
+            .getElementById("course")
+            .addEventListener(
+                "change",
+                validateCourse
+            );
+
+
+        document
+            .getElementById("percentage")
+            .addEventListener(
+                "input",
+                validatePercentage
+            );
+
+
+        document
+            .getElementById("city")
+            .addEventListener(
+                "input",
+                validateCity
+            );
+
+
+        document
+            .getElementById("declaration")
+            .addEventListener(
+                "change",
+                validateDeclaration
+            );
+
+
+        admissionForm.addEventListener(
+            "submit",
+            function(event) {
+
+                event.preventDefault();
+
+                successMessage.style.display = "none";
+
+                const isValid =
+                    validateStudentName() &&
+                    validateDOB() &&
+                    validateGender() &&
+                    validateEmail() &&
+                    validateMobile() &&
+                    validateAddress() &&
+                    validateCourse() &&
+                    validatePercentage() &&
+                    validateCity() &&
+                    validateDeclaration();
+
+                if (isValid) {
+
+                    successMessage.textContent =
+                        "Admission form submitted successfully! All fields are valid.";
+
+                    successMessage.style.display =
+                        "block";
+
+                    admissionForm.reset();
+
+                    document
+                        .querySelectorAll(
+                            "input, select, textarea"
+                        )
+                        .forEach(function(element) {
+
+                            element.classList.remove(
+                                "valid",
+                                "invalid"
+                            );
+
+                        });
+                }
+            }
+        );
+
+    </script>
+
+</body>
+</html>

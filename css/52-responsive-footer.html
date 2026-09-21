@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Footer | CSS Practical 52</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: #f1f5f9;
+            color: #334155;
+            line-height: 1.6;
+        }
+
+        header {
+            background: #0f172a;
+            color: white;
+            padding: 18px 30px;
+        }
+
+        .header-container {
+            width: 90%;
+            max-width: 1050px;
+            margin: auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 22px;
+            font-weight: 700;
+        }
+
+        nav a {
+            color: #cbd5e1;
+            text-decoration: none;
+            margin-left: 22px;
+            font-size: 15px;
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            color: white;
+        }
+
+        /* Hero */
+        .hero {
+            background: linear-gradient(135deg, #1e3a8a, #2563eb);
+            color: white;
+            text-align: center;
+            padding: 65px 20px;
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 7px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            margin-bottom: 15px;
+        }
+
+        .hero h1 {
+            font-size: 34px;
+            margin-bottom: 10px;
+        }
+
+        .hero p {
+            max-width: 700px;
+            margin: auto;
+            color: #dbeafe;
+        }
+
+        /* Main Content */
+        main {
+            width: 90%;
+            max-width: 1050px;
+            margin: 40px auto;
+        }
+
+        .objective,
+        .content-card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(15, 23, 42, 0.08);
+        }
+
+        .objective {
+            border-left: 5px solid #2563eb;
+            padding: 22px 25px;
+            margin-bottom: 25px;
+        }
+
+        .objective h2 {
+            color: #1e3a8a;
+            margin-bottom: 8px;
+        }
+
+        .content-card {
+            padding: 35px;
+            margin-bottom: 25px;
+        }
+
+        .content-card h2 {
+            color: #1e3a8a;
+            margin-bottom: 18px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #dbeafe;
+        }
+
+        .footer-features {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+            margin-top: 20px;
+        }
+
+        .feature-card {
+            background: #f8fafc;
+            border-left: 4px solid #2563eb;
+            border-radius: 10px;
+            padding: 20px;
+        }
+
+        .feature-card h3 {
+            color: #1e3a8a;
+            margin-bottom: 8px;
+        }
+
+        /* Responsive Footer */
+        .responsive-footer {
+            background: #0f172a;
+            color: #cbd5e1;
+            padding: 45px 20px 20px;
+        }
+
+        .footer-container {
+            width: 90%;
+            max-width: 1050px;
+            margin: auto;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 40px;
+            padding-bottom: 30px;
+        }
+
+        .footer-section h3 {
+            color: white;
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+
+        .footer-section p {
+            color: #94a3b8;
+            font-size: 14px;
+            max-width: 400px;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 8px;
+        }
+
+        .footer-links a {
+            color: #94a3b8;
+            text-decoration: none;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: white;
+            padding-left: 4px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .social-links a {
+            display: inline-block;
+            color: #cbd5e1;
+            border: 1px solid #334155;
+            padding: 7px 12px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 13px;
+            transition: 0.3s;
+        }
+
+        .social-links a:hover {
+            background: #2563eb;
+            border-color: #2563eb;
+            color: white;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #334155;
+            padding-top: 18px;
+            text-align: center;
+            font-size: 13px;
+            color: #64748b;
+        }
+
+        .footer-bottom strong {
+            color: white;
+        }
+
+        /* Navigation Buttons */
+        .buttons {
+            text-align: center;
+            margin: 35px 0;
+        }
+
+        .btn {
+            display: inline-block;
+            background: #2563eb;
+            color: white;
+            text-decoration: none;
+            padding: 11px 20px;
+            border-radius: 7px;
+            margin: 5px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background: #1e3a8a;
+            transform: translateY(-2px);
+        }
+
+        .btn.secondary {
+            background: #e2e8f0;
+            color: #1e3a8a;
+        }
+
+        .btn.secondary:hover {
+            background: #cbd5e1;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 750px) {
+
+            .header-container {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            nav {
+                text-align: center;
+            }
+
+            nav a {
+                margin: 0 8px;
+            }
+
+            .hero h1 {
+                font-size: 28px;
+            }
+
+            .content-card {
+                padding: 25px 20px;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 25px;
+                text-align: center;
+            }
+
+            .footer-section p {
+                max-width: none;
+            }
+
+            .social-links {
+                justify-content: center;
+            }
+
+            .footer-features {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+
+            <div class="logo">
+                CSS Practical
+            </div>
+
+            <nav>
+                <a href="../index.html">Home</a>
+                <a href="index.html">CSS Programs</a>
+            </nav>
+
+        </div>
+    </header>
+
+
+    <!-- Hero Section -->
+    <section class="hero">
+
+        <span class="badge">CSS PRACTICAL 52</span>
+
+        <h1>Responsive Footer</h1>
+
+        <p>
+            Create a responsive footer using HTML and CSS
+            that adapts to different screen sizes.
+        </p>
+
+    </section>
+
+
+    <main>
+
+        <!-- Objective -->
+        <section class="objective">
+
+            <h2>Objective</h2>
+
+            <p>
+                To create a responsive footer using HTML and CSS
+                that adjusts its layout, spacing, and content
+                according to the screen size.
+            </p>
+
+        </section>
+
+
+        <!-- Responsive Footer Features -->
+        <section class="content-card">
+
+            <h2>Responsive Footer Features</h2>
+
+            <div class="footer-features">
+
+                <div class="feature-card">
+                    <h3>Flexible Layout</h3>
+                    <p>
+                        Uses CSS Grid to organize footer content
+                        into flexible columns.
+                    </p>
+                </div>
+
+                <div class="feature-card">
+                    <h3>Responsive Design</h3>
+                    <p>
+                        Media queries change the footer into a
+                        single-column layout on smaller screens.
+                    </p>
+                </div>
+
+                <div class="feature-card">
+                    <h3>Easy Navigation</h3>
+                    <p>
+                        Footer links provide quick access to
+                        important sections of the webpage.
+                    </p>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- Footer Structure -->
+        <section class="content-card">
+
+            <h2>Footer Structure</h2>
+
+            <p>
+                The responsive footer contains an information
+                section, navigation links, social links, and
+                a copyright section.
+            </p>
+
+        </section>
+
+
+        <!-- Navigation -->
+        <div class="buttons">
+
+            <a href="css-51.html" class="btn secondary">
+                ← Previous Practical
+            </a>
+
+            <a href="index.html" class="btn">
+                CSS Programs
+            </a>
+
+            <a href="../index.html" class="btn">
+                Dashboard
+            </a>
+
+        </div>
+
+    </main>
+
+
+    <!-- Responsive Footer -->
+    <footer class="responsive-footer">
+
+        <div class="footer-container">
+
+            <div class="footer-content">
+
+                <!-- About -->
+                <div class="footer-section">
+
+                    <h3>CSS Practical</h3>
+
+                    <p>
+                        A professional academic webpage demonstrating
+                        responsive footer design using HTML5 and CSS3.
+                    </p>
+
+                </div>
+
+
+                <!-- Quick Links -->
+                <div class="footer-section">
+
+                    <h3>Quick Links</h3>
+
+                    <ul class="footer-links">
+
+                        <li>
+                            <a href="../index.html">Home</a>
+                        </li>
+
+                        <li>
+                            <a href="index.html">CSS Programs</a>
+                        </li>
+
+                        <li>
+                            <a href="css-51.html">Previous Practical</a>
+                        </li>
+
+                    </ul>
+
+                </div>
+
+
+                <!-- Social Links -->
+                <div class="footer-section">
+
+                    <h3>Connect</h3>
+
+                    <div class="social-links">
+
+                        <a href="https://www.linkedin.com/" target="_blank"
+                           rel="noopener noreferrer">
+                            LinkedIn
+                        </a>
+
+                        <a href="https://github.com/" target="_blank"
+                           rel="noopener noreferrer">
+                            GitHub
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- Footer Bottom -->
+            <div class="footer-bottom">
+
+                <p>
+                    © 2026 <strong>CSS Practical 52</strong>.
+                    All Rights Reserved.
+                </p>
+
+            </div>
+
+        </div>
+
+    </footer>
+
+</body>
+</html>

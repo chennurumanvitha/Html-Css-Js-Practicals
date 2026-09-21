@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Keyboard Typing Test</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: #f1f5f9;
+            color: #334155;
+            line-height: 1.6;
+        }
+
+        header {
+            background: #0f172a;
+            padding: 18px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: white;
+            font-size: 22px;
+            font-weight: 700;
+        }
+
+        nav {
+            display: flex;
+            gap: 24px;
+        }
+
+        nav a {
+            color: #cbd5e1;
+            text-decoration: none;
+            font-size: 15px;
+        }
+
+        nav a:hover {
+            color: white;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #1e3a8a, #2563eb);
+            color: white;
+            text-align: center;
+            padding: 65px 20px;
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        .hero h1 {
+            font-size: 38px;
+            margin-bottom: 10px;
+        }
+
+        .hero p {
+            font-size: 17px;
+            opacity: 0.9;
+        }
+
+        main {
+            width: 90%;
+            max-width: 1050px;
+            margin: 40px auto;
+        }
+
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 15px rgba(15, 23, 42, 0.08);
+        }
+
+        .objective {
+            border-left: 5px solid #2563eb;
+        }
+
+        .card h2 {
+            color: #1e3a8a;
+            font-size: 23px;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e2e8f0;
+        }
+
+        .demo {
+            padding: 20px 10px;
+        }
+
+        .sample-text {
+            background: #eff6ff;
+            border: 2px dashed #93c5fd;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            color: #1e3a8a;
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        textarea {
+            width: 100%;
+            min-height: 150px;
+            padding: 15px;
+            border: 2px solid #cbd5e1;
+            border-radius: 10px;
+            resize: vertical;
+            font-family: "Segoe UI", Arial, sans-serif;
+            font-size: 16px;
+            color: #334155;
+            outline: none;
+        }
+
+        textarea:focus {
+            border-color: #2563eb;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .stat-box {
+            background: #f8fafc;
+            border: 1px solid #cbd5e1;
+            border-radius: 10px;
+            padding: 18px;
+            text-align: center;
+        }
+
+        .stat-label {
+            color: #64748b;
+            font-size: 14px;
+        }
+
+        .stat-value {
+            color: #1e3a8a;
+            font-size: 30px;
+            font-weight: 700;
+        }
+
+        .output {
+            padding: 18px;
+            background: #eff6ff;
+            border: 2px dashed #93c5fd;
+            border-radius: 10px;
+        }
+
+        .output p {
+            margin: 5px 0;
+        }
+
+        .output strong {
+            color: #1e3a8a;
+        }
+
+        button {
+            border: none;
+            padding: 11px 22px;
+            border-radius: 7px;
+            background: #2563eb;
+            color: white;
+            font-size: 15px;
+            cursor: pointer;
+            margin: 5px;
+        }
+
+        button:hover {
+            background: #1e40af;
+        }
+
+        button.secondary {
+            background: #64748b;
+        }
+
+        button.secondary:hover {
+            background: #475569;
+        }
+
+        .controls {
+            text-align: center;
+            margin: 15px 0;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin: 30px 0;
+        }
+
+        .btn-link {
+            display: inline-block;
+            padding: 11px 20px;
+            background: #2563eb;
+            color: white;
+            text-decoration: none;
+            border-radius: 7px;
+            font-size: 15px;
+        }
+
+        .btn-link:hover {
+            background: #1e40af;
+        }
+
+        .btn-link.secondary {
+            background: #64748b;
+        }
+
+        .btn-link.secondary:hover {
+            background: #475569;
+        }
+
+        footer {
+            background: #0f172a;
+            color: #cbd5e1;
+            text-align: center;
+            padding: 22px;
+            margin-top: 50px;
+        }
+
+        @media (max-width: 750px) {
+            header {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            .hero h1 {
+                font-size: 30px;
+            }
+
+            .card {
+                padding: 22px;
+            }
+
+            .stats {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 550px) {
+            nav {
+                gap: 14px;
+            }
+
+            .hero {
+                padding: 45px 15px;
+            }
+
+            .hero h1 {
+                font-size: 26px;
+            }
+
+            .sample-text {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="logo">JavaScript Events</div>
+
+        <nav>
+           <a href="../../index.html">Home</a>
+<a href="../index.html">JavaScript Programs</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="badge">Events Practical 38</div>
+        <h1>Keyboard Typing Test</h1>
+        <p>Practice typing and track keyboard input using JavaScript</p>
+    </section>
+
+    <main>
+
+        <section class="card objective">
+            <h2>Objective</h2>
+            <p>
+                Create a simple keyboard typing test using JavaScript to
+                detect typing input and display typing statistics.
+            </p>
+        </section>
+
+        <section class="card">
+            <h2>Interactive Demonstration</h2>
+
+            <div class="demo">
+
+                <div class="sample-text">
+                    Practice makes progress. Keep typing and improve your
+                    keyboard skills.
+                </div>
+
+                <textarea
+                    id="typingInput"
+                    placeholder="Start typing the sentence above..."
+                ></textarea>
+
+                <div class="stats">
+
+                    <div class="stat-box">
+                        <div class="stat-label">Characters</div>
+                        <div class="stat-value" id="characterCount">0</div>
+                    </div>
+
+                    <div class="stat-box">
+                        <div class="stat-label">Words</div>
+                        <div class="stat-value" id="wordCount">0</div>
+                    </div>
+
+                    <div class="stat-box">
+                        <div class="stat-label">Time</div>
+                        <div class="stat-value" id="timeCount">0s</div>
+                    </div>
+
+                </div>
+
+                <div class="controls">
+                    <button id="resetButton" class="secondary">
+                        Reset Test
+                    </button>
+                </div>
+
+                <div class="output">
+                    <p>
+                        <strong>Event:</strong>
+                        <span id="eventName">
+                            Waiting for typing...
+                        </span>
+                    </p>
+
+                    <p>
+                        <strong>Status:</strong>
+                        <span id="status">
+                            Start typing to begin the test.
+                        </span>
+                    </p>
+                </div>
+
+            </div>
+        </section>
+
+        <div class="buttons">
+            <a href="37-reaction-time-game.html" class="btn-link">
+                ← Previous Practical
+            </a>
+
+            <a href="index.html" class="btn-link secondary">
+                Events Programs
+            </a>
+
+            <a href="39-next.html" class="btn-link">
+                Next Practical →
+            </a>
+        </div>
+
+    </main>
+
+    <footer>
+        <p>JavaScript Events Practical</p>
+    </footer>
+
+    <script>
+        let startTime = null;
+        let timer = null;
+
+        const typingInput = document.getElementById("typingInput");
+        const characterCount = document.getElementById("characterCount");
+        const wordCount = document.getElementById("wordCount");
+        const timeCount = document.getElementById("timeCount");
+        const eventName = document.getElementById("eventName");
+        const status = document.getElementById("status");
+        const resetButton = document.getElementById("resetButton");
+
+        typingInput.addEventListener("input", function () {
+
+            if (startTime === null && typingInput.value.length > 0) {
+                startTime = Date.now();
+
+                timer = setInterval(function () {
+                    const elapsedTime =
+                        Math.floor((Date.now() - startTime) / 1000);
+
+                    timeCount.textContent = elapsedTime + "s";
+                }, 1000);
+            }
+
+            const text = typingInput.value;
+
+            characterCount.textContent = text.length;
+
+            const trimmedText = text.trim();
+
+            if (trimmedText === "") {
+                wordCount.textContent = "0";
+            } else {
+                wordCount.textContent =
+                    trimmedText.split(/\s+/).length;
+            }
+
+            eventName.textContent = "input";
+            status.textContent = "Typing detected successfully.";
+        });
+
+        typingInput.addEventListener("keydown", function () {
+            eventName.textContent = "keydown";
+        });
+
+        typingInput.addEventListener("keyup", function () {
+            eventName.textContent = "keyup";
+        });
+
+        resetButton.addEventListener("click", function () {
+
+            clearInterval(timer);
+
+            startTime = null;
+            timer = null;
+
+            typingInput.value = "";
+
+            characterCount.textContent = "0";
+            wordCount.textContent = "0";
+            timeCount.textContent = "0s";
+
+            eventName.textContent = "Waiting for typing...";
+            status.textContent = "Start typing to begin the test.";
+
+            typingInput.focus();
+        });
+    </script>
+
+</body>
+</html>

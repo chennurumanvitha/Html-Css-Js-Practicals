@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Practical 28 - Remove Event Listener</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: #f1f5f9;
+            color: #334155;
+            line-height: 1.6;
+        }
+
+        header {
+            background: #0f172a;
+            padding: 18px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: white;
+            font-size: 22px;
+            font-weight: 700;
+        }
+
+        nav a {
+            color: #cbd5e1;
+            text-decoration: none;
+            margin-left: 24px;
+            font-size: 15px;
+        }
+
+        nav a:hover {
+            color: white;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #1e3a8a, #2563eb);
+            color: white;
+            text-align: center;
+            padding: 65px 20px;
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.18);
+            padding: 7px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            margin-bottom: 12px;
+        }
+
+        .hero h1 {
+            margin: 5px 0;
+            font-size: 36px;
+        }
+
+        .hero p {
+            margin: 8px 0 0;
+            color: #dbeafe;
+        }
+
+        main {
+            width: 90%;
+            max-width: 1050px;
+            margin: 40px auto;
+        }
+
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(15, 23, 42, 0.08);
+            margin-bottom: 25px;
+        }
+
+        .objective {
+            border-left: 5px solid #2563eb;
+        }
+
+        .card h2 {
+            color: #1e3a8a;
+            margin-top: 0;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e2e8f0;
+        }
+
+        .demo {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .interactive-box {
+            max-width: 650px;
+            margin: 25px auto;
+            padding: 30px;
+            background: #eff6ff;
+            border: 2px solid #93c5fd;
+            border-radius: 10px;
+        }
+
+        .interactive-box h3 {
+            color: #1e3a8a;
+            margin-top: 0;
+        }
+
+        .button-group {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin: 25px 0;
+        }
+
+        button {
+            border: none;
+            background: #2563eb;
+            color: white;
+            padding: 12px 22px;
+            border-radius: 7px;
+            cursor: pointer;
+            font-size: 15px;
+        }
+
+        button:hover {
+            background: #1d4ed8;
+        }
+
+        button.green {
+            background: #15803d;
+        }
+
+        button.green:hover {
+            background: #166534;
+        }
+
+        button.secondary {
+            background: #64748b;
+        }
+
+        button.secondary:hover {
+            background: #475569;
+        }
+
+        .status {
+            font-size: 20px;
+            font-weight: 600;
+            color: #1e3a8a;
+            margin: 15px 0;
+        }
+
+        .output {
+            margin-top: 25px;
+            padding: 20px;
+            background: #eff6ff;
+            border: 2px dashed #93c5fd;
+            border-radius: 8px;
+            text-align: center;
+            min-height: 110px;
+        }
+
+        .output strong {
+            color: #1e3a8a;
+        }
+
+        .event-log {
+            max-width: 650px;
+            margin: 20px auto 0;
+            text-align: left;
+        }
+
+        .event-log p {
+            margin: 6px 0;
+            padding: 8px 12px;
+            background: #f8fafc;
+            border-left: 3px solid #2563eb;
+            border-radius: 4px;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin: 30px 0;
+        }
+
+        .btn-link {
+            display: inline-block;
+            text-decoration: none;
+            background: #2563eb;
+            color: white;
+            padding: 11px 20px;
+            border-radius: 7px;
+        }
+
+        .btn-link:hover {
+            background: #1d4ed8;
+        }
+
+        .btn-link.secondary {
+            background: #64748b;
+        }
+
+        .btn-link.secondary:hover {
+            background: #475569;
+        }
+
+        footer {
+            background: #0f172a;
+            color: #94a3b8;
+            text-align: center;
+            padding: 22px;
+            margin-top: 50px;
+            font-size: 14px;
+        }
+
+        @media (max-width: 750px) {
+            header {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            nav a {
+                margin: 0 8px;
+            }
+
+            .hero h1 {
+                font-size: 30px;
+            }
+
+            .card {
+                padding: 22px;
+            }
+        }
+
+        @media (max-width: 550px) {
+            .hero {
+                padding: 45px 15px;
+            }
+
+            .hero h1 {
+                font-size: 26px;
+            }
+
+            .button-group {
+                flex-direction: column;
+            }
+
+            button {
+                width: 100%;
+            }
+
+            .buttons {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .btn-link {
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="logo">JavaScript Practical</div>
+
+        <nav>
+           <a href="../../index.html">Home</a>
+<a href="../index.html">JavaScript Programs</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="badge">Practical 28</div>
+        <h1>Remove Event Listener</h1>
+        <p>Remove an event listener using removeEventListener()</p>
+    </section>
+
+    <main>
+
+        <section class="card objective">
+            <h2>Objective</h2>
+            <p>
+                To demonstrate how an event listener can be removed from
+                an HTML element using the
+                <strong>removeEventListener()</strong> method.
+            </p>
+        </section>
+
+        <section class="card">
+            <h2>Interactive Demonstration</h2>
+
+            <div class="demo">
+
+                <div class="interactive-box">
+                    <h3>Event Listener Control</h3>
+
+                    <p>
+                        First activate the event listener, then click the
+                        button to see it execute. Use the remove button to
+                        stop the event listener.
+                    </p>
+
+                    <div class="status" id="status">
+                        Listener is inactive
+                    </div>
+
+                    <div class="button-group">
+                        <button id="activateButton">
+                            Add Listener
+                        </button>
+
+                        <button class="green" id="testButton">
+                            Test Click
+                        </button>
+
+                        <button class="secondary" id="removeButton">
+                            Remove Listener
+                        </button>
+                    </div>
+                </div>
+
+                <div class="output" id="output">
+                    <strong>Event Status:</strong>
+                    <p>Add the listener and test the button.</p>
+                </div>
+
+                <div class="event-log" id="eventLog"></div>
+
+            </div>
+        </section>
+
+        <div class="buttons">
+            <a href="27-multiple-listeners.html" class="btn-link">
+                ← Previous Practical
+            </a>
+
+            <a href="index.html" class="btn-link secondary">
+                Events Programs
+            </a>
+
+            <a href="29-next.html" class="btn-link">
+                Next Practical →
+            </a>
+        </div>
+
+    </main>
+
+    <footer>
+        JavaScript Practical Programs | Events
+    </footer>
+
+    <script>
+        const activateButton =
+            document.getElementById("activateButton");
+
+        const testButton =
+            document.getElementById("testButton");
+
+        const removeButton =
+            document.getElementById("removeButton");
+
+        const status =
+            document.getElementById("status");
+
+        const output =
+            document.getElementById("output");
+
+        const eventLog =
+            document.getElementById("eventLog");
+
+        let listenerActive = false;
+
+        function addLog(message) {
+            const entry = document.createElement("p");
+            entry.textContent = message;
+            eventLog.prepend(entry);
+        }
+
+        function testClickHandler() {
+            output.innerHTML = `
+                <strong>Event Status:</strong>
+                <p>The event listener executed successfully.</p>
+                <p><strong>Event:</strong> click</p>
+            `;
+
+            addLog("Click event listener executed.");
+        }
+
+        activateButton.addEventListener("click", function() {
+
+            if (!listenerActive) {
+                testButton.addEventListener(
+                    "click",
+                    testClickHandler
+                );
+
+                listenerActive = true;
+
+                status.textContent = "Listener is active";
+
+                output.innerHTML = `
+                    <strong>Event Status:</strong>
+                    <p>Event listener has been added.</p>
+                    <p><strong>Method:</strong> addEventListener()</p>
+                `;
+
+                addLog("Event listener added.");
+            }
+        });
+
+        removeButton.addEventListener("click", function() {
+
+            if (listenerActive) {
+                testButton.removeEventListener(
+                    "click",
+                    testClickHandler
+                );
+
+                listenerActive = false;
+
+                status.textContent = "Listener is inactive";
+
+                output.innerHTML = `
+                    <strong>Event Status:</strong>
+                    <p>Event listener has been removed.</p>
+                    <p><strong>Method:</strong> removeEventListener()</p>
+                `;
+
+                addLog("Event listener removed.");
+            }
+        });
+    </script>
+
+</body>
+</html>

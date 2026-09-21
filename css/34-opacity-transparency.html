@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Opacity and Transparency | Practical 34</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: #f1f5f9;
+            color: #334155;
+            line-height: 1.6;
+        }
+
+        /* Header */
+        header {
+            background: #0f172a;
+            padding: 18px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: #ffffff;
+            font-size: 22px;
+            font-weight: 700;
+        }
+
+        nav a {
+            color: #cbd5e1;
+            text-decoration: none;
+            margin-left: 25px;
+            font-weight: 500;
+        }
+
+        nav a:hover {
+            color: #ffffff;
+        }
+
+        /* Hero */
+        .hero {
+            background: linear-gradient(135deg, #1e3a8a, #2563eb);
+            color: #ffffff;
+            text-align: center;
+            padding: 65px 20px;
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 7px 15px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .hero h1 {
+            font-size: 38px;
+            margin-bottom: 10px;
+        }
+
+        .hero p {
+            font-size: 17px;
+            color: #dbeafe;
+        }
+
+        /* Main */
+        main {
+            width: 90%;
+            max-width: 1050px;
+            margin: 40px auto;
+        }
+
+        /* Objective */
+        .objective {
+            background: #ffffff;
+            border-left: 5px solid #2563eb;
+            padding: 22px 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(15, 23, 42, 0.08);
+            margin-bottom: 25px;
+        }
+
+        .objective h2 {
+            color: #1e3a8a;
+            margin-bottom: 8px;
+        }
+
+        /* Content Card */
+        .content-card {
+            background: #ffffff;
+            padding: 35px;
+            margin-bottom: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(15, 23, 42, 0.08);
+        }
+
+        .content-card h2 {
+            color: #1e3a8a;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #dbeafe;
+        }
+
+        /* Opacity Grid */
+        .opacity-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .opacity-card {
+            background: #f8fafc;
+            border-left: 4px solid #2563eb;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .opacity-card h3 {
+            color: #1e3a8a;
+            margin-bottom: 15px;
+        }
+
+        .opacity-box {
+            height: 130px;
+            background: #2563eb;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffffff;
+            font-weight: 700;
+            font-size: 18px;
+        }
+
+        .opacity-100 {
+            opacity: 1;
+        }
+
+        .opacity-75 {
+            opacity: 0.75;
+        }
+
+        .opacity-50 {
+            opacity: 0.5;
+        }
+
+        .opacity-25 {
+            opacity: 0.25;
+        }
+
+        /* Transparency Demonstration */
+        .transparency-area {
+            background:
+                linear-gradient(45deg, #dbeafe 25%, transparent 25%),
+                linear-gradient(-45deg, #dbeafe 25%, transparent 25%),
+                linear-gradient(45deg, transparent 75%, #dbeafe 75%),
+                linear-gradient(-45deg, transparent 75%, #dbeafe 75%);
+            background-size: 40px 40px;
+            background-position: 0 0, 0 20px, 20px -20px, -20px 0;
+            background-color: #ffffff;
+            padding: 35px;
+            border: 2px dashed #2563eb;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .transparent-box {
+            background: rgba(37, 99, 235, 0.5);
+            padding: 30px;
+            max-width: 500px;
+            margin: auto;
+            border-radius: 12px;
+            color: #0f172a;
+            font-weight: 700;
+        }
+
+        /* RGBA Demonstration */
+        .rgba-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .rgba-box {
+            padding: 30px 15px;
+            border-radius: 10px;
+            text-align: center;
+            color: #ffffff;
+            font-weight: 700;
+        }
+
+        .rgba-100 {
+            background: rgba(37, 99, 235, 1);
+        }
+
+        .rgba-75 {
+            background: rgba(37, 99, 235, 0.75);
+        }
+
+        .rgba-50 {
+            background: rgba(37, 99, 235, 0.5);
+        }
+
+        .rgba-25 {
+            background: rgba(37, 99, 235, 0.25);
+            color: #1e3a8a;
+        }
+
+        /* Image Opacity */
+        .image-opacity {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            flex-wrap: wrap;
+        }
+
+        .image-box {
+            width: 250px;
+            padding: 15px;
+            background: #f8fafc;
+            border-radius: 10px;
+            text-align: center;
+            border-left: 4px solid #2563eb;
+        }
+
+        .image-box img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+
+        .image-normal img {
+            opacity: 1;
+        }
+
+        .image-transparent img {
+            opacity: 0.45;
+        }
+
+        /* Navigation Buttons */
+        .buttons {
+            text-align: center;
+            margin: 35px 0;
+        }
+
+        .btn {
+            display: inline-block;
+            background: #2563eb;
+            color: #ffffff;
+            text-decoration: none;
+            padding: 12px 22px;
+            border-radius: 8px;
+            margin: 5px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background: #1e3a8a;
+            transform: translateY(-2px);
+        }
+
+        .secondary {
+            background: #e2e8f0;
+            color: #1e3a8a;
+        }
+
+        .secondary:hover {
+            background: #cbd5e1;
+        }
+
+        /* Footer */
+        footer {
+            background: #0f172a;
+            color: #cbd5e1;
+            text-align: center;
+            padding: 25px;
+            margin-top: 40px;
+        }
+
+        footer strong {
+            color: #ffffff;
+        }
+
+        /* Responsive */
+        @media (max-width: 750px) {
+            header {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            nav a {
+                margin: 0 8px;
+                font-size: 14px;
+            }
+
+            .hero h1 {
+                font-size: 30px;
+            }
+
+            .content-card {
+                padding: 25px 20px;
+            }
+
+            .opacity-grid,
+            .rgba-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 500px) {
+            .opacity-grid,
+            .rgba-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="logo">Web Practicals</div>
+
+        <nav>
+            <a href="../index.html">Home</a>
+            <a href="index.html">CSS Programs</a>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="badge">CSS PRACTICAL 34</div>
+        <h1>Opacity and Transparency</h1>
+        <p>Demonstrating opacity and transparent colors using CSS</p>
+    </section>
+
+    <main>
+
+        <!-- Objective -->
+        <section class="objective">
+            <h2>Objective</h2>
+            <p>
+                To demonstrate the use of the CSS <strong>opacity</strong>
+                property and transparent colors using <strong>RGBA</strong>
+                values.
+            </p>
+        </section>
+
+        <!-- Opacity Demonstration -->
+        <section class="content-card">
+            <h2>Opacity Demonstration</h2>
+
+            <div class="opacity-grid">
+
+                <div class="opacity-card">
+                    <h3>100% Opacity</h3>
+                    <div class="opacity-box opacity-100">
+                        opacity: 1
+                    </div>
+                </div>
+
+                <div class="opacity-card">
+                    <h3>75% Opacity</h3>
+                    <div class="opacity-box opacity-75">
+                        opacity: 0.75
+                    </div>
+                </div>
+
+                <div class="opacity-card">
+                    <h3>50% Opacity</h3>
+                    <div class="opacity-box opacity-50">
+                        opacity: 0.5
+                    </div>
+                </div>
+
+                <div class="opacity-card">
+                    <h3>25% Opacity</h3>
+                    <div class="opacity-box opacity-25">
+                        opacity: 0.25
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Transparency -->
+        <section class="content-card">
+            <h2>Transparency Using RGBA</h2>
+
+            <div class="transparency-area">
+                <div class="transparent-box">
+                    This box uses a transparent background
+                    with <strong>rgba(37, 99, 235, 0.5)</strong>.
+                </div>
+            </div>
+        </section>
+
+        <!-- RGBA Demonstration -->
+        <section class="content-card">
+            <h2>Different Levels of Transparency</h2>
+
+            <div class="rgba-grid">
+
+                <div class="rgba-box rgba-100">
+                    100%<br>
+                    rgba(..., 1)
+                </div>
+
+                <div class="rgba-box rgba-75">
+                    75%<br>
+                    rgba(..., 0.75)
+                </div>
+
+                <div class="rgba-box rgba-50">
+                    50%<br>
+                    rgba(..., 0.5)
+                </div>
+
+                <div class="rgba-box rgba-25">
+                    25%<br>
+                    rgba(..., 0.25)
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Image Opacity -->
+        <section class="content-card">
+            <h2>Image Opacity</h2>
+
+            <div class="image-opacity">
+
+                <div class="image-box image-normal">
+                    <img
+                        src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=600&q=80"
+                        alt="Computer workspace">
+                    <strong>Normal Image</strong>
+                    <p>opacity: 1</p>
+                </div>
+
+                <div class="image-box image-transparent">
+                    <img
+                        src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=600&q=80"
+                        alt="Transparent computer workspace">
+                    <strong>Transparent Image</strong>
+                    <p>opacity: 0.45</p>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Navigation -->
+        <div class="buttons">
+            <a href="css-33.html" class="btn secondary">
+                ← Previous Practical
+            </a>
+
+            <a href="index.html" class="btn">
+                CSS Programs
+            </a>
+
+            <a href="../index.html" class="btn">
+                Dashboard
+            </a>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>
+            <strong>CSS Practical 34</strong> | Web Practicals
+        </p>
+        <p>Demonstrating opacity and transparency using CSS</p>
+    </footer>
+
+</body>
+</html>

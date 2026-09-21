@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Store JavaScript Object in localStorage</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: #f1f5f9;
+            color: #334155;
+            line-height: 1.6;
+        }
+
+        header {
+            background: #0f172a;
+            padding: 18px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: white;
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        nav a {
+            color: #cbd5e1;
+            text-decoration: none;
+            margin-left: 25px;
+            font-size: 15px;
+        }
+
+        nav a:hover {
+            color: white;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #1e3a8a, #2563eb);
+            color: white;
+            text-align: center;
+            padding: 65px 20px;
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 7px 16px;
+            border-radius: 20px;
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+
+        .hero h1 {
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+
+        .hero p {
+            font-size: 17px;
+            opacity: 0.9;
+        }
+
+        main {
+            width: 90%;
+            max-width: 1050px;
+            margin: 40px auto;
+        }
+
+        .objective {
+            background: white;
+            padding: 22px;
+            border-left: 5px solid #2563eb;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
+            margin-bottom: 25px;
+        }
+
+        .objective h2 {
+            color: #1e3a8a;
+            margin-bottom: 8px;
+        }
+
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(15, 23, 42, 0.08);
+            margin-bottom: 25px;
+        }
+
+        .card h2 {
+            color: #1e3a8a;
+            margin-bottom: 25px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e2e8f0;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 7px;
+        }
+
+        input {
+            width: 100%;
+            padding: 11px 13px;
+            border: 1px solid #cbd5e1;
+            border-radius: 7px;
+            font-size: 15px;
+            outline: none;
+        }
+
+        input:focus {
+            border-color: #2563eb;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+
+        .btn {
+            border: none;
+            background: #2563eb;
+            color: white;
+            padding: 11px 20px;
+            border-radius: 7px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .btn:hover {
+            background: #1d4ed8;
+        }
+
+        .btn.secondary {
+            background: #475569;
+        }
+
+        .btn.secondary:hover {
+            background: #334155;
+        }
+
+        .btn.danger {
+            background: #dc2626;
+        }
+
+        .btn.danger:hover {
+            background: #b91c1c;
+        }
+
+        .data-display {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+
+        .data-row {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+            padding: 10px 0;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .data-row:last-child {
+            border-bottom: none;
+        }
+
+        .data-label {
+            font-weight: 600;
+            color: #1e3a8a;
+        }
+
+        .data-value {
+            color: #475569;
+            text-align: right;
+            word-break: break-word;
+        }
+
+        .message {
+            min-height: 25px;
+            margin-top: 15px;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .success {
+            color: #15803d;
+        }
+
+        .warning {
+            color: #b45309;
+        }
+
+        footer {
+            background: #0f172a;
+            color: #cbd5e1;
+            text-align: center;
+            padding: 22px;
+            margin-top: 50px;
+        }
+
+        @media (max-width: 750px) {
+            header {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            nav a {
+                margin: 0 8px;
+            }
+
+            .hero h1 {
+                font-size: 28px;
+            }
+
+            .card {
+                padding: 22px;
+            }
+
+            .data-row {
+                flex-direction: column;
+                gap: 3px;
+            }
+
+            .data-value {
+                text-align: left;
+            }
+        }
+
+        @media (max-width: 550px) {
+            main {
+                width: 94%;
+            }
+
+            .hero {
+                padding: 50px 15px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="logo">Web Storage Practical</div>
+
+        <nav>
+            <a href="../../index.html">Home</a>
+<a href="../index.html">JavaScript Programs</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <span class="badge">Practical 08</span>
+        <h1>Store a JavaScript Object in localStorage</h1>
+        <p>Store and retrieve object data using browser storage</p>
+    </section>
+
+    <main>
+
+        <section class="objective">
+            <h2>Objective</h2>
+            <p>
+                To store a JavaScript object in
+                <strong>localStorage</strong> using JSON and retrieve
+                the stored object.
+            </p>
+        </section>
+
+        <section class="card">
+            <h2>Student Object</h2>
+
+            <div class="form-group">
+                <label for="name">Student Name</label>
+                <input type="text" id="name" placeholder="Enter student name">
+            </div>
+
+            <div class="form-group">
+                <label for="age">Age</label>
+                <input type="number" id="age" placeholder="Enter age">
+            </div>
+
+            <div class="form-group">
+                <label for="course">Course</label>
+                <input type="text" id="course" placeholder="Enter course">
+            </div>
+
+            <div class="buttons">
+                <button class="btn" onclick="saveObject()">
+                    Save Object
+                </button>
+
+                <button class="btn secondary" onclick="loadObject()">
+                    Retrieve Object
+                </button>
+
+                <button class="btn danger" onclick="clearObject()">
+                    Clear Object
+                </button>
+            </div>
+
+            <p class="message" id="message"></p>
+        </section>
+
+        <section class="card">
+            <h2>Stored Object</h2>
+
+            <div class="data-display">
+                <div class="data-row">
+                    <span class="data-label">Name</span>
+                    <span class="data-value" id="displayName">-</span>
+                </div>
+
+                <div class="data-row">
+                    <span class="data-label">Age</span>
+                    <span class="data-value" id="displayAge">-</span>
+                </div>
+
+                <div class="data-row">
+                    <span class="data-label">Course</span>
+                    <span class="data-value" id="displayCourse">-</span>
+                </div>
+            </div>
+        </section>
+
+        <div class="buttons">
+            <button class="btn secondary"
+                onclick="window.location.href='07-array-localstorage.html'">
+                Previous
+            </button>
+
+            <button class="btn"
+                onclick="window.location.href='../index.html'">
+                Home
+            </button>
+
+            <button class="btn"
+                onclick="window.location.href='09-student-record-localstorage.html'">
+                Next
+            </button>
+        </div>
+
+    </main>
+
+    <footer>
+        Web Storage Practicals &copy; 2026
+    </footer>
+
+    <script>
+        function saveObject() {
+            const name = document.getElementById("name").value.trim();
+            const age = document.getElementById("age").value.trim();
+            const course = document.getElementById("course").value.trim();
+            const message = document.getElementById("message");
+
+            if (name === "" || age === "" || course === "") {
+                message.textContent = "Please fill in all fields.";
+                message.className = "message warning";
+                return;
+            }
+
+            const student = {
+                name: name,
+                age: Number(age),
+                course: course
+            };
+
+            localStorage.setItem(
+                "studentObject",
+                JSON.stringify(student)
+            );
+
+            message.textContent = "Student object saved successfully.";
+            message.className = "message success";
+
+            loadObject();
+        }
+
+        function loadObject() {
+            const storedData = localStorage.getItem("studentObject");
+
+            if (storedData) {
+                const student = JSON.parse(storedData);
+
+                document.getElementById("name").value = student.name;
+                document.getElementById("age").value = student.age;
+                document.getElementById("course").value = student.course;
+
+                document.getElementById("displayName").textContent =
+                    student.name;
+
+                document.getElementById("displayAge").textContent =
+                    student.age;
+
+                document.getElementById("displayCourse").textContent =
+                    student.course;
+            } else {
+                document.getElementById("displayName").textContent = "-";
+                document.getElementById("displayAge").textContent = "-";
+                document.getElementById("displayCourse").textContent = "-";
+            }
+        }
+
+        function clearObject() {
+            localStorage.removeItem("studentObject");
+
+            document.getElementById("name").value = "";
+            document.getElementById("age").value = "";
+            document.getElementById("course").value = "";
+
+            document.getElementById("displayName").textContent = "-";
+            document.getElementById("displayAge").textContent = "-";
+            document.getElementById("displayCourse").textContent = "-";
+
+            const message = document.getElementById("message");
+            message.textContent = "Student object cleared successfully.";
+            message.className = "message success";
+        }
+
+        loadObject();
+    </script>
+
+</body>
+</html>

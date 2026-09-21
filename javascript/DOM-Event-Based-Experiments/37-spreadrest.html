@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Spread and Rest Operators | JavaScript Practical 37</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: #f1f5f9;
+            color: #334155;
+            line-height: 1.6;
+        }
+
+        header {
+            background: #0f172a;
+            color: white;
+            padding: 18px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            font-size: 22px;
+            font-weight: 700;
+        }
+
+        nav {
+            display: flex;
+            gap: 22px;
+        }
+
+        nav a {
+            color: #cbd5e1;
+            text-decoration: none;
+            font-size: 15px;
+        }
+
+        nav a:hover {
+            color: white;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #1e3a8a, #2563eb);
+            color: white;
+            text-align: center;
+            padding: 65px 20px;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 7px 14px;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.18);
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        .hero h1 {
+            margin: 0;
+            font-size: 38px;
+        }
+
+        .hero p {
+            margin: 10px 0 0;
+            font-size: 17px;
+            color: #dbeafe;
+        }
+
+        main {
+            width: 90%;
+            max-width: 1050px;
+            margin: 40px auto;
+        }
+
+        .card {
+            background: white;
+            padding: 28px;
+            margin-bottom: 25px;
+            border-radius: 12px;
+            box-shadow: 0 5px 18px rgba(15, 23, 42, 0.08);
+        }
+
+        .objective {
+            border-left: 5px solid #2563eb;
+        }
+
+        .card h2 {
+            margin-top: 0;
+            color: #1e3a8a;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 10px;
+        }
+
+        .demo-box {
+            max-width: 750px;
+            margin: auto;
+        }
+
+        .demo-item {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 16px;
+            margin-bottom: 15px;
+        }
+
+        .demo-item strong {
+            display: block;
+            color: #1e3a8a;
+            margin-bottom: 5px;
+        }
+
+        .output {
+            margin-top: 20px;
+            padding: 18px;
+            background: #eff6ff;
+            border: 1px dashed #93c5fd;
+            border-radius: 8px;
+            color: #1e3a8a;
+            font-weight: 600;
+        }
+
+        .output p {
+            margin: 7px 0;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 11px 20px;
+            border-radius: 7px;
+            background: #2563eb;
+            color: white;
+            text-decoration: none;
+            font-size: 15px;
+        }
+
+        .btn:hover {
+            background: #1d4ed8;
+        }
+
+        .secondary {
+            background: #475569;
+        }
+
+        .secondary:hover {
+            background: #334155;
+        }
+
+        footer {
+            background: #0f172a;
+            color: #94a3b8;
+            text-align: center;
+            padding: 22px;
+            margin-top: 50px;
+        }
+
+        @media (max-width: 650px) {
+            header {
+                justify-content: center;
+                gap: 12px;
+            }
+
+            nav {
+                gap: 15px;
+            }
+
+            .hero h1 {
+                font-size: 30px;
+            }
+
+            .card {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+
+    <div class="logo">JavaScript Practical</div>
+
+    <nav>
+        <a href="../../index.html">Home</a>
+<a href="../index.html">JavaScript Programs</a>
+    </nav>
+
+</header>
+
+
+<section class="hero">
+
+    <div class="badge">JavaScript Practical 37</div>
+
+    <h1>Spread and Rest Operators</h1>
+
+    <p>Demonstrate spread and rest operators using JavaScript</p>
+
+</section>
+
+
+<main>
+
+    <section class="card objective">
+
+        <h2>Objective</h2>
+
+        <p>
+            Demonstrate spread and rest operators.
+        </p>
+
+    </section>
+
+
+    <section class="card">
+
+        <h2>Spread and Rest Demonstration</h2>
+
+        <div class="demo-box">
+
+            <div class="demo-item">
+                <strong>Original Array</strong>
+                <span id="originalArray"></span>
+            </div>
+
+            <div class="demo-item">
+                <strong>Spread Operator</strong>
+                <span id="spreadOutput"></span>
+            </div>
+
+            <div class="demo-item">
+                <strong>Combined Array Using Spread</strong>
+                <span id="combinedArray"></span>
+            </div>
+
+            <div class="demo-item">
+                <strong>Rest Operator</strong>
+                <span id="restOutput"></span>
+            </div>
+
+            <div class="output" id="result">
+                Spread and rest operators demonstrated successfully.
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <div class="buttons">
+
+        <a href="es6features.html" class="btn">
+            ← Previous Practical
+        </a>
+
+        <a href="index.html" class="btn secondary">
+            JavaScript Programs
+        </a>
+
+        <a href="../index.html" class="btn">
+            Dashboard
+        </a>
+
+    </div>
+
+</main>
+
+
+<footer>
+
+    <p>JavaScript Practical Assignment</p>
+
+</footer>
+
+
+<script>
+
+    function demonstrateOperators() {
+
+        const firstArray = [10, 20, 30];
+
+        const secondArray = [40, 50, 60];
+
+
+        const copiedArray = [...firstArray];
+
+        const combinedArray = [...firstArray, ...secondArray];
+
+
+        function calculateSum(...numbers) {
+
+            let sum = 0;
+
+            for (let number of numbers) {
+                sum += number;
+            }
+
+            return sum;
+        }
+
+
+        document.getElementById("originalArray").textContent =
+            firstArray.join(", ");
+
+
+        document.getElementById("spreadOutput").textContent =
+            copiedArray.join(", ");
+
+
+        document.getElementById("combinedArray").textContent =
+            combinedArray.join(", ");
+
+
+        document.getElementById("restOutput").textContent =
+            "Sum of values = " +
+            calculateSum(10, 20, 30, 40, 50);
+
+
+        document.getElementById("result").textContent =
+            "Spread copies and combines array elements, while rest collects multiple arguments into an array.";
+
+    }
+
+
+    demonstrateOperators();
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BMI Calculator | JavaScript Mini Project</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: #f1f5f9;
+            color: #334155;
+            line-height: 1.6;
+        }
+
+        header {
+            background: #0f172a;
+            padding: 18px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: white;
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        nav a {
+            color: #cbd5e1;
+            text-decoration: none;
+            margin-left: 25px;
+            font-size: 15px;
+        }
+
+        nav a:hover {
+            color: white;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #1e3a8a, #2563eb);
+            color: white;
+            text-align: center;
+            padding: 65px 20px;
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 7px 16px;
+            border-radius: 20px;
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+
+        .hero h1 {
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+
+        .hero p {
+            font-size: 17px;
+            opacity: 0.9;
+        }
+
+        main {
+            width: 90%;
+            max-width: 1050px;
+            margin: 40px auto;
+        }
+
+        .objective {
+            background: white;
+            padding: 22px;
+            border-left: 5px solid #2563eb;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
+            margin-bottom: 25px;
+        }
+
+        .objective h2 {
+            color: #1e3a8a;
+            margin-bottom: 8px;
+        }
+
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(15, 23, 42, 0.08);
+            margin-bottom: 25px;
+        }
+
+        .card h2 {
+            color: #1e3a8a;
+            margin-bottom: 25px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e2e8f0;
+        }
+
+        .calculator {
+            max-width: 600px;
+            margin: auto;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 7px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #cbd5e1;
+            border-radius: 7px;
+            font-family: inherit;
+            font-size: 15px;
+            outline: none;
+        }
+
+        .form-group input:focus {
+            border-color: #2563eb;
+        }
+
+        .unit {
+            color: #64748b;
+            font-size: 13px;
+            margin-top: 4px;
+            display: block;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 25px;
+        }
+
+        .btn {
+            border: none;
+            background: #2563eb;
+            color: white;
+            padding: 11px 20px;
+            border-radius: 7px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .btn:hover {
+            background: #1d4ed8;
+        }
+
+        .btn.secondary {
+            background: #475569;
+        }
+
+        .btn.secondary:hover {
+            background: #334155;
+        }
+
+        .result {
+            display: none;
+            margin-top: 30px;
+            padding: 25px;
+            background: #eff6ff;
+            border: 1px solid #bfdbfe;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .result h3 {
+            color: #1e3a8a;
+            margin-bottom: 10px;
+        }
+
+        .bmi-value {
+            font-size: 42px;
+            font-weight: bold;
+            color: #2563eb;
+            margin: 10px 0;
+        }
+
+        .result-message {
+            color: #475569;
+            margin-top: 10px;
+        }
+
+        .message {
+            text-align: center;
+            min-height: 25px;
+            margin-top: 15px;
+            font-size: 14px;
+        }
+
+        .features {
+            padding-left: 20px;
+        }
+
+        .features li {
+            margin-bottom: 8px;
+        }
+
+        .info-box {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 18px;
+            margin-top: 20px;
+        }
+
+        .info-box h3 {
+            color: #1e3a8a;
+            margin-bottom: 8px;
+        }
+
+        .navigation {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+
+        .navigation a {
+            text-decoration: none;
+            color: white;
+            background: #2563eb;
+            padding: 11px 20px;
+            border-radius: 7px;
+            font-weight: 600;
+        }
+
+        .navigation a:hover {
+            background: #1d4ed8;
+        }
+
+        footer {
+            background: #0f172a;
+            color: #cbd5e1;
+            text-align: center;
+            padding: 22px;
+            margin-top: 50px;
+        }
+
+        @media (max-width: 750px) {
+            header {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            nav a {
+                margin: 0 8px;
+            }
+
+            .hero h1 {
+                font-size: 28px;
+            }
+
+            .card {
+                padding: 22px;
+            }
+        }
+
+        @media (max-width: 550px) {
+            main {
+                width: 94%;
+            }
+
+            .hero {
+                padding: 50px 15px;
+            }
+
+            .bmi-value {
+                font-size: 36px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="logo">JavaScript Mini Project</div>
+
+        <nav>
+            <a href="../../index.html">Home</a>
+<a href="../index.html">JavaScript Programs</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <span class="badge">Mini Projects — Project 15</span>
+        <h1>BMI Calculator</h1>
+        <p>Calculate Body Mass Index using JavaScript</p>
+    </section>
+
+    <main>
+
+        <section class="objective">
+            <h2>Objective</h2>
+            <p>
+                Create a BMI calculator that accepts height and weight,
+                performs the BMI calculation using JavaScript, and
+                displays the calculated BMI value.
+            </p>
+        </section>
+
+        <section class="card">
+            <h2>BMI Calculator</h2>
+
+            <div class="calculator">
+
+                <form id="bmiForm">
+
+                    <div class="form-group">
+                        <label for="weight">
+                            Weight
+                        </label>
+
+                        <input
+                            type="number"
+                            id="weight"
+                            min="1"
+                            max="500"
+                            step="0.1"
+                            placeholder="Enter weight"
+                            required
+                        >
+
+                        <span class="unit">
+                            Enter weight in kilograms (kg)
+                        </span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="height">
+                            Height
+                        </label>
+
+                        <input
+                            type="number"
+                            id="height"
+                            min="50"
+                            max="250"
+                            step="0.1"
+                            placeholder="Enter height"
+                            required
+                        >
+
+                        <span class="unit">
+                            Enter height in centimetres (cm)
+                        </span>
+                    </div>
+
+                    <div class="buttons">
+
+                        <button
+                            type="submit"
+                            class="btn"
+                        >
+                            Calculate BMI
+                        </button>
+
+                        <button
+                            type="button"
+                            class="btn secondary"
+                            onclick="resetCalculator()"
+                        >
+                            Reset
+                        </button>
+
+                    </div>
+
+                </form>
+
+                <p class="message" id="message"></p>
+
+                <div class="result" id="result">
+
+                    <h3>Your BMI</h3>
+
+                    <div
+                        class="bmi-value"
+                        id="bmiValue"
+                    >
+                        0.00
+                    </div>
+
+                    <p class="result-message" id="resultMessage">
+                        BMI calculation completed.
+                    </p>
+
+                </div>
+
+            </div>
+        </section>
+
+        <section class="card">
+            <h2>How the Calculation Works</h2>
+
+            <div class="info-box">
+                <h3>BMI Formula</h3>
+
+                <p>
+                    BMI is calculated by dividing weight in kilograms
+                    by height in metres squared.
+                </p>
+
+                <p style="margin-top: 10px;">
+                    The program first converts the entered height from
+                    centimetres to metres and then performs the calculation.
+                </p>
+            </div>
+        </section>
+
+        <section class="card">
+            <h2>Features</h2>
+
+            <ul class="features">
+                <li>Accepts weight in kilograms.</li>
+                <li>Accepts height in centimetres.</li>
+                <li>Converts height into metres.</li>
+                <li>Calculates BMI using JavaScript.</li>
+                <li>Displays the BMI value to two decimal places.</li>
+                <li>Validates user input.</li>
+                <li>Provides a reset button.</li>
+                <li>Responsive interface for different screen sizes.</li>
+            </ul>
+        </section>
+
+        <section class="card">
+            <h2>Important Note</h2>
+
+            <p>
+                BMI is a screening measurement, not a diagnosis. BMI
+                interpretation for children and teenagers is different
+                from adult interpretation and depends on factors such
+                as age and sex. This educational project therefore
+                displays the calculated BMI value without assigning
+                adult weight categories.
+            </p>
+        </section>
+
+        <div class="navigation">
+            <a href="14-random-password-generator.html">Previous</a>
+            <a href="../index.html">Home</a>
+            <a href="16-currency-converter-api.html">Next</a>
+        </div>
+
+    </main>
+
+    <footer>
+        <p>JavaScript Mini Projects &copy; 2026</p>
+    </footer>
+
+    <script>
+        const bmiForm = document.getElementById("bmiForm");
+        const weightInput = document.getElementById("weight");
+        const heightInput = document.getElementById("height");
+        const bmiValue = document.getElementById("bmiValue");
+        const result = document.getElementById("result");
+        const resultMessage = document.getElementById("resultMessage");
+        const message = document.getElementById("message");
+
+        bmiForm.addEventListener("submit", function(event) {
+
+            event.preventDefault();
+
+            const weight = parseFloat(weightInput.value);
+            const heightCm = parseFloat(heightInput.value);
+
+            if (
+                isNaN(weight) ||
+                isNaN(heightCm) ||
+                weight <= 0 ||
+                heightCm <= 0
+            ) {
+                showMessage(
+                    "Please enter valid height and weight values.",
+                    "#dc2626"
+                );
+                result.style.display = "none";
+                return;
+            }
+
+            if (heightCm < 50 || heightCm > 250) {
+                showMessage(
+                    "Please enter a height between 50 cm and 250 cm.",
+                    "#dc2626"
+                );
+                result.style.display = "none";
+                return;
+            }
+
+            if (weight < 1 || weight > 500) {
+                showMessage(
+                    "Please enter a weight between 1 kg and 500 kg.",
+                    "#dc2626"
+                );
+                result.style.display = "none";
+                return;
+            }
+
+            const heightMetres = heightCm / 100;
+
+            const bmi =
+                weight / (heightMetres * heightMetres);
+
+            bmiValue.textContent = bmi.toFixed(2);
+
+            resultMessage.textContent =
+                "BMI value calculated successfully.";
+
+            result.style.display = "block";
+
+            showMessage(
+                "BMI calculation completed.",
+                "#16a34a"
+            );
+        });
+
+        function resetCalculator() {
+
+            bmiForm.reset();
+
+            result.style.display = "none";
+
+            bmiValue.textContent = "0.00";
+
+            resultMessage.textContent =
+                "BMI calculation completed.";
+
+            showMessage(
+                "Calculator has been reset.",
+                "#475569"
+            );
+        }
+
+        function showMessage(text, color) {
+            message.textContent = text;
+            message.style.color = color;
+        }
+    </script>
+
+</body>
+</html>

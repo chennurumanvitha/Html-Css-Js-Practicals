@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM Manipulation - Search Table</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: #f1f5f9;
+            color: #334155;
+            line-height: 1.6;
+        }
+
+        header {
+            background: #0f172a;
+            padding: 18px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: white;
+            font-size: 22px;
+            font-weight: 700;
+        }
+
+        nav a {
+            color: #cbd5e1;
+            text-decoration: none;
+            margin-left: 25px;
+            font-size: 15px;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #1e3a8a, #2563eb);
+            color: white;
+            text-align: center;
+            padding: 65px 20px;
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 7px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        .hero h1 {
+            font-size: 34px;
+            margin-bottom: 8px;
+        }
+
+        main {
+            width: 90%;
+            max-width: 1050px;
+            margin: 40px auto;
+        }
+
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 28px;
+            margin-bottom: 25px;
+            box-shadow: 0 5px 18px rgba(15, 23, 42, 0.08);
+        }
+
+        .objective {
+            border-left: 5px solid #2563eb;
+        }
+
+        .objective h2,
+        .card h2 {
+            color: #1e3a8a;
+            margin-bottom: 15px;
+        }
+
+        .card h2 {
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 8px;
+        }
+
+        .demo {
+            background: #eff6ff;
+            border: 2px dashed #93c5fd;
+            border-radius: 10px;
+            padding: 22px;
+            margin-top: 20px;
+        }
+
+        .search-box {
+            margin-bottom: 20px;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 12px 14px;
+            border: 1px solid #cbd5e1;
+            border-radius: 7px;
+            font-size: 15px;
+            outline: none;
+        }
+
+        .search-box input:focus {
+            border-color: #2563eb;
+        }
+
+        .table-container {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            min-width: 600px;
+        }
+
+        th,
+        td {
+            padding: 12px;
+            border: 1px solid #cbd5e1;
+            text-align: center;
+        }
+
+        th {
+            background: #1e3a8a;
+            color: white;
+        }
+
+        tbody tr:nth-child(even) {
+            background: #f8fafc;
+        }
+
+        tbody tr:hover {
+            background: #dbeafe;
+        }
+
+        .no-result {
+            text-align: center;
+            color: #64748b;
+            padding: 15px;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin: 35px 0;
+        }
+
+        .btn-link {
+            display: inline-block;
+            background: #2563eb;
+            color: white;
+            padding: 11px 20px;
+            border-radius: 7px;
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        .btn-link.secondary {
+            background: #475569;
+        }
+
+        footer {
+            background: #0f172a;
+            color: #cbd5e1;
+            text-align: center;
+            padding: 22px;
+            margin-top: 50px;
+            font-size: 14px;
+        }
+
+        @media (max-width: 750px) {
+            header {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            nav a {
+                margin: 0 8px;
+            }
+
+            .hero h1 {
+                font-size: 30px;
+            }
+        }
+
+        @media (max-width: 650px) {
+            .card {
+                padding: 20px;
+            }
+
+            .hero {
+                padding: 50px 15px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="logo">JavaScript Practical</div>
+
+        <nav>
+            <a href="../../index.html">Home</a>
+<a href="../index.html">JavaScript Programs</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="badge">DOM Manipulation - Practical 10</div>
+        <h1>Search and Filter Table Records</h1>
+        <p>Filter table records dynamically using JavaScript</p>
+    </section>
+
+    <main>
+
+        <section class="card objective">
+            <h2>Objective</h2>
+            <p>
+                To create a program that searches and filters HTML table
+                records dynamically using JavaScript.
+            </p>
+        </section>
+
+        <section class="card">
+            <h2>Program Demonstration</h2>
+
+            <div class="demo">
+
+                <div class="search-box">
+                    <input
+                        type="text"
+                        id="searchInput"
+                        placeholder="Search by name, roll number or course..."
+                        onkeyup="filterTable()"
+                    >
+                </div>
+
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Roll No.</th>
+                                <th>Student Name</th>
+                                <th>Course</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="studentTable">
+
+                            <tr>
+                                <td>101</td>
+                                <td>Arun</td>
+                                <td>Computer Science</td>
+                            </tr>
+
+                            <tr>
+                                <td>102</td>
+                                <td>Priya</td>
+                                <td>Information Technology</td>
+                            </tr>
+
+                            <tr>
+                                <td>103</td>
+                                <td>Rahul</td>
+                                <td>Electronics</td>
+                            </tr>
+
+                            <tr>
+                                <td>104</td>
+                                <td>Divya</td>
+                                <td>Computer Applications</td>
+                            </tr>
+
+                            <tr>
+                                <td>105</td>
+                                <td>Karthik</td>
+                                <td>Mechanical Engineering</td>
+                            </tr>
+
+                            <tr>
+                                <td>106</td>
+                                <td>Ananya</td>
+                                <td>Information Technology</td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </section>
+
+        <div class="buttons">
+            <a href="dom-add-delete-row.html" class="btn-link">
+                ← Previous Practical
+            </a>
+
+            <a href="index.html" class="btn-link secondary">
+                JavaScript Programs
+            </a>
+
+            <a href="dom-sort-table.html" class="btn-link">
+                Next Practical →
+            </a>
+        </div>
+
+    </main>
+
+    <footer>
+        <p>JavaScript Practical Assignment</p>
+    </footer>
+
+    <script>
+        function filterTable() {
+            const input = document.getElementById("searchInput");
+            const filter = input.value.toLowerCase();
+
+            const table = document.getElementById("studentTable");
+            const rows = table.getElementsByTagName("tr");
+
+            let visibleRows = 0;
+
+            for (let i = 0; i < rows.length; i++) {
+                const rowText = rows[i].textContent.toLowerCase();
+
+                if (rowText.includes(filter)) {
+                    rows[i].style.display = "";
+                    visibleRows++;
+                } else {
+                    rows[i].style.display = "none";
+                }
+            }
+
+            const oldMessage = document.getElementById("noResult");
+
+            if (oldMessage) {
+                oldMessage.remove();
+            }
+
+            if (visibleRows === 0) {
+                const row = document.createElement("tr");
+                row.id = "noResult";
+
+                const cell = document.createElement("td");
+                cell.colSpan = 3;
+                cell.className = "no-result";
+                cell.textContent = "No matching records found.";
+
+                row.appendChild(cell);
+                table.appendChild(row);
+            }
+        }
+    </script>
+
+</body>
+</html>

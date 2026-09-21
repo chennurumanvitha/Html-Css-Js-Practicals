@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Practice 04 - Signup Form</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: #f1f5f9;
+            color: #334155;
+            line-height: 1.6;
+        }
+
+        header {
+            background: #0f172a;
+            padding: 18px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: white;
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        nav a {
+            color: #cbd5e1;
+            text-decoration: none;
+            margin-left: 25px;
+            font-size: 15px;
+        }
+
+        nav a:hover {
+            color: white;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #1e3a8a, #2563eb);
+            color: white;
+            text-align: center;
+            padding: 65px 20px;
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 7px 16px;
+            border-radius: 20px;
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+
+        .hero h1 {
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+
+        .hero p {
+            font-size: 17px;
+            opacity: 0.9;
+        }
+
+        main {
+            width: 90%;
+            max-width: 1050px;
+            margin: 40px auto;
+        }
+
+        .objective {
+            background: white;
+            padding: 22px;
+            border-left: 5px solid #2563eb;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
+            margin-bottom: 25px;
+        }
+
+        .objective h2 {
+            color: #1e3a8a;
+            margin-bottom: 8px;
+        }
+
+        .card {
+            background: white;
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(15, 23, 42, 0.08);
+        }
+
+        .card h2 {
+            color: #1e3a8a;
+            margin-bottom: 25px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e2e8f0;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 7px;
+        }
+
+        input {
+            width: 100%;
+            padding: 11px 13px;
+            border: 1px solid #cbd5e1;
+            border-radius: 7px;
+            font-size: 15px;
+            font-family: inherit;
+            outline: none;
+            transition: 0.2s;
+        }
+
+        input:focus {
+            border-color: #2563eb;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        .error {
+            color: #dc2626;
+            font-size: 13px;
+            margin-top: 5px;
+            min-height: 18px;
+        }
+
+        .invalid {
+            border-color: #dc2626;
+            background: #fff7f7;
+        }
+
+        .valid {
+            border-color: #16a34a;
+        }
+
+        .success-message {
+            display: none;
+            background: #ecfdf5;
+            color: #166534;
+            border: 1px solid #86efac;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .signup-btn {
+            width: 100%;
+            border: none;
+            background: #2563eb;
+            color: white;
+            padding: 13px 20px;
+            border-radius: 7px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .signup-btn:hover {
+            background: #1d4ed8;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+
+        .btn-link {
+            text-decoration: none;
+            background: #2563eb;
+            color: white;
+            padding: 11px 20px;
+            border-radius: 7px;
+            font-weight: 600;
+        }
+
+        .btn-link:hover {
+            background: #1d4ed8;
+        }
+
+        .btn-link.secondary {
+            background: #475569;
+        }
+
+        .btn-link.secondary:hover {
+            background: #334155;
+        }
+
+        footer {
+            background: #0f172a;
+            color: #cbd5e1;
+            text-align: center;
+            padding: 22px;
+            margin-top: 50px;
+        }
+
+        @media (max-width: 750px) {
+            header {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            nav a {
+                margin: 0 8px;
+            }
+
+            .hero h1 {
+                font-size: 28px;
+            }
+
+            .card {
+                padding: 22px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="logo">JavaScript Practical</div>
+
+        <nav>
+            <a href="../../index.html">Home</a>
+<a href="../index.html">JavaScript Programs</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="badge">Practice 04</div>
+        <h1>Signup Form</h1>
+        <p>Password and Confirm Password Validation</p>
+    </section>
+
+    <main>
+
+        <section class="objective">
+            <h2>Objective</h2>
+            <p>
+                To create a signup form with password confirmation and
+                validate that both password fields contain matching values.
+            </p>
+        </section>
+
+        <section class="card">
+
+            <h2>Create Account</h2>
+
+            <div id="successMessage"
+                 class="success-message"
+                 aria-live="polite">
+                Signup successful!
+            </div>
+
+            <form id="signupForm" novalidate>
+
+                <div class="form-group">
+                    <label for="name">Full Name</label>
+
+                    <input
+                        type="text"
+                        id="name"
+                        placeholder="Enter your name"
+                    >
+
+                    <div id="nameError" class="error"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+
+                    <input
+                        type="text"
+                        id="email"
+                        placeholder="Enter your email"
+                    >
+
+                    <div id="emailError" class="error"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="username">Username</label>
+
+                    <input
+                        type="text"
+                        id="username"
+                        placeholder="Enter username"
+                        autocomplete="off"
+                    >
+
+                    <div id="usernameError" class="error"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password</label>
+
+                    <input
+                        type="password"
+                        id="password"
+                        placeholder="Enter a test password"
+                        autocomplete="off"
+                    >
+
+                    <div id="passwordError" class="error"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="confirmPassword">
+                        Confirm Password
+                    </label>
+
+                    <input
+                        type="password"
+                        id="confirmPassword"
+                        placeholder="Re-enter the test password"
+                        autocomplete="off"
+                    >
+
+                    <div id="confirmPasswordError" class="error"></div>
+                </div>
+
+                <button type="submit" class="signup-btn">
+                    Sign Up
+                </button>
+
+            </form>
+
+        </section>
+
+        <div class="buttons">
+
+            <a href="03-password-strength-checker.html"
+               class="btn-link">
+                ← Previous Practical
+            </a>
+
+            <a href="index.html"
+               class="btn-link secondary">
+                Forms &amp; Validation
+            </a>
+
+            <a href="05-name-validation.html"
+               class="btn-link">
+                Next Practical →
+            </a>
+
+        </div>
+
+    </main>
+
+    <footer>
+        <p>JavaScript Practical &copy; 2026</p>
+    </footer>
+
+
+    <script>
+        const signupForm = document.getElementById("signupForm");
+
+        const nameInput = document.getElementById("name");
+        const emailInput = document.getElementById("email");
+        const usernameInput = document.getElementById("username");
+        const passwordInput = document.getElementById("password");
+        const confirmPasswordInput =
+            document.getElementById("confirmPassword");
+
+        const successMessage =
+            document.getElementById("successMessage");
+
+
+        function setError(input, errorElement, message) {
+            input.classList.remove("valid");
+            input.classList.add("invalid");
+            errorElement.textContent = message;
+        }
+
+
+        function setValid(input, errorElement) {
+            input.classList.remove("invalid");
+            input.classList.add("valid");
+            errorElement.textContent = "";
+        }
+
+
+        function validateName() {
+
+            const value = nameInput.value.trim();
+            const error = document.getElementById("nameError");
+
+            if (value === "") {
+                setError(
+                    nameInput,
+                    error,
+                    "Full name is required."
+                );
+                return false;
+            }
+
+            if (!/^[A-Za-z ]+$/.test(value)) {
+                setError(
+                    nameInput,
+                    error,
+                    "Name must contain alphabets and spaces only."
+                );
+                return false;
+            }
+
+            setValid(nameInput, error);
+            return true;
+        }
+
+
+        function validateEmail() {
+
+            const value = emailInput.value.trim();
+            const error = document.getElementById("emailError");
+
+            const emailPattern =
+                /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+            if (value === "") {
+                setError(
+                    emailInput,
+                    error,
+                    "Email address is required."
+                );
+                return false;
+            }
+
+            if (!emailPattern.test(value)) {
+                setError(
+                    emailInput,
+                    error,
+                    "Enter a valid email address."
+                );
+                return false;
+            }
+
+            setValid(emailInput, error);
+            return true;
+        }
+
+
+        function validateUsername() {
+
+            const value = usernameInput.value.trim();
+            const error = document.getElementById("usernameError");
+
+            if (value === "") {
+                setError(
+                    usernameInput,
+                    error,
+                    "Username is required."
+                );
+                return false;
+            }
+
+            if (value.length < 3) {
+                setError(
+                    usernameInput,
+                    error,
+                    "Username must contain at least 3 characters."
+                );
+                return false;
+            }
+
+            if (!/^[A-Za-z0-9_]+$/.test(value)) {
+                setError(
+                    usernameInput,
+                    error,
+                    "Username can contain letters, numbers and underscore only."
+                );
+                return false;
+            }
+
+            setValid(usernameInput, error);
+            return true;
+        }
+
+
+        function validatePassword() {
+
+            const value = passwordInput.value;
+            const error = document.getElementById("passwordError");
+
+            if (value === "") {
+                setError(
+                    passwordInput,
+                    error,
+                    "Password is required."
+                );
+                return false;
+            }
+
+            if (value.length < 8) {
+                setError(
+                    passwordInput,
+                    error,
+                    "Password must contain at least 8 characters."
+                );
+                return false;
+            }
+
+            setValid(passwordInput, error);
+            return true;
+        }
+
+
+        function validateConfirmPassword() {
+
+            const value = confirmPasswordInput.value;
+            const password = passwordInput.value;
+
+            const error =
+                document.getElementById("confirmPasswordError");
+
+            if (value === "") {
+                setError(
+                    confirmPasswordInput,
+                    error,
+                    "Please confirm your password."
+                );
+                return false;
+            }
+
+            if (value !== password) {
+                setError(
+                    confirmPasswordInput,
+                    error,
+                    "Passwords do not match."
+                );
+                return false;
+            }
+
+            setValid(confirmPasswordInput, error);
+            return true;
+        }
+
+
+        nameInput.addEventListener("input", validateName);
+
+        emailInput.addEventListener("input", validateEmail);
+
+        usernameInput.addEventListener(
+            "input",
+            validateUsername
+        );
+
+        passwordInput.addEventListener(
+            "input",
+            function() {
+                validatePassword();
+
+                if (confirmPasswordInput.value !== "") {
+                    validateConfirmPassword();
+                }
+            }
+        );
+
+        confirmPasswordInput.addEventListener(
+            "input",
+            validateConfirmPassword
+        );
+
+
+        signupForm.addEventListener(
+            "submit",
+            function(event) {
+
+                event.preventDefault();
+
+                successMessage.style.display = "none";
+
+                const valid =
+                    validateName() &&
+                    validateEmail() &&
+                    validateUsername() &&
+                    validatePassword() &&
+                    validateConfirmPassword();
+
+                if (valid) {
+
+                    successMessage.textContent =
+                        "Signup successful! Passwords match and all fields are valid.";
+
+                    successMessage.style.display = "block";
+
+                    signupForm.reset();
+
+                    document
+                        .querySelectorAll("input")
+                        .forEach(function(input) {
+                            input.classList.remove("valid");
+                        });
+                }
+            }
+        );
+    </script>
+
+</body>
+</html>

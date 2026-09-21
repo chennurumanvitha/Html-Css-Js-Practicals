@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Card | CSS Practical 23</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: #f1f5f9;
+            color: #334155;
+        }
+
+        /* Header */
+        header {
+            background: #0f172a;
+            color: white;
+            padding: 18px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header .logo {
+            font-size: 22px;
+            font-weight: 700;
+        }
+
+        header nav a {
+            color: #cbd5e1;
+            text-decoration: none;
+            margin-left: 25px;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+
+        header nav a:hover {
+            color: white;
+        }
+
+        /* Hero */
+        .hero {
+            background: linear-gradient(135deg, #1e3a8a, #2563eb);
+            color: white;
+            text-align: center;
+            padding: 65px 20px;
+        }
+
+        .hero .badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .hero h1 {
+            font-size: 38px;
+            margin-bottom: 10px;
+        }
+
+        .hero p {
+            font-size: 17px;
+            color: #dbeafe;
+        }
+
+        /* Main */
+        main {
+            width: 90%;
+            max-width: 1050px;
+            margin: 40px auto;
+        }
+
+        /* Objective */
+        .objective {
+            background: white;
+            border-left: 5px solid #2563eb;
+            border-radius: 12px;
+            padding: 22px 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
+        }
+
+        .objective h2 {
+            color: #1e3a8a;
+            margin-bottom: 8px;
+        }
+
+        /* Content Card */
+        .content-card {
+            background: white;
+            border-radius: 12px;
+            padding: 35px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
+        }
+
+        .content-card h2 {
+            color: #1e3a8a;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #dbeafe;
+        }
+
+        /* Product Area */
+        .product-area {
+            background: #f8fafc;
+            border-left: 4px solid #2563eb;
+            border-radius: 10px;
+            padding: 35px;
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        /* Product Card */
+        .product-card {
+            width: 340px;
+            background: white;
+            border-radius: 14px;
+            overflow: hidden;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 8px 20px rgba(15, 23, 42, 0.12);
+            transition: 0.3s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(15, 23, 42, 0.18);
+        }
+
+        /* Product Image */
+        .product-image {
+            width: 100%;
+            height: 230px;
+            overflow: hidden;
+            background: #e2e8f0;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: 0.4s;
+        }
+
+        .product-card:hover .product-image img {
+            transform: scale(1.05);
+        }
+
+        /* Product Details */
+        .product-details {
+            padding: 25px;
+        }
+
+        .product-category {
+            color: #2563eb;
+            font-size: 13px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+
+        .product-details h3 {
+            color: #1e3a8a;
+            font-size: 23px;
+            margin-bottom: 10px;
+        }
+
+        .product-description {
+            color: #64748b;
+            line-height: 1.6;
+            font-size: 14px;
+            margin-bottom: 18px;
+        }
+
+        /* Product Features */
+        .features {
+            list-style: none;
+            margin-bottom: 20px;
+        }
+
+        .features li {
+            padding: 6px 0;
+            color: #475569;
+            font-size: 14px;
+        }
+
+        .features li::before {
+            content: "✓";
+            color: #2563eb;
+            font-weight: 700;
+            margin-right: 8px;
+        }
+
+        /* Price */
+        .product-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .price {
+            color: #1e3a8a;
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        .buy-btn {
+            background: #2563eb;
+            color: white;
+            text-decoration: none;
+            padding: 11px 18px;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .buy-btn:hover {
+            background: #1e3a8a;
+            transform: translateY(-2px);
+        }
+
+        /* Navigation Buttons */
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-block;
+            background: #2563eb;
+            color: white;
+            text-decoration: none;
+            padding: 12px 22px;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background: #1e3a8a;
+            transform: translateY(-2px);
+        }
+
+        .secondary {
+            background: #64748b;
+        }
+
+        .secondary:hover {
+            background: #475569;
+        }
+
+        /* Footer */
+        footer {
+            background: #0f172a;
+            color: #cbd5e1;
+            text-align: center;
+            padding: 25px;
+            margin-top: 40px;
+        }
+
+        footer strong {
+            color: white;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 750px) {
+            header {
+                flex-direction: column;
+                gap: 12px;
+                text-align: center;
+                padding: 20px;
+            }
+
+            header nav a {
+                margin: 0 8px;
+            }
+
+            .hero h1 {
+                font-size: 30px;
+            }
+
+            main {
+                width: 92%;
+            }
+
+            .content-card {
+                padding: 25px 20px;
+            }
+
+            .product-area {
+                padding: 20px;
+            }
+
+            .product-card {
+                width: 100%;
+                max-width: 340px;
+            }
+
+            .product-bottom {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .price {
+                text-align: center;
+            }
+
+            .buy-btn {
+                text-align: center;
+            }
+
+            .buttons {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="logo">Web Practicals</div>
+
+        <nav>
+            <a href="../index.html">Home</a>
+            <a href="index.html">CSS Programs</a>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <span class="badge">CSS PRACTICAL 23</span>
+        <h1>Product Card</h1>
+        <p>A laptop product card designed using HTML and CSS</p>
+    </section>
+
+    <main>
+
+        <!-- Objective -->
+        <section class="objective">
+            <h2>Objective</h2>
+            <p>
+                To create a stylish product card layout using CSS
+                with an image, product details, features, price, and button.
+            </p>
+        </section>
+
+        <!-- Product Card -->
+        <section class="content-card">
+            <h2>Laptop Product Card</h2>
+
+            <div class="product-area">
+
+                <div class="product-card">
+
+                    <!-- Laptop Image -->
+                    <div class="product-image">
+                        <img
+                            src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853?auto=format&fit=crop&w=800&q=80"
+                            alt="Laptop"
+                        >
+                    </div>
+
+                    <!-- Product Details -->
+                    <div class="product-details">
+
+                        <div class="product-category">
+                            Laptop
+                        </div>
+
+                        <h3>Professional Laptop</h3>
+
+                        <p class="product-description">
+                            A modern laptop suitable for programming,
+                            web development, data science, and everyday work.
+                        </p>
+
+                        <ul class="features">
+                            <li>15.6-inch Full HD Display</li>
+                            <li>Intel Core i5 Processor</li>
+                            <li>16 GB RAM</li>
+                            <li>512 GB SSD Storage</li>
+                        </ul>
+
+                        <div class="product-bottom">
+                            <div class="price">₹59,999</div>
+
+                            <a href="#" class="buy-btn">
+                                View Product
+                            </a>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Navigation -->
+        <div class="buttons">
+
+            <a href="css-22.html" class="btn secondary">
+                Previous Practical
+            </a>
+
+            <a href="index.html" class="btn">
+                CSS Programs
+            </a>
+
+            <a href="../index.html" class="btn">
+                Dashboard
+            </a>
+
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>
+            <strong>CSS Practical 23</strong> |
+            Product Card Layout using HTML and CSS
+        </p>
+    </footer>
+
+</body>
+</html>

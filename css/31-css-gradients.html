@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Gradients | Practical 31</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: #f1f5f9;
+            color: #334155;
+            line-height: 1.6;
+        }
+
+        header {
+            background: #0f172a;
+            color: white;
+            padding: 18px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        nav a {
+            color: #cbd5e1;
+            text-decoration: none;
+            margin-left: 25px;
+            font-weight: 500;
+        }
+
+        nav a:hover {
+            color: white;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #1e3a8a, #2563eb);
+            color: white;
+            text-align: center;
+            padding: 65px 20px;
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 7px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+        }
+
+        .hero h1 {
+            font-size: 42px;
+            margin-bottom: 10px;
+        }
+
+        .hero p {
+            font-size: 17px;
+            color: #dbeafe;
+        }
+
+        main {
+            width: 90%;
+            max-width: 1050px;
+            margin: 40px auto;
+        }
+
+        .objective,
+        .content-card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(15, 23, 42, 0.08);
+        }
+
+        .objective {
+            border-left: 5px solid #2563eb;
+            padding: 22px 25px;
+            margin-bottom: 25px;
+        }
+
+        .objective h2 {
+            color: #1e3a8a;
+            margin-bottom: 8px;
+        }
+
+        .content-card {
+            padding: 35px;
+            margin-bottom: 25px;
+        }
+
+        .content-card h2 {
+            color: #1e3a8a;
+            border-bottom: 2px solid #dbeafe;
+            padding-bottom: 10px;
+            margin-bottom: 25px;
+        }
+
+        .gradient-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .gradient-card {
+            border-radius: 10px;
+            padding: 25px;
+            min-height: 220px;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .gradient-card h3 {
+            font-size: 22px;
+            margin-bottom: 5px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .gradient-card p {
+            color: #e2e8f0;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Linear Gradients */
+        .linear-one {
+            background: linear-gradient(to right, #1e3a8a, #2563eb);
+        }
+
+        .linear-two {
+            background: linear-gradient(
+                135deg,
+                #2563eb,
+                #7c3aed,
+                #db2777
+            );
+        }
+
+        .linear-three {
+            background: linear-gradient(
+                to bottom,
+                #0f172a,
+                #2563eb
+            );
+        }
+
+        /* Radial Gradients */
+        .radial-one {
+            background: radial-gradient(
+                circle,
+                #60a5fa,
+                #2563eb,
+                #1e3a8a
+            );
+        }
+
+        .radial-two {
+            background: radial-gradient(
+                circle at top left,
+                #93c5fd,
+                #2563eb,
+                #0f172a
+            );
+        }
+
+        .radial-three {
+            background: radial-gradient(
+                ellipse,
+                #38bdf8,
+                #2563eb,
+                #1e3a8a
+            );
+        }
+
+        .large-demo {
+            min-height: 280px;
+            border-radius: 10px;
+            background: linear-gradient(
+                135deg,
+                #1e3a8a,
+                #2563eb,
+                #7c3aed
+            );
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+        }
+
+        .large-demo-content h3 {
+            font-size: 30px;
+            margin-bottom: 8px;
+        }
+
+        .large-demo-content p {
+            color: #dbeafe;
+        }
+
+        .buttons {
+            text-align: center;
+            margin: 35px 0;
+        }
+
+        .btn {
+            display: inline-block;
+            background: #2563eb;
+            color: white;
+            text-decoration: none;
+            padding: 11px 22px;
+            border-radius: 7px;
+            margin: 5px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background: #1e3a8a;
+            transform: translateY(-2px);
+        }
+
+        .secondary {
+            background: #475569;
+        }
+
+        .secondary:hover {
+            background: #334155;
+        }
+
+        footer {
+            background: #0f172a;
+            color: #cbd5e1;
+            text-align: center;
+            padding: 25px;
+            margin-top: 40px;
+        }
+
+        footer strong {
+            color: white;
+        }
+
+        @media (max-width: 750px) {
+            header {
+                flex-direction: column;
+                gap: 12px;
+                text-align: center;
+            }
+
+            nav a {
+                margin: 0 8px;
+            }
+
+            .hero h1 {
+                font-size: 32px;
+            }
+
+            .gradient-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .content-card {
+                padding: 25px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="logo">Web Practicals</div>
+
+        <nav>
+            <a href="../index.html">Home</a>
+            <a href="index.html">CSS Programs</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="badge">CSS PRACTICAL 31</div>
+        <h1>CSS Gradients</h1>
+        <p>Demonstrating linear and radial gradients using CSS</p>
+    </section>
+
+    <main>
+
+        <section class="objective">
+            <h2>Objective</h2>
+            <p>
+                To create a webpage demonstrating linear gradients and radial
+                gradients using CSS.
+            </p>
+        </section>
+
+        <section class="content-card">
+            <h2>Linear Gradients</h2>
+
+            <div class="gradient-grid">
+
+                <div class="gradient-card linear-one">
+                    <h3>Horizontal Linear Gradient</h3>
+                    <p>
+                        Gradient moves from left to right.
+                    </p>
+                </div>
+
+                <div class="gradient-card linear-two">
+                    <h3>Diagonal Linear Gradient</h3>
+                    <p>
+                        Gradient moves diagonally through multiple colors.
+                    </p>
+                </div>
+
+                <div class="gradient-card linear-three">
+                    <h3>Vertical Linear Gradient</h3>
+                    <p>
+                        Gradient moves from top to bottom.
+                    </p>
+                </div>
+
+            </div>
+        </section>
+
+        <section class="content-card">
+            <h2>Radial Gradients</h2>
+
+            <div class="gradient-grid">
+
+                <div class="gradient-card radial-one">
+                    <h3>Circle Radial Gradient</h3>
+                    <p>
+                        Colors spread outward from the center in a circular shape.
+                    </p>
+                </div>
+
+                <div class="gradient-card radial-two">
+                    <h3>Positioned Radial Gradient</h3>
+                    <p>
+                        The gradient starts from the top-left position.
+                    </p>
+                </div>
+
+                <div class="gradient-card radial-three">
+                    <h3>Ellipse Radial Gradient</h3>
+                    <p>
+                        Colors spread outward using an elliptical shape.
+                    </p>
+                </div>
+
+            </div>
+        </section>
+
+        <section class="content-card">
+            <h2>Gradient Demonstration</h2>
+
+            <div class="large-demo">
+                <div class="large-demo-content">
+                    <h3>Beautiful CSS Gradient</h3>
+                    <p>
+                        Linear gradients can combine multiple colors
+                        to create attractive backgrounds.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <div class="buttons">
+            <a href="css-30.html" class="btn">← Previous Practical</a>
+            <a href="index.html" class="btn secondary">CSS Programs</a>
+            <a href="../index.html" class="btn secondary">Dashboard</a>
+        </div>
+
+    </main>
+
+    <footer>
+        <p>
+            <strong>Web Practicals</strong> | CSS Practical 31
+        </p>
+        <p>
+            Designed for learning and practical demonstration of CSS gradients.
+        </p>
+    </footer>
+
+</body>
+</html>

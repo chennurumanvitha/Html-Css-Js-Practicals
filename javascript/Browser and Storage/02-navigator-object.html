@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Navigator Object - JavaScript Practical</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Segoe UI", Arial, sans-serif;
+      background: #f1f5f9;
+      color: #334155;
+      line-height: 1.6;
+    }
+
+    header {
+      background: #0f172a;
+      padding: 18px 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      color: white;
+      font-size: 22px;
+      font-weight: bold;
+    }
+
+    nav a {
+      color: #cbd5e1;
+      text-decoration: none;
+      margin-left: 25px;
+      font-size: 15px;
+    }
+
+    nav a:hover {
+      color: white;
+    }
+
+    .hero {
+      background: linear-gradient(135deg, #1e3a8a, #2563eb);
+      color: white;
+      text-align: center;
+      padding: 65px 20px;
+    }
+
+    .badge {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.15);
+      padding: 7px 16px;
+      border-radius: 20px;
+      margin-bottom: 15px;
+      font-size: 14px;
+    }
+
+    .hero h1 {
+      font-size: 36px;
+      margin-bottom: 10px;
+    }
+
+    .hero p {
+      font-size: 17px;
+      opacity: 0.9;
+    }
+
+    main {
+      width: 90%;
+      max-width: 1050px;
+      margin: 40px auto;
+    }
+
+    .objective {
+      background: white;
+      padding: 22px;
+      border-left: 5px solid #2563eb;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
+      margin-bottom: 25px;
+    }
+
+    .objective h2 {
+      color: #1e3a8a;
+      margin-bottom: 8px;
+    }
+
+    .card {
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(15, 23, 42, 0.08);
+      margin-bottom: 25px;
+    }
+
+    .card h2 {
+      color: #1e3a8a;
+      margin-bottom: 25px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #e2e8f0;
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+    }
+
+    .info-box {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 9px;
+      padding: 18px;
+    }
+
+    .info-box h3 {
+      color: #1e3a8a;
+      font-size: 16px;
+      margin-bottom: 8px;
+    }
+
+    .info-box p {
+      color: #475569;
+      word-break: break-word;
+    }
+
+    .value {
+      color: #2563eb;
+      font-weight: 600;
+    }
+
+    .status {
+      margin-top: 25px;
+      padding: 16px;
+      border-radius: 8px;
+      background: #ecfdf5;
+      border: 1px solid #86efac;
+      color: #166534;
+      text-align: center;
+      font-weight: 600;
+    }
+
+    .buttons {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      flex-wrap: wrap;
+      margin-top: 30px;
+    }
+
+    .btn {
+      border: none;
+      background: #2563eb;
+      color: white;
+      padding: 11px 20px;
+      border-radius: 7px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      transition: 0.2s;
+    }
+
+    .btn:hover {
+      background: #1d4ed8;
+    }
+
+    .btn.secondary {
+      background: #475569;
+    }
+
+    .btn.secondary:hover {
+      background: #334155;
+    }
+
+    footer {
+      background: #0f172a;
+      color: #cbd5e1;
+      text-align: center;
+      padding: 22px;
+      margin-top: 50px;
+    }
+
+    @media (max-width: 750px) {
+      header {
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      nav a {
+        margin: 0 8px;
+      }
+
+      .hero h1 {
+        font-size: 28px;
+      }
+
+      .card {
+        padding: 22px;
+      }
+
+      .info-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 550px) {
+      main {
+        width: 94%;
+      }
+
+      .hero {
+        padding: 50px 15px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <div class="logo">JavaScript Practical</div>
+
+    <nav>
+      <a href="../../index.html">Home</a>
+<a href="../index.html">JavaScript Programs</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <span class="badge">Browser &amp; Storage — Practice 2</span>
+    <h1>Navigator Object</h1>
+    <p>Demonstration of the JavaScript Navigator object and its properties.</p>
+  </section>
+
+  <main>
+
+    <section class="objective">
+      <h2>Objective</h2>
+      <p>
+        To demonstrate the JavaScript Navigator object and display
+        information about the user's browser environment.
+      </p>
+    </section>
+
+    <section class="card">
+
+      <h2>Navigator Object Information</h2>
+
+      <div class="info-grid">
+
+        <div class="info-box">
+          <h3>Browser Information</h3>
+          <p>
+            <span class="value" id="appName"></span>
+          </p>
+        </div>
+
+        <div class="info-box">
+          <h3>Browser Code Name</h3>
+          <p>
+            <span class="value" id="appCodeName"></span>
+          </p>
+        </div>
+
+        <div class="info-box">
+          <h3>Browser Version</h3>
+          <p>
+            <span class="value" id="appVersion"></span>
+          </p>
+        </div>
+
+        <div class="info-box">
+          <h3>User Agent</h3>
+          <p>
+            <span class="value" id="userAgent"></span>
+          </p>
+        </div>
+
+        <div class="info-box">
+          <h3>Platform</h3>
+          <p>
+            <span class="value" id="platform"></span>
+          </p>
+        </div>
+
+        <div class="info-box">
+          <h3>Language</h3>
+          <p>
+            <span class="value" id="language"></span>
+          </p>
+        </div>
+
+        <div class="info-box">
+          <h3>Cookies Enabled</h3>
+          <p>
+            <span class="value" id="cookiesEnabled"></span>
+          </p>
+        </div>
+
+        <div class="info-box">
+          <h3>Online Status</h3>
+          <p>
+            <span class="value" id="onlineStatus"></span>
+          </p>
+        </div>
+
+        <div class="info-box">
+          <h3>CPU Cores</h3>
+          <p>
+            <span class="value" id="cpuCores"></span>
+          </p>
+        </div>
+
+        <div class="info-box">
+          <h3>Device Memory</h3>
+          <p>
+            <span class="value" id="deviceMemory"></span>
+          </p>
+        </div>
+
+      </div>
+
+      <div class="status" id="statusMessage">
+        Navigator information loaded successfully.
+      </div>
+
+      <div class="buttons">
+
+        <button
+          type="button"
+          class="btn"
+          id="refreshButton"
+        >
+          Refresh Information
+        </button>
+
+        <button
+          type="button"
+          class="btn secondary"
+          id="onlineButton"
+        >
+          Check Online Status
+        </button>
+
+      </div>
+
+    </section>
+
+    <div class="buttons">
+
+      <a
+        href="01-window-object.html"
+        class="btn secondary"
+      >
+        ← Previous Practical
+      </a>
+
+      <a
+        href="../../index.html"
+        class="btn secondary"
+      >
+        Home
+      </a>
+
+      <a
+        href="03-alert-confirm-prompt.html"
+        class="btn"
+      >
+        Next Practical →
+      </a>
+
+    </div>
+
+  </main>
+
+  <footer>
+    <p>
+      &copy; 2026 JavaScript Practical —
+      Browser &amp; Storage
+    </p>
+  </footer>
+
+  <script>
+    function displayNavigatorInformation() {
+
+      const nav = window.navigator;
+
+      document.getElementById("appName").textContent =
+        nav.appName;
+
+      document.getElementById("appCodeName").textContent =
+        nav.appCodeName;
+
+      document.getElementById("appVersion").textContent =
+        nav.appVersion;
+
+      document.getElementById("userAgent").textContent =
+        nav.userAgent;
+
+      document.getElementById("platform").textContent =
+        nav.platform;
+
+      document.getElementById("language").textContent =
+        nav.language;
+
+      document.getElementById("cookiesEnabled").textContent =
+        nav.cookieEnabled ? "Enabled" : "Disabled";
+
+      document.getElementById("onlineStatus").textContent =
+        nav.onLine ? "Online" : "Offline";
+
+      document.getElementById("cpuCores").textContent =
+        nav.hardwareConcurrency || "Not available";
+
+      document.getElementById("deviceMemory").textContent =
+        nav.deviceMemory
+          ? nav.deviceMemory + " GB"
+          : "Not available";
+    }
+
+    document
+      .getElementById("refreshButton")
+      .addEventListener("click", function () {
+
+        displayNavigatorInformation();
+
+        document.getElementById(
+          "statusMessage"
+        ).textContent =
+          "Navigator information has been refreshed successfully.";
+
+      });
+
+    document
+      .getElementById("onlineButton")
+      .addEventListener("click", function () {
+
+        const status =
+          window.navigator.onLine;
+
+        document.getElementById(
+          "onlineStatus"
+        ).textContent =
+          status ? "Online" : "Offline";
+
+        document.getElementById(
+          "statusMessage"
+        ).textContent =
+          status
+            ? "The browser is currently online."
+            : "The browser is currently offline.";
+      });
+
+    window.addEventListener(
+      "online",
+      displayNavigatorInformation
+    );
+
+    window.addEventListener(
+      "offline",
+      displayNavigatorInformation
+    );
+
+    displayNavigatorInformation();
+  </script>
+
+</body>
+</html>

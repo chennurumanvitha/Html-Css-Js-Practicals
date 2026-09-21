@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Box Model | Practical 05</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: #f1f5f9;
+            color: #334155;
+        }
+
+        header {
+            background: #0f172a;
+            color: white;
+            padding: 20px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        header h2 {
+            margin: 0;
+        }
+
+        nav a {
+            color: #cbd5e1;
+            text-decoration: none;
+            margin: 0 10px;
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            color: white;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #1e3a8a, #2563eb);
+            color: white;
+            text-align: center;
+            padding: 65px 20px;
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .hero h1 {
+            font-size: 42px;
+            margin: 10px 0;
+        }
+
+        .hero p {
+            font-size: 18px;
+            max-width: 750px;
+            margin: auto;
+            line-height: 1.6;
+        }
+
+        main {
+            width: 90%;
+            max-width: 1050px;
+            margin: 40px auto;
+        }
+
+        .objective,
+        .content-card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
+        }
+
+        .objective {
+            border-left: 5px solid #2563eb;
+            padding: 22px 25px;
+            margin-bottom: 25px;
+        }
+
+        .objective h2,
+        .content-card h2 {
+            color: #1e3a8a;
+        }
+
+        .objective p {
+            line-height: 1.7;
+        }
+
+        .content-card {
+            padding: 35px;
+            margin-bottom: 25px;
+        }
+
+        .content-card h2 {
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 12px;
+            margin-top: 0;
+        }
+
+        .box-area {
+            background: #eff6ff;
+            border: 2px dashed #2563eb;
+            padding: 30px;
+            margin: 25px 0;
+            border-radius: 10px;
+        }
+
+        .box-model {
+            width: 70%;
+            margin: 35px auto;
+            border: 8px solid #2563eb;
+            padding: 30px;
+            background: #dbeafe;
+            text-align: center;
+            border-radius: 10px;
+        }
+
+        .box-model .content {
+            background: white;
+            padding: 25px;
+            border-radius: 6px;
+        }
+
+        .box-model h3 {
+            color: #1e3a8a;
+            margin-top: 0;
+        }
+
+        .box-model p {
+            line-height: 1.7;
+        }
+
+        .parts-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin-top: 25px;
+        }
+
+        .part-card {
+            background: #f8fafc;
+            border-left: 4px solid #2563eb;
+            border-radius: 10px;
+            padding: 20px;
+        }
+
+        .part-card h3 {
+            color: #1e3a8a;
+            margin-top: 0;
+        }
+
+        .part-card p {
+            line-height: 1.6;
+        }
+
+        .demo-box {
+            margin: 40px;
+            border: 5px solid #1e3a8a;
+            padding: 25px;
+            background: #dbeafe;
+            text-align: center;
+            border-radius: 8px;
+        }
+
+        .demo-box .inner-content {
+            background: white;
+            padding: 20px;
+            border-radius: 5px;
+        }
+
+        .note {
+            background: linear-gradient(135deg, #eff6ff, #dbeafe);
+            border-left: 5px solid #2563eb;
+            padding: 20px;
+            border-radius: 10px;
+            line-height: 1.7;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin: 35px 0;
+        }
+
+        .btn {
+            display: inline-block;
+            text-decoration: none;
+            background: #2563eb;
+            color: white;
+            padding: 12px 22px;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background: #1d4ed8;
+            transform: translateY(-2px);
+        }
+
+        .secondary {
+            background: #475569;
+        }
+
+        .secondary:hover {
+            background: #334155;
+        }
+
+        footer {
+            background: #0f172a;
+            color: #cbd5e1;
+            text-align: center;
+            padding: 25px;
+            margin-top: 40px;
+        }
+
+        footer strong {
+            color: white;
+        }
+
+        @media (max-width: 750px) {
+            .hero h1 {
+                font-size: 32px;
+            }
+
+            .content-card {
+                padding: 22px;
+            }
+
+            .parts-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .box-model {
+                width: 100%;
+            }
+
+            .demo-box {
+                margin: 20px 0;
+            }
+
+            header {
+                justify-content: center;
+                text-align: center;
+            }
+
+            nav {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h2>Web Practicals</h2>
+
+        <nav>
+            <a href="../index.html">Home</a>
+            <a href="index.html">CSS Programs</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <span class="badge">CSS PRACTICAL 05</span>
+
+        <h1>CSS Box Model</h1>
+
+        <p>
+            Demonstration of content, padding, border, and margin
+            using the CSS box model.
+        </p>
+    </section>
+
+    <main>
+
+        <section class="objective">
+            <h2>Objective</h2>
+
+            <p>
+                To understand and demonstrate the CSS box model using
+                margin, border, padding, and content.
+            </p>
+        </section>
+
+        <section class="content-card">
+
+            <
+
+            <h2>Box Model Demonstration</h2>
+
+            <div class="box-area">
+
+                <div class="box-model">
+
+                    <div class="content">
+
+                        <h3>Content Area</h3>
+
+                        <p>
+                            This is the content of the element.
+                            The surrounding blue area represents
+                            the padding.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="note">
+                <strong>Box Model Structure:</strong>
+                Content → Padding → Border → Margin
+            </div>
+
+        </section>
+
+        <section class="content-card">
+
+            <h2>Margin, Border and Padding Example</h2>
+
+            <div class="demo-box">
+
+                <div class="inner-content">
+
+                    <h3>CSS Box Model</h3>
+
+                    <p>
+                        This box has margin outside the border,
+                        a border around the element, and padding
+                        between the border and the content.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <div class="buttons">
+            <a href="css-04.html" class="btn secondary">
+                Previous Practical
+            </a>
+
+            <a href="index.html" class="btn">
+                CSS Programs
+            </a>
+
+            <a href="../index.html" class="btn">
+                Dashboard
+            </a>
+        </div>
+
+    </main>
+
+    <footer>
+        <strong>CSS Practical 05</strong> — CSS Box Model
+        <br>
+        Web Development Practicals
+    </footer>
+
+</body>
+</html>

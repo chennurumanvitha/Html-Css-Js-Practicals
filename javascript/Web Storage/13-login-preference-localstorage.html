@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login Preference System using localStorage</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Segoe UI", Arial, sans-serif;
+      background: #f1f5f9;
+      color: #334155;
+      line-height: 1.6;
+    }
+
+    header {
+      background: #0f172a;
+      padding: 18px 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      color: white;
+      font-size: 22px;
+      font-weight: bold;
+    }
+
+    nav a {
+      color: #cbd5e1;
+      text-decoration: none;
+      margin-left: 25px;
+      font-size: 15px;
+    }
+
+    nav a:hover {
+      color: white;
+    }
+
+    .hero {
+      background: linear-gradient(135deg, #1e3a8a, #2563eb);
+      color: white;
+      text-align: center;
+      padding: 65px 20px;
+    }
+
+    .badge {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.15);
+      padding: 7px 16px;
+      border-radius: 20px;
+      margin-bottom: 15px;
+      font-size: 14px;
+    }
+
+    .hero h1 {
+      font-size: 36px;
+      margin-bottom: 10px;
+    }
+
+    .hero p {
+      font-size: 17px;
+      opacity: 0.9;
+    }
+
+    main {
+      width: 90%;
+      max-width: 1050px;
+      margin: 40px auto;
+    }
+
+    .objective {
+      background: white;
+      padding: 22px;
+      border-left: 5px solid #2563eb;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
+      margin-bottom: 25px;
+    }
+
+    .objective h2 {
+      color: #1e3a8a;
+      margin-bottom: 8px;
+    }
+
+    .card {
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(15, 23, 42, 0.08);
+      margin-bottom: 25px;
+    }
+
+    .card h2 {
+      color: #1e3a8a;
+      margin-bottom: 25px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #e2e8f0;
+    }
+
+    .form-group {
+      margin-bottom: 18px;
+    }
+
+    label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 7px;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #cbd5e1;
+      border-radius: 7px;
+      font-size: 15px;
+      outline: none;
+    }
+
+    input:focus {
+      border-color: #2563eb;
+    }
+
+    .checkbox-group {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .checkbox-group input {
+      width: auto;
+    }
+
+    .buttons {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      flex-wrap: wrap;
+      margin-top: 30px;
+    }
+
+    .btn {
+      border: none;
+      background: #2563eb;
+      color: white;
+      padding: 11px 20px;
+      border-radius: 7px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      background: #1d4ed8;
+    }
+
+    .btn.secondary {
+      background: #475569;
+    }
+
+    .btn.secondary:hover {
+      background: #334155;
+    }
+
+    .btn.danger {
+      background: #dc2626;
+    }
+
+    .btn.danger:hover {
+      background: #b91c1c;
+    }
+
+    .status {
+      text-align: center;
+      padding: 20px;
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 10px;
+    }
+
+    .status strong {
+      color: #1e3a8a;
+    }
+
+    .message {
+      text-align: center;
+      margin-top: 15px;
+      font-weight: 600;
+      min-height: 24px;
+    }
+
+    .navigation {
+      display: flex;
+      justify-content: space-between;
+      gap: 15px;
+      margin-top: 35px;
+    }
+
+    .navigation a {
+      text-decoration: none;
+      background: #2563eb;
+      color: white;
+      padding: 11px 20px;
+      border-radius: 7px;
+      font-weight: 600;
+      font-size: 14px;
+    }
+
+    .navigation a:hover {
+      background: #1d4ed8;
+    }
+
+    footer {
+      background: #0f172a;
+      color: #cbd5e1;
+      text-align: center;
+      padding: 22px;
+      margin-top: 50px;
+    }
+
+    @media (max-width: 750px) {
+      header {
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      nav a {
+        margin: 0 8px;
+      }
+
+      .hero h1 {
+        font-size: 28px;
+      }
+
+      .card {
+        padding: 22px;
+      }
+
+      .navigation {
+        flex-direction: column;
+      }
+
+      .navigation a {
+        text-align: center;
+      }
+    }
+
+    @media (max-width: 550px) {
+      main {
+        width: 94%;
+      }
+
+      .hero {
+        padding: 50px 15px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <div class="logo">Web Storage Practical</div>
+
+    <nav>
+      <a href="../../index.html">Home</a>
+<a href="../index.html">JavaScript Programs</a>
+  </header>
+
+  <section class="hero">
+    <div class="badge">Practical 13</div>
+    <h1>Login Preference System</h1>
+    <p>Save login preferences using localStorage</p>
+  </section>
+
+  <main>
+
+    <section class="objective">
+      <h2>Objective</h2>
+      <p>
+        To create a login preference system that remembers a user's
+        login name and preference using localStorage.
+      </p>
+    </section>
+
+    <section class="card">
+      <h2>Login Preferences</h2>
+
+      <form id="loginForm">
+
+        <div class="form-group">
+          <label for="username">Username</label>
+
+          <input
+            type="text"
+            id="username"
+            placeholder="Enter demo username"
+            required
+          >
+        </div>
+
+        <div class="checkbox-group">
+          <input
+            type="checkbox"
+            id="rememberMe"
+          >
+
+          <label for="rememberMe">
+            Remember my login preference
+          </label>
+        </div>
+
+        <div class="buttons">
+          <button type="submit" class="btn">
+            Save Preference
+          </button>
+
+          <button
+            type="button"
+            class="btn secondary"
+            onclick="loadPreference()"
+          >
+            Load Preference
+          </button>
+
+          <button
+            type="button"
+            class="btn danger"
+            onclick="clearPreference()"
+          >
+            Clear Preference
+          </button>
+        </div>
+
+        <div class="message" id="message"></div>
+
+      </form>
+    </section>
+
+    <section class="card">
+      <h2>Saved Login Preference</h2>
+
+      <div class="status">
+        <p>
+          Username:
+          <strong id="savedUsername">Not saved</strong>
+        </p>
+
+        <p>
+          Remember Login:
+          <strong id="savedPreference">Not saved</strong>
+        </p>
+      </div>
+    </section>
+
+    <div class="navigation">
+      <a href="12-shopping-cart-localstorage.html">← Previous</a>
+      <a href="../index.html">Home</a>
+      <a href="14-theme-switcher-localstorage.html">Next →</a>
+    </div>
+
+  </main>
+
+  <footer>
+    Web Storage Practicals &copy; 2026
+  </footer>
+
+  <script>
+    const loginForm = document.getElementById("loginForm");
+    const username = document.getElementById("username");
+    const rememberMe = document.getElementById("rememberMe");
+
+    const savedUsername = document.getElementById("savedUsername");
+    const savedPreference = document.getElementById("savedPreference");
+    const message = document.getElementById("message");
+
+    loginForm.addEventListener("submit", function(event) {
+      event.preventDefault();
+
+      const name = username.value.trim();
+
+      if (name === "") {
+        showMessage("Please enter a username.", "error");
+        return;
+      }
+
+      if (rememberMe.checked) {
+        localStorage.setItem("loginUsername", name);
+        localStorage.setItem("rememberLogin", "true");
+
+        showMessage(
+          "Login preference saved successfully.",
+          "success"
+        );
+      } else {
+        localStorage.removeItem("loginUsername");
+        localStorage.removeItem("rememberLogin");
+
+        showMessage(
+          "Login preference was not saved.",
+          "success"
+        );
+      }
+
+      loadPreference();
+    });
+
+    function loadPreference() {
+      const storedUsername =
+        localStorage.getItem("loginUsername");
+
+      const storedPreference =
+        localStorage.getItem("rememberLogin");
+
+      if (storedUsername) {
+        savedUsername.textContent = storedUsername;
+        username.value = storedUsername;
+      } else {
+        savedUsername.textContent = "Not saved";
+      }
+
+      if (storedPreference === "true") {
+        savedPreference.textContent = "Yes";
+        rememberMe.checked = true;
+      } else {
+        savedPreference.textContent = "No";
+        rememberMe.checked = false;
+      }
+    }
+
+    function clearPreference() {
+      localStorage.removeItem("loginUsername");
+      localStorage.removeItem("rememberLogin");
+
+      username.value = "";
+      rememberMe.checked = false;
+
+      savedUsername.textContent = "Not saved";
+      savedPreference.textContent = "Not saved";
+
+      showMessage(
+        "Login preference cleared successfully.",
+        "success"
+      );
+    }
+
+    function showMessage(text, type) {
+      message.textContent = text;
+
+      if (type === "error") {
+        message.style.color = "#dc2626";
+      } else {
+        message.style.color = "#16a34a";
+      }
+
+      setTimeout(function() {
+        message.textContent = "";
+      }, 2500);
+    }
+
+    loadPreference();
+  </script>
+
+</body>
+</html>

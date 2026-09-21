@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Counter Application | JavaScript Practical 33</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: #f1f5f9;
+            color: #334155;
+            line-height: 1.6;
+        }
+
+        header {
+            background: #0f172a;
+            color: white;
+            padding: 18px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            font-size: 22px;
+            font-weight: 700;
+        }
+
+        nav {
+            display: flex;
+            gap: 22px;
+        }
+
+        nav a {
+            color: #cbd5e1;
+            text-decoration: none;
+            font-size: 15px;
+        }
+
+        nav a:hover {
+            color: white;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #1e3a8a, #2563eb);
+            color: white;
+            text-align: center;
+            padding: 65px 20px;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 7px 14px;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.18);
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        .hero h1 {
+            margin: 0;
+            font-size: 38px;
+        }
+
+        .hero p {
+            margin: 10px 0 0;
+            font-size: 17px;
+            color: #dbeafe;
+        }
+
+        main {
+            width: 90%;
+            max-width: 1050px;
+            margin: 40px auto;
+        }
+
+        .card {
+            background: white;
+            padding: 28px;
+            margin-bottom: 25px;
+            border-radius: 12px;
+            box-shadow: 0 5px 18px rgba(15, 23, 42, 0.08);
+        }
+
+        .objective {
+            border-left: 5px solid #2563eb;
+        }
+
+        .card h2 {
+            margin-top: 0;
+            color: #1e3a8a;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 10px;
+        }
+
+        .counter-box {
+            max-width: 600px;
+            margin: auto;
+            text-align: center;
+        }
+
+        .counter-display {
+            font-size: 64px;
+            font-weight: 700;
+            color: #1e3a8a;
+            margin: 25px 0;
+        }
+
+        .counter-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .counter-buttons button {
+            min-width: 130px;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 7px;
+            background: #2563eb;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .counter-buttons button:hover {
+            background: #1d4ed8;
+        }
+
+        .reset {
+            background: #475569 !important;
+        }
+
+        .reset:hover {
+            background: #334155 !important;
+        }
+
+        .output {
+            margin-top: 25px;
+            padding: 18px;
+            background: #eff6ff;
+            border: 1px dashed #93c5fd;
+            border-radius: 8px;
+            color: #1e3a8a;
+            font-weight: 600;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 11px 20px;
+            border-radius: 7px;
+            background: #2563eb;
+            color: white;
+            text-decoration: none;
+            font-size: 15px;
+        }
+
+        .btn:hover {
+            background: #1d4ed8;
+        }
+
+        .secondary {
+            background: #475569;
+        }
+
+        .secondary:hover {
+            background: #334155;
+        }
+
+        footer {
+            background: #0f172a;
+            color: #94a3b8;
+            text-align: center;
+            padding: 22px;
+            margin-top: 50px;
+        }
+
+        @media (max-width: 650px) {
+            header {
+                justify-content: center;
+                gap: 12px;
+            }
+
+            nav {
+                gap: 15px;
+            }
+
+            .hero h1 {
+                font-size: 30px;
+            }
+
+            .card {
+                padding: 20px;
+            }
+
+            .counter-display {
+                font-size: 52px;
+            }
+
+            .counter-buttons {
+                flex-direction: column;
+            }
+
+            .counter-buttons button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+
+    <div class="logo">JavaScript Practical</div>
+
+    <nav>
+       <a href="../../index.html">Home</a>
+<a href="../index.html">JavaScript Programs</a>
+    </nav>
+
+</header>
+
+
+<section class="hero">
+
+    <div class="badge">JavaScript Practical 33</div>
+
+    <h1>Counter Application</h1>
+
+    <p>Increment and decrement a number using JavaScript</p>
+
+</section>
+
+
+<main>
+
+    <section class="card objective">
+
+        <h2>Objective</h2>
+
+        <p>
+            Create a counter application with increment and decrement buttons.
+        </p>
+
+    </section>
+
+
+    <section class="card">
+
+        <h2>Counter</h2>
+
+        <div class="counter-box">
+
+            <div class="counter-display" id="counter">
+                0
+            </div>
+
+            <div class="counter-buttons">
+
+                <button onclick="decrement()">
+                    − Decrement
+                </button>
+
+                <button onclick="resetCounter()" class="reset">
+                    Reset
+                </button>
+
+                <button onclick="increment()">
+                    + Increment
+                </button>
+
+            </div>
+
+            <div class="output" id="result">
+                Current Count: 0
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <div class="buttons">
+
+        <a href="quiz.html" class="btn">
+            ← Previous Practical
+        </a>
+
+        <a href="index.html" class="btn secondary">
+            JavaScript Programs
+        </a>
+
+        <a href="../index.html" class="btn">
+            Dashboard
+        </a>
+
+    </div>
+
+</main>
+
+
+<footer>
+
+    <p>JavaScript Practical Assignment</p>
+
+</footer>
+
+
+<script>
+
+    let count = 0;
+
+
+    function updateCounter() {
+
+        document.getElementById("counter").textContent = count;
+
+        document.getElementById("result").textContent =
+            "Current Count: " + count;
+    }
+
+
+    function increment() {
+
+        count++;
+
+        updateCounter();
+    }
+
+
+    function decrement() {
+
+        count--;
+
+        updateCounter();
+    }
+
+
+    function resetCounter() {
+
+        count = 0;
+
+        updateCounter();
+    }
+
+</script>
+
+</body>
+</html>

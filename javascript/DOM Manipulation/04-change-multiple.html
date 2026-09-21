@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM Manipulation - Multiple Elements</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: #f1f5f9;
+            color: #334155;
+            line-height: 1.6;
+        }
+
+        header {
+            background: #0f172a;
+            padding: 18px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: white;
+            font-size: 22px;
+            font-weight: 700;
+        }
+
+        nav a {
+            color: #cbd5e1;
+            text-decoration: none;
+            margin-left: 25px;
+            font-size: 15px;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #1e3a8a, #2563eb);
+            color: white;
+            text-align: center;
+            padding: 65px 20px;
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 7px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        .hero h1 {
+            font-size: 34px;
+            margin-bottom: 8px;
+        }
+
+        main {
+            width: 90%;
+            max-width: 1050px;
+            margin: 40px auto;
+        }
+
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 28px;
+            margin-bottom: 25px;
+            box-shadow: 0 5px 18px rgba(15, 23, 42, 0.08);
+        }
+
+        .objective {
+            border-left: 5px solid #2563eb;
+        }
+
+        .objective h2,
+        .card h2 {
+            color: #1e3a8a;
+            margin-bottom: 15px;
+        }
+
+        .card h2 {
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 8px;
+        }
+
+        .demo {
+            background: #eff6ff;
+            border: 2px dashed #93c5fd;
+            border-radius: 10px;
+            padding: 22px;
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .box {
+            background: white;
+            border: 2px solid #cbd5e1;
+            border-radius: 8px;
+            padding: 18px;
+            margin: 12px 0;
+            transition: 0.3s;
+        }
+
+        .box h3 {
+            color: #1e3a8a;
+            margin-bottom: 5px;
+        }
+
+        .btn {
+            border: none;
+            background: #2563eb;
+            color: white;
+            padding: 11px 20px;
+            border-radius: 7px;
+            font-weight: 600;
+            cursor: pointer;
+            margin: 5px;
+        }
+
+        .btn:hover {
+            opacity: 0.9;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin: 35px 0;
+        }
+
+        .buttons a {
+            text-decoration: none;
+        }
+
+        .btn-link {
+            display: inline-block;
+            background: #2563eb;
+            color: white;
+            padding: 11px 20px;
+            border-radius: 7px;
+            font-weight: 600;
+        }
+
+        .btn-link.secondary {
+            background: #475569;
+        }
+
+        footer {
+            background: #0f172a;
+            color: #cbd5e1;
+            text-align: center;
+            padding: 22px;
+            margin-top: 50px;
+            font-size: 14px;
+        }
+
+        @media (max-width: 750px) {
+            header {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            nav a {
+                margin: 0 8px;
+            }
+
+            .hero h1 {
+                font-size: 30px;
+            }
+        }
+
+        @media (max-width: 650px) {
+            .card {
+                padding: 20px;
+            }
+
+            .hero {
+                padding: 50px 15px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="logo">JavaScript Practical</div>
+
+        <nav>
+            <a href="../../index.html">Home</a>
+<a href="../index.html">JavaScript Programs</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="badge">DOM Manipulation - Practical 4</div>
+        <h1>Change Multiple HTML Elements</h1>
+        <p>Using JavaScript DOM Manipulation</p>
+    </section>
+
+    <main>
+
+        <section class="card objective">
+            <h2>Objective</h2>
+            <p>
+                To create a program that changes multiple HTML elements
+                simultaneously using JavaScript.
+            </p>
+        </section>
+
+        <section class="card">
+            <h2>Program Demonstration</h2>
+
+            <div class="demo">
+
+                <div class="box">
+                    <h3 class="title">Element One</h3>
+                    <p class="message">
+                        This element can be changed using JavaScript.
+                    </p>
+                </div>
+
+                <div class="box">
+                    <h3 class="title">Element Two</h3>
+                    <p class="message">
+                        This element can also be changed simultaneously.
+                    </p>
+                </div>
+
+                <div class="box">
+                    <h3 class="title">Element Three</h3>
+                    <p class="message">
+                        All matching elements will be updated together.
+                    </p>
+                </div>
+
+                <button class="btn" onclick="changeElements()">
+                    Change All Elements
+                </button>
+
+                <button class="btn" onclick="resetElements()">
+                    Reset
+                </button>
+
+            </div>
+        </section>
+
+        <div class="buttons">
+            <a href="dom-style.html" class="btn-link">
+                ← Previous Practical
+            </a>
+
+            <a href="index.html" class="btn-link secondary">
+                JavaScript Programs
+            </a>
+
+            <a href="dom-background.html" class="btn-link">
+                Next Practical →
+            </a>
+        </div>
+
+    </main>
+
+    <footer>
+        <p>JavaScript Practical Assignment</p>
+    </footer>
+
+    <script>
+        function changeElements() {
+            const titles = document.querySelectorAll(".title");
+            const messages = document.querySelectorAll(".message");
+            const boxes = document.querySelectorAll(".box");
+
+            titles.forEach(function(title) {
+                title.textContent = "Element Updated";
+                title.style.color = "#2563eb";
+            });
+
+            messages.forEach(function(message) {
+                message.textContent = "This element has been changed simultaneously using JavaScript.";
+                message.style.fontWeight = "600";
+            });
+
+            boxes.forEach(function(box) {
+                box.style.backgroundColor = "#dbeafe";
+                box.style.borderColor = "#2563eb";
+            });
+        }
+
+        function resetElements() {
+            const titles = document.querySelectorAll(".title");
+            const messages = document.querySelectorAll(".message");
+            const boxes = document.querySelectorAll(".box");
+
+            titles[0].textContent = "Element One";
+            titles[1].textContent = "Element Two";
+            titles[2].textContent = "Element Three";
+
+            messages[0].textContent =
+                "This element can be changed using JavaScript.";
+
+            messages[1].textContent =
+                "This element can also be changed simultaneously.";
+
+            messages[2].textContent =
+                "All matching elements will be updated together.";
+
+            titles.forEach(function(title) {
+                title.style.color = "#1e3a8a";
+            });
+
+            messages.forEach(function(message) {
+                message.style.fontWeight = "normal";
+            });
+
+            boxes.forEach(function(box) {
+                box.style.backgroundColor = "white";
+                box.style.borderColor = "#cbd5e1";
+            });
+        }
+    </script>
+
+</body>
+</html>

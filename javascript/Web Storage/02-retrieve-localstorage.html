@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Retrieve Data from localStorage</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: #f1f5f9;
+            color: #334155;
+            line-height: 1.6;
+        }
+
+        header {
+            background: #0f172a;
+            padding: 18px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: white;
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        nav a {
+            color: #cbd5e1;
+            text-decoration: none;
+            margin-left: 25px;
+            font-size: 15px;
+        }
+
+        nav a:hover {
+            color: white;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #1e3a8a, #2563eb);
+            color: white;
+            text-align: center;
+            padding: 65px 20px;
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 7px 16px;
+            border-radius: 20px;
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+
+        .hero h1 {
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+
+        .hero p {
+            font-size: 17px;
+            opacity: 0.9;
+        }
+
+        main {
+            width: 90%;
+            max-width: 1050px;
+            margin: 40px auto;
+        }
+
+        .objective {
+            background: white;
+            padding: 22px;
+            border-left: 5px solid #2563eb;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
+            margin-bottom: 25px;
+        }
+
+        .objective h2 {
+            color: #1e3a8a;
+            margin-bottom: 8px;
+        }
+
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(15, 23, 42, 0.08);
+            margin-bottom: 25px;
+        }
+
+        .card h2 {
+            color: #1e3a8a;
+            margin-bottom: 25px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e2e8f0;
+        }
+
+        .storage-box {
+            max-width: 650px;
+            margin: auto;
+            text-align: center;
+        }
+
+        .data-display {
+            background: #eff6ff;
+            border: 1px solid #bfdbfe;
+            border-radius: 10px;
+            padding: 25px;
+            margin: 20px 0;
+        }
+
+        .data-display h3 {
+            color: #1e3a8a;
+            margin-bottom: 10px;
+        }
+
+        .stored-data {
+            font-size: 24px;
+            font-weight: bold;
+            color: #2563eb;
+            word-break: break-word;
+        }
+
+        .message {
+            min-height: 25px;
+            margin-top: 15px;
+            font-size: 14px;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 25px;
+        }
+
+        .btn {
+            border: none;
+            background: #2563eb;
+            color: white;
+            padding: 11px 20px;
+            border-radius: 7px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background: #1d4ed8;
+        }
+
+        .btn.secondary {
+            background: #475569;
+        }
+
+        .btn.secondary:hover {
+            background: #334155;
+        }
+
+        .steps {
+            display: grid;
+            gap: 12px;
+        }
+
+        .step {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            padding: 15px;
+            border-radius: 8px;
+        }
+
+        .step strong {
+            color: #1e3a8a;
+        }
+
+        .features {
+            padding-left: 20px;
+        }
+
+        .features li {
+            margin-bottom: 8px;
+        }
+
+        .navigation {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+
+        .navigation a {
+            text-decoration: none;
+            color: white;
+            background: #2563eb;
+            padding: 11px 20px;
+            border-radius: 7px;
+            font-weight: 600;
+        }
+
+        .navigation a:hover {
+            background: #1d4ed8;
+        }
+
+        footer {
+            background: #0f172a;
+            color: #cbd5e1;
+            text-align: center;
+            padding: 22px;
+            margin-top: 50px;
+        }
+
+        @media (max-width: 750px) {
+            header {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            nav a {
+                margin: 0 8px;
+            }
+
+            .hero h1 {
+                font-size: 28px;
+            }
+
+            .card {
+                padding: 22px;
+            }
+        }
+
+        @media (max-width: 550px) {
+            main {
+                width: 94%;
+            }
+
+            .hero {
+                padding: 50px 15px;
+            }
+
+            .stored-data {
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+
+        <div class="logo">
+            JavaScript Web Storage
+        </div>
+
+        <nav>
+            <a href="../../index.html">Home</a>
+<a href="../index.html">JavaScript Programs</a>
+        </nav>
+
+    </header>
+
+    <section class="hero">
+
+        <span class="badge">
+            Web Storage — Practice 2
+        </span>
+
+        <h1>
+            Retrieve Data from localStorage
+        </h1>
+
+        <p>
+            Retrieve and display previously stored browser data
+        </p>
+
+    </section>
+
+    <main>
+
+        <section class="objective">
+
+            <h2>Objective</h2>
+
+            <p>
+                Create a JavaScript program that retrieves data stored
+                in localStorage and displays the retrieved value on
+                the webpage.
+            </p>
+
+        </section>
+
+        <section class="card">
+
+            <h2>Retrieve Stored Data</h2>
+
+            <div class="storage-box">
+
+                <p>
+                    Click the button below to retrieve the username
+                    stored by Practice 1.
+                </p>
+
+                <div class="data-display">
+
+                    <h3>
+                        Retrieved Username
+                    </h3>
+
+                    <p
+                        class="stored-data"
+                        id="storedUsername"
+                    >
+                        No data retrieved
+                    </p>
+
+                </div>
+
+                <div class="buttons">
+
+                    <button
+                        type="button"
+                        class="btn"
+                        onclick="retrieveData()"
+                    >
+                        Retrieve Data
+                    </button>
+
+                    <button
+                        type="button"
+                        class="btn secondary"
+                        onclick="clearDisplay()"
+                    >
+                        Clear Display
+                    </button>
+
+                </div>
+
+                <p
+                    class="message"
+                    id="message"
+                ></p>
+
+            </div>
+
+        </section>
+
+        <section class="card">
+
+            <h2>How It Works</h2>
+
+            <div class="steps">
+
+                <div class="step">
+                    <strong>Step 1:</strong>
+                    JavaScript checks localStorage for the saved
+                    username.
+                </div>
+
+                <div class="step">
+                    <strong>Step 2:</strong>
+                    The stored value is retrieved from the browser.
+                </div>
+
+                <div class="step">
+                    <strong>Step 3:</strong>
+                    The retrieved value is displayed on the webpage.
+                </div>
+
+                <div class="step">
+                    <strong>Step 4:</strong>
+                    If no username exists, an appropriate message
+                    is displayed.
+                </div>
+
+            </div>
+
+        </section>
+
+        <section class="card">
+
+            <h2>Features</h2>
+
+            <ul class="features">
+
+                <li>
+                    Retrieve data using localStorage.
+                </li>
+
+                <li>
+                    Display stored data dynamically.
+                </li>
+
+                <li>
+                    Handle the case where no data is stored.
+                </li>
+
+                <li>
+                    Demonstrate the use of localStorage.getItem().
+                </li>
+
+                <li>
+                    Clear the displayed result.
+                </li>
+
+                <li>
+                    Responsive interface.
+                </li>
+
+            </ul>
+
+        </section>
+
+        <div class="navigation">
+
+            <a href="01-store-username-localstorage.html">
+                Previous
+            </a>
+
+            <a href="../index.html">
+                Home
+            </a>
+
+            <a href="03-update-localstorage.html">
+                Next
+            </a>
+
+        </div>
+
+    </main>
+
+    <footer>
+
+        <p>
+            JavaScript Web Storage &copy; 2026
+        </p>
+
+    </footer>
+
+    <script>
+
+        const storedUsername =
+            document.getElementById("storedUsername");
+
+        const message =
+            document.getElementById("message");
+
+        function retrieveData() {
+
+            const username =
+                localStorage.getItem("username");
+
+            if (username !== null) {
+
+                storedUsername.textContent =
+                    username;
+
+                showMessage(
+                    "Data retrieved successfully.",
+                    "#16a34a"
+                );
+
+            } else {
+
+                storedUsername.textContent =
+                    "No username found";
+
+                showMessage(
+                    "No data is available in localStorage.",
+                    "#dc2626"
+                );
+            }
+        }
+
+        function clearDisplay() {
+
+            storedUsername.textContent =
+                "No data retrieved";
+
+            showMessage(
+                "Displayed data has been cleared.",
+                "#475569"
+            );
+        }
+
+        function showMessage(text, color) {
+
+            message.textContent = text;
+
+            message.style.color = color;
+        }
+
+    </script>
+
+</body>
+</html>

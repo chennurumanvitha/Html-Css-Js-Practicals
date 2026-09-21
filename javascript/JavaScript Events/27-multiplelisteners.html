@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Practical 27 - Multiple Event Listeners</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: #f1f5f9;
+            color: #334155;
+            line-height: 1.6;
+        }
+
+        header {
+            background: #0f172a;
+            padding: 18px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: white;
+            font-size: 22px;
+            font-weight: 700;
+        }
+
+        nav a {
+            color: #cbd5e1;
+            text-decoration: none;
+            margin-left: 24px;
+            font-size: 15px;
+        }
+
+        nav a:hover {
+            color: white;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #1e3a8a, #2563eb);
+            color: white;
+            text-align: center;
+            padding: 65px 20px;
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.18);
+            padding: 7px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            margin-bottom: 12px;
+        }
+
+        .hero h1 {
+            margin: 5px 0;
+            font-size: 36px;
+        }
+
+        .hero p {
+            margin: 8px 0 0;
+            color: #dbeafe;
+        }
+
+        main {
+            width: 90%;
+            max-width: 1050px;
+            margin: 40px auto;
+        }
+
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(15, 23, 42, 0.08);
+            margin-bottom: 25px;
+        }
+
+        .objective {
+            border-left: 5px solid #2563eb;
+        }
+
+        .card h2 {
+            color: #1e3a8a;
+            margin-top: 0;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e2e8f0;
+        }
+
+        .demo {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .interactive-box {
+            max-width: 650px;
+            margin: 25px auto;
+            padding: 30px;
+            background: #eff6ff;
+            border: 2px solid #93c5fd;
+            border-radius: 10px;
+        }
+
+        .interactive-box h3 {
+            color: #1e3a8a;
+            margin-top: 0;
+        }
+
+        button {
+            border: none;
+            background: #2563eb;
+            color: white;
+            padding: 13px 28px;
+            border-radius: 7px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 10px;
+        }
+
+        button:hover {
+            background: #1d4ed8;
+        }
+
+        button.secondary {
+            background: #64748b;
+        }
+
+        button.secondary:hover {
+            background: #475569;
+        }
+
+        .counter {
+            font-size: 34px;
+            font-weight: 700;
+            color: #1e3a8a;
+            margin: 15px 0;
+        }
+
+        .output {
+            margin-top: 25px;
+            padding: 20px;
+            background: #eff6ff;
+            border: 2px dashed #93c5fd;
+            border-radius: 8px;
+            text-align: center;
+            min-height: 120px;
+        }
+
+        .output strong {
+            color: #1e3a8a;
+        }
+
+        .event-log {
+            max-width: 650px;
+            margin: 20px auto 0;
+            text-align: left;
+        }
+
+        .event-log p {
+            margin: 6px 0;
+            padding: 8px 12px;
+            background: #f8fafc;
+            border-left: 3px solid #2563eb;
+            border-radius: 4px;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin: 30px 0;
+        }
+
+        .btn-link {
+            display: inline-block;
+            text-decoration: none;
+            background: #2563eb;
+            color: white;
+            padding: 11px 20px;
+            border-radius: 7px;
+        }
+
+        .btn-link:hover {
+            background: #1d4ed8;
+        }
+
+        .btn-link.secondary {
+            background: #64748b;
+        }
+
+        .btn-link.secondary:hover {
+            background: #475569;
+        }
+
+        footer {
+            background: #0f172a;
+            color: #94a3b8;
+            text-align: center;
+            padding: 22px;
+            margin-top: 50px;
+            font-size: 14px;
+        }
+
+        @media (max-width: 750px) {
+            header {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            nav a {
+                margin: 0 8px;
+            }
+
+            .hero h1 {
+                font-size: 30px;
+            }
+
+            .card {
+                padding: 22px;
+            }
+        }
+
+        @media (max-width: 550px) {
+            .hero {
+                padding: 45px 15px;
+            }
+
+            .hero h1 {
+                font-size: 26px;
+            }
+
+            button {
+                width: 100%;
+                margin: 6px 0;
+            }
+
+            .buttons {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .btn-link {
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="logo">JavaScript Practical</div>
+
+        <nav>
+           <a href="../../index.html">Home</a>
+<a href="../index.html">JavaScript Programs</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="badge">Practical 27</div>
+        <h1>Multiple Event Listeners</h1>
+        <p>Add multiple event listeners to a single element</p>
+    </section>
+
+    <main>
+
+        <section class="card objective">
+            <h2>Objective</h2>
+            <p>
+                To demonstrate how multiple event listeners can be attached
+                to a single HTML element using JavaScript.
+            </p>
+        </section>
+
+        <section class="card">
+            <h2>Interactive Demonstration</h2>
+
+            <div class="demo">
+
+                <div class="interactive-box">
+                    <h3>Single Button, Multiple Listeners</h3>
+
+                    <p>
+                        The button below has multiple click event listeners.
+                        Click it to execute all attached handlers.
+                    </p>
+
+                    <div class="counter" id="counter">
+                        0
+                    </div>
+
+                    <button id="multiButton">
+                        Click the Button
+                    </button>
+
+                    <button class="secondary" id="resetButton">
+                        Reset
+                    </button>
+                </div>
+
+                <div class="output" id="output">
+                    <strong>Event Status:</strong>
+                    <p>Click the button to execute multiple event listeners.</p>
+                </div>
+
+                <div class="event-log" id="eventLog"></div>
+
+            </div>
+        </section>
+
+        <div class="buttons">
+            <a href="26-event-listeners.html" class="btn-link">
+                ← Previous Practical
+            </a>
+
+            <a href="index.html" class="btn-link secondary">
+                Events Programs
+            </a>
+
+            <a href="28-next.html" class="btn-link">
+                Next Practical →
+            </a>
+        </div>
+
+    </main>
+
+    <footer>
+        JavaScript Practical Programs | Events
+    </footer>
+
+    <script>
+        const multiButton = document.getElementById("multiButton");
+        const resetButton = document.getElementById("resetButton");
+        const counter = document.getElementById("counter");
+        const output = document.getElementById("output");
+        const eventLog = document.getElementById("eventLog");
+
+        let clickCount = 0;
+
+        function addLog(message) {
+            const entry = document.createElement("p");
+            entry.textContent = message;
+            eventLog.prepend(entry);
+        }
+
+        // First event listener
+        multiButton.addEventListener("click", function() {
+            clickCount++;
+            counter.textContent = clickCount;
+
+            output.innerHTML = `
+                <strong>Event Status:</strong>
+                <p>First event listener executed.</p>
+            `;
+
+            addLog("Listener 1: Click counter updated.");
+        });
+
+        // Second event listener
+        multiButton.addEventListener("click", function() {
+            output.innerHTML += `
+                <p>Second event listener executed successfully.</p>
+            `;
+
+            addLog("Listener 2: Output message updated.");
+        });
+
+        // Third event listener
+        multiButton.addEventListener("click", function() {
+            addLog("Listener 3: Event log updated.");
+
+            output.innerHTML += `
+                <p><strong>Total Clicks:</strong> ${clickCount}</p>
+            `;
+        });
+
+        resetButton.addEventListener("click", function() {
+            clickCount = 0;
+            counter.textContent = "0";
+
+            output.innerHTML = `
+                <strong>Event Status:</strong>
+                <p>Demonstration has been reset.</p>
+            `;
+
+            eventLog.innerHTML = "";
+        });
+    </script>
+
+</body>
+</html>

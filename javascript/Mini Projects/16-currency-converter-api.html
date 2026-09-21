@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Currency Converter API | JavaScript Mini Project</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: #f1f5f9;
+            color: #334155;
+            line-height: 1.6;
+        }
+
+        header {
+            background: #0f172a;
+            padding: 18px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: white;
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        nav a {
+            color: #cbd5e1;
+            text-decoration: none;
+            margin-left: 25px;
+            font-size: 15px;
+        }
+
+        nav a:hover {
+            color: white;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #1e3a8a, #2563eb);
+            color: white;
+            text-align: center;
+            padding: 65px 20px;
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 7px 16px;
+            border-radius: 20px;
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+
+        .hero h1 {
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+
+        .hero p {
+            font-size: 17px;
+            opacity: 0.9;
+        }
+
+        main {
+            width: 90%;
+            max-width: 1050px;
+            margin: 40px auto;
+        }
+
+        .objective {
+            background: white;
+            padding: 22px;
+            border-left: 5px solid #2563eb;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
+            margin-bottom: 25px;
+        }
+
+        .objective h2 {
+            color: #1e3a8a;
+            margin-bottom: 8px;
+        }
+
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(15, 23, 42, 0.08);
+            margin-bottom: 25px;
+        }
+
+        .card h2 {
+            color: #1e3a8a;
+            margin-bottom: 25px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e2e8f0;
+        }
+
+        .converter {
+            max-width: 700px;
+            margin: auto;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 18px;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            font-weight: 600;
+            margin-bottom: 7px;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #cbd5e1;
+            border-radius: 7px;
+            font-family: inherit;
+            font-size: 15px;
+            background: white;
+            outline: none;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            border-color: #2563eb;
+        }
+
+        .swap-area {
+            text-align: center;
+            margin: 5px 0 20px;
+        }
+
+        .swap-btn {
+            border: none;
+            background: #e2e8f0;
+            color: #1e3a8a;
+            padding: 9px 16px;
+            border-radius: 7px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .swap-btn:hover {
+            background: #cbd5e1;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 25px;
+        }
+
+        .btn {
+            border: none;
+            background: #2563eb;
+            color: white;
+            padding: 11px 20px;
+            border-radius: 7px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .btn:hover {
+            background: #1d4ed8;
+        }
+
+        .btn.secondary {
+            background: #475569;
+        }
+
+        .btn.secondary:hover {
+            background: #334155;
+        }
+
+        .result {
+            display: none;
+            margin-top: 30px;
+            padding: 25px;
+            background: #eff6ff;
+            border: 1px solid #bfdbfe;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .result h3 {
+            color: #1e3a8a;
+            margin-bottom: 12px;
+        }
+
+        .result-value {
+            font-size: 32px;
+            font-weight: bold;
+            color: #2563eb;
+            margin: 10px 0;
+        }
+
+        .rate {
+            color: #475569;
+            font-size: 14px;
+        }
+
+        .message {
+            text-align: center;
+            min-height: 25px;
+            margin-top: 15px;
+            font-size: 14px;
+        }
+
+        .features {
+            padding-left: 20px;
+        }
+
+        .features li {
+            margin-bottom: 8px;
+        }
+
+        .info-box {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 18px;
+        }
+
+        .info-box h3 {
+            color: #1e3a8a;
+            margin-bottom: 8px;
+        }
+
+        .navigation {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+
+        .navigation a {
+            text-decoration: none;
+            color: white;
+            background: #2563eb;
+            padding: 11px 20px;
+            border-radius: 7px;
+            font-weight: 600;
+        }
+
+        .navigation a:hover {
+            background: #1d4ed8;
+        }
+
+        footer {
+            background: #0f172a;
+            color: #cbd5e1;
+            text-align: center;
+            padding: 22px;
+            margin-top: 50px;
+        }
+
+        @media (max-width: 750px) {
+            header {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            nav a {
+                margin: 0 8px;
+            }
+
+            .hero h1 {
+                font-size: 28px;
+            }
+
+            .card {
+                padding: 22px;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 550px) {
+            main {
+                width: 94%;
+            }
+
+            .hero {
+                padding: 50px 15px;
+            }
+
+            .result-value {
+                font-size: 26px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="logo">JavaScript Mini Project</div>
+
+        <nav>
+            <a href="../../index.html">Home</a>
+<a href="../index.html">JavaScript Programs</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <span class="badge">Mini Projects — Project 16</span>
+        <h1>Currency Converter</h1>
+        <p>Convert currencies using a live exchange-rate API</p>
+    </section>
+
+    <main>
+
+        <section class="objective">
+            <h2>Objective</h2>
+
+            <p>
+                Create a currency converter that retrieves exchange
+                rates from an API and converts an amount from one
+                currency into another.
+            </p>
+        </section>
+
+        <section class="card">
+            <h2>Currency Converter</h2>
+
+            <div class="converter">
+
+                <div class="form-row">
+
+                    <div class="form-group">
+                        <label for="amount">Amount</label>
+
+                        <input
+                            type="number"
+                            id="amount"
+                            min="0.01"
+                            step="0.01"
+                            value="1"
+                            placeholder="Enter amount"
+                            required
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="fromCurrency">
+                            From Currency
+                        </label>
+
+                        <select id="fromCurrency">
+                            <option value="USD">USD - US Dollar</option>
+                            <option value="INR" selected>
+                                INR - Indian Rupee
+                            </option>
+                            <option value="EUR">EUR - Euro</option>
+                            <option value="GBP">GBP - British Pound</option>
+                            <option value="JPY">JPY - Japanese Yen</option>
+                            <option value="AUD">
+                                AUD - Australian Dollar
+                            </option>
+                            <option value="CAD">
+                                CAD - Canadian Dollar
+                            </option>
+                            <option value="SGD">
+                                SGD - Singapore Dollar
+                            </option>
+                        </select>
+                    </div>
+
+                </div>
+
+                <div class="swap-area">
+                    <button
+                        type="button"
+                        class="swap-btn"
+                        onclick="swapCurrencies()"
+                    >
+                        ⇄ Swap Currencies
+                    </button>
+                </div>
+
+                <div class="form-row">
+
+                    <div class="form-group">
+                        <label for="toCurrency">
+                            To Currency
+                        </label>
+
+                        <select id="toCurrency">
+                            <option value="USD" selected>
+                                USD - US Dollar
+                            </option>
+                            <option value="INR">
+                                INR - Indian Rupee
+                            </option>
+                            <option value="EUR">EUR - Euro</option>
+                            <option value="GBP">
+                                GBP - British Pound
+                            </option>
+                            <option value="JPY">
+                                JPY - Japanese Yen
+                            </option>
+                            <option value="AUD">
+                                AUD - Australian Dollar
+                            </option>
+                            <option value="CAD">
+                                CAD - Canadian Dollar
+                            </option>
+                            <option value="SGD">
+                                SGD - Singapore Dollar
+                            </option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>API Status</label>
+
+                        <input
+                            type="text"
+                            id="apiStatus"
+                            value="Ready"
+                            readonly
+                        >
+                    </div>
+
+                </div>
+
+                <div class="buttons">
+
+                    <button
+                        type="button"
+                        class="btn"
+                        onclick="convertCurrency()"
+                    >
+                        Convert
+                    </button>
+
+                    <button
+                        type="button"
+                        class="btn secondary"
+                        onclick="resetConverter()"
+                    >
+                        Reset
+                    </button>
+
+                </div>
+
+                <p class="message" id="message"></p>
+
+                <div class="result" id="result">
+
+                    <h3>Conversion Result</h3>
+
+                    <div
+                        class="result-value"
+                        id="resultValue"
+                    >
+                        —
+                    </div>
+
+                    <p
+                        class="rate"
+                        id="exchangeRate"
+                    >
+                        —
+                    </p>
+
+                </div>
+
+            </div>
+        </section>
+
+        <section class="card">
+            <h2>API Information</h2>
+
+            <div class="info-box">
+
+                <h3>Frankfurter Exchange Rates API</h3>
+
+                <p>
+                    This project uses the Frankfurter API to request
+                    exchange-rate data. JavaScript uses fetch() to
+                    send the API request and JSON data is used to
+                    calculate the converted amount.
+                </p>
+
+            </div>
+        </section>
+
+        <section class="card">
+            <h2>Features</h2>
+
+            <ul class="features">
+                <li>Convert between different currencies.</li>
+                <li>Retrieve exchange rates from an external API.</li>
+                <li>Use the JavaScript fetch() function.</li>
+                <li>Process API responses using JSON.</li>
+                <li>Swap source and target currencies.</li>
+                <li>Validate the entered amount.</li>
+                <li>Display the exchange rate and converted amount.</li>
+                <li>Handle API and network errors.</li>
+                <li>Reset the converter.</li>
+                <li>Responsive interface for different screen sizes.</li>
+            </ul>
+        </section>
+
+        <div class="navigation">
+            <a href="15-bmi-calculator.html">Previous</a>
+            <a href="../index.html">Home</a>
+            <a href="17-interactive-portfolio.html">Next</a>
+        </div>
+
+    </main>
+
+    <footer>
+        <p>JavaScript Mini Projects &copy; 2026</p>
+    </footer>
+
+    <script>
+        const amountInput = document.getElementById("amount");
+        const fromCurrency = document.getElementById("fromCurrency");
+        const toCurrency = document.getElementById("toCurrency");
+        const apiStatus = document.getElementById("apiStatus");
+
+        const result = document.getElementById("result");
+        const resultValue = document.getElementById("resultValue");
+        const exchangeRate = document.getElementById("exchangeRate");
+        const message = document.getElementById("message");
+
+        async function convertCurrency() {
+
+            const amount = parseFloat(amountInput.value);
+            const from = fromCurrency.value;
+            const to = toCurrency.value;
+
+            if (isNaN(amount) || amount <= 0) {
+                showMessage(
+                    "Please enter a valid amount greater than zero.",
+                    "#dc2626"
+                );
+
+                result.style.display = "none";
+                return;
+            }
+
+            if (from === to) {
+                resultValue.textContent =
+                    amount.toFixed(2) + " " + to;
+
+                exchangeRate.textContent =
+                    "1 " + from + " = 1 " + to;
+
+                result.style.display = "block";
+
+                showMessage(
+                    "Both currencies are the same.",
+                    "#475569"
+                );
+
+                return;
+            }
+
+            apiStatus.value = "Loading...";
+
+            showMessage(
+                "Fetching the latest exchange rate...",
+                "#475569"
+            );
+
+            result.style.display = "none";
+
+            try {
+
+                const apiUrl =
+                    "https://api.frankfurter.app/latest?amount=1&from="
+                    + encodeURIComponent(from)
+                    + "&to="
+                    + encodeURIComponent(to);
+
+                const response = await fetch(apiUrl);
+
+                if (!response.ok) {
+                    throw new Error("API request failed.");
+                }
+
+                const data = await response.json();
+
+                if (
+                    !data.rates ||
+                    typeof data.rates[to] !== "number"
+                ) {
+                    throw new Error(
+                        "Exchange rate was not available."
+                    );
+                }
+
+                const rate = data.rates[to];
+                const convertedAmount = amount * rate;
+
+                resultValue.textContent =
+                    convertedAmount.toFixed(2) + " " + to;
+
+                exchangeRate.textContent =
+                    "1 " + from + " = "
+                    + rate.toFixed(4)
+                    + " " + to;
+
+                apiStatus.value = "Connected";
+
+                result.style.display = "block";
+
+                showMessage(
+                    "Currency conversion completed successfully.",
+                    "#16a34a"
+                );
+
+            } catch (error) {
+
+                apiStatus.value = "Error";
+
+                result.style.display = "none";
+
+                showMessage(
+                    "Unable to retrieve exchange rates. Check your internet connection and try again.",
+                    "#dc2626"
+                );
+            }
+        }
+
+        function swapCurrencies() {
+
+            const oldFrom = fromCurrency.value;
+
+            fromCurrency.value = toCurrency.value;
+            toCurrency.value = oldFrom;
+
+            result.style.display = "none";
+
+            showMessage(
+                "Currencies swapped successfully.",
+                "#475569"
+            );
+        }
+
+        function resetConverter() {
+
+            amountInput.value = 1;
+
+            fromCurrency.value = "INR";
+            toCurrency.value = "USD";
+
+            apiStatus.value = "Ready";
+
+            result.style.display = "none";
+
+            resultValue.textContent = "—";
+            exchangeRate.textContent = "—";
+
+            showMessage(
+                "Currency converter has been reset.",
+                "#475569"
+            );
+        }
+
+        function showMessage(text, color) {
+            message.textContent = text;
+            message.style.color = color;
+        }
+    </script>
+
+</body>
+</html>

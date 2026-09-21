@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Practical 19 - Objects</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: #f1f5f9;
+            color: #334155;
+            line-height: 1.6;
+        }
+
+        header {
+            background: #0f172a;
+            padding: 18px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: white;
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        nav a {
+            color: #cbd5e1;
+            text-decoration: none;
+            margin-left: 25px;
+            font-size: 15px;
+        }
+
+        nav a:hover {
+            color: white;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #1e3a8a, #2563eb);
+            color: white;
+            text-align: center;
+            padding: 65px 20px;
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.18);
+            padding: 7px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        .hero h1 {
+            font-size: 38px;
+            margin-bottom: 10px;
+        }
+
+        .hero p {
+            font-size: 17px;
+            color: #dbeafe;
+        }
+
+        main {
+            width: 90%;
+            max-width: 1050px;
+            margin: 40px auto;
+        }
+
+        .card {
+            background: white;
+            padding: 28px;
+            margin-bottom: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(15, 23, 42, 0.08);
+        }
+
+        .card h2 {
+            color: #1e3a8a;
+            margin-bottom: 18px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e2e8f0;
+        }
+
+        .objective {
+            border-left: 5px solid #2563eb;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #1e293b;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px 14px;
+            border: 1px solid #cbd5e1;
+            border-radius: 7px;
+            font-size: 16px;
+            outline: none;
+        }
+
+        input:focus {
+            border-color: #2563eb;
+        }
+
+        .btn {
+            display: inline-block;
+            background: #2563eb;
+            color: white;
+            padding: 11px 20px;
+            border-radius: 7px;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            font-size: 15px;
+            font-weight: 600;
+        }
+
+        .btn:hover {
+            background: #1d4ed8;
+        }
+
+        .output {
+            margin-top: 20px;
+            padding: 18px;
+            background: #eff6ff;
+            border: 2px dashed #93c5fd;
+            border-radius: 8px;
+            font-size: 17px;
+            font-weight: 600;
+            color: #1e3a8a;
+        }
+
+        .output p {
+            margin: 8px 0;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+
+        .secondary {
+            background: #475569;
+        }
+
+        .secondary:hover {
+            background: #334155;
+        }
+
+        footer {
+            background: #0f172a;
+            color: #cbd5e1;
+            text-align: center;
+            padding: 25px;
+            margin-top: 50px;
+            font-size: 14px;
+        }
+
+        @media (max-width: 750px) {
+            header {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            nav a {
+                margin: 0 8px;
+            }
+
+            .hero h1 {
+                font-size: 30px;
+            }
+
+            .card {
+                padding: 22px;
+            }
+
+            .buttons {
+                flex-direction: column;
+            }
+
+            .buttons .btn {
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="logo">JavaScript Programs</div>
+
+        <nav>
+            <a href="../index.html">Home</a>
+            <a href="index.html">JavaScript Programs</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="badge">JavaScript Practical 19</div>
+        <h1>Objects in JavaScript</h1>
+        <p>Demonstrate objects and access their properties</p>
+    </section>
+
+    <main>
+
+        <div class="card objective">
+            <h2>Objective</h2>
+            <p>
+                Write a JavaScript program demonstrating objects and
+                their properties.
+            </p>
+        </div>
+
+        <div class="card">
+            <h2>Program</h2>
+
+            <div class="form-group">
+                <label for="name">Enter Student Name</label>
+                <input
+                    type="text"
+                    id="name"
+                    value="Rahul"
+                    placeholder="Enter student name"
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="age">Enter Age</label>
+                <input
+                    type="number"
+                    id="age"
+                    value="18"
+                    placeholder="Enter age"
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="course">Enter Course</label>
+                <input
+                    type="text"
+                    id="course"
+                    value="Computer Science"
+                    placeholder="Enter course"
+                >
+            </div>
+
+            <button class="btn" onclick="displayObject()">
+                Display Object
+            </button>
+
+            <div class="output" id="result">
+                <p>Name = Rahul</p>
+                <p>Age = 18</p>
+                <p>Course = Computer Science</p>
+            </div>
+        </div>
+
+        <div class="buttons">
+            <a href="javascript-18.html" class="btn">← Previous Practical</a>
+            <a href="index.html" class="btn secondary">JavaScript Programs</a>
+            <a href="../index.html" class="btn">Dashboard</a>
+        </div>
+
+    </main>
+
+    <footer>
+        <p>JavaScript Practical Programs | Web Technology</p>
+    </footer>
+
+    <script>
+        function displayObject() {
+            const name = document.getElementById("name").value;
+            const age = Number(document.getElementById("age").value);
+            const course = document.getElementById("course").value;
+            const result = document.getElementById("result");
+
+            if (name.trim() === "" || course.trim() === "" || Number.isNaN(age)) {
+                result.textContent = "Please enter valid details.";
+                return;
+            }
+
+            const student = {
+                name: name,
+                age: age,
+                course: course
+            };
+
+            result.innerHTML =
+                "<p>Name = " + student.name + "</p>" +
+                "<p>Age = " + student.age + "</p>" +
+                "<p>Course = " + student.course + "</p>";
+        }
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Real-Time Form Validation</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Segoe UI", Arial, sans-serif;
+      background: #f1f5f9;
+      color: #334155;
+      line-height: 1.6;
+    }
+
+    header {
+      background: #0f172a;
+      padding: 18px 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      color: white;
+      font-size: 22px;
+      font-weight: bold;
+    }
+
+    nav a {
+      color: #cbd5e1;
+      text-decoration: none;
+      margin-left: 25px;
+      font-size: 15px;
+    }
+
+    nav a:hover {
+      color: white;
+    }
+
+    .hero {
+      background: linear-gradient(135deg, #1e3a8a, #2563eb);
+      color: white;
+      text-align: center;
+      padding: 65px 20px;
+    }
+
+    .badge {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.15);
+      padding: 7px 16px;
+      border-radius: 20px;
+      margin-bottom: 15px;
+      font-size: 14px;
+    }
+
+    .hero h1 {
+      font-size: 36px;
+      margin-bottom: 10px;
+    }
+
+    .hero p {
+      font-size: 17px;
+      opacity: 0.9;
+    }
+
+    main {
+      width: 90%;
+      max-width: 1050px;
+      margin: 40px auto;
+    }
+
+    .objective {
+      background: white;
+      padding: 22px;
+      border-left: 5px solid #2563eb;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
+      margin-bottom: 25px;
+    }
+
+    .objective h2 {
+      color: #1e3a8a;
+      margin-bottom: 8px;
+    }
+
+    .card {
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(15, 23, 42, 0.08);
+    }
+
+    .card h2 {
+      color: #1e3a8a;
+      margin-bottom: 25px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #e2e8f0;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 7px;
+    }
+
+    input,
+    select {
+      width: 100%;
+      padding: 11px 13px;
+      border: 1px solid #cbd5e1;
+      border-radius: 7px;
+      font-size: 15px;
+      font-family: inherit;
+      outline: none;
+      transition: 0.2s;
+      background: white;
+    }
+
+    input:focus,
+    select:focus {
+      border-color: #2563eb;
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+    }
+
+    .error {
+      color: #dc2626;
+      font-size: 13px;
+      margin-top: 5px;
+      min-height: 18px;
+    }
+
+    .valid {
+      border-color: #16a34a;
+      background: #f0fdf4;
+    }
+
+    .invalid {
+      border-color: #dc2626;
+      background: #fff7f7;
+    }
+
+    .success-message {
+      display: none;
+      background: #ecfdf5;
+      color: #166534;
+      border: 1px solid #86efac;
+      padding: 15px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      text-align: center;
+      font-weight: 600;
+    }
+
+    .submit-btn {
+      width: 100%;
+      border: none;
+      background: #2563eb;
+      color: white;
+      padding: 13px 20px;
+      border-radius: 7px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .submit-btn:hover {
+      background: #1d4ed8;
+    }
+
+    .buttons {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      flex-wrap: wrap;
+      margin-top: 30px;
+    }
+
+    .btn-link {
+      text-decoration: none;
+      background: #2563eb;
+      color: white;
+      padding: 11px 20px;
+      border-radius: 7px;
+      font-weight: 600;
+    }
+
+    .btn-link:hover {
+      background: #1d4ed8;
+    }
+
+    .btn-link.secondary {
+      background: #475569;
+    }
+
+    .btn-link.secondary:hover {
+      background: #334155;
+    }
+
+    footer {
+      background: #0f172a;
+      color: #cbd5e1;
+      text-align: center;
+      padding: 22px;
+      margin-top: 50px;
+    }
+
+    @media (max-width: 750px) {
+      header {
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      nav a {
+        margin: 0 8px;
+      }
+
+      .hero h1 {
+        font-size: 28px;
+      }
+
+      .card {
+        padding: 22px;
+      }
+    }
+
+    @media (max-width: 550px) {
+      main {
+        width: 94%;
+      }
+
+      .hero {
+        padding: 50px 15px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <div class="logo">JavaScript Practical</div>
+
+    <nav>
+     <a href="../../index.html">Home</a>
+<a href="../index.html">JavaScript Programs</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <span class="badge">Practice 29</span>
+    <h1>Real-Time Form Validation</h1>
+    <p>Validate form fields instantly while the user enters information.</p>
+  </section>
+
+  <main>
+
+    <section class="objective">
+      <h2>Objective</h2>
+      <p>
+        To create a real-time form validation system that checks user input
+        immediately and displays appropriate validation messages.
+      </p>
+    </section>
+
+    <section class="card">
+      <h2>Registration Form</h2>
+
+      <div class="success-message" id="successMessage">
+        All fields are valid. Form submitted successfully!
+      </div>
+
+      <form id="registrationForm" novalidate>
+
+        <div class="form-group">
+          <label for="name">Full Name</label>
+
+          <input
+            type="text"
+            id="name"
+            placeholder="Enter your full name"
+            autocomplete="off"
+          >
+
+          <div class="error" id="nameError"></div>
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email Address</label>
+
+          <input
+            type="email"
+            id="email"
+            placeholder="Enter your email address"
+            autocomplete="off"
+          >
+
+          <div class="error" id="emailError"></div>
+        </div>
+
+        <div class="form-group">
+          <label for="phone">Mobile Number</label>
+
+          <input
+            type="text"
+            id="phone"
+            maxlength="10"
+            inputmode="numeric"
+            placeholder="Enter 10-digit mobile number"
+            autocomplete="off"
+          >
+
+          <div class="error" id="phoneError"></div>
+        </div>
+
+        <div class="form-group">
+          <label for="course">Select Course</label>
+
+          <select id="course">
+            <option value="">-- Select a Course --</option>
+            <option value="BCA">BCA</option>
+            <option value="BSc Computer Science">BSc Computer Science</option>
+            <option value="BTech">BTech</option>
+            <option value="MCA">MCA</option>
+          </select>
+
+          <div class="error" id="courseError"></div>
+        </div>
+
+        <button type="submit" class="submit-btn">
+          Submit Form
+        </button>
+
+      </form>
+    </section>
+
+    <div class="buttons">
+      <a href="28-password-regex-validation.html" class="btn-link">
+        ← Previous Practical
+      </a>
+
+      <a href="index.html" class="btn-link secondary">
+        Forms &amp; Validation
+      </a>
+
+      <a href="30-input-change-focus-blur.html" class="btn-link">
+        Next Practical →
+      </a>
+    </div>
+
+  </main>
+
+  <footer>
+    <p>&copy; 2026 JavaScript Practical — Forms &amp; Validation</p>
+  </footer>
+
+  <script>
+    const form = document.getElementById("registrationForm");
+
+    const name = document.getElementById("name");
+    const email = document.getElementById("email");
+    const phone = document.getElementById("phone");
+    const course = document.getElementById("course");
+
+    const nameError = document.getElementById("nameError");
+    const emailError = document.getElementById("emailError");
+    const phoneError = document.getElementById("phoneError");
+    const courseError = document.getElementById("courseError");
+
+    const successMessage = document.getElementById("successMessage");
+
+    const nameRegex = /^[A-Za-z ]+$/;
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const phoneRegex = /^\d{10}$/;
+
+    function validateName() {
+      const value = name.value.trim();
+
+      name.classList.remove("valid", "invalid");
+      nameError.textContent = "";
+
+      if (value === "") {
+        name.classList.add("invalid");
+        nameError.textContent = "Name is required.";
+        return false;
+      }
+
+      if (!nameRegex.test(value)) {
+        name.classList.add("invalid");
+        nameError.textContent = "Name can contain only alphabets and spaces.";
+        return false;
+      }
+
+      name.classList.add("valid");
+      return true;
+    }
+
+    function validateEmail() {
+      const value = email.value.trim();
+
+      email.classList.remove("valid", "invalid");
+      emailError.textContent = "";
+
+      if (value === "") {
+        email.classList.add("invalid");
+        emailError.textContent = "Email is required.";
+        return false;
+      }
+
+      if (!emailRegex.test(value)) {
+        email.classList.add("invalid");
+        emailError.textContent = "Enter a valid email address.";
+        return false;
+      }
+
+      email.classList.add("valid");
+      return true;
+    }
+
+    function validatePhone() {
+      const value = phone.value.trim();
+
+      phone.classList.remove("valid", "invalid");
+      phoneError.textContent = "";
+
+      if (value === "") {
+        phone.classList.add("invalid");
+        phoneError.textContent = "Mobile number is required.";
+        return false;
+      }
+
+      if (!phoneRegex.test(value)) {
+        phone.classList.add("invalid");
+        phoneError.textContent = "Enter exactly 10 digits.";
+        return false;
+      }
+
+      phone.classList.add("valid");
+      return true;
+    }
+
+    function validateCourse() {
+      course.classList.remove("valid", "invalid");
+      courseError.textContent = "";
+
+      if (course.value === "") {
+        course.classList.add("invalid");
+        courseError.textContent = "Please select a course.";
+        return false;
+      }
+
+      course.classList.add("valid");
+      return true;
+    }
+
+    // Real-time validation while typing
+    name.addEventListener("input", validateName);
+    email.addEventListener("input", validateEmail);
+    phone.addEventListener("input", validatePhone);
+
+    // Real-time validation when selecting a course
+    course.addEventListener("change", validateCourse);
+
+    // Form submission validation
+    form.addEventListener("submit", function (event) {
+      event.preventDefault();
+
+      const nameValid = validateName();
+      const emailValid = validateEmail();
+      const phoneValid = validatePhone();
+      const courseValid = validateCourse();
+
+      if (!nameValid || !emailValid || !phoneValid || !courseValid) {
+        successMessage.style.display = "none";
+        return;
+      }
+
+      successMessage.style.display = "block";
+
+      form.reset();
+
+      name.classList.remove("valid", "invalid");
+      email.classList.remove("valid", "invalid");
+      phone.classList.remove("valid", "invalid");
+      course.classList.remove("valid", "invalid");
+
+      nameError.textContent = "";
+      emailError.textContent = "";
+      phoneError.textContent = "";
+      courseError.textContent = "";
+    });
+  </script>
+
+</body>
+</html>

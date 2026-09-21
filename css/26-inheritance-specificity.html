@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Inheritance and Specificity | CSS Practical 26</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: #f1f5f9;
+            color: #334155;
+            line-height: 1.6;
+        }
+
+        /* Header */
+        header {
+            background: #0f172a;
+            color: white;
+            padding: 18px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header .logo {
+            font-size: 22px;
+            font-weight: 700;
+        }
+
+        header nav a {
+            color: #cbd5e1;
+            text-decoration: none;
+            margin-left: 25px;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+
+        header nav a:hover {
+            color: white;
+        }
+
+        /* Hero */
+        .hero {
+            background: linear-gradient(135deg, #1e3a8a, #2563eb);
+            color: white;
+            text-align: center;
+            padding: 65px 20px;
+        }
+
+        .hero .badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .hero h1 {
+            font-size: 38px;
+            margin-bottom: 10px;
+        }
+
+        .hero p {
+            font-size: 17px;
+            color: #dbeafe;
+        }
+
+        /* Main */
+        main {
+            width: 90%;
+            max-width: 1050px;
+            margin: 40px auto;
+        }
+
+        /* Objective */
+        .objective {
+            background: white;
+            border-left: 5px solid #2563eb;
+            border-radius: 12px;
+            padding: 22px 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
+        }
+
+        .objective h2 {
+            color: #1e3a8a;
+            margin-bottom: 8px;
+        }
+
+        /* Content Card */
+        .content-card {
+            background: white;
+            border-radius: 12px;
+            padding: 35px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
+        }
+
+        .content-card h2 {
+            color: #1e3a8a;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #dbeafe;
+        }
+
+        /* Demo Area */
+        .demo-area {
+            background: #f8fafc;
+            border-left: 4px solid #2563eb;
+            border-radius: 10px;
+            padding: 25px;
+            margin-top: 20px;
+        }
+
+        .demo-area h3 {
+            color: #1e3a8a;
+            margin-bottom: 15px;
+        }
+
+        /* Inheritance Demo */
+        .inheritance-parent {
+            color: #1e3a8a;
+            font-size: 18px;
+            font-weight: 600;
+            background: #dbeafe;
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        .inheritance-child {
+            margin-top: 15px;
+            padding: 15px;
+            background: white;
+            border-radius: 8px;
+        }
+
+        .inheritance-child p {
+            margin-top: 8px;
+        }
+
+        .inheritance-child span {
+            font-weight: normal;
+        }
+
+        /* Specificity Demo */
+        .specificity-box {
+            margin-top: 20px;
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            border: 2px solid #cbd5e1;
+        }
+
+        .specificity-box p {
+            color: #64748b;
+            font-size: 17px;
+        }
+
+        .specificity-box .specific-text {
+            color: #2563eb;
+        }
+
+        #special-text {
+            color: #1e3a8a;
+            font-weight: 700;
+        }
+
+        /* Class vs Element */
+        .class-example {
+            color: #2563eb;
+            font-weight: 600;
+        }
+
+        /* ID Specificity */
+        #id-example {
+            color: #1e3a8a;
+            font-size: 19px;
+            font-weight: 700;
+        }
+
+        /* Inline-style explanation */
+        .inline-example {
+            background: #eff6ff;
+            border: 2px dashed #2563eb;
+            padding: 18px;
+            border-radius: 8px;
+            margin-top: 15px;
+        }
+
+        /* Navigation Buttons */
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-block;
+            background: #2563eb;
+            color: white;
+            text-decoration: none;
+            padding: 12px 22px;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background: #1e3a8a;
+            transform: translateY(-2px);
+        }
+
+        .secondary {
+            background: #64748b;
+        }
+
+        .secondary:hover {
+            background: #475569;
+        }
+
+        /* Footer */
+        footer {
+            background: #0f172a;
+            color: #cbd5e1;
+            text-align: center;
+            padding: 25px;
+            margin-top: 40px;
+        }
+
+        footer strong {
+            color: white;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 750px) {
+            header {
+                flex-direction: column;
+                gap: 12px;
+                text-align: center;
+                padding: 20px;
+            }
+
+            header nav a {
+                margin: 0 8px;
+            }
+
+            .hero h1 {
+                font-size: 30px;
+            }
+
+            main {
+                width: 92%;
+            }
+
+            .content-card {
+                padding: 25px 20px;
+            }
+
+            .demo-area {
+                padding: 20px;
+            }
+
+            .buttons {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="logo">Web Practicals</div>
+
+        <nav>
+            <a href="../index.html">Home</a>
+            <a href="index.html">CSS Programs</a>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <span class="badge">CSS PRACTICAL 26</span>
+
+        <h1>CSS Inheritance and Specificity</h1>
+
+        <p>
+            A demonstration of how CSS properties are inherited
+            and how specificity determines which style is applied.
+        </p>
+    </section>
+
+    <main>
+
+        <!-- Objective -->
+        <section class="objective">
+            <h2>Objective</h2>
+
+            <p>
+                To demonstrate CSS inheritance and specificity and
+                understand how CSS determines the final style of an element.
+            </p>
+        </section>
+
+        <!-- Inheritance -->
+        <section class="content-card">
+
+            <h2>CSS Inheritance</h2>
+
+            <div class="demo-area">
+
+                <h3>Inheritance Example</h3>
+
+                <div class="inheritance-parent">
+
+                    Parent Element
+
+                    <div class="inheritance-child">
+
+                        Child Element
+
+                        <p>
+                            This child element inherits the
+                            <strong>color</strong> and
+                            <strong>font-size</strong> from its parent.
+                        </p>
+
+                        <span>
+                            This text also inherits the parent's
+                            text color unless another style overrides it.
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- Specificity -->
+        <section class="content-card">
+
+            <h2>CSS Specificity</h2>
+
+            <div class="demo-area">
+
+                <h3>Specificity Example</h3>
+
+                <div class="specificity-box">
+
+                    <p>
+                        This paragraph uses an element selector.
+                    </p>
+
+                    <p class="specific-text">
+                        This paragraph uses a class selector,
+                        which has higher specificity than an element selector.
+                    </p>
+
+                    <p id="special-text">
+                        This paragraph uses an ID selector,
+                        which has higher specificity than a class selector.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- Selector Examples -->
+        <section class="content-card">
+
+            <h2>Selector Specificity Examples</h2>
+
+            <div class="demo-area">
+
+                <h3>Element Selector</h3>
+
+                <p>
+                    Element selectors such as
+                    <strong>p</strong> have lower specificity.
+                </p>
+
+                <h3>Class Selector</h3>
+
+                <p class="class-example">
+                    This paragraph is styled using a class selector.
+                </p>
+
+                <h3>ID Selector</h3>
+
+                <p id="id-example">
+                    This paragraph is styled using an ID selector.
+                </p>
+
+                <div class="inline-example">
+
+                    <strong>Specificity Order:</strong>
+
+                    <p>
+                        Inline styles generally have higher specificity
+                        than ID, class, and element selectors.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- Navigation -->
+        <div class="buttons">
+
+            <a href="css-25.html" class="btn secondary">
+                Previous Practical
+            </a>
+
+            <a href="index.html" class="btn">
+                CSS Programs
+            </a>
+
+            <a href="../index.html" class="btn">
+                Dashboard
+            </a>
+
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>
+            <strong>CSS Practical 26</strong> |
+            CSS Inheritance and Specificity
+        </p>
+    </footer>
+
+</body>
+</html>

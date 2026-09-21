@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>CSS Practical 03 - Colors, Backgrounds and Borders</title>
+
+    <!-- External CSS -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Internal CSS -->
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f4f7fb;
+            color: #1f2937;
+        }
+
+        header {
+            background: linear-gradient(135deg, #0f172a, #2563eb);
+            color: white;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        header h1 {
+            margin: 0 0 10px;
+            font-size: 32px;
+        }
+
+        header p {
+            margin: 0;
+            font-size: 17px;
+        }
+
+        nav {
+            background-color: #111827;
+            padding: 14px;
+            text-align: center;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 12px;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            color: #60a5fa;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1000px;
+            margin: 30px auto;
+        }
+
+        .card {
+            background-color: white;
+            padding: 25px;
+            margin-bottom: 25px;
+            border-radius: 12px;
+            box-shadow: 0 5px 18px rgba(0, 0, 0, 0.08);
+        }
+
+        .card h2 {
+            color: #1d4ed8;
+            border-bottom: 2px solid #dbeafe;
+            padding-bottom: 10px;
+        }
+
+        .objective {
+            background-color: #eff6ff;
+            border-left: 5px solid #2563eb;
+            padding: 15px;
+            line-height: 1.6;
+        }
+
+        .demo {
+            padding: 20px;
+            margin-top: 15px;
+            border-radius: 10px;
+        }
+
+        /* CSS Colors */
+        .color-name {
+            color: darkblue;
+        }
+
+        .color-hex {
+            color: #16a34a;
+        }
+
+        .color-rgb {
+            color: rgb(220, 38, 38);
+        }
+
+        .color-hsl {
+            color: hsl(280, 70%, 45%);
+        }
+
+        /* Backgrounds */
+        .background-color-demo {
+            background-color: #dbeafe;
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        .background-gradient {
+            background: linear-gradient(135deg, #2563eb, #7c3aed);
+            color: white;
+            padding: 25px;
+            border-radius: 8px;
+        }
+
+        .background-image {
+            background-image: url(
+                "https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1000&q=80"
+            );
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 50px 20px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        /* Borders */
+        .solid-border {
+            border: 3px solid #2563eb;
+            padding: 20px;
+        }
+
+        .dashed-border {
+            border: 3px dashed #16a34a;
+            padding: 20px;
+        }
+
+        .dotted-border {
+            border: 3px dotted #dc2626;
+            padding: 20px;
+        }
+
+        .rounded-border {
+            border: 3px solid #7c3aed;
+            border-radius: 20px;
+            padding: 20px;
+        }
+
+        .border-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+
+        .border-table th,
+        .border-table td {
+            border: 1px solid #cbd5e1;
+            padding: 12px;
+            text-align: left;
+        }
+
+        .border-table th {
+            background-color: #1d4ed8;
+            color: white;
+        }
+
+        .code {
+            background-color: #111827;
+            color: #e5e7eb;
+            padding: 18px;
+            border-radius: 8px;
+            overflow-x: auto;
+            line-height: 1.6;
+            font-family: Consolas, monospace;
+            font-size: 14px;
+        }
+
+        /* Navigation buttons */
+        .navigation {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin: 35px 0;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 22px;
+            background-color: #2563eb;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #1d4ed8;
+            transform: translateY(-2px);
+        }
+
+        .btn.secondary {
+            background-color: #475569;
+        }
+
+        .btn.secondary:hover {
+            background-color: #334155;
+        }
+
+        footer {
+            background-color: #0f172a;
+            color: #cbd5e1;
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+        }
+
+        footer p {
+            margin: 5px;
+        }
+
+        @media (max-width: 600px) {
+            header h1 {
+                font-size: 25px;
+            }
+
+            nav a {
+                display: inline-block;
+                margin: 6px;
+            }
+
+            .container {
+                width: 94%;
+            }
+
+            .card {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header>
+        <h1>CSS Practical 03</h1>
+        <p>Demonstration of CSS Colors, Backgrounds and Borders</p>
+    </header>
+
+    <!-- Navigation -->
+    <nav>
+        <a href="../index.html">Dashboard</a>
+        <a href="index.html">CSS Programs</a>
+    </nav>
+
+    <main class="container">
+
+        <!-- Objective -->
+        <section class="card">
+            <h2>1. Objective</h2>
+
+            <div class="objective">
+                To create a webpage demonstrating different CSS properties
+                used for <strong>colors</strong>, <strong>backgrounds</strong>,
+                and <strong>borders</strong>.
+            </div>
+        </section>
+
+        <!-- Colors -->
+        <section class="card">
+            <h2>2. CSS Colors</h2>
+
+            <p>
+                CSS provides different ways to specify colors, including
+                color names, hexadecimal values, RGB values and HSL values.
+            </p>
+
+            <div class="demo">
+                <p class="color-name">
+                    This text uses a CSS color name: <strong>darkblue</strong>
+                </p>
+
+                <p class="color-hex">
+                    This text uses a hexadecimal color:
+                    <strong>#16a34a</strong>
+                </p>
+
+                <p class="color-rgb">
+                    This text uses an RGB color:
+                    <strong>rgb(220, 38, 38)</strong>
+                </p>
+
+                <p class="color-hsl">
+                    This text uses an HSL color:
+                    <strong>hsl(280, 70%, 45%)</strong>
+                </p>
+            </div>
+        </section>
+
+        <!-- Backgrounds -->
+        <section class="card">
+            <h2>3. CSS Backgrounds</h2>
+
+            <p>
+                CSS background properties can be used to set background
+                colors, gradients and images.
+            </p>
+
+            <h3>Background Color</h3>
+
+            <div class="background-color-demo">
+                This section uses the
+                <strong>background-color</strong> property.
+            </div>
+
+            <h3>Background Gradient</h3>
+
+            <div class="background-gradient">
+                <h3>Gradient Background</h3>
+                <p>
+                    This section demonstrates a CSS linear gradient.
+                </p>
+            </div>
+
+            <h3>Background Image</h3>
+
+            <div class="background-image">
+                <h3>Background Image</h3>
+                <p>
+                    This section demonstrates the
+                    <strong>background-image</strong> property.
+                </p>
+            </div>
+        </section>
+
+        <!-- Borders -->
+        <section class="card">
+            <h2>4. CSS Borders</h2>
+
+            <p>
+                CSS borders are used to create visible boundaries around
+                HTML elements. Different border styles can be applied.
+            </p>
+
+            <div class="demo solid-border">
+                <strong>Solid Border:</strong>
+                This uses a solid border.
+            </div>
+
+            <br>
+
+            <div class="demo dashed-border">
+                <strong>Dashed Border:</strong>
+                This uses a dashed border.
+            </div>
+
+            <br>
+
+            <div class="demo dotted-border">
+                <strong>Dotted Border:</strong>
+                This uses a dotted border.
+            </div>
+
+            <br>
+
+            <div class="demo rounded-border">
+                <strong>Rounded Border:</strong>
+                This uses border-radius to create rounded corners.
+            </div>
+        </section>
+
+        
+
+        <!-- Navigation Buttons -->
+        <div class="navigation">
+
+            <a href="css-02.html" class="btn secondary">
+                ← Previous Practical
+            </a>
+
+            <a href="index.html" class="btn">
+                CSS Programs
+            </a>
+
+            <a href="css-04.html" class="btn">
+                Next Practical →
+            </a>
+
+            <a href="../index.html" class="btn secondary">
+                Dashboard
+            </a>
+
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p><strong>CSS Practical 03</strong></p>
+        <p>CSS Colors, Backgrounds and Borders</p>
+    </footer>
+
+</body>
+</html>

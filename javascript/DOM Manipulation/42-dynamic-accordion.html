@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM Manipulation - Accordion</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: #f1f5f9;
+            color: #334155;
+            line-height: 1.6;
+        }
+
+        header {
+            background: #0f172a;
+            padding: 18px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: white;
+            font-size: 22px;
+            font-weight: 700;
+        }
+
+        nav a {
+            color: #cbd5e1;
+            text-decoration: none;
+            margin-left: 25px;
+            font-size: 15px;
+        }
+
+        nav a:hover {
+            color: white;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #1e3a8a, #2563eb);
+            color: white;
+            text-align: center;
+            padding: 65px 20px;
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 7px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        .hero h1 {
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+
+        .hero p {
+            font-size: 16px;
+            opacity: 0.9;
+        }
+
+        main {
+            width: 90%;
+            max-width: 1050px;
+            margin: 40px auto;
+        }
+
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 28px;
+            margin-bottom: 25px;
+            box-shadow: 0 5px 18px rgba(15, 23, 42, 0.08);
+        }
+
+        .objective {
+            border-left: 5px solid #2563eb;
+        }
+
+        .objective h2,
+        .card h2 {
+            color: #1e3a8a;
+            margin-bottom: 15px;
+        }
+
+        .card h2 {
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 8px;
+        }
+
+        .demo {
+            background: #eff6ff;
+            border: 2px dashed #93c5fd;
+            border-radius: 10px;
+            padding: 25px;
+            margin-top: 20px;
+        }
+
+        .instruction {
+            margin-bottom: 25px;
+            color: #475569;
+            text-align: center;
+        }
+
+        .accordion {
+            max-width: 750px;
+            margin: 0 auto;
+        }
+
+        .accordion-item {
+            background: white;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            margin-bottom: 12px;
+            overflow: hidden;
+        }
+
+        .accordion-header {
+            width: 100%;
+            border: none;
+            border-radius: 0;
+            background: white;
+            color: #1e3a8a;
+            padding: 17px 20px;
+            text-align: left;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .accordion-header:hover {
+            background: #dbeafe;
+        }
+
+        .accordion-header.active {
+            background: #2563eb;
+            color: white;
+        }
+
+        .icon {
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        .accordion-content {
+            display: none;
+            padding: 20px;
+            background: white;
+            color: #475569;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        .accordion-content.active {
+            display: block;
+        }
+
+        .status {
+            margin-top: 20px;
+            padding: 14px;
+            background: white;
+            border: 1px solid #bfdbfe;
+            border-radius: 8px;
+            text-align: center;
+            color: #1e3a8a;
+            font-weight: 600;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin: 35px 0;
+        }
+
+        .btn-link {
+            display: inline-block;
+            background: #2563eb;
+            color: white;
+            text-decoration: none;
+            padding: 11px 20px;
+            border-radius: 7px;
+            font-size: 15px;
+        }
+
+        .btn-link:hover {
+            background: #1e3a8a;
+        }
+
+        .btn-link.secondary {
+            background: #0f172a;
+        }
+
+        .btn-link.secondary:hover {
+            background: #1e293b;
+        }
+
+        footer {
+            background: #0f172a;
+            color: #cbd5e1;
+            text-align: center;
+            padding: 22px;
+            margin-top: 50px;
+            font-size: 14px;
+        }
+
+        @media (max-width: 750px) {
+            header {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            nav a {
+                margin: 0 8px;
+            }
+
+            .hero h1 {
+                font-size: 30px;
+            }
+
+            .card {
+                padding: 22px;
+            }
+        }
+
+        @media (max-width: 550px) {
+            .hero {
+                padding: 50px 15px;
+            }
+
+            .demo {
+                padding: 18px;
+            }
+
+            .accordion-header {
+                padding: 15px;
+            }
+
+            .accordion-content {
+                padding: 17px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="logo">Practical Programs</div>
+
+        <nav>
+            <a href="../../index.html">Home</a>
+<a href="../index.html">JavaScript Programs</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="badge">DOM Manipulation • Practical 42</div>
+        <h1>Accordion</h1>
+        <p>Create an interactive accordion using JavaScript</p>
+    </section>
+
+    <main>
+
+        <section class="card objective">
+            <h2>Objective</h2>
+            <p>
+                To create an interactive accordion using JavaScript
+                DOM manipulation, where clicking a heading displays
+                or hides its corresponding content.
+            </p>
+        </section>
+
+        <section class="card">
+            <h2>Interactive Demonstration</h2>
+
+            <div class="demo">
+
+                <p class="instruction">
+                    Click any heading to expand or collapse its content.
+                </p>
+
+                <div class="accordion">
+
+                    <div class="accordion-item">
+
+                        <button class="accordion-header"
+                                onclick="toggleAccordion(this)">
+                            <span>What is HTML?</span>
+                            <span class="icon">+</span>
+                        </button>
+
+                        <div class="accordion-content">
+                            HTML is the standard markup language used
+                            to create the structure and content of
+                            webpages.
+                        </div>
+
+                    </div>
+
+                    <div class="accordion-item">
+
+                        <button class="accordion-header"
+                                onclick="toggleAccordion(this)">
+                            <span>What is CSS?</span>
+                            <span class="icon">+</span>
+                        </button>
+
+                        <div class="accordion-content">
+                            CSS is used to style webpages and control
+                            their layout, colors, fonts, spacing and
+                            responsive appearance.
+                        </div>
+
+                    </div>
+
+                    <div class="accordion-item">
+
+                        <button class="accordion-header"
+                                onclick="toggleAccordion(this)">
+                            <span>What is JavaScript?</span>
+                            <span class="icon">+</span>
+                        </button>
+
+                        <div class="accordion-content">
+                            JavaScript is a programming language that
+                            adds interactivity and dynamic behavior
+                            to webpages.
+                        </div>
+
+                    </div>
+
+                    <div class="accordion-item">
+
+                        <button class="accordion-header"
+                                onclick="toggleAccordion(this)">
+                            <span>What is DOM Manipulation?</span>
+                            <span class="icon">+</span>
+                        </button>
+
+                        <div class="accordion-content">
+                            DOM manipulation allows JavaScript to access,
+                            modify, create and remove HTML elements
+                            dynamically.
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="status" id="status">
+                    No accordion item is currently open.
+                </div>
+
+            </div>
+        </section>
+
+        <div class="buttons">
+
+            <a href="41-tabs.html" class="btn-link">
+                ← Previous Practical
+            </a>
+
+            <a href="index.html" class="btn-link secondary">
+                DOM Programs
+            </a>
+
+            <a href="43-modal.html" class="btn-link">
+                Next Practical →
+            </a>
+
+        </div>
+
+    </main>
+
+    <footer>
+        <p>JavaScript Practical Programs | DOM Manipulation</p>
+    </footer>
+
+    <script>
+        function toggleAccordion(button) {
+
+            const content =
+                button.nextElementSibling;
+
+            const icon =
+                button.querySelector(".icon");
+
+            const isOpen =
+                content.classList.contains("active");
+
+            const allHeaders =
+                document.querySelectorAll(".accordion-header");
+
+            const allContents =
+                document.querySelectorAll(".accordion-content");
+
+            allHeaders.forEach(function(header) {
+                header.classList.remove("active");
+
+                header.querySelector(".icon").textContent = "+";
+            });
+
+            allContents.forEach(function(item) {
+                item.classList.remove("active");
+            });
+
+            if (!isOpen) {
+
+                content.classList.add("active");
+                button.classList.add("active");
+                icon.textContent = "−";
+
+                document.getElementById("status").textContent =
+                    "Open Item: " +
+                    button.querySelector("span").textContent;
+
+            } else {
+
+                document.getElementById("status").textContent =
+                    "No accordion item is currently open.";
+            }
+        }
+    </script>
+
+</body>
+</html>

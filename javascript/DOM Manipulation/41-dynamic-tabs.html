@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM Manipulation - Tabs Interface</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: #f1f5f9;
+            color: #334155;
+            line-height: 1.6;
+        }
+
+        header {
+            background: #0f172a;
+            padding: 18px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: white;
+            font-size: 22px;
+            font-weight: 700;
+        }
+
+        nav a {
+            color: #cbd5e1;
+            text-decoration: none;
+            margin-left: 25px;
+            font-size: 15px;
+        }
+
+        nav a:hover {
+            color: white;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #1e3a8a, #2563eb);
+            color: white;
+            text-align: center;
+            padding: 65px 20px;
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 7px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        .hero h1 {
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+
+        .hero p {
+            font-size: 16px;
+            opacity: 0.9;
+        }
+
+        main {
+            width: 90%;
+            max-width: 1050px;
+            margin: 40px auto;
+        }
+
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 28px;
+            margin-bottom: 25px;
+            box-shadow: 0 5px 18px rgba(15, 23, 42, 0.08);
+        }
+
+        .objective {
+            border-left: 5px solid #2563eb;
+        }
+
+        .objective h2,
+        .card h2 {
+            color: #1e3a8a;
+            margin-bottom: 15px;
+        }
+
+        .card h2 {
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 8px;
+        }
+
+        .demo {
+            background: #eff6ff;
+            border: 2px dashed #93c5fd;
+            border-radius: 10px;
+            padding: 25px;
+            margin-top: 20px;
+        }
+
+        .instruction {
+            margin-bottom: 25px;
+            color: #475569;
+            text-align: center;
+        }
+
+        .tabs-container {
+            max-width: 750px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 14px rgba(15, 23, 42, 0.1);
+        }
+
+        .tab-buttons {
+            display: flex;
+            background: #e2e8f0;
+        }
+
+        .tab-button {
+            flex: 1;
+            border: none;
+            border-radius: 0;
+            background: #e2e8f0;
+            color: #475569;
+            padding: 14px 18px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .tab-button:hover {
+            background: #cbd5e1;
+            color: #1e3a8a;
+        }
+
+        .tab-button.active {
+            background: #2563eb;
+            color: white;
+        }
+
+        .tab-content {
+            display: none;
+            padding: 28px;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .tab-content h3 {
+            color: #1e3a8a;
+            margin-bottom: 10px;
+        }
+
+        .tab-content p {
+            color: #475569;
+        }
+
+        .status {
+            margin-top: 20px;
+            padding: 14px;
+            background: white;
+            border: 1px solid #bfdbfe;
+            border-radius: 8px;
+            text-align: center;
+            color: #1e3a8a;
+            font-weight: 600;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin: 35px 0;
+        }
+
+        .btn-link {
+            display: inline-block;
+            background: #2563eb;
+            color: white;
+            text-decoration: none;
+            padding: 11px 20px;
+            border-radius: 7px;
+            font-size: 15px;
+        }
+
+        .btn-link:hover {
+            background: #1e3a8a;
+        }
+
+        .btn-link.secondary {
+            background: #0f172a;
+        }
+
+        .btn-link.secondary:hover {
+            background: #1e293b;
+        }
+
+        footer {
+            background: #0f172a;
+            color: #cbd5e1;
+            text-align: center;
+            padding: 22px;
+            margin-top: 50px;
+            font-size: 14px;
+        }
+
+        @media (max-width: 750px) {
+            header {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            nav a {
+                margin: 0 8px;
+            }
+
+            .hero h1 {
+                font-size: 30px;
+            }
+
+            .card {
+                padding: 22px;
+            }
+        }
+
+        @media (max-width: 550px) {
+            .hero {
+                padding: 50px 15px;
+            }
+
+            .demo {
+                padding: 18px;
+            }
+
+            .tab-buttons {
+                flex-direction: column;
+            }
+
+            .tab-button {
+                width: 100%;
+            }
+
+            .tab-content {
+                padding: 22px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="logo">Practical Programs</div>
+
+        <nav>
+            <a href="../../index.html">Home</a>
+<a href="../index.html">JavaScript Programs</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="badge">DOM Manipulation • Practical 41</div>
+        <h1>Tabs Interface</h1>
+        <p>Create an interactive tabs interface using JavaScript</p>
+    </section>
+
+    <main>
+
+        <section class="card objective">
+            <h2>Objective</h2>
+            <p>
+                To create an interactive tabs interface using JavaScript
+                DOM manipulation, where clicking a tab displays its
+                corresponding content.
+            </p>
+        </section>
+
+        <section class="card">
+            <h2>Interactive Demonstration</h2>
+
+            <div class="demo">
+
+                <p class="instruction">
+                    Click the tabs below to display different content.
+                </p>
+
+                <div class="tabs-container">
+
+                    <div class="tab-buttons">
+
+                        <button class="tab-button active"
+                                onclick="openTab(event, 'htmlTab')">
+                            HTML
+                        </button>
+
+                        <button class="tab-button"
+                                onclick="openTab(event, 'cssTab')">
+                            CSS
+                        </button>
+
+                        <button class="tab-button"
+                                onclick="openTab(event, 'jsTab')">
+                            JavaScript
+                        </button>
+
+                    </div>
+
+                    <div id="htmlTab"
+                         class="tab-content active">
+
+                        <h3>HTML</h3>
+
+                        <p>
+                            HTML is used to create the structure
+                            and content of a webpage using elements
+                            such as headings, paragraphs, links and
+                            forms.
+                        </p>
+
+                    </div>
+
+                    <div id="cssTab"
+                         class="tab-content">
+
+                        <h3>CSS</h3>
+
+                        <p>
+                            CSS is used to style webpages by controlling
+                            colors, fonts, spacing, layouts and responsive
+                            design.
+                        </p>
+
+                    </div>
+
+                    <div id="jsTab"
+                         class="tab-content">
+
+                        <h3>JavaScript</h3>
+
+                        <p>
+                            JavaScript adds interactivity to webpages
+                            and can dynamically change HTML elements
+                            through DOM manipulation.
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <div class="status" id="status">
+                    Active Tab: HTML
+                </div>
+
+            </div>
+        </section>
+
+        <div class="buttons">
+
+            <a href="40-show-hide.html" class="btn-link">
+                ← Previous Practical
+            </a>
+
+            <a href="index.html" class="btn-link secondary">
+                DOM Programs
+            </a>
+
+            <a href="42-accordion.html" class="btn-link">
+                Next Practical →
+            </a>
+
+        </div>
+
+    </main>
+
+    <footer>
+        <p>JavaScript Practical Programs | DOM Manipulation</p>
+    </footer>
+
+    <script>
+        function openTab(event, tabId) {
+
+            const tabContents =
+                document.querySelectorAll(".tab-content");
+
+            tabContents.forEach(function(content) {
+                content.classList.remove("active");
+            });
+
+            const tabButtons =
+                document.querySelectorAll(".tab-button");
+
+            tabButtons.forEach(function(button) {
+                button.classList.remove("active");
+            });
+
+            document
+                .getElementById(tabId)
+                .classList.add("active");
+
+            event.currentTarget.classList.add("active");
+
+            const activeTab =
+                event.currentTarget.textContent.trim();
+
+            document.getElementById("status").textContent =
+                "Active Tab: " + activeTab;
+        }
+    </script>
+
+</body>
+</html>

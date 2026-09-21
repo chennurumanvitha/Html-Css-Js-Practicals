@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Practical 43 - LocalStorage</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: #f1f5f9;
+            color: #334155;
+            line-height: 1.6;
+        }
+
+        header {
+            background: #0f172a;
+            padding: 18px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: white;
+            font-size: 22px;
+            font-weight: 700;
+        }
+
+        nav a {
+            color: #cbd5e1;
+            text-decoration: none;
+            margin-left: 25px;
+            font-size: 15px;
+        }
+
+        nav a:hover {
+            color: white;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #1e3a8a, #2563eb);
+            color: white;
+            text-align: center;
+            padding: 65px 20px;
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 7px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        .hero h1 {
+            font-size: 38px;
+            margin-bottom: 10px;
+        }
+
+        .hero p {
+            font-size: 17px;
+            color: #dbeafe;
+        }
+
+        main {
+            width: 90%;
+            max-width: 1050px;
+            margin: 40px auto;
+        }
+
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 28px;
+            margin-bottom: 25px;
+            box-shadow: 0 5px 18px rgba(15, 23, 42, 0.08);
+        }
+
+        .objective {
+            border-left: 5px solid #2563eb;
+        }
+
+        .objective h2,
+        .card h2 {
+            color: #1e3a8a;
+            margin-bottom: 15px;
+        }
+
+        .card h2 {
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 8px;
+        }
+
+        .demo {
+            background: #eff6ff;
+            border: 2px dashed #93c5fd;
+            border-radius: 10px;
+            padding: 22px;
+            margin-top: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            color: #1e3a8a;
+            margin-bottom: 6px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 11px 13px;
+            border: 1px solid #cbd5e1;
+            border-radius: 7px;
+            font-size: 15px;
+            outline: none;
+        }
+
+        .form-group input:focus {
+            border-color: #2563eb;
+        }
+
+        .action-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 18px;
+        }
+
+        .action-btn {
+            background: #2563eb;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 7px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .action-btn:hover {
+            background: #1d4ed8;
+        }
+
+        .action-btn.clear {
+            background: #475569;
+        }
+
+        .action-btn.clear:hover {
+            background: #334155;
+        }
+
+        .output {
+            background: white;
+            border-radius: 8px;
+            padding: 18px;
+            margin-top: 20px;
+            border-left: 4px solid #2563eb;
+        }
+
+        .output-row {
+            margin: 8px 0;
+        }
+
+        .label {
+            font-weight: 600;
+            color: #1e3a8a;
+        }
+
+        .status {
+            text-align: center;
+            font-weight: 600;
+            margin-top: 15px;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin: 35px 0;
+        }
+
+        .btn {
+            display: inline-block;
+            background: #2563eb;
+            color: white;
+            text-decoration: none;
+            padding: 11px 20px;
+            border-radius: 7px;
+            font-weight: 600;
+            transition: 0.2s;
+        }
+
+        .btn:hover {
+            background: #1d4ed8;
+            transform: translateY(-1px);
+        }
+
+        .btn.secondary {
+            background: #475569;
+        }
+
+        .btn.secondary:hover {
+            background: #334155;
+        }
+
+        footer {
+            background: #0f172a;
+            color: #cbd5e1;
+            text-align: center;
+            padding: 22px;
+            margin-top: 50px;
+            font-size: 14px;
+        }
+
+        @media (max-width: 750px) {
+            header {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            nav a {
+                margin: 0 8px;
+            }
+
+            .hero h1 {
+                font-size: 30px;
+            }
+        }
+
+        @media (max-width: 650px) {
+            .card {
+                padding: 20px;
+            }
+
+            .hero {
+                padding: 50px 15px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="logo">JavaScript Lab</div>
+
+        <nav>
+           <a href="../../index.html">Home</a>
+<a href="../index.html">JavaScript Programs</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="badge">JavaScript Practical 43</div>
+        <h1>LocalStorage</h1>
+        <p>Store and retrieve data using JavaScript</p>
+    </section>
+
+    <main>
+
+        <section class="card objective">
+            <h2>Objective</h2>
+            <p>
+                Store and retrieve data using localStorage.
+            </p>
+        </section>
+
+        <section class="card">
+            <h2>Demonstration</h2>
+
+            <p>
+                The localStorage object allows data to be stored in the
+                browser so that it can be retrieved later, even after
+                refreshing the webpage.
+            </p>
+
+            <div class="demo">
+
+                <div class="form-group">
+                    <label for="name">Enter Your Name</label>
+                    <input
+                        type="text"
+                        id="name"
+                        placeholder="Enter your name"
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="course">Enter Your Course</label>
+                    <input
+                        type="text"
+                        id="course"
+                        placeholder="Enter your course"
+                    >
+                </div>
+
+                <div class="action-buttons">
+                    <button class="action-btn" onclick="storeData()">
+                        Store Data
+                    </button>
+
+                    <button class="action-btn" onclick="retrieveData()">
+                        Retrieve Data
+                    </button>
+
+                    <button class="action-btn clear" onclick="clearData()">
+                        Clear Data
+                    </button>
+                </div>
+
+                <div class="status" id="status">
+                    Enter the details and store them in localStorage.
+                </div>
+
+                <div class="output">
+                    <div class="output-row">
+                        <span class="label">Stored Name:</span>
+                        <span id="storedName">Not available</span>
+                    </div>
+
+                    <div class="output-row">
+                        <span class="label">Stored Course:</span>
+                        <span id="storedCourse">Not available</span>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <section class="card">
+            <h2>Result</h2>
+            <p id="result">
+                Data can be stored and retrieved using localStorage.
+            </p>
+        </section>
+
+        <div class="buttons">
+            <a href="apidata.html" class="btn">← Previous Practical</a>
+            <a href="index.html" class="btn secondary">JavaScript Programs</a>
+            <a href="loginvalidation.html" class="btn">Next Practical →</a>
+        </div>
+
+    </main>
+
+    <footer>
+        <p>JavaScript Practical Lab &copy; 2026</p>
+    </footer>
+
+    <script>
+        function storeData() {
+            const name = document.getElementById("name").value.trim();
+            const course = document.getElementById("course").value.trim();
+
+            if (name === "" || course === "") {
+                document.getElementById("status").textContent =
+                    "Please enter both name and course.";
+                return;
+            }
+
+            localStorage.setItem("studentName", name);
+            localStorage.setItem("studentCourse", course);
+
+            document.getElementById("status").textContent =
+                "Data stored successfully in localStorage.";
+
+            document.getElementById("result").textContent =
+                "The entered data has been stored successfully using localStorage.";
+        }
+
+        function retrieveData() {
+            const name = localStorage.getItem("studentName");
+            const course = localStorage.getItem("studentCourse");
+
+            if (name === null || course === null) {
+                document.getElementById("status").textContent =
+                    "No stored data found.";
+                return;
+            }
+
+            document.getElementById("storedName").textContent = name;
+            document.getElementById("storedCourse").textContent = course;
+
+            document.getElementById("status").textContent =
+                "Data retrieved successfully from localStorage.";
+
+            document.getElementById("result").textContent =
+                "The stored data was successfully retrieved from localStorage.";
+        }
+
+        function clearData() {
+            localStorage.removeItem("studentName");
+            localStorage.removeItem("studentCourse");
+
+            document.getElementById("storedName").textContent =
+                "Not available";
+
+            document.getElementById("storedCourse").textContent =
+                "Not available";
+
+            document.getElementById("status").textContent =
+                "Stored data has been cleared.";
+
+            document.getElementById("result").textContent =
+                "The localStorage data has been cleared successfully.";
+        }
+
+        window.addEventListener("load", retrieveData);
+    </script>
+
+</body>
+</html>

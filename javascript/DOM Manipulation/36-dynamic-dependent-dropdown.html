@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM Manipulation - Dependent Dropdown</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: #f1f5f9;
+            color: #334155;
+            line-height: 1.6;
+        }
+
+        header {
+            background: #0f172a;
+            padding: 18px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: white;
+            font-size: 22px;
+            font-weight: 700;
+        }
+
+        nav a {
+            color: #cbd5e1;
+            text-decoration: none;
+            margin-left: 25px;
+            font-size: 15px;
+        }
+
+        nav a:hover {
+            color: white;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #1e3a8a, #2563eb);
+            color: white;
+            text-align: center;
+            padding: 65px 20px;
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 7px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        .hero h1 {
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+
+        .hero p {
+            font-size: 16px;
+            opacity: 0.9;
+        }
+
+        main {
+            width: 90%;
+            max-width: 1050px;
+            margin: 40px auto;
+        }
+
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 28px;
+            margin-bottom: 25px;
+            box-shadow: 0 5px 18px rgba(15, 23, 42, 0.08);
+        }
+
+        .objective {
+            border-left: 5px solid #2563eb;
+        }
+
+        .objective h2,
+        .card h2 {
+            color: #1e3a8a;
+            margin-bottom: 15px;
+        }
+
+        .card h2 {
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 8px;
+        }
+
+        .demo {
+            background: #eff6ff;
+            border: 2px dashed #93c5fd;
+            border-radius: 10px;
+            padding: 30px;
+            margin-top: 20px;
+        }
+
+        .instruction {
+            margin-bottom: 25px;
+            color: #475569;
+        }
+
+        .form-area {
+            max-width: 550px;
+            margin: 0 auto;
+        }
+
+        .field {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            color: #1e3a8a;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        select {
+            width: 100%;
+            padding: 12px 14px;
+            border: 1px solid #cbd5e1;
+            border-radius: 7px;
+            background: white;
+            color: #334155;
+            font-size: 15px;
+            outline: none;
+            cursor: pointer;
+        }
+
+        select:focus {
+            border-color: #2563eb;
+        }
+
+        select:disabled {
+            background: #e2e8f0;
+            color: #64748b;
+            cursor: not-allowed;
+        }
+
+        .output {
+            margin-top: 25px;
+            padding: 15px;
+            background: white;
+            border: 1px solid #bfdbfe;
+            border-radius: 8px;
+            text-align: center;
+            color: #1e3a8a;
+            font-weight: 600;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin: 35px 0;
+        }
+
+        .btn-link {
+            display: inline-block;
+            background: #2563eb;
+            color: white;
+            text-decoration: none;
+            padding: 11px 20px;
+            border-radius: 7px;
+            font-size: 15px;
+        }
+
+        .btn-link:hover {
+            background: #1e3a8a;
+        }
+
+        .btn-link.secondary {
+            background: #0f172a;
+        }
+
+        .btn-link.secondary:hover {
+            background: #1e293b;
+        }
+
+        footer {
+            background: #0f172a;
+            color: #cbd5e1;
+            text-align: center;
+            padding: 22px;
+            margin-top: 50px;
+            font-size: 14px;
+        }
+
+        @media (max-width: 750px) {
+            header {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            nav a {
+                margin: 0 8px;
+            }
+
+            .hero h1 {
+                font-size: 30px;
+            }
+
+            .card {
+                padding: 22px;
+            }
+        }
+
+        @media (max-width: 650px) {
+            .hero {
+                padding: 50px 15px;
+            }
+
+            .demo {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="logo">Practical Programs</div>
+
+        <nav>
+            <a href="../../index.html">Home</a>
+<a href="../index.html">JavaScript Programs</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="badge">DOM Manipulation • Practical 36</div>
+        <h1>Dependent Dropdown</h1>
+        <p>Country → State → City using JavaScript</p>
+    </section>
+
+    <main>
+
+        <section class="card objective">
+            <h2>Objective</h2>
+            <p>
+                To create dependent dropdown menus where the available
+                states depend on the selected country and the available
+                cities depend on the selected state.
+            </p>
+        </section>
+
+        <section class="card">
+            <h2>Interactive Demonstration</h2>
+
+            <div class="demo">
+
+                <p class="instruction">
+                    Select a country to load its states. Then select a
+                    state to load its cities.
+                </p>
+
+                <div class="form-area">
+
+                    <div class="field">
+                        <label for="country">
+                            Country
+                        </label>
+
+                        <select id="country"
+                                onchange="loadStates()">
+
+                            <option value="">
+                                -- Select Country --
+                            </option>
+
+                            <option value="india">
+                                India
+                            </option>
+
+                            <option value="usa">
+                                United States
+                            </option>
+
+                            <option value="uk">
+                                United Kingdom
+                            </option>
+
+                        </select>
+                    </div>
+
+                    <div class="field">
+                        <label for="state">
+                            State
+                        </label>
+
+                        <select id="state"
+                                onchange="loadCities()"
+                                disabled>
+
+                            <option value="">
+                                -- Select State --
+                            </option>
+
+                        </select>
+                    </div>
+
+                    <div class="field">
+                        <label for="city">
+                            City
+                        </label>
+
+                        <select id="city"
+                                onchange="showSelection()"
+                                disabled>
+
+                            <option value="">
+                                -- Select City --
+                            </option>
+
+                        </select>
+                    </div>
+
+                    <div class="output" id="output">
+                        Please select a country, state and city.
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+        <div class="buttons">
+
+            <a href="35-select-options.html" class="btn-link">
+                ← Previous Practical
+            </a>
+
+            <a href="index.html" class="btn-link secondary">
+                DOM Programs
+            </a>
+
+            <a href="37-image-gallery.html" class="btn-link">
+                Next Practical →
+            </a>
+
+        </div>
+
+    </main>
+
+    <footer>
+        <p>JavaScript Practical Programs | DOM Manipulation</p>
+    </footer>
+
+    <script>
+        const locationData = {
+            india: {
+                Chennai: [
+                    "Chennai",
+                    "Tambaram",
+                    "Avadi"
+                ],
+                TamilNadu: [
+                    "Coimbatore",
+                    "Madurai",
+                    "Salem"
+                ],
+                Karnataka: [
+                    "Bengaluru",
+                    "Mysuru",
+                    "Mangaluru"
+                ]
+            },
+
+            usa: {
+                California: [
+                    "Los Angeles",
+                    "San Francisco",
+                    "San Diego"
+                ],
+                Texas: [
+                    "Houston",
+                    "Dallas",
+                    "Austin"
+                ],
+                Florida: [
+                    "Miami",
+                    "Orlando",
+                    "Tampa"
+                ]
+            },
+
+            uk: {
+                England: [
+                    "London",
+                    "Manchester",
+                    "Liverpool"
+                ],
+                Scotland: [
+                    "Edinburgh",
+                    "Glasgow",
+                    "Aberdeen"
+                ],
+                Wales: [
+                    "Cardiff",
+                    "Swansea",
+                    "Newport"
+                ]
+            }
+        };
+
+        function loadStates() {
+            const country =
+                document.getElementById("country").value;
+
+            const state =
+                document.getElementById("state");
+
+            const city =
+                document.getElementById("city");
+
+            state.innerHTML =
+                '<option value="">-- Select State --</option>';
+
+            city.innerHTML =
+                '<option value="">-- Select City --</option>';
+
+            city.disabled = true;
+
+            if (country === "") {
+                state.disabled = true;
+                updateOutput();
+                return;
+            }
+
+            const states =
+                Object.keys(locationData[country]);
+
+            states.forEach(function(stateName) {
+                const option =
+                    document.createElement("option");
+
+                option.value = stateName;
+                option.textContent =
+                    stateName === "TamilNadu"
+                        ? "Tamil Nadu"
+                        : stateName;
+
+                state.appendChild(option);
+            });
+
+            state.disabled = false;
+
+            updateOutput();
+        }
+
+        function loadCities() {
+            const country =
+                document.getElementById("country").value;
+
+            const state =
+                document.getElementById("state").value;
+
+            const city =
+                document.getElementById("city");
+
+            city.innerHTML =
+                '<option value="">-- Select City --</option>';
+
+            if (state === "") {
+                city.disabled = true;
+                updateOutput();
+                return;
+            }
+
+            const cities =
+                locationData[country][state];
+
+            cities.forEach(function(cityName) {
+                const option =
+                    document.createElement("option");
+
+                option.value = cityName;
+                option.textContent = cityName;
+
+                city.appendChild(option);
+            });
+
+            city.disabled = false;
+
+            updateOutput();
+        }
+
+        function showSelection() {
+            const country =
+                document.getElementById("country");
+
+            const state =
+                document.getElementById("state");
+
+            const city =
+                document.getElementById("city");
+
+            const output =
+                document.getElementById("output");
+
+            if (
+                country.value !== "" &&
+                state.value !== "" &&
+                city.value !== ""
+            ) {
+                output.textContent =
+                    "Selected Location: " +
+                    country.options[country.selectedIndex].text +
+                    " → " +
+                    state.options[state.selectedIndex].text +
+                    " → " +
+                    city.value;
+            } else {
+                updateOutput();
+            }
+        }
+
+        function updateOutput() {
+            const output =
+                document.getElementById("output");
+
+            output.textContent =
+                "Please select a country, state and city.";
+        }
+    </script>
+
+</body>
+</html>

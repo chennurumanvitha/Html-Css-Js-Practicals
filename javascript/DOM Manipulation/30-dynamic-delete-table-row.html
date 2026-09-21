@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM Manipulation - Delete Selected Row</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: #f1f5f9;
+            color: #334155;
+            line-height: 1.6;
+        }
+
+        header {
+            background: #0f172a;
+            padding: 18px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: white;
+            font-size: 22px;
+            font-weight: 700;
+        }
+
+        nav a {
+            color: #cbd5e1;
+            text-decoration: none;
+            margin-left: 25px;
+            font-size: 15px;
+        }
+
+        nav a:hover {
+            color: white;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #1e3a8a, #2563eb);
+            color: white;
+            text-align: center;
+            padding: 65px 20px;
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 7px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        .hero h1 {
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+
+        .hero p {
+            font-size: 16px;
+            opacity: 0.9;
+        }
+
+        main {
+            width: 90%;
+            max-width: 1050px;
+            margin: 40px auto;
+        }
+
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 28px;
+            margin-bottom: 25px;
+            box-shadow: 0 5px 18px rgba(15, 23, 42, 0.08);
+        }
+
+        .objective {
+            border-left: 5px solid #2563eb;
+        }
+
+        .objective h2,
+        .card h2 {
+            color: #1e3a8a;
+            margin-bottom: 15px;
+        }
+
+        .card h2 {
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 8px;
+        }
+
+        .demo {
+            background: #eff6ff;
+            border: 2px dashed #93c5fd;
+            border-radius: 10px;
+            padding: 25px;
+            margin-top: 20px;
+        }
+
+        .instruction {
+            margin-bottom: 18px;
+            color: #475569;
+        }
+
+        .table-container {
+            overflow-x: auto;
+            background: white;
+            border-radius: 8px;
+            border: 1px solid #bfdbfe;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 600px;
+        }
+
+        th {
+            background: #1e3a8a;
+            color: white;
+            padding: 13px;
+            text-align: left;
+        }
+
+        td {
+            padding: 12px 13px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        tbody tr:hover {
+            background: #f8fafc;
+        }
+
+        tbody tr.selected {
+            background: #dbeafe;
+        }
+
+        .select-btn {
+            background: #64748b;
+            color: white;
+            border: none;
+            padding: 7px 13px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .select-btn:hover {
+            background: #475569;
+        }
+
+        .select-btn.selected {
+            background: #2563eb;
+        }
+
+        .delete-area {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .delete-btn {
+            background: #dc2626;
+            color: white;
+            border: none;
+            padding: 11px 22px;
+            border-radius: 7px;
+            cursor: pointer;
+            font-size: 15px;
+        }
+
+        .delete-btn:hover {
+            background: #b91c1c;
+        }
+
+        .status {
+            text-align: center;
+            margin-top: 15px;
+            color: #475569;
+            font-size: 14px;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin: 35px 0;
+        }
+
+        .btn-link {
+            display: inline-block;
+            background: #2563eb;
+            color: white;
+            text-decoration: none;
+            padding: 11px 20px;
+            border-radius: 7px;
+            font-size: 15px;
+        }
+
+        .btn-link:hover {
+            background: #1e3a8a;
+        }
+
+        .btn-link.secondary {
+            background: #0f172a;
+        }
+
+        .btn-link.secondary:hover {
+            background: #1e293b;
+        }
+
+        footer {
+            background: #0f172a;
+            color: #cbd5e1;
+            text-align: center;
+            padding: 22px;
+            margin-top: 50px;
+            font-size: 14px;
+        }
+
+        @media (max-width: 750px) {
+            header {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            nav a {
+                margin: 0 8px;
+            }
+
+            .hero h1 {
+                font-size: 30px;
+            }
+
+            .card {
+                padding: 22px;
+            }
+        }
+
+        @media (max-width: 650px) {
+            .hero {
+                padding: 50px 15px;
+            }
+
+            .demo {
+                padding: 18px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="logo">Practical Programs</div>
+
+        <nav>
+            <a href="../../index.html">Home</a>
+<a href="../index.html">JavaScript Programs</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="badge">DOM Manipulation • Practical 30</div>
+        <h1>Delete Selected Table Row</h1>
+        <p>Select a row and remove it dynamically using JavaScript</p>
+    </section>
+
+    <main>
+
+        <section class="card objective">
+            <h2>Objective</h2>
+            <p>
+                To demonstrate how JavaScript can select and dynamically
+                remove an existing row from an HTML table.
+            </p>
+        </section>
+
+        <section class="card">
+            <h2>Interactive Demonstration</h2>
+
+            <div class="demo">
+
+                <p class="instruction">
+                    Select any row using the <strong>Select</strong> button,
+                    then click <strong>Delete Selected Row</strong>.
+                </p>
+
+                <div class="table-container">
+
+                    <table id="studentTable">
+                        <thead>
+                            <tr>
+                                <th>S.No.</th>
+                                <th>Student Name</th>
+                                <th>Roll Number</th>
+                                <th>Course</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="tableBody">
+                            <tr>
+                                <td>1</td>
+                                <td>Arun</td>
+                                <td>101</td>
+                                <td>Computer Science</td>
+                                <td>
+                                    <button class="select-btn"
+                                            onclick="selectRow(this)">
+                                        Select
+                                    </button>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>2</td>
+                                <td>Priya</td>
+                                <td>102</td>
+                                <td>Information Technology</td>
+                                <td>
+                                    <button class="select-btn"
+                                            onclick="selectRow(this)">
+                                        Select
+                                    </button>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>3</td>
+                                <td>Rahul</td>
+                                <td>103</td>
+                                <td>Computer Applications</td>
+                                <td>
+                                    <button class="select-btn"
+                                            onclick="selectRow(this)">
+                                        Select
+                                    </button>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>4</td>
+                                <td>Divya</td>
+                                <td>104</td>
+                                <td>Information Technology</td>
+                                <td>
+                                    <button class="select-btn"
+                                            onclick="selectRow(this)">
+                                        Select
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+
+                <div class="delete-area">
+                    <button class="delete-btn" onclick="deleteRow()">
+                        Delete Selected Row
+                    </button>
+                </div>
+
+                <p class="status" id="status">
+                    No row selected.
+                </p>
+
+            </div>
+        </section>
+
+        <div class="buttons">
+            <a href="29-add-table-row.html" class="btn-link">
+                ← Previous Practical
+            </a>
+
+            <a href="index.html" class="btn-link secondary">
+                DOM Programs
+            </a>
+
+            <a href="31-edit-table.html" class="btn-link">
+                Next Practical →
+            </a>
+        </div>
+
+    </main>
+
+    <footer>
+        <p>JavaScript Practical Programs | DOM Manipulation</p>
+    </footer>
+
+    <script>
+        let selectedRow = null;
+
+        function selectRow(button) {
+            if (selectedRow !== null) {
+                selectedRow.classList.remove("selected");
+
+                const previousButton =
+                    selectedRow.querySelector(".select-btn");
+
+                previousButton.classList.remove("selected");
+                previousButton.textContent = "Select";
+            }
+
+            selectedRow = button.parentElement.parentElement;
+
+            selectedRow.classList.add("selected");
+            button.classList.add("selected");
+            button.textContent = "Selected";
+
+            const studentName = selectedRow.cells[1].textContent;
+
+            document.getElementById("status").textContent =
+                "Selected student: " + studentName;
+        }
+
+        function deleteRow() {
+            if (selectedRow === null) {
+                alert("Please select a row to delete.");
+                return;
+            }
+
+            selectedRow.remove();
+            selectedRow = null;
+
+            updateSerialNumbers();
+
+            document.getElementById("status").textContent =
+                "Selected row deleted successfully.";
+        }
+
+        function updateSerialNumbers() {
+            const rows =
+                document.querySelectorAll("#tableBody tr");
+
+            rows.forEach(function(row, index) {
+                row.cells[0].textContent = index + 1;
+            });
+        }
+    </script>
+
+</body>
+</html>

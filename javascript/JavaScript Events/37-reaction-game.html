@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reaction Time Game</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: #f1f5f9;
+            color: #334155;
+            line-height: 1.6;
+        }
+
+        header {
+            background: #0f172a;
+            padding: 18px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: white;
+            font-size: 22px;
+            font-weight: 700;
+        }
+
+        nav {
+            display: flex;
+            gap: 24px;
+        }
+
+        nav a {
+            color: #cbd5e1;
+            text-decoration: none;
+            font-size: 15px;
+        }
+
+        nav a:hover {
+            color: white;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #1e3a8a, #2563eb);
+            color: white;
+            text-align: center;
+            padding: 65px 20px;
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        .hero h1 {
+            font-size: 38px;
+            margin-bottom: 10px;
+        }
+
+        .hero p {
+            font-size: 17px;
+            opacity: 0.9;
+        }
+
+        main {
+            width: 90%;
+            max-width: 1050px;
+            margin: 40px auto;
+        }
+
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 15px rgba(15, 23, 42, 0.08);
+        }
+
+        .objective {
+            border-left: 5px solid #2563eb;
+        }
+
+        .card h2 {
+            color: #1e3a8a;
+            font-size: 23px;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e2e8f0;
+        }
+
+        .demo {
+            text-align: center;
+            padding: 20px 10px;
+        }
+
+        .instructions {
+            margin-bottom: 20px;
+            color: #475569;
+        }
+
+        .game-area {
+            max-width: 650px;
+            min-height: 250px;
+            margin: 20px auto;
+            border: 2px dashed #93c5fd;
+            border-radius: 12px;
+            background: #eff6ff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            user-select: none;
+            transition: background 0.2s, border-color 0.2s;
+        }
+
+        .game-area.waiting {
+            background: #dbeafe;
+            border-color: #2563eb;
+        }
+
+        .game-area.ready {
+            background: #2563eb;
+            border-color: #1e3a8a;
+            color: white;
+        }
+
+        .game-message {
+            font-size: 22px;
+            font-weight: 700;
+            padding: 20px;
+        }
+
+        .result-box {
+            max-width: 500px;
+            margin: 20px auto;
+            padding: 20px;
+            background: #f8fafc;
+            border: 1px solid #cbd5e1;
+            border-radius: 10px;
+        }
+
+        .reaction-time {
+            color: #1e3a8a;
+            font-size: 38px;
+            font-weight: 700;
+        }
+
+        .output {
+            max-width: 650px;
+            margin: 20px auto 0;
+            padding: 18px;
+            background: #eff6ff;
+            border: 2px dashed #93c5fd;
+            border-radius: 10px;
+            text-align: left;
+        }
+
+        .output p {
+            margin: 5px 0;
+        }
+
+        .output strong {
+            color: #1e3a8a;
+        }
+
+        button {
+            border: none;
+            padding: 11px 22px;
+            border-radius: 7px;
+            background: #2563eb;
+            color: white;
+            font-size: 15px;
+            cursor: pointer;
+            margin: 5px;
+        }
+
+        button:hover {
+            background: #1e40af;
+        }
+
+        button.secondary {
+            background: #64748b;
+        }
+
+        button.secondary:hover {
+            background: #475569;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin: 30px 0;
+        }
+
+        .btn-link {
+            display: inline-block;
+            padding: 11px 20px;
+            background: #2563eb;
+            color: white;
+            text-decoration: none;
+            border-radius: 7px;
+            font-size: 15px;
+        }
+
+        .btn-link:hover {
+            background: #1e40af;
+        }
+
+        .btn-link.secondary {
+            background: #64748b;
+        }
+
+        .btn-link.secondary:hover {
+            background: #475569;
+        }
+
+        footer {
+            background: #0f172a;
+            color: #cbd5e1;
+            text-align: center;
+            padding: 22px;
+            margin-top: 50px;
+        }
+
+        @media (max-width: 750px) {
+            header {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            .hero h1 {
+                font-size: 30px;
+            }
+
+            .card {
+                padding: 22px;
+            }
+
+            .game-area {
+                min-height: 220px;
+            }
+        }
+
+        @media (max-width: 550px) {
+            nav {
+                gap: 14px;
+            }
+
+            .hero {
+                padding: 45px 15px;
+            }
+
+            .hero h1 {
+                font-size: 26px;
+            }
+
+            .game-message {
+                font-size: 18px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="logo">JavaScript Events</div>
+
+        <nav>
+            <a href="../../index.html">Home</a>
+<a href="../index.html">JavaScript Programs</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="badge">Events Practical 37</div>
+        <h1>Reaction Time Game</h1>
+        <p>Test reaction speed using JavaScript events</p>
+    </section>
+
+    <main>
+
+        <section class="card objective">
+            <h2>Objective</h2>
+            <p>
+                Create a reaction-time game using JavaScript events that
+                measures how quickly the user responds when the game area
+                becomes ready.
+            </p>
+        </section>
+
+        <section class="card">
+            <h2>Interactive Demonstration</h2>
+
+            <div class="demo">
+
+                <p class="instructions">
+                    Click "Start Game", wait for the game area to change,
+                    then click it as quickly as possible.
+                </p>
+
+                <button id="startButton">
+                    Start Game
+                </button>
+
+                <button id="resetButton" class="secondary">
+                    Reset
+                </button>
+
+                <div class="game-area" id="gameArea">
+                    <div class="game-message" id="gameMessage">
+                        Press Start Game to begin
+                    </div>
+                </div>
+
+                <div class="result-box">
+                    <p>Reaction Time</p>
+                    <div class="reaction-time" id="reactionTime">
+                        -- ms
+                    </div>
+                </div>
+
+                <div class="output">
+                    <p>
+                        <strong>Game Status:</strong>
+                        <span id="gameStatus">
+                            Ready to start
+                        </span>
+                    </p>
+
+                    <p>
+                        <strong>Event:</strong>
+                        <span id="eventName">
+                            Waiting for interaction...
+                        </span>
+                    </p>
+
+                    <p>
+                        <strong>Attempts:</strong>
+                        <span id="attempts">
+                            0
+                        </span>
+                    </p>
+                </div>
+
+            </div>
+        </section>
+
+        <div class="buttons">
+            <a href="36-double-click-counter.html" class="btn-link">
+                ← Previous Practical
+            </a>
+
+            <a href="index.html" class="btn-link secondary">
+                Events Programs
+            </a>
+
+            <a href="38-next.html" class="btn-link">
+                Next Practical →
+            </a>
+        </div>
+
+    </main>
+
+    <footer>
+        <p>JavaScript Events Practical</p>
+    </footer>
+
+    <script>
+        let startTime = 0;
+        let timerId = null;
+        let gameStarted = false;
+        let gameReady = false;
+        let attempts = 0;
+
+        const startButton = document.getElementById("startButton");
+        const resetButton = document.getElementById("resetButton");
+        const gameArea = document.getElementById("gameArea");
+        const gameMessage = document.getElementById("gameMessage");
+        const reactionTime = document.getElementById("reactionTime");
+        const gameStatus = document.getElementById("gameStatus");
+        const eventName = document.getElementById("eventName");
+        const attemptsDisplay = document.getElementById("attempts");
+
+        startButton.addEventListener("click", function () {
+            if (gameStarted) {
+                return;
+            }
+
+            gameStarted = true;
+            gameReady = false;
+
+            gameArea.classList.remove("ready");
+            gameArea.classList.add("waiting");
+
+            gameMessage.textContent = "Wait for the signal...";
+            gameStatus.textContent = "Waiting...";
+            eventName.textContent = "click";
+
+            reactionTime.textContent = "-- ms";
+
+            const delay = Math.floor(Math.random() * 3000) + 2000;
+
+            timerId = setTimeout(function () {
+                gameReady = true;
+                startTime = performance.now();
+
+                gameArea.classList.remove("waiting");
+                gameArea.classList.add("ready");
+
+                gameMessage.textContent = "CLICK NOW!";
+                gameStatus.textContent = "Go! Click the game area.";
+                eventName.textContent = "ready";
+            }, delay);
+        });
+
+        gameArea.addEventListener("click", function () {
+            if (!gameStarted) {
+                return;
+            }
+
+            if (!gameReady) {
+                clearTimeout(timerId);
+
+                gameStarted = false;
+                gameReady = false;
+
+                gameArea.classList.remove("waiting");
+
+                gameMessage.textContent = "Too early! Press Start Game.";
+                gameStatus.textContent = "Clicked before the signal.";
+                eventName.textContent = "click";
+
+                return;
+            }
+
+            const endTime = performance.now();
+            const timeTaken = Math.round(endTime - startTime);
+
+            attempts++;
+
+            reactionTime.textContent = timeTaken + " ms";
+            attemptsDisplay.textContent = attempts;
+
+            gameStatus.textContent = "Reaction time recorded.";
+            eventName.textContent = "click";
+
+            gameMessage.textContent =
+                "Your reaction time: " + timeTaken + " ms";
+
+            gameArea.classList.remove("ready");
+
+            gameStarted = false;
+            gameReady = false;
+        });
+
+        resetButton.addEventListener("click", function () {
+            clearTimeout(timerId);
+
+            startTime = 0;
+            gameStarted = false;
+            gameReady = false;
+            attempts = 0;
+
+            gameArea.classList.remove("waiting", "ready");
+
+            gameMessage.textContent =
+                "Press Start Game to begin";
+
+            reactionTime.textContent = "-- ms";
+            gameStatus.textContent = "Ready to start";
+            eventName.textContent = "Waiting for interaction...";
+            attemptsDisplay.textContent = "0";
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>CSS Practicals</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Segoe UI", Arial, sans-serif;
+      background: #f1f5f9;
+      color: #334155;
+      line-height: 1.6;
+    }
+
+    header {
+      background: #0f172a;
+      padding: 18px 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      color: white;
+      font-size: 22px;
+      font-weight: bold;
+    }
+
+    nav a {
+      color: #cbd5e1;
+      text-decoration: none;
+      margin-left: 25px;
+      font-size: 15px;
+    }
+
+    nav a:hover {
+      color: white;
+    }
+
+    .hero {
+      background: linear-gradient(135deg, #1e3a8a, #2563eb);
+      color: white;
+      text-align: center;
+      padding: 65px 20px;
+    }
+
+    .badge {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.15);
+      padding: 7px 16px;
+      border-radius: 20px;
+      margin-bottom: 15px;
+      font-size: 14px;
+    }
+
+    .hero h1 {
+      font-size: 36px;
+      margin-bottom: 10px;
+    }
+
+    .hero p {
+      font-size: 17px;
+      opacity: 0.9;
+    }
+
+    main {
+      width: 90%;
+      max-width: 1050px;
+      margin: 40px auto;
+    }
+
+    .objective {
+      background: white;
+      padding: 22px;
+      border-left: 5px solid #2563eb;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
+      margin-bottom: 25px;
+    }
+
+    .objective h2 {
+      color: #1e3a8a;
+      margin-bottom: 8px;
+    }
+
+    .program-list {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
+    }
+
+    .program {
+      background: white;
+      padding: 18px 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
+      text-decoration: none;
+      color: #334155;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      transition: 0.2s;
+      border: 1px solid transparent;
+    }
+
+    .program:hover {
+      transform: translateY(-3px);
+      border-color: #2563eb;
+      box-shadow: 0 7px 18px rgba(15, 23, 42, 0.12);
+    }
+
+    .number {
+      width: 45px;
+      height: 45px;
+      min-width: 45px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #2563eb;
+      color: white;
+      border-radius: 8px;
+      font-weight: bold;
+    }
+
+    .program-title {
+      font-size: 15px;
+      font-weight: 600;
+    }
+
+    footer {
+      background: #0f172a;
+      color: #cbd5e1;
+      text-align: center;
+      padding: 22px;
+      margin-top: 50px;
+    }
+
+    @media (max-width: 750px) {
+      header {
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      nav a {
+        margin: 0 8px;
+      }
+
+      .hero h1 {
+        font-size: 28px;
+      }
+
+      .program-list {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 550px) {
+      main {
+        width: 94%;
+      }
+
+      .hero {
+        padding: 50px 15px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+
+    <div class="logo">
+      CSS Practicals
+    </div>
+
+    <nav>
+      <a href="../index.html">Home</a>
+      <a href="index.html">CSS</a>
+    </nav>
+
+  </header>
+
+  <section class="hero">
+
+    <div class="badge">
+      75 CSS Practicals
+    </div>
+
+    <h1>CSS Practicals</h1>
+
+    <p>
+      Learn and demonstrate CSS concepts through practical webpages
+    </p>
+
+  </section>
+
+  <main>
+
+    <section class="objective">
+
+      <h2>Objective</h2>
+
+      <p>
+        To learn and demonstrate CSS concepts including selectors,
+        colors, backgrounds, box model, positioning, Flexbox, Grid,
+        responsive design, animations, transitions and modern CSS features.
+      </p>
+
+    </section>
+
+    <section class="program-list">
+
+      <a href="01-inline-internal-external-css.html" class="program">
+        <span class="number">01</span>
+        <span class="program-title">
+          Inline, Internal and External CSS
+        </span>
+      </a>
+
+      <a href="02-css-selectors.html" class="program">
+        <span class="number">02</span>
+        <span class="program-title">
+          Different CSS Selectors
+        </span>
+      </a>
+
+      <a href="03-colors-backgrounds-borders.html" class="program">
+        <span class="number">03</span>
+        <span class="program-title">
+          CSS Colors, Backgrounds and Borders
+        </span>
+      </a>
+
+      <a href="04-font-text-formatting.html" class="program">
+        <span class="number">04</span>
+        <span class="program-title">
+          Font Properties and Text Formatting
+        </span>
+      </a>
+
+      <a href="05-box-model.html" class="program">
+        <span class="number">05</span>
+        <span class="program-title">
+          CSS Box Model
+        </span>
+      </a>
+
+      <a href="06-width-height-sizing.html" class="program">
+        <span class="number">06</span>
+        <span class="program-title">
+          Width, Height and Sizing Properties
+        </span>
+      </a>
+
+      <a href="07-css-positioning.html" class="program">
+        <span class="number">07</span>
+        <span class="program-title">
+          CSS Positioning
+        </span>
+      </a>
+
+      <a href="08-float-clear.html" class="program">
+        <span class="number">08</span>
+        <span class="program-title">
+          Float and Clear Properties
+        </span>
+      </a>
+
+      <a href="09-styled-navigation-bar.html" class="program">
+        <span class="number">09</span>
+        <span class="program-title">
+          Styled Navigation Bar
+        </span>
+      </a>
+
+      <a href="10-css-pseudo-classes.html" class="program">
+        <span class="number">10</span>
+        <span class="program-title">
+          CSS Pseudo-Classes
+        </span>
+      </a>
+
+      <a href="11-css-pseudo-elements.html" class="program">
+        <span class="number">11</span>
+        <span class="program-title">
+          CSS Pseudo-Elements
+        </span>
+      </a>
+
+      <a href="12-css-lists-tables.html" class="program">
+        <span class="number">12</span>
+        <span class="program-title">
+          CSS Lists and Tables
+        </span>
+      </a>
+
+      <a href="13-styled-registration-form.html" class="program">
+        <span class="number">13</span>
+        <span class="program-title">
+          Styled Registration Form
+        </span>
+      </a>
+
+      <a href="14-flexbox.html" class="program">
+        <span class="number">14</span>
+        <span class="program-title">
+          CSS Flexbox
+        </span>
+      </a>
+
+      <a href="15-grid-layout.html" class="program">
+        <span class="number">15</span>
+        <span class="program-title">
+          CSS Grid Layout
+        </span>
+      </a>
+
+      <a href="16-responsive-media-queries.html" class="program">
+        <span class="number">16</span>
+        <span class="program-title">
+          Responsive Design using Media Queries
+        </span>
+      </a>
+
+      <a href="17-transitions-transformations.html" class="program">
+        <span class="number">17</span>
+        <span class="program-title">
+          CSS Transitions and Transformations
+        </span>
+      </a>
+
+      <a href="18-css-animations.html" class="program">
+        <span class="number">18</span>
+        <span class="program-title">
+          CSS Animations
+        </span>
+      </a>
+
+      <a href="19-responsive-navigation-menu.html" class="program">
+        <span class="number">19</span>
+        <span class="program-title">
+          Responsive Navigation Menu
+        </span>
+      </a>
+
+      <a href="20-personal-portfolio.html" class="program">
+        <span class="number">20</span>
+        <span class="program-title">
+          Personal Portfolio Webpage
+        </span>
+      </a>
+
+      <a href="21-student-profile.html" class="program">
+        <span class="number">21</span>
+        <span class="program-title">
+          College/Student Profile Page
+        </span>
+      </a>
+
+      <a href="22-login-page.html" class="program">
+        <span class="number">22</span>
+        <span class="program-title">
+          Login Page
+        </span>
+      </a>
+
+      <a href="23-product-card.html" class="program">
+        <span class="number">23</span>
+        <span class="program-title">
+          Product Card Layout
+        </span>
+      </a>
+
+      <a href="24-responsive-photo-gallery.html" class="program">
+        <span class="number">24</span>
+        <span class="program-title">
+          Responsive Photo Gallery
+        </span>
+      </a>
+
+      <a href="25-complete-website-homepage.html" class="program">
+        <span class="number">25</span>
+        <span class="program-title">
+          Complete Website Homepage
+        </span>
+      </a>
+
+      <a href="26-inheritance-specificity.html" class="program">
+        <span class="number">26</span>
+        <span class="program-title">
+          CSS Inheritance and Specificity
+        </span>
+      </a>
+
+      <a href="27-basic-css-selectors.html" class="program">
+        <span class="number">27</span>
+        <span class="program-title">
+          Universal, Element, Class, ID, Attribute and Grouping Selectors
+        </span>
+      </a>
+
+      <a href="28-combinator-selectors.html" class="program">
+        <span class="number">28</span>
+        <span class="program-title">
+          CSS Combinator Selectors
+        </span>
+      </a>
+
+      <a href="29-css-variables.html" class="program">
+        <span class="number">29</span>
+        <span class="program-title">
+          CSS Variables
+        </span>
+      </a>
+
+      <a href="30-background-images.html" class="program">
+        <span class="number">30</span>
+        <span class="program-title">
+          Background Images and Positioning
+        </span>
+      </a>
+
+      <a href="31-css-gradients.html" class="program">
+        <span class="number">31</span>
+        <span class="program-title">
+          Linear and Radial Gradients
+        </span>
+      </a>
+
+      <a href="32-box-text-shadow.html" class="program">
+        <span class="number">32</span>
+        <span class="program-title">
+          Box Shadow and Text Shadow
+        </span>
+      </a>
+
+      <a href="33-border-radius-shapes.html" class="program">
+        <span class="number">33</span>
+        <span class="program-title">
+          Border Radius and Shapes
+        </span>
+      </a>
+
+      <a href="34-opacity-transparency.html" class="program">
+        <span class="number">34</span>
+        <span class="program-title">
+          Opacity and Transparency
+        </span>
+      </a>
+
+      <a href="35-overflow-properties.html" class="program">
+        <span class="number">35</span>
+        <span class="program-title">
+          CSS Overflow Properties
+        </span>
+      </a>
+
+      <a href="36-z-index-stacking.html" class="program">
+        <span class="number">36</span>
+        <span class="program-title">
+          Z-Index and Stacking Order
+        </span>
+      </a>
+
+      <a href="37-display-properties.html" class="program">
+        <span class="number">37</span>
+        <span class="program-title">
+          CSS Display Properties
+        </span>
+      </a>
+
+      <a href="38-visibility-hiding.html" class="program">
+        <span class="number">38</span>
+        <span class="program-title">
+          Visibility and Hiding Elements
+        </span>
+      </a>
+
+      <a href="39-dropdown-menu.html" class="program">
+        <span class="number">39</span>
+        <span class="program-title">
+          CSS Dropdown Menu
+        </span>
+      </a>
+
+      <a href="40-image-hover-effect.html" class="program">
+        <span class="number">40</span>
+        <span class="program-title">
+          Image Hover Effect
+        </span>
+      </a>
+
+      <a href="41-css-tooltip.html" class="program">
+        <span class="number">41</span>
+        <span class="program-title">
+          CSS Tooltip
+        </span>
+      </a>
+
+      <a href="42-button-hover-animation.html" class="program">
+        <span class="number">42</span>
+        <span class="program-title">
+          CSS-Only Button Hover Animation
+        </span>
+      </a>
+
+      <a href="43-css-filters.html" class="program">
+        <span class="number">43</span>
+        <span class="program-title">
+          CSS Filters
+        </span>
+      </a>
+
+      <a href="44-object-fit-position.html" class="program">
+        <span class="number">44</span>
+        <span class="program-title">
+          Object-Fit and Object-Position
+        </span>
+      </a>
+
+      <a href="45-responsive-image-gallery.html" class="program">
+        <span class="number">45</span>
+        <span class="program-title">
+          Responsive Image Gallery
+        </span>
+      </a>
+
+      <a href="46-flexbox-card-layout.html" class="program">
+        <span class="number">46</span>
+        <span class="program-title">
+          Card Layout using Flexbox
+        </span>
+      </a>
+
+      <a href="47-css-grid-dashboard.html" class="program">
+        <span class="number">47</span>
+        <span class="program-title">
+          Dashboard using CSS Grid
+        </span>
+      </a>
+
+      <a href="48-two-column-grid.html" class="program">
+        <span class="number">48</span>
+        <span class="program-title">
+          Two-Column CSS Grid Layout
+        </span>
+      </a>
+
+      <a href="49-three-column-flexbox.html" class="program">
+        <span class="number">49</span>
+        <span class="program-title">
+          Three-Column Flexbox Layout
+        </span>
+      </a>
+
+      <a href="50-sticky-header.html" class="program">
+        <span class="number">50</span>
+        <span class="program-title">
+          Sticky Header
+        </span>
+      </a>
+
+      <a href="51-fixed-sidebar.html" class="program">
+        <span class="number">51</span>
+        <span class="program-title">
+          Fixed Sidebar
+        </span>
+      </a>
+
+      <a href="52-responsive-footer.html" class="program">
+        <span class="number">52</span>
+        <span class="program-title">
+          Responsive Footer
+        </span>
+      </a>
+
+      <a href="53-responsive-login-signup.html" class="program">
+        <span class="number">53</span>
+        <span class="program-title">
+          Responsive Login and Signup Page
+        </span>
+      </a>
+
+      <a href="54-responsive-contact-form.html" class="program">
+        <span class="number">54</span>
+        <span class="program-title">
+          Responsive Contact Form
+        </span>
+      </a>
+
+      <a href="55-responsive-college-homepage.html" class="program">
+        <span class="number">55</span>
+        <span class="program-title">
+          Responsive College Website Homepage
+        </span>
+      </a>
+
+      <a href="56-restaurant-webpage.html" class="program">
+        <span class="number">56</span>
+        <span class="program-title">
+          Restaurant Webpage
+        </span>
+      </a>
+
+      <a href="57-online-shopping-webpage.html" class="program">
+        <span class="number">57</span>
+        <span class="program-title">
+          Online Shopping Webpage
+        </span>
+      </a>
+
+      <a href="58-travel-website.html" class="program">
+        <span class="number">58</span>
+        <span class="program-title">
+          Travel Website Homepage
+        </span>
+      </a>
+
+      <a href="59-news-blog-grid.html" class="program">
+        <span class="number">59</span>
+        <span class="program-title">
+          News/Blog Layout using CSS Grid
+        </span>
+      </a>
+
+      <a href="60-multi-section-portfolio.html" class="program">
+        <span class="number">60</span>
+        <span class="program-title">
+          Multi-Section Portfolio Website
+        </span>
+      </a>
+
+      <a href="61-grid-template-areas.html" class="program">
+        <span class="number">61</span>
+        <span class="program-title">
+          CSS Grid Template Areas
+        </span>
+      </a>
+
+      <a href="62-flexbox-alignment-ordering.html" class="program">
+        <span class="number">62</span>
+        <span class="program-title">
+          Flexbox Alignment and Ordering
+        </span>
+      </a>
+
+      <a href="63-responsive-grid-media-queries.html" class="program">
+        <span class="number">63</span>
+        <span class="program-title">
+          CSS Grid with Media Queries
+        </span>
+      </a>
+
+      <a href="64-mobile-first-responsive.html" class="program">
+        <span class="number">64</span>
+        <span class="program-title">
+          Mobile-First Responsive Webpage
+        </span>
+      </a>
+
+      <a href="65-css-transitions.html" class="program">
+        <span class="number">65</span>
+        <span class="program-title">
+          CSS Transitions
+        </span>
+      </a>
+
+      <a href="66-2d-3d-transformations.html" class="program">
+        <span class="number">66</span>
+        <span class="program-title">
+          2D and 3D CSS Transformations
+        </span>
+      </a>
+
+      <a href="67-keyframe-animations.html" class="program">
+        <span class="number">67</span>
+        <span class="program-title">
+          CSS Keyframe Animations
+        </span>
+      </a>
+
+      <a href="68-loading-spinner.html" class="program">
+        <span class="number">68</span>
+        <span class="program-title">
+          CSS Loading Spinner
+        </span>
+      </a>
+
+      <a href="69-sliding-card-animation.html" class="program">
+        <span class="number">69</span>
+        <span class="program-title">
+          Sliding Image/Card Animation
+        </span>
+      </a>
+
+      <a href="70-css-modal-popup.html" class="program">
+        <span class="number">70</span>
+        <span class="program-title">
+          CSS-Only Modal/Popup
+        </span>
+      </a>
+
+      <a href="71-dark-mode-css-variables.html" class="program">
+        <span class="number">71</span>
+        <span class="program-title">
+          Dark Mode using CSS Variables
+        </span>
+      </a>
+
+      <a href="72-responsive-typography.html" class="program">
+        <span class="number">72</span>
+        <span class="program-title">
+          Responsive Typography
+        </span>
+      </a>
+
+      <a href="73-clamp-min-max.html" class="program">
+        <span class="number">73</span>
+        <span class="program-title">
+          clamp(), min() and max()
+        </span>
+      </a>
+
+      <a href="74-css-calc.html" class="program">
+        <span class="number">74</span>
+        <span class="program-title">
+          CSS calc() Function
+        </span>
+      </a>
+
+      <a href="75-complete-responsive-website.html" class="program">
+        <span class="number">75</span>
+        <span class="program-title">
+          Complete Responsive Website
+        </span>
+      </a>
+
+    </section>
+
+  </main>
+
+  <footer>
+    CSS Practicals &copy; 2026
+  </footer>
+
+</body>
+</html>

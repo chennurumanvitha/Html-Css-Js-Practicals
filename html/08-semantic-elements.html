@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="description"
+        content="Demonstration of semantic HTML5 elements including header, nav, section, article and footer."
+    >
+
+    <title>Semantic HTML Elements | Practical 08</title>
+
+    <style>
+        /* =========================================
+           GLOBAL STYLES
+        ========================================== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: #f1f5f9;
+            color: #334155;
+            line-height: 1.6;
+        }
+
+        /* =========================================
+           HEADER & NAVIGATION
+        ========================================== */
+        header {
+            background: #0f172a;
+            color: #ffffff;
+            padding: 16px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        nav a {
+            color: #cbd5e1;
+            text-decoration: none;
+            margin-left: 25px;
+            font-size: 14px;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: #ffffff;
+        }
+
+        /* =========================================
+           HERO SECTION
+        ========================================== */
+        .hero {
+            background: linear-gradient(135deg, #1e3a8a, #2563eb);
+            color: #ffffff;
+            text-align: center;
+            padding: 65px 20px;
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 6px 15px;
+            border-radius: 20px;
+            font-size: 13px;
+            margin-bottom: 15px;
+        }
+
+        .hero h1 {
+            font-size: 42px;
+            margin-bottom: 10px;
+        }
+
+        .hero p {
+            font-size: 18px;
+            color: #dbeafe;
+        }
+
+        /* =========================================
+           MAIN CONTENT
+        ========================================== */
+        main {
+            width: 90%;
+            max-width: 1050px;
+            margin: 40px auto;
+        }
+
+        .objective,
+        .content-card {
+            background: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(15, 23, 42, 0.06);
+        }
+
+        /* Objective */
+        .objective {
+            border-left: 5px solid #2563eb;
+            padding: 22px 25px;
+            margin-bottom: 30px;
+        }
+
+        .objective h2 {
+            color: #1e3a8a;
+            font-size: 20px;
+            margin-bottom: 6px;
+        }
+
+        /* Content Cards */
+        .content-card {
+            padding: 35px;
+            margin-bottom: 25px;
+        }
+
+        .content-card > h2 {
+            color: #1e3a8a;
+            margin-bottom: 12px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e2e8f0;
+        }
+
+        /* =========================================
+           SEMANTIC ELEMENT CARDS
+        ========================================== */
+        .element-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 18px;
+            margin-top: 25px;
+        }
+
+        .element-card {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-left: 4px solid #2563eb;
+            border-radius: 8px;
+            padding: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .element-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 7px 18px rgba(15, 23, 42, 0.08);
+        }
+
+        .element-card h3 {
+            color: #1e3a8a;
+            margin-bottom: 8px;
+        }
+
+        .element-card p {
+            font-size: 14px;
+            color: #64748b;
+        }
+
+        /* =========================================
+           ARTICLE SECTION
+        ========================================== */
+        .article-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 18px;
+            margin-top: 25px;
+        }
+
+        article {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 22px;
+            transition: all 0.3s ease;
+        }
+
+        article:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 7px 18px rgba(15, 23, 42, 0.08);
+        }
+
+        article h3 {
+            color: #1e3a8a;
+            margin-bottom: 8px;
+        }
+
+        article p {
+            font-size: 14px;
+            color: #64748b;
+        }
+
+        /* =========================================
+           SECTION DEMONSTRATION
+        ========================================== */
+        .section-box {
+            background: #eff6ff;
+            border: 1px solid #bfdbfe;
+            border-radius: 8px;
+            padding: 22px;
+            margin-top: 20px;
+        }
+
+        .section-box h3 {
+            color: #1e3a8a;
+            margin-bottom: 8px;
+        }
+
+        /* =========================================
+           HTML CODE
+        ========================================== */
+        pre {
+            background: #0f172a;
+            color: #e2e8f0;
+            padding: 22px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin-top: 18px;
+            font-size: 14px;
+            line-height: 1.7;
+        }
+
+        code {
+            background: #e2e8f0;
+            color: #1e40af;
+            padding: 3px 7px;
+            border-radius: 4px;
+            font-family: Consolas, monospace;
+        }
+
+        pre code {
+            background: transparent;
+            color: #e2e8f0;
+            padding: 0;
+        }
+
+        /* =========================================
+           ADVANTAGES
+        ========================================== */
+        .advantages {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 20px 25px;
+        }
+
+        .advantages ul {
+            padding-left: 20px;
+        }
+
+        .advantages li {
+            margin: 8px 0;
+        }
+
+        /* =========================================
+           NAVIGATION BUTTONS
+        ========================================== */
+        .buttons {
+            text-align: center;
+            margin: 35px 0;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 22px;
+            margin: 5px;
+            background: #2563eb;
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 7px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            background: #1d4ed8;
+            transform: translateY(-2px);
+        }
+
+        .secondary {
+            background: #475569;
+        }
+
+        .secondary:hover {
+            background: #334155;
+        }
+
+        /* =========================================
+           FOOTER
+        ========================================== */
+        footer {
+            background: #0f172a;
+            color: #94a3b8;
+            text-align: center;
+            padding: 25px 15px;
+            margin-top: 50px;
+        }
+
+        footer strong {
+            color: #ffffff;
+        }
+
+        footer p + p {
+            margin-top: 5px;
+            font-size: 14px;
+        }
+
+        /* =========================================
+           RESPONSIVE DESIGN
+        ========================================== */
+        @media (max-width: 750px) {
+
+            header {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            nav a {
+                margin: 0 8px;
+            }
+
+            .hero h1 {
+                font-size: 30px;
+            }
+
+            .hero p {
+                font-size: 16px;
+            }
+
+            .content-card {
+                padding: 22px;
+            }
+
+            .element-grid,
+            .article-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- =========================================
+         HEADER
+    ========================================== -->
+    <header>
+
+        <div class="logo">
+            Web Practicals
+        </div>
+
+
+        <!-- =====================================
+             NAVIGATION
+        ====================================== -->
+        <nav>
+
+            <a href="../index.html">
+                Home
+            </a>
+
+            <a href="index.html">
+                HTML Programs
+            </a>
+
+        </nav>
+
+    </header>
+
+
+    <!-- =========================================
+         HERO SECTION
+    ========================================== -->
+    <section class="hero">
+
+        <div class="badge">
+            HTML PRACTICAL 08
+        </div>
+
+        <h1>Semantic HTML Elements</h1>
+
+        <p>
+            Creating Structured and Meaningful Web Pages
+            Using HTML5 Semantic Elements
+        </p>
+
+    </section>
+
+
+    <!-- =========================================
+         MAIN CONTENT
+    ========================================== -->
+    <main>
+
+        <!-- OBJECTIVE -->
+        <section class="objective">
+
+            <h2>Objective</h2>
+
+            <p>
+                To create an HTML page demonstrating semantic
+                elements such as
+                <code>&lt;header&gt;</code>,
+                <code>&lt;nav&gt;</code>,
+                <code>&lt;section&gt;</code>,
+                <code>&lt;article&gt;</code>, and
+                <code>&lt;footer&gt;</code>.
+            </p>
+
+        </section>
+
+
+        <!-- =====================================
+             SEMANTIC ELEMENTS
+        ====================================== -->
+        <section class="content-card">
+
+            <h2>1. Semantic HTML Elements</h2>
+
+            <p>
+                Semantic HTML elements clearly describe the meaning
+                and purpose of the content they contain. They improve
+                webpage structure, readability, accessibility, and
+                maintainability.
+            </p>
+
+
+            <div class="element-grid">
+
+                <!-- Header -->
+                <div class="element-card">
+
+                    <h3>
+                        &lt;header&gt;
+                    </h3>
+
+                    <p>
+                        Represents the introductory content of a
+                        webpage or a particular section.
+                    </p>
+
+                </div>
+
+
+                <!-- Navigation -->
+                <div class="element-card">
+
+                    <h3>
+                        &lt;nav&gt;
+                    </h3>
+
+                    <p>
+                        Contains important navigation links used
+                        to move between webpages or sections.
+                    </p>
+
+                </div>
+
+
+                <!-- Section -->
+                <div class="element-card">
+
+                    <h3>
+                        &lt;section&gt;
+                    </h3>
+
+                    <p>
+                        Groups related content into a meaningful
+                        section of a webpage.
+                    </p>
+
+                </div>
+
+
+                <!-- Article -->
+                <div class="element-card">
+
+                    <h3>
+                        &lt;article&gt;
+                    </h3>
+
+                    <p>
+                        Represents independent content such as
+                        an article, blog post, or news item.
+                    </p>
+
+                </div>
+
+
+                <!-- Footer -->
+                <div class="element-card">
+
+                    <h3>
+                        &lt;footer&gt;
+                    </h3>
+
+                    <p>
+                        Contains footer information such as
+                        copyright, contact information, or links.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================
+             ARTICLE DEMONSTRATION
+        ====================================== -->
+        <section class="content-card">
+
+            <h2>2. Article Demonstration</h2>
+
+            <p>
+                The following independent content blocks demonstrate
+                the use of the <code>&lt;article&gt;</code> element.
+            </p>
+
+
+            <div class="article-grid">
+
+                <article>
+
+                    <h3>
+                        Web Development
+                    </h3>
+
+                    <p>
+                        Web development involves creating and
+                        maintaining websites using technologies
+                        such as HTML, CSS, and JavaScript.
+                    </p>
+
+                </article>
+
+
+                <article>
+
+                    <h3>
+                        Artificial Intelligence
+                    </h3>
+
+                    <p>
+                        Artificial Intelligence enables computer
+                        systems to perform tasks that normally
+                        require human intelligence.
+                    </p>
+
+                </article>
+
+
+                <article>
+
+                    <h3>
+                        Data Science
+                    </h3>
+
+                    <p>
+                        Data Science combines programming,
+                        statistics, and analytical techniques
+                        to extract useful information from data.
+                    </p>
+
+                </article>
+
+
+                <article>
+
+                    <h3>
+                        Programming
+                    </h3>
+
+                    <p>
+                        Programming is the process of creating
+                        instructions that enable computers to
+                        perform specific tasks.
+                    </p>
+
+                </article>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================
+             SECTION DEMONSTRATION
+        ====================================== -->
+        <section class="content-card">
+
+            <h2>3. Section Demonstration</h2>
+
+            <p>
+                The <code>&lt;section&gt;</code> element is used
+                to group related content under a specific topic.
+            </p>
+
+
+            <section class="section-box">
+
+                <h3>
+                    Web Technologies
+                </h3>
+
+                <p>
+                    HTML provides the structure of a webpage,
+                    CSS provides styling, and JavaScript adds
+                    interactivity and dynamic behaviour.
+                </p>
+
+            </section>
+
+        </section>
+
+
+        
+
+        <!-- =====================================
+             ADVANTAGES
+        ====================================== -->
+        <section class="content-card">
+
+            <h2>5. Advantages of Semantic HTML</h2>
+
+            <div class="advantages">
+
+                <ul>
+
+                    <li>
+                        Improves webpage structure and readability.
+                    </li>
+
+                    <li>
+                        Makes the content easier to understand
+                        for developers.
+                    </li>
+
+                    <li>
+                        Improves accessibility for users and
+                        assistive technologies.
+                    </li>
+
+                    <li>
+                        Helps search engines understand the
+                        structure of webpage content.
+                    </li>
+
+                    <li>
+                        Makes websites easier to maintain and update.
+                    </li>
+
+                </ul>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================
+             NAVIGATION BUTTONS
+        ====================================== -->
+        <div class="buttons">
+
+            <a
+                href="index.html"
+                class="btn">
+                ← HTML Programs
+            </a>
+
+            <a
+                href="html-07.html"
+                class="btn secondary">
+                Previous Practical
+            </a>
+
+            <a
+                href="../index.html"
+                class="btn secondary">
+                Dashboard
+            </a>
+
+        </div>
+
+    </main>
+
+
+    <!-- =========================================
+         FOOTER
+    ========================================== -->
+    <footer>
+
+        <p>
+            <strong>Web Practicals</strong> |
+            HTML Practical 08
+        </p>
+
+        <p>
+            Semantic HTML • HTML5 • Structured Webpage
+        </p>
+
+    </footer>
+
+</body>
+
+</html>

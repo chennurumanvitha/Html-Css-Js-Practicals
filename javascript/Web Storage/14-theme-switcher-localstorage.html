@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dark Light Theme Switcher using localStorage</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Segoe UI", Arial, sans-serif;
+      background: #f1f5f9;
+      color: #334155;
+      line-height: 1.6;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    header {
+      background: #0f172a;
+      padding: 18px 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: background 0.3s;
+    }
+
+    .logo {
+      color: white;
+      font-size: 22px;
+      font-weight: bold;
+    }
+
+    nav a {
+      color: #cbd5e1;
+      text-decoration: none;
+      margin-left: 25px;
+      font-size: 15px;
+    }
+
+    nav a:hover {
+      color: white;
+    }
+
+    .hero {
+      background: linear-gradient(135deg, #1e3a8a, #2563eb);
+      color: white;
+      text-align: center;
+      padding: 65px 20px;
+    }
+
+    .badge {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.15);
+      padding: 7px 16px;
+      border-radius: 20px;
+      margin-bottom: 15px;
+      font-size: 14px;
+    }
+
+    .hero h1 {
+      font-size: 36px;
+      margin-bottom: 10px;
+    }
+
+    .hero p {
+      font-size: 17px;
+      opacity: 0.9;
+    }
+
+    main {
+      width: 90%;
+      max-width: 1050px;
+      margin: 40px auto;
+    }
+
+    .objective,
+    .card {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(15, 23, 42, 0.08);
+      transition: background 0.3s, color 0.3s;
+    }
+
+    .objective {
+      padding: 22px;
+      border-left: 5px solid #2563eb;
+      margin-bottom: 25px;
+    }
+
+    .objective h2,
+    .card h2 {
+      color: #1e3a8a;
+    }
+
+    .objective h2 {
+      margin-bottom: 8px;
+    }
+
+    .card {
+      padding: 30px;
+      margin-bottom: 25px;
+      text-align: center;
+    }
+
+    .card h2 {
+      margin-bottom: 25px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #e2e8f0;
+    }
+
+    .theme-preview {
+      padding: 35px 20px;
+      border: 1px solid #e2e8f0;
+      border-radius: 10px;
+      background: #f8fafc;
+      margin-bottom: 25px;
+      transition: background 0.3s, border-color 0.3s;
+    }
+
+    .theme-preview h3 {
+      color: #1e3a8a;
+      margin-bottom: 8px;
+    }
+
+    .theme-preview p {
+      color: #64748b;
+    }
+
+    .theme-status {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+
+    .buttons {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      flex-wrap: wrap;
+      margin-top: 30px;
+    }
+
+    .btn {
+      border: none;
+      background: #2563eb;
+      color: white;
+      padding: 11px 20px;
+      border-radius: 7px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      background: #1d4ed8;
+    }
+
+    .btn.secondary {
+      background: #475569;
+    }
+
+    .btn.secondary:hover {
+      background: #334155;
+    }
+
+    .btn.danger {
+      background: #dc2626;
+    }
+
+    .btn.danger:hover {
+      background: #b91c1c;
+    }
+
+    .navigation {
+      display: flex;
+      justify-content: space-between;
+      gap: 15px;
+      margin-top: 35px;
+    }
+
+    .navigation a {
+      text-decoration: none;
+      background: #2563eb;
+      color: white;
+      padding: 11px 20px;
+      border-radius: 7px;
+      font-weight: 600;
+      font-size: 14px;
+    }
+
+    .navigation a:hover {
+      background: #1d4ed8;
+    }
+
+    footer {
+      background: #0f172a;
+      color: #cbd5e1;
+      text-align: center;
+      padding: 22px;
+      margin-top: 50px;
+      transition: background 0.3s;
+    }
+
+    /* Dark Theme */
+
+    body.dark {
+      background: #0f172a;
+      color: #e2e8f0;
+    }
+
+    body.dark header {
+      background: #020617;
+    }
+
+    body.dark .objective,
+    body.dark .card {
+      background: #1e293b;
+      color: #e2e8f0;
+    }
+
+    body.dark .objective h2,
+    body.dark .card h2 {
+      color: #93c5fd;
+    }
+
+    body.dark .card h2 {
+      border-bottom-color: #334155;
+    }
+
+    body.dark .theme-preview {
+      background: #0f172a;
+      border-color: #334155;
+    }
+
+    body.dark .theme-preview h3 {
+      color: #93c5fd;
+    }
+
+    body.dark .theme-preview p {
+      color: #cbd5e1;
+    }
+
+    body.dark footer {
+      background: #020617;
+    }
+
+    @media (max-width: 750px) {
+      header {
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      nav a {
+        margin: 0 8px;
+      }
+
+      .hero h1 {
+        font-size: 28px;
+      }
+
+      .card {
+        padding: 22px;
+      }
+
+      .navigation {
+        flex-direction: column;
+      }
+
+      .navigation a {
+        text-align: center;
+      }
+    }
+
+    @media (max-width: 550px) {
+      main {
+        width: 94%;
+      }
+
+      .hero {
+        padding: 50px 15px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <div class="logo">Web Storage Practical</div>
+
+    <nav>
+      <a href="../../index.html">Home</a>
+<a href="../index.html">JavaScript Programs</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div class="badge">Practical 14</div>
+    <h1>Dark / Light Theme Switcher</h1>
+    <p>Save the selected theme using localStorage</p>
+  </section>
+
+  <main>
+
+    <section class="objective">
+      <h2>Objective</h2>
+      <p>
+        To create a dark and light theme switcher that saves the
+        user's selected theme using localStorage.
+      </p>
+    </section>
+
+    <section class="card">
+
+      <h2>Theme Switcher</h2>
+
+      <div class="theme-preview">
+        <h3>Theme Preview</h3>
+        <p>
+          Change the theme and refresh the page to see that the
+          selected theme is remembered.
+        </p>
+      </div>
+
+      <div class="theme-status">
+        Current Theme:
+        <span id="themeName">Light</span>
+      </div>
+
+      <div class="buttons">
+
+        <button
+          type="button"
+          class="btn"
+          onclick="setTheme('light')"
+        >
+          Light Mode
+        </button>
+
+        <button
+          type="button"
+          class="btn secondary"
+          onclick="setTheme('dark')"
+        >
+          Dark Mode
+        </button>
+
+        <button
+          type="button"
+          class="btn danger"
+          onclick="resetTheme()"
+        >
+          Reset Theme
+        </button>
+
+      </div>
+
+    </section>
+
+    <div class="navigation">
+      <a href="13-login-preference-localstorage.html">← Previous</a>
+      <a href="../index.html">Home</a>
+      <a href="15-preferred-font-size-localstorage.html">Next →</a>
+    </div>
+
+  </main>
+
+  <footer>
+    Web Storage Practicals &copy; 2026
+  </footer>
+
+  <script>
+    const themeName = document.getElementById("themeName");
+
+    function setTheme(theme) {
+      if (theme === "dark") {
+        document.body.classList.add("dark");
+        localStorage.setItem("theme", "dark");
+        themeName.textContent = "Dark";
+      } else {
+        document.body.classList.remove("dark");
+        localStorage.setItem("theme", "light");
+        themeName.textContent = "Light";
+      }
+    }
+
+    function loadTheme() {
+      const savedTheme = localStorage.getItem("theme");
+
+      if (savedTheme === "dark") {
+        setTheme("dark");
+      } else {
+        setTheme("light");
+      }
+    }
+
+    function resetTheme() {
+      localStorage.removeItem("theme");
+      setTheme("light");
+    }
+
+    loadTheme();
+  </script>
+
+</body>
+</html>

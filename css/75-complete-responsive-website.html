@@ -1,0 +1,1410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Complete Responsive Website | Practical 75</title>
+
+    <style>
+
+        /* =========================
+           GENERAL STYLES
+        ========================= */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: #f1f5f9;
+            color: #334155;
+            line-height: 1.6;
+        }
+
+        img {
+            width: 100%;
+            display: block;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+
+        /* =========================
+           HEADER - FLEXBOX
+        ========================= */
+
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+
+            background: #0f172a;
+            color: white;
+            padding: 18px 8%;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+
+            box-shadow: 0 3px 12px rgba(15, 23, 42, 0.2);
+        }
+
+        .logo {
+            font-size: 1.4rem;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 22px;
+        }
+
+        nav a {
+            color: #cbd5e1;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            color: white;
+        }
+
+        .nav-button {
+            background: #2563eb;
+            color: white;
+            padding: 9px 16px;
+            border-radius: 7px;
+            font-weight: 600;
+        }
+
+        .nav-button:hover {
+            background: #1e3a8a;
+        }
+
+
+        /* =========================
+           HERO
+        ========================= */
+
+        .hero {
+            min-height: 520px;
+
+            background:
+                linear-gradient(
+                    rgba(15, 23, 42, 0.75),
+                    rgba(30, 58, 138, 0.75)
+                ),
+                url("https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=1600&q=80");
+
+            background-size: cover;
+            background-position: center;
+
+            color: white;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            text-align: center;
+            padding: 60px 20px;
+        }
+
+        .hero-content {
+            max-width: 800px;
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.18);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 18px;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.2rem, 6vw, 4.2rem);
+            line-height: 1.1;
+            margin-bottom: 18px;
+        }
+
+        .hero p {
+            font-size: clamp(1rem, 2.5vw, 1.25rem);
+            margin-bottom: 28px;
+            color: #e2e8f0;
+        }
+
+        .hero-button {
+            display: inline-block;
+            background: #2563eb;
+            color: white;
+            padding: 13px 25px;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .hero-button:hover {
+            background: #1e3a8a;
+            transform: translateY(-3px);
+        }
+
+
+        /* =========================
+           COMMON SECTION
+        ========================= */
+
+        section {
+            scroll-margin-top: 90px;
+        }
+
+        .section {
+            width: 90%;
+            max-width: 1100px;
+            margin: 50px auto;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .section-title h2 {
+            color: #0f172a;
+            font-size: clamp(1.7rem, 4vw, 2.4rem);
+            margin-bottom: 8px;
+        }
+
+        .section-title p {
+            color: #64748b;
+        }
+
+
+        /* =========================
+           ABOUT - GRID
+        ========================= */
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .about-image {
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 18px rgba(15, 23, 42, 0.12);
+        }
+
+        .about-image img {
+            height: 350px;
+            object-fit: cover;
+            transition: 0.4s;
+        }
+
+        .about-image img:hover {
+            transform: scale(1.04);
+        }
+
+        .about-content {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(15, 23, 42, 0.08);
+        }
+
+        .about-content h3 {
+            color: #1e3a8a;
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+
+        .about-content p {
+            margin-bottom: 15px;
+        }
+
+
+        /* =========================
+           SERVICES - GRID
+        ========================= */
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 22px;
+        }
+
+        .service-card {
+            background: white;
+            padding: 28px;
+            border-radius: 12px;
+            border-top: 4px solid #2563eb;
+            box-shadow: 0 4px 15px rgba(15, 23, 42, 0.08);
+
+            transition: 0.3s;
+        }
+
+        .service-card:hover {
+            transform: translateY(-7px);
+            box-shadow: 0 10px 25px rgba(15, 23, 42, 0.14);
+        }
+
+        .service-icon {
+            width: 55px;
+            height: 55px;
+
+            background: #dbeafe;
+            color: #1e3a8a;
+
+            border-radius: 10px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 1.5rem;
+            font-weight: 700;
+
+            margin-bottom: 18px;
+        }
+
+        .service-card h3 {
+            color: #0f172a;
+            margin-bottom: 10px;
+        }
+
+        .service-card p {
+            color: #64748b;
+        }
+
+
+        /* =========================
+           FEATURES - FLEXBOX
+        ========================= */
+
+        .features-container {
+            background: white;
+            padding: 35px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(15, 23, 42, 0.08);
+        }
+
+        .features {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .feature {
+            flex: 1 1 220px;
+            max-width: 260px;
+
+            background: #f8fafc;
+            border-left: 4px solid #2563eb;
+            border-radius: 10px;
+            padding: 22px;
+        }
+
+        .feature h3 {
+            color: #1e3a8a;
+            margin-bottom: 8px;
+        }
+
+        .feature p {
+            color: #64748b;
+        }
+
+
+        /* =========================
+           PROJECTS - GRID
+        ========================= */
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 22px;
+        }
+
+        .project-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+
+            box-shadow: 0 4px 15px rgba(15, 23, 42, 0.08);
+
+            transition: 0.3s;
+        }
+
+        .project-card:hover {
+            transform: translateY(-6px);
+        }
+
+        .project-card img {
+            height: 210px;
+            object-fit: cover;
+        }
+
+        .project-content {
+            padding: 22px;
+        }
+
+        .project-content h3 {
+            color: #0f172a;
+            margin-bottom: 8px;
+        }
+
+        .project-content p {
+            color: #64748b;
+        }
+
+
+        /* =========================
+           STATS - FLEXBOX
+        ========================= */
+
+        .stats {
+            background: #1e3a8a;
+            color: white;
+            padding: 40px 30px;
+            border-radius: 12px;
+
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            gap: 25px;
+
+            text-align: center;
+        }
+
+        .stat {
+            flex: 1 1 150px;
+        }
+
+        .stat h3 {
+            font-size: 2rem;
+            margin-bottom: 5px;
+        }
+
+        .stat p {
+            color: #dbeafe;
+        }
+
+
+        /* =========================
+           CONTACT - GRID
+        ========================= */
+
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 25px;
+        }
+
+        .contact-info,
+        .contact-form {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(15, 23, 42, 0.08);
+        }
+
+        .contact-info h3,
+        .contact-form h3 {
+            color: #0f172a;
+            margin-bottom: 18px;
+        }
+
+        .contact-info p {
+            margin-bottom: 15px;
+            color: #64748b;
+        }
+
+        .contact-item {
+            padding: 14px 0;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .contact-item strong {
+            color: #1e3a8a;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 7px;
+            font-weight: 600;
+            color: #334155;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 14px;
+
+            border: 2px solid #cbd5e1;
+            border-radius: 8px;
+
+            font-family: inherit;
+            font-size: 15px;
+
+            outline: none;
+        }
+
+        .form-group textarea {
+            min-height: 130px;
+            resize: vertical;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            border-color: #2563eb;
+            box-shadow: 0 0 0 3px #dbeafe;
+        }
+
+        .submit-button {
+            border: none;
+            background: #2563eb;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .submit-button:hover {
+            background: #1e3a8a;
+        }
+
+
+        /* =========================
+           CALL TO ACTION
+        ========================= */
+
+        .cta {
+            background: linear-gradient(135deg, #1e3a8a, #2563eb);
+            color: white;
+
+            text-align: center;
+            padding: 55px 25px;
+            border-radius: 12px;
+        }
+
+        .cta h2 {
+            font-size: clamp(1.7rem, 4vw, 2.5rem);
+            margin-bottom: 12px;
+        }
+
+        .cta p {
+            margin-bottom: 25px;
+            color: #dbeafe;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: white;
+            color: #1e3a8a;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 700;
+        }
+
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        footer {
+            background: #0f172a;
+            color: #cbd5e1;
+            margin-top: 60px;
+        }
+
+        .footer-content {
+            width: 90%;
+            max-width: 1100px;
+            margin: auto;
+            padding: 45px 0;
+
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 40px;
+        }
+
+        .footer-section h3 {
+            color: white;
+            margin-bottom: 15px;
+        }
+
+        .footer-section p {
+            color: #94a3b8;
+        }
+
+        .footer-section a {
+            display: block;
+            color: #94a3b8;
+            margin-bottom: 8px;
+        }
+
+        .footer-section a:hover {
+            color: white;
+        }
+
+        .copyright {
+            border-top: 1px solid #334155;
+            text-align: center;
+            padding: 20px;
+            color: #94a3b8;
+        }
+
+
+        /* =========================
+           TABLET RESPONSIVE
+        ========================= */
+
+        @media (max-width: 900px) {
+
+            header {
+                padding: 18px 5%;
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .services-grid,
+            .projects-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .contact-container {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr 1fr;
+            }
+
+        }
+
+
+        /* =========================
+           MOBILE RESPONSIVE
+        ========================= */
+
+        @media (max-width: 750px) {
+
+            header {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            nav {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .hero {
+                min-height: 450px;
+                padding: 50px 20px;
+            }
+
+            .section {
+                width: 92%;
+                margin: 40px auto;
+            }
+
+            .services-grid,
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .about-image img {
+                height: 280px;
+            }
+
+            .features-container {
+                padding: 25px;
+            }
+
+            .features {
+                flex-direction: column;
+            }
+
+            .feature {
+                max-width: none;
+            }
+
+            .stats {
+                flex-direction: column;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 25px;
+            }
+
+        }
+
+
+        /* =========================
+           SMALL MOBILE
+        ========================= */
+
+        @media (max-width: 500px) {
+
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .about-content,
+            .contact-info,
+            .contact-form {
+                padding: 22px;
+            }
+
+            .cta {
+                padding: 40px 20px;
+            }
+
+        }
+
+    </style>
+</head>
+
+<body>
+
+
+    <!-- =========================
+         HEADER
+    ========================= -->
+
+    <header>
+
+        <div class="logo">
+            My Responsive Website
+        </div>
+
+        <nav>
+
+            <a href="#home">Home</a>
+
+            <a href="#about">About</a>
+
+            <a href="#services">Services</a>
+
+            <a href="#projects">Projects</a>
+
+            <a href="#contact">Contact</a>
+
+            <a href="../index.html" class="nav-button">
+                Dashboard
+            </a>
+
+        </nav>
+
+    </header>
+
+
+    <!-- =========================
+         HERO
+    ========================= -->
+
+    <section class="hero" id="home">
+
+        <div class="hero-content">
+
+            <div class="badge">
+                CSS PRACTICAL 75
+            </div>
+
+            <h1>
+                Complete Responsive Website
+            </h1>
+
+            <p>
+                A modern responsive webpage created using
+                HTML5, CSS3, Flexbox, Grid, and media queries.
+            </p>
+
+            <a href="#about" class="hero-button">
+                Explore Website
+            </a>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         ABOUT SECTION
+    ========================= -->
+
+    <section class="section" id="about">
+
+        <div class="section-title">
+
+            <h2>
+                About This Website
+            </h2>
+
+            <p>
+                A complete responsive webpage using modern CSS techniques
+            </p>
+
+        </div>
+
+
+        <div class="about-grid">
+
+            <div class="about-image">
+
+                <img
+                    src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=900&q=80"
+                    alt="Modern workspace"
+                >
+
+            </div>
+
+
+            <div class="about-content">
+
+                <h3>
+                    Modern Web Design
+                </h3>
+
+                <p>
+                    This webpage demonstrates how HTML5 and CSS3
+                    can be combined to create a modern and responsive
+                    website.
+                </p>
+
+                <p>
+                    CSS Grid is used for structured layouts, while
+                    Flexbox is used for flexible alignment and
+                    navigation components.
+                </p>
+
+                <p>
+                    Media queries make the website adapt to desktops,
+                    tablets, and mobile devices.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         SERVICES SECTION
+    ========================= -->
+
+    <section class="section" id="services">
+
+        <div class="section-title">
+
+            <h2>
+                Our Services
+            </h2>
+
+            <p>
+                Responsive solutions for modern websites
+            </p>
+
+        </div>
+
+
+        <div class="services-grid">
+
+
+            <div class="service-card">
+
+                <div class="service-icon">
+                    01
+                </div>
+
+                <h3>
+                    Web Design
+                </h3>
+
+                <p>
+                    Creating clean and modern webpage designs
+                    using HTML5 and CSS3.
+                </p>
+
+            </div>
+
+
+            <div class="service-card">
+
+                <div class="service-icon">
+                    02
+                </div>
+
+                <h3>
+                    Responsive Design
+                </h3>
+
+                <p>
+                    Building websites that work properly on
+                    desktops, tablets, and mobile devices.
+                </p>
+
+            </div>
+
+
+            <div class="service-card">
+
+                <div class="service-icon">
+                    03
+                </div>
+
+                <h3>
+                    UI Development
+                </h3>
+
+                <p>
+                    Developing user-friendly interfaces using
+                    Flexbox, Grid, and modern CSS.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         FEATURES SECTION
+    ========================= -->
+
+    <section class="section">
+
+        <div class="section-title">
+
+            <h2>
+                Website Features
+            </h2>
+
+            <p>
+                Technologies used in this practical
+            </p>
+
+        </div>
+
+
+        <div class="features-container">
+
+            <div class="features">
+
+                <div class="feature">
+
+                    <h3>
+                        HTML5
+                    </h3>
+
+                    <p>
+                        Semantic HTML5 elements are used to
+                        structure the webpage.
+                    </p>
+
+                </div>
+
+
+                <div class="feature">
+
+                    <h3>
+                        CSS3
+                    </h3>
+
+                    <p>
+                        Modern CSS properties are used for
+                        styling and visual design.
+                    </p>
+
+                </div>
+
+
+                <div class="feature">
+
+                    <h3>
+                        Flexbox
+                    </h3>
+
+                    <p>
+                        Flexbox is used for navigation,
+                        features, and flexible layouts.
+                    </p>
+
+                </div>
+
+
+                <div class="feature">
+
+                    <h3>
+                        CSS Grid
+                    </h3>
+
+                    <p>
+                        Grid is used to create structured
+                        multi-column webpage layouts.
+                    </p>
+
+                </div>
+
+
+                <div class="feature">
+
+                    <h3>
+                        Media Queries
+                    </h3>
+
+                    <p>
+                        Media queries make the webpage
+                        responsive on different devices.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         PROJECTS SECTION
+    ========================= -->
+
+    <section class="section" id="projects">
+
+        <div class="section-title">
+
+            <h2>
+                Featured Projects
+            </h2>
+
+            <p>
+                Example responsive web projects
+            </p>
+
+        </div>
+
+
+        <div class="projects-grid">
+
+
+            <div class="project-card">
+
+                <img
+                    src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=900&q=80"
+                    alt="Dashboard project"
+                >
+
+                <div class="project-content">
+
+                    <h3>
+                        Dashboard
+                    </h3>
+
+                    <p>
+                        A structured dashboard interface
+                        created using CSS Grid.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="project-card">
+
+                <img
+                    src="https://images.unsplash.com/photo-1559028012-481c04fa702d?auto=format&fit=crop&w=900&q=80"
+                    alt="Web design project"
+                >
+
+                <div class="project-content">
+
+                    <h3>
+                        Web Design
+                    </h3>
+
+                    <p>
+                        A modern interface demonstrating
+                        responsive design techniques.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="project-card">
+
+                <img
+                    src="https://images.unsplash.com/photo-1558655146-d09347e92766?auto=format&fit=crop&w=900&q=80"
+                    alt="Mobile application project"
+                >
+
+                <div class="project-content">
+
+                    <h3>
+                        Mobile Interface
+                    </h3>
+
+                    <p>
+                        A mobile-friendly interface created
+                        with responsive CSS.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         STATS SECTION
+    ========================= -->
+
+    <section class="section">
+
+        <div class="stats">
+
+            <div class="stat">
+
+                <h3>
+                    75
+                </h3>
+
+                <p>
+                    CSS Practicals
+                </p>
+
+            </div>
+
+
+            <div class="stat">
+
+                <h3>
+                    5
+                </h3>
+
+                <p>
+                    Core Technologies
+                </p>
+
+            </div>
+
+
+            <div class="stat">
+
+                <h3>
+                    100%
+                </h3>
+
+                <p>
+                    Responsive Design
+                </p>
+
+            </div>
+
+
+            <div class="stat">
+
+                <h3>
+                    3
+                </h3>
+
+                <p>
+                    Device Layouts
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         CONTACT SECTION
+    ========================= -->
+
+    <section class="section" id="contact">
+
+        <div class="section-title">
+
+            <h2>
+                Contact Us
+            </h2>
+
+            <p>
+                Get in touch with us
+            </p>
+
+        </div>
+
+
+        <div class="contact-container">
+
+
+            <div class="contact-info">
+
+                <h3>
+                    Contact Information
+                </h3>
+
+                <p>
+                    Feel free to contact us for more information
+                    about our responsive web solutions.
+                </p>
+
+
+                <div class="contact-item">
+
+                    <strong>
+                        Email
+                    </strong>
+
+                    <p>
+                        example@email.com
+                    </p>
+
+                </div>
+
+
+                <div class="contact-item">
+
+                    <strong>
+                        Phone
+                    </strong>
+
+                    <p>
+                        +91 98765 43210
+                    </p>
+
+                </div>
+
+
+                <div class="contact-item">
+
+                    <strong>
+                        Location
+                    </strong>
+
+                    <p>
+                        Chennai, Tamil Nadu, India
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="contact-form">
+
+                <h3>
+                    Send a Message
+                </h3>
+
+                <form>
+
+                    <div class="form-group">
+
+                        <label for="name">
+                            Full Name
+                        </label>
+
+                        <input
+                            type="text"
+                            id="name"
+                            name="name"
+                            placeholder="Enter your name"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="email">
+                            Email Address
+                        </label>
+
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            placeholder="Enter your email"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="message">
+                            Message
+                        </label>
+
+                        <textarea
+                            id="message"
+                            name="message"
+                            placeholder="Enter your message"
+                            required
+                        ></textarea>
+
+                    </div>
+
+
+                    <button
+                        type="submit"
+                        class="submit-button">
+                        Send Message
+                    </button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         CALL TO ACTION
+    ========================= -->
+
+    <section class="section">
+
+        <div class="cta">
+
+            <h2>
+                Build Responsive Websites
+            </h2>
+
+            <p>
+                HTML5, CSS3, Flexbox, Grid, and media queries
+                work together to create flexible web layouts.
+            </p>
+
+            <a href="#home" class="cta-button">
+                Back to Top
+            </a>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         FOOTER
+    ========================= -->
+
+    <footer>
+
+        <div class="footer-content">
+
+
+            <div class="footer-section">
+
+                <h3>
+                    My Responsive Website
+                </h3>
+
+                <p>
+                    A complete responsive website demonstrating
+                    HTML5, CSS3, Flexbox, Grid, and media queries.
+                </p>
+
+            </div>
+
+
+            <div class="footer-section">
+
+                <h3>
+                    Quick Links
+                </h3>
+
+                <a href="#home">Home</a>
+                <a href="#about">About</a>
+                <a href="#services">Services</a>
+                <a href="#projects">Projects</a>
+
+            </div>
+
+
+            <div class="footer-section">
+
+                <h3>
+                    Practical
+                </h3>
+
+                <a href="css-74.html">
+                    Previous Practical
+                </a>
+
+                <a href="index.html">
+                    CSS Programs
+                </a>
+
+                <a href="../index.html">
+                    Dashboard
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <div class="copyright">
+
+            <p>
+                <strong>CSS Practical 75</strong>
+                | Complete Responsive Website
+            </p>
+
+            <p>
+                Designed using HTML5 and CSS3
+            </p>
+
+        </div>
+
+    </footer>
+
+</body>
+</html>

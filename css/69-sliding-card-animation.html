@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sliding Image and Card Animation | Practical 69</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: #f1f5f9;
+            color: #334155;
+            line-height: 1.6;
+        }
+
+        header {
+            background: #0f172a;
+            color: white;
+            padding: 18px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        nav {
+            display: flex;
+            gap: 22px;
+        }
+
+        nav a {
+            color: #cbd5e1;
+            text-decoration: none;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            color: white;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #1e3a8a, #2563eb);
+            color: white;
+            text-align: center;
+            padding: 65px 20px;
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 8px 18px;
+            border-radius: 20px;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        .hero h1 {
+            font-size: 38px;
+            margin-bottom: 10px;
+        }
+
+        .hero p {
+            font-size: 17px;
+        }
+
+        main {
+            width: 90%;
+            max-width: 1050px;
+            margin: 40px auto;
+        }
+
+        .objective,
+        .content-card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(15, 23, 42, 0.08);
+        }
+
+        .objective {
+            border-left: 5px solid #2563eb;
+            padding: 22px 25px;
+            margin-bottom: 25px;
+        }
+
+        .objective h2 {
+            color: #1e3a8a;
+            margin-bottom: 8px;
+        }
+
+        .content-card {
+            padding: 35px;
+            margin-bottom: 25px;
+            overflow: hidden;
+        }
+
+        .content-card h2 {
+            color: #1e3a8a;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #dbeafe;
+        }
+
+        .content-card h3 {
+            color: #2563eb;
+            margin-bottom: 8px;
+        }
+
+        /* Sliding Image */
+
+        .image-slider {
+            width: 100%;
+            height: 300px;
+            margin-top: 25px;
+            overflow: hidden;
+            border-radius: 12px;
+            position: relative;
+            background: #dbeafe;
+        }
+
+        .sliding-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            animation: slideImage 6s infinite alternate ease-in-out;
+        }
+
+        @keyframes slideImage {
+            0% {
+                transform: translateX(-15%);
+            }
+
+            100% {
+                transform: translateX(15%);
+            }
+        }
+
+        /* Sliding Card */
+
+        .card-slider {
+            height: 260px;
+            background: #eff6ff;
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+            margin-top: 25px;
+        }
+
+        .sliding-card {
+            position: absolute;
+            width: 280px;
+            background: white;
+            border-left: 5px solid #2563eb;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 5px 18px rgba(15, 23, 42, 0.12);
+
+            animation: slideCard 5s infinite alternate ease-in-out;
+        }
+
+        @keyframes slideCard {
+            0% {
+                left: -300px;
+            }
+
+            100% {
+                left: calc(100% - 280px);
+            }
+        }
+
+        /* Multiple Sliding Cards */
+
+        .cards-container {
+            display: flex;
+            gap: 20px;
+            overflow: hidden;
+            padding: 20px 0;
+            margin-top: 20px;
+        }
+
+        .animated-card {
+            min-width: 240px;
+            background: #f8fafc;
+            border-left: 4px solid #2563eb;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
+            animation: cardSlide 8s infinite linear;
+        }
+
+        @keyframes cardSlide {
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(-260px);
+            }
+        }
+
+        .card-icon {
+            width: 55px;
+            height: 55px;
+            background: #2563eb;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        /* Slide From Left */
+
+        .slide-left-area {
+            background: #eff6ff;
+            border-radius: 10px;
+            padding: 30px;
+            margin-top: 20px;
+            overflow: hidden;
+        }
+
+        .slide-left-box {
+            background: #1e3a8a;
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: 600;
+
+            animation: slideFromLeft 3s infinite alternate ease-in-out;
+        }
+
+        @keyframes slideFromLeft {
+            0% {
+                transform: translateX(-100%);
+            }
+
+            100% {
+                transform: translateX(0);
+            }
+        }
+
+        /* Slide From Right */
+
+        .slide-right-area {
+            background: #eff6ff;
+            border-radius: 10px;
+            padding: 30px;
+            margin-top: 20px;
+            overflow: hidden;
+        }
+
+        .slide-right-box {
+            background: #2563eb;
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: 600;
+
+            animation: slideFromRight 3s infinite alternate ease-in-out;
+        }
+
+        @keyframes slideFromRight {
+            0% {
+                transform: translateX(100%);
+            }
+
+            100% {
+                transform: translateX(0);
+            }
+        }
+
+        /* Sliding Image Card */
+
+        .image-card {
+            max-width: 420px;
+            margin: 25px auto 0;
+            background: #f8fafc;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 18px rgba(15, 23, 42, 0.12);
+
+            animation: cardAppear 4s infinite alternate ease-in-out;
+        }
+
+        .image-card img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .image-card-content {
+            padding: 22px;
+        }
+
+        @keyframes cardAppear {
+            0% {
+                transform: translateX(-80px);
+                opacity: 0.5;
+            }
+
+            100% {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        .code-box {
+            background: #0f172a;
+            color: #e2e8f0;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin-top: 20px;
+        }
+
+        .code-box code {
+            font-family: Consolas, monospace;
+            font-size: 14px;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 22px;
+            background: #2563eb;
+            color: white;
+            text-decoration: none;
+            border-radius: 7px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background: #1e3a8a;
+            transform: translateY(-2px);
+        }
+
+        .secondary {
+            background: #0f172a;
+        }
+
+        .secondary:hover {
+            background: #1e293b;
+        }
+
+        footer {
+            background: #0f172a;
+            color: #cbd5e1;
+            text-align: center;
+            padding: 25px;
+            margin-top: 40px;
+        }
+
+        footer strong {
+            color: white;
+        }
+
+        @media (max-width: 750px) {
+
+            header {
+                justify-content: center;
+                gap: 15px;
+            }
+
+            nav {
+                width: 100%;
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+
+            .hero h1 {
+                font-size: 30px;
+            }
+
+            .content-card {
+                padding: 25px 20px;
+            }
+
+            .image-slider {
+                height: 220px;
+            }
+
+            .sliding-card {
+                width: 240px;
+            }
+
+            .card-slider {
+                height: 230px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+
+        <div class="logo">CSS Learning Hub</div>
+
+        <nav>
+            <a href="../index.html">Home</a>
+            <a href="index.html">CSS Programs</a>
+        </nav>
+
+    </header>
+
+    <section class="hero">
+
+        <div class="badge">CSS PRACTICAL 69</div>
+
+        <h1>Sliding Image and Card Animation</h1>
+
+        <p>
+            Creating sliding effects using CSS keyframe animations
+        </p>
+
+    </section>
+
+    <main>
+
+        <section class="objective">
+
+            <h2>Objective</h2>
+
+            <p>
+                To create sliding image and card animations using CSS
+                <strong>@keyframes</strong> and the
+                <strong>animation</strong> property without using JavaScript.
+            </p>
+
+        </section>
+
+        <section class="content-card">
+
+            <h2>Sliding Image Animation</h2>
+
+            <p>
+                The image moves horizontally from left to right using
+                the CSS <strong>transform</strong> property and
+                <strong>@keyframes</strong>.
+            </p>
+
+            <div class="image-slider">
+
+                <img
+                    class="sliding-image"
+                    src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1200&q=80"
+                    alt="Modern workspace"
+                >
+
+            </div>
+
+        </section>
+
+        <section class="content-card">
+
+            <h2>Sliding Card Animation</h2>
+
+            <p>
+                The card slides across the container from the left side
+                to the right side using a keyframe animation.
+            </p>
+
+            <div class="card-slider">
+
+                <div class="sliding-card">
+
+                    <h3>Animated Card</h3>
+
+                    <p>
+                        This card moves smoothly across the container
+                        using CSS keyframes.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <section class="content-card">
+
+            <h2>Multiple Sliding Cards</h2>
+
+            <p>
+                Multiple cards can be animated to create a continuous
+                horizontal sliding effect.
+            </p>
+
+            <div class="cards-container">
+
+                <div class="animated-card">
+
+                    <div class="card-icon">1</div>
+
+                    <h3>Web Design</h3>
+
+                    <p>
+                        Creating modern and responsive webpages.
+                    </p>
+
+                </div>
+
+                <div class="animated-card">
+
+                    <div class="card-icon">2</div>
+
+                    <h3>CSS Styling</h3>
+
+                    <p>
+                        Designing attractive interfaces using CSS.
+                    </p>
+
+                </div>
+
+                <div class="animated-card">
+
+                    <div class="card-icon">3</div>
+
+                    <h3>Animations</h3>
+
+                    <p>
+                        Adding smooth motion effects to webpages.
+                    </p>
+
+                </div>
+
+                <div class="animated-card">
+
+                    <div class="card-icon">4</div>
+
+                    <h3>Responsive Design</h3>
+
+                    <p>
+                        Making webpages work across different devices.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <section class="content-card">
+
+            <h2>Slide From Left</h2>
+
+            <p>
+                This example demonstrates an element entering the page
+                from the left side.
+            </p>
+
+            <div class="slide-left-area">
+
+                <div class="slide-left-box">
+                    Sliding From Left
+                </div>
+
+            </div>
+
+        </section>
+
+        <section class="content-card">
+
+            <h2>Slide From Right</h2>
+
+            <p>
+                This example demonstrates an element entering the page
+                from the right side.
+            </p>
+
+            <div class="slide-right-area">
+
+                <div class="slide-right-box">
+                    Sliding From Right
+                </div>
+
+            </div>
+
+        </section>
+
+        <section class="content-card">
+
+            <h2>Sliding Image Card</h2>
+
+            <p>
+                An image and its content can be combined into a card
+                and animated using CSS keyframes.
+            </p>
+
+            <div class="image-card">
+
+                <img
+                    src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=900&q=80"
+                    alt="Web development workspace"
+                >
+
+                <div class="image-card-content">
+
+                    <h3>Web Development</h3>
+
+                    <p>
+                        A simple image card with a smooth sliding
+                        entrance animation.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        
+
+            
+</code>
+
+            </div>
+
+        </section>
+
+        <div class="buttons">
+
+            <a href="css-68.html" class="btn secondary">
+                ← Previous Practical
+            </a>
+
+            <a href="index.html" class="btn">
+                CSS Programs
+            </a>
+
+            <a href="../index.html" class="btn secondary">
+                Dashboard
+            </a>
+
+        </div>
+
+    </main>
+
+    <footer>
+
+        <p>
+            <strong>CSS Practical 69</strong> |
+            Sliding Image and Card Animation
+        </p>
+
+        <p>
+            Designed using HTML5 and CSS3
+        </p>
+
+    </footer>
+
+</body>
+</html>

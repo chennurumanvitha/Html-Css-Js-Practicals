@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Contact Form | CSS Practical 54</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: #f1f5f9;
+            color: #334155;
+            line-height: 1.6;
+        }
+
+        /* Header */
+        header {
+            background: #0f172a;
+            color: white;
+            padding: 18px 30px;
+        }
+
+        .header-container {
+            width: 90%;
+            max-width: 1050px;
+            margin: auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 22px;
+            font-weight: 700;
+        }
+
+        nav a {
+            color: #cbd5e1;
+            text-decoration: none;
+            margin-left: 22px;
+            font-size: 15px;
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            color: white;
+        }
+
+        /* Hero */
+        .hero {
+            background: linear-gradient(135deg, #1e3a8a, #2563eb);
+            color: white;
+            text-align: center;
+            padding: 65px 20px;
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 7px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            margin-bottom: 15px;
+        }
+
+        .hero h1 {
+            font-size: 34px;
+            margin-bottom: 10px;
+        }
+
+        .hero p {
+            max-width: 700px;
+            margin: auto;
+            color: #dbeafe;
+        }
+
+        /* Main */
+        main {
+            width: 90%;
+            max-width: 1050px;
+            margin: 40px auto;
+        }
+
+        .objective,
+        .content-card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(15, 23, 42, 0.08);
+        }
+
+        .objective {
+            border-left: 5px solid #2563eb;
+            padding: 22px 25px;
+            margin-bottom: 25px;
+        }
+
+        .objective h2 {
+            color: #1e3a8a;
+            margin-bottom: 8px;
+        }
+
+        .content-card {
+            padding: 35px;
+            margin-bottom: 25px;
+        }
+
+        .content-card h2 {
+            color: #1e3a8a;
+            margin-bottom: 18px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #dbeafe;
+        }
+
+        /* Contact Layout */
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 25px;
+            margin-top: 20px;
+        }
+
+        /* Contact Information */
+        .contact-info {
+            background: #0f172a;
+            color: white;
+            border-radius: 10px;
+            padding: 30px;
+        }
+
+        .contact-info h3 {
+            margin-bottom: 12px;
+            font-size: 22px;
+        }
+
+        .contact-info > p {
+            color: #cbd5e1;
+            font-size: 14px;
+            margin-bottom: 25px;
+        }
+
+        .contact-item {
+            margin-bottom: 20px;
+        }
+
+        .contact-item h4 {
+            color: #dbeafe;
+            margin-bottom: 3px;
+        }
+
+        .contact-item p {
+            color: #94a3b8;
+            font-size: 14px;
+        }
+
+        /* Contact Form */
+        .form-container {
+            background: #f8fafc;
+            border-left: 4px solid #2563eb;
+            border-radius: 10px;
+            padding: 30px;
+        }
+
+        .contact-form {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 18px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group.full-width {
+            grid-column: 1 / -1;
+        }
+
+        .form-group label {
+            color: #1e3a8a;
+            font-weight: 600;
+            margin-bottom: 7px;
+            font-size: 14px;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 14px;
+            border: 2px solid #cbd5e1;
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 15px;
+            color: #334155;
+            background: white;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        .form-group textarea {
+            min-height: 140px;
+            resize: vertical;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: #2563eb;
+            box-shadow: 0 0 0 3px #dbeafe;
+        }
+
+        .form-actions {
+            grid-column: 1 / -1;
+            display: flex;
+            gap: 10px;
+            margin-top: 5px;
+        }
+
+        .submit-btn,
+        .reset-btn {
+            border: none;
+            padding: 12px 22px;
+            border-radius: 7px;
+            font-family: inherit;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .submit-btn {
+            background: #2563eb;
+            color: white;
+        }
+
+        .submit-btn:hover {
+            background: #1e3a8a;
+            transform: translateY(-2px);
+        }
+
+        .reset-btn {
+            background: #e2e8f0;
+            color: #1e3a8a;
+        }
+
+        .reset-btn:hover {
+            background: #cbd5e1;
+        }
+
+        /* Responsive Features */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+        }
+
+        .feature-card {
+            background: #f8fafc;
+            border-left: 4px solid #2563eb;
+            border-radius: 10px;
+            padding: 20px;
+        }
+
+        .feature-card h3 {
+            color: #1e3a8a;
+            margin-bottom: 8px;
+        }
+
+        .feature-card p {
+            font-size: 14px;
+        }
+
+        /* Navigation Buttons */
+        .buttons {
+            text-align: center;
+            margin: 35px 0;
+        }
+
+        .btn {
+            display: inline-block;
+            background: #2563eb;
+            color: white;
+            text-decoration: none;
+            padding: 11px 20px;
+            border-radius: 7px;
+            margin: 5px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background: #1e3a8a;
+            transform: translateY(-2px);
+        }
+
+        .btn.secondary {
+            background: #e2e8f0;
+            color: #1e3a8a;
+        }
+
+        .btn.secondary:hover {
+            background: #cbd5e1;
+        }
+
+        /* Footer */
+        footer {
+            background: #0f172a;
+            color: #94a3b8;
+            text-align: center;
+            padding: 25px;
+        }
+
+        footer strong {
+            color: white;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 850px) {
+            .contact-container {
+                grid-template-columns: 1fr;
+            }
+
+            .features {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 750px) {
+            .header-container {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            nav {
+                text-align: center;
+            }
+
+            nav a {
+                margin: 0 8px;
+            }
+
+            .hero h1 {
+                font-size: 28px;
+            }
+
+            .content-card {
+                padding: 25px 20px;
+            }
+
+            .form-container {
+                padding: 22px 18px;
+            }
+
+            .contact-form {
+                grid-template-columns: 1fr;
+            }
+
+            .form-group.full-width {
+                grid-column: auto;
+            }
+
+            .form-actions {
+                grid-column: auto;
+                flex-direction: column;
+            }
+
+            .submit-btn,
+            .reset-btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+
+            <div class="logo">
+                CSS Practical
+            </div>
+
+            <nav>
+                <a href="../index.html">Home</a>
+                <a href="index.html">CSS Programs</a>
+            </nav>
+
+        </div>
+    </header>
+
+
+    <!-- Hero Section -->
+    <section class="hero">
+
+        <span class="badge">CSS PRACTICAL 54</span>
+
+        <h1>Responsive Contact Form</h1>
+
+        <p>
+            Create a responsive contact form using HTML and CSS
+            that adapts to different screen sizes.
+        </p>
+
+    </section>
+
+
+    <main>
+
+        <!-- Objective -->
+        <section class="objective">
+
+            <h2>Objective</h2>
+
+            <p>
+                To create a responsive contact form using HTML
+                form elements and CSS media queries so that the
+                form provides a user-friendly experience on
+                desktop, tablet, and mobile devices.
+            </p>
+
+        </section>
+
+
+        <!-- Contact Form -->
+        <section class="content-card">
+
+            <h2>Contact Form</h2>
+
+            <div class="contact-container">
+
+                <!-- Contact Information -->
+                <div class="contact-info">
+
+                    <h3>Get in Touch</h3>
+
+                    <p>
+                        Fill out the form to send a message.
+                        We would be happy to hear from you.
+                    </p>
+
+                    <div class="contact-item">
+                        <h4>Email</h4>
+                        <p>chmanvitha2007@gmail.com</p>
+                    </div>
+
+                    <div class="contact-item">
+                        <h4>Phone</h4>
+                        <p>+91 98765 43210</p>
+                    </div>
+
+                    <div class="contact-item">
+                        <h4>Location</h4>
+                        <p>Chennai, Tamil Nadu, India</p>
+                    </div>
+
+                </div>
+
+
+                <!-- Form -->
+                <div class="form-container">
+
+                    <form class="contact-form">
+
+                        <div class="form-group">
+
+                            <label for="name">
+                                Full Name
+                            </label>
+
+                            <input
+                                type="text"
+                                id="name"
+                                placeholder="Enter your name"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="email">
+                                Email Address
+                            </label>
+
+                            <input
+                                type="email"
+                                id="email"
+                                placeholder="Enter your email"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="phone">
+                                Phone Number
+                            </label>
+
+                            <input
+                                type="tel"
+                                id="phone"
+                                placeholder="Enter your phone number"
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="subject">
+                                Subject
+                            </label>
+
+                            <select id="subject" required>
+
+                                <option value="">
+                                    Select a subject
+                                </option>
+
+                                <option value="general">
+                                    General Enquiry
+                                </option>
+
+                                <option value="academic">
+                                    Academic Enquiry
+                                </option>
+
+                                <option value="project">
+                                    Project Enquiry
+                                </option>
+
+                                <option value="other">
+                                    Other
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <div class="form-group full-width">
+
+                            <label for="message">
+                                Message
+                            </label>
+
+                            <textarea
+                                id="message"
+                                placeholder="Write your message here..."
+                                required
+                            ></textarea>
+
+                        </div>
+
+
+                        <div class="form-actions">
+
+                            <button
+                                type="submit"
+                                class="submit-btn">
+                                Send Message
+                            </button>
+
+                            <button
+                                type="reset"
+                                class="reset-btn">
+                                Reset
+                            </button>
+
+                        </div>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- Responsive Features -->
+        <section class="content-card">
+
+            <h2>Responsive Design Features</h2>
+
+            <div class="features">
+
+                <div class="feature-card">
+                    <h3>Flexible Grid</h3>
+
+                    <p>
+                        CSS Grid creates a two-column contact
+                        layout that adapts to the available space.
+                    </p>
+                </div>
+
+                <div class="feature-card">
+                    <h3>Mobile Friendly</h3>
+
+                    <p>
+                        Media queries change the form into a
+                        single-column layout on smaller screens.
+                    </p>
+                </div>
+
+                <div class="feature-card">
+                    <h3>Form Styling</h3>
+
+                    <p>
+                        Inputs, select boxes, textarea, and
+                        buttons are styled for easy interaction.
+                    </p>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- Navigation -->
+        <div class="buttons">
+
+            <a href="css-53.html" class="btn secondary">
+                ← Previous Practical
+            </a>
+
+            <a href="index.html" class="btn">
+                CSS Programs
+            </a>
+
+            <a href="../index.html" class="btn">
+                Dashboard
+            </a>
+
+        </div>
+
+    </main>
+
+
+    <!-- Footer -->
+    <footer>
+
+        <p>
+            <strong>CSS Practical 54</strong> |
+            Responsive Contact Form
+        </p>
+
+        <p>
+            Created using HTML5 and CSS3
+        </p>
+
+    </footer>
+
+</body>
+</html>

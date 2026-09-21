@@ -1,0 +1,866 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Marks & Grade Calculator | JavaScript Mini Project</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: #f1f5f9;
+            color: #334155;
+            line-height: 1.6;
+        }
+
+        header {
+            background: #0f172a;
+            padding: 18px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: white;
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        nav a {
+            color: #cbd5e1;
+            text-decoration: none;
+            margin-left: 25px;
+            font-size: 15px;
+        }
+
+        nav a:hover {
+            color: white;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #1e3a8a, #2563eb);
+            color: white;
+            text-align: center;
+            padding: 65px 20px;
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 7px 16px;
+            border-radius: 20px;
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+
+        .hero h1 {
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+
+        .hero p {
+            font-size: 17px;
+            opacity: 0.9;
+        }
+
+        main {
+            width: 90%;
+            max-width: 1050px;
+            margin: 40px auto;
+        }
+
+        .objective {
+            background: white;
+            padding: 22px;
+            border-left: 5px solid #2563eb;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
+            margin-bottom: 25px;
+        }
+
+        .objective h2 {
+            color: #1e3a8a;
+            margin-bottom: 8px;
+        }
+
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(15, 23, 42, 0.08);
+            margin-bottom: 25px;
+        }
+
+        .card h2 {
+            color: #1e3a8a;
+            margin-bottom: 25px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e2e8f0;
+        }
+
+        .student-info {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 18px;
+            margin-bottom: 25px;
+        }
+
+        .form-group {
+            margin-bottom: 5px;
+        }
+
+        .form-group.full {
+            grid-column: 1 / -1;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 7px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #cbd5e1;
+            border-radius: 7px;
+            font-size: 15px;
+            outline: none;
+        }
+
+        .form-group input:focus {
+            border-color: #2563eb;
+        }
+
+        .marks-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 18px;
+        }
+
+        .mark-input label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 7px;
+        }
+
+        .mark-input input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #cbd5e1;
+            border-radius: 7px;
+            font-size: 15px;
+            outline: none;
+        }
+
+        .mark-input input:focus {
+            border-color: #2563eb;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 25px;
+        }
+
+        .btn {
+            border: none;
+            background: #2563eb;
+            color: white;
+            padding: 11px 20px;
+            border-radius: 7px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .btn:hover {
+            background: #1d4ed8;
+        }
+
+        .btn.secondary {
+            background: #475569;
+        }
+
+        .btn.secondary:hover {
+            background: #334155;
+        }
+
+        .message {
+            text-align: center;
+            min-height: 25px;
+            margin-top: 15px;
+            font-size: 14px;
+        }
+
+        .result {
+            display: none;
+        }
+
+        .result.show {
+            display: block;
+        }
+
+        .student-summary {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 18px;
+            margin-bottom: 20px;
+        }
+
+        .student-summary p {
+            margin-bottom: 5px;
+        }
+
+        .result-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+        }
+
+        .result-box {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 18px;
+            text-align: center;
+        }
+
+        .result-box h3 {
+            color: #64748b;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+
+        .result-box p {
+            color: #1e3a8a;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .grade {
+            color: #16a34a !important;
+        }
+
+        .failed {
+            color: #dc2626 !important;
+        }
+
+        .marks-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 25px;
+        }
+
+        .marks-table th,
+        .marks-table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .marks-table th {
+            background: #f8fafc;
+            color: #1e3a8a;
+        }
+
+        .features {
+            padding-left: 20px;
+        }
+
+        .features li {
+            margin-bottom: 8px;
+        }
+
+        .navigation {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+
+        .navigation a {
+            text-decoration: none;
+            color: white;
+            background: #2563eb;
+            padding: 11px 20px;
+            border-radius: 7px;
+            font-weight: 600;
+        }
+
+        .navigation a:hover {
+            background: #1d4ed8;
+        }
+
+        footer {
+            background: #0f172a;
+            color: #cbd5e1;
+            text-align: center;
+            padding: 22px;
+            margin-top: 50px;
+        }
+
+        @media (max-width: 800px) {
+            .result-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 750px) {
+            header {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            nav a {
+                margin: 0 8px;
+            }
+
+            .hero h1 {
+                font-size: 28px;
+            }
+
+            .card {
+                padding: 22px;
+            }
+
+            .student-info,
+            .marks-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .form-group.full {
+                grid-column: auto;
+            }
+        }
+
+        @media (max-width: 550px) {
+            main {
+                width: 94%;
+            }
+
+            .hero {
+                padding: 50px 15px;
+            }
+
+            .result-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .marks-table {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="logo">JavaScript Mini Project</div>
+
+        <nav>
+            <a href="../../index.html">Home</a>
+<a href="../index.html">JavaScript Programs</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <span class="badge">Mini Projects — Project 11</span>
+        <h1>Student Marks & Grade Calculator</h1>
+        <p>Calculate total marks, percentage and grade using JavaScript</p>
+    </section>
+
+    <main>
+
+        <section class="objective">
+            <h2>Objective</h2>
+            <p>
+                Create a student marks calculator that accepts marks for
+                different subjects and calculates the total, percentage,
+                average and corresponding grade.
+            </p>
+        </section>
+
+        <section class="card">
+            <h2>Enter Student Details</h2>
+
+            <form id="marksForm">
+
+                <div class="student-info">
+
+                    <div class="form-group">
+                        <label for="studentName">
+                            Student Name
+                        </label>
+
+                        <input
+                            type="text"
+                            id="studentName"
+                            placeholder="Enter student name"
+                            required
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="rollNumber">
+                            Roll Number
+                        </label>
+
+                        <input
+                            type="text"
+                            id="rollNumber"
+                            placeholder="Enter roll number"
+                            required
+                        >
+                    </div>
+
+                </div>
+
+                <h3 style="color:#1e3a8a; margin-bottom:18px;">
+                    Enter Marks
+                </h3>
+
+                <div class="marks-grid">
+
+                    <div class="mark-input">
+                        <label for="english">English</label>
+                        <input
+                            type="number"
+                            id="english"
+                            min="0"
+                            max="100"
+                            placeholder="0 - 100"
+                            required
+                        >
+                    </div>
+
+                    <div class="mark-input">
+                        <label for="mathematics">Mathematics</label>
+                        <input
+                            type="number"
+                            id="mathematics"
+                            min="0"
+                            max="100"
+                            placeholder="0 - 100"
+                            required
+                        >
+                    </div>
+
+                    <div class="mark-input">
+                        <label for="science">Science</label>
+                        <input
+                            type="number"
+                            id="science"
+                            min="0"
+                            max="100"
+                            placeholder="0 - 100"
+                            required
+                        >
+                    </div>
+
+                    <div class="mark-input">
+                        <label for="socialScience">Social Science</label>
+                        <input
+                            type="number"
+                            id="socialScience"
+                            min="0"
+                            max="100"
+                            placeholder="0 - 100"
+                            required
+                        >
+                    </div>
+
+                    <div class="mark-input">
+                        <label for="computer">Computer Science</label>
+                        <input
+                            type="number"
+                            id="computer"
+                            min="0"
+                            max="100"
+                            placeholder="0 - 100"
+                            required
+                        >
+                    </div>
+
+                    <div class="mark-input">
+                        <label for="tamil">Tamil</label>
+                        <input
+                            type="number"
+                            id="tamil"
+                            min="0"
+                            max="100"
+                            placeholder="0 - 100"
+                            required
+                        >
+                    </div>
+
+                </div>
+
+                <div class="buttons">
+
+                    <button type="submit" class="btn">
+                        Calculate Result
+                    </button>
+
+                    <button
+                        type="button"
+                        class="btn secondary"
+                        onclick="resetCalculator()"
+                    >
+                        Reset
+                    </button>
+
+                </div>
+
+                <p class="message" id="message"></p>
+
+            </form>
+        </section>
+
+        <section class="card result" id="resultSection">
+            <h2>Student Result</h2>
+
+            <div class="student-summary">
+                <p>
+                    <strong>Student Name:</strong>
+                    <span id="resultName"></span>
+                </p>
+
+                <p>
+                    <strong>Roll Number:</strong>
+                    <span id="resultRoll"></span>
+                </p>
+            </div>
+
+            <div class="result-grid">
+
+                <div class="result-box">
+                    <h3>Total Marks</h3>
+                    <p id="totalMarks">0</p>
+                </div>
+
+                <div class="result-box">
+                    <h3>Percentage</h3>
+                    <p id="percentage">0%</p>
+                </div>
+
+                <div class="result-box">
+                    <h3>Average</h3>
+                    <p id="average">0</p>
+                </div>
+
+                <div class="result-box">
+                    <h3>Grade</h3>
+                    <p id="grade" class="grade">-</p>
+                </div>
+
+            </div>
+
+            <table class="marks-table">
+                <thead>
+                    <tr>
+                        <th>Subject</th>
+                        <th>Marks</th>
+                    </tr>
+                </thead>
+
+                <tbody id="marksTableBody"></tbody>
+            </table>
+        </section>
+
+        <section class="card">
+            <h2>Grade Scale</h2>
+
+            <table class="marks-table">
+                <thead>
+                    <tr>
+                        <th>Percentage</th>
+                        <th>Grade</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr>
+                        <td>90 - 100%</td>
+                        <td>A+</td>
+                    </tr>
+
+                    <tr>
+                        <td>80 - 89%</td>
+                        <td>A</td>
+                    </tr>
+
+                    <tr>
+                        <td>70 - 79%</td>
+                        <td>B</td>
+                    </tr>
+
+                    <tr>
+                        <td>60 - 69%</td>
+                        <td>C</td>
+                    </tr>
+
+                    <tr>
+                        <td>50 - 59%</td>
+                        <td>D</td>
+                    </tr>
+
+                    <tr>
+                        <td>Below 50%</td>
+                        <td>F</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section class="card">
+            <h2>Features</h2>
+
+            <ul class="features">
+                <li>Accepts student name and roll number.</li>
+                <li>Accepts marks for six subjects.</li>
+                <li>Validates marks between 0 and 100.</li>
+                <li>Calculates total marks.</li>
+                <li>Calculates percentage and average.</li>
+                <li>Assigns a grade based on percentage.</li>
+                <li>Displays individual subject marks.</li>
+                <li>Provides a reset button.</li>
+                <li>Responsive design for different screen sizes.</li>
+            </ul>
+        </section>
+
+        <div class="navigation">
+            <a href="10-expense-tracker.html">Previous</a>
+            <a href="../index.html">Home</a>
+            <a href="12-simple-shopping-cart.html">Next</a>
+        </div>
+
+    </main>
+
+    <footer>
+        <p>JavaScript Mini Projects &copy; 2026</p>
+    </footer>
+
+    <script>
+        const marksForm = document.getElementById("marksForm");
+        const message = document.getElementById("message");
+        const resultSection = document.getElementById("resultSection");
+
+        const subjects = [
+            {
+                name: "English",
+                id: "english"
+            },
+            {
+                name: "Mathematics",
+                id: "mathematics"
+            },
+            {
+                name: "Science",
+                id: "science"
+            },
+            {
+                name: "Social Science",
+                id: "socialScience"
+            },
+            {
+                name: "Computer Science",
+                id: "computer"
+            },
+            {
+                name: "Tamil",
+                id: "tamil"
+            }
+        ];
+
+        marksForm.addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            const studentName =
+                document.getElementById("studentName").value.trim();
+
+            const rollNumber =
+                document.getElementById("rollNumber").value.trim();
+
+            if (studentName === "" || rollNumber === "") {
+                showMessage(
+                    "Please enter the student name and roll number.",
+                    "#dc2626"
+                );
+                return;
+            }
+
+            const marks = [];
+
+            for (let subject of subjects) {
+                const input =
+                    document.getElementById(subject.id);
+
+                const mark = Number(input.value);
+
+                if (
+                    input.value === "" ||
+                    !Number.isFinite(mark) ||
+                    mark < 0 ||
+                    mark > 100
+                ) {
+                    showMessage(
+                        "Please enter valid marks between 0 and 100 for all subjects.",
+                        "#dc2626"
+                    );
+
+                    input.focus();
+                    return;
+                }
+
+                marks.push({
+                    name: subject.name,
+                    mark: mark
+                });
+            }
+
+            calculateResult(
+                studentName,
+                rollNumber,
+                marks
+            );
+        });
+
+        function calculateResult(
+            studentName,
+            rollNumber,
+            marks
+        ) {
+            let total = 0;
+
+            marks.forEach(function(subject) {
+                total += subject.mark;
+            });
+
+            const maximumMarks = marks.length * 100;
+
+            const percentage =
+                (total / maximumMarks) * 100;
+
+            const average =
+                total / marks.length;
+
+            const grade =
+                calculateGrade(percentage);
+
+            document.getElementById("resultName").textContent =
+                studentName;
+
+            document.getElementById("resultRoll").textContent =
+                rollNumber;
+
+            document.getElementById("totalMarks").textContent =
+                total + " / " + maximumMarks;
+
+            document.getElementById("percentage").textContent =
+                percentage.toFixed(2) + "%";
+
+            document.getElementById("average").textContent =
+                average.toFixed(2);
+
+            const gradeElement =
+                document.getElementById("grade");
+
+            gradeElement.textContent = grade;
+
+            gradeElement.classList.remove("failed");
+
+            if (grade === "F") {
+                gradeElement.classList.add("failed");
+            }
+
+            const tableBody =
+                document.getElementById("marksTableBody");
+
+            tableBody.innerHTML = "";
+
+            marks.forEach(function(subject) {
+                const row =
+                    document.createElement("tr");
+
+                const subjectCell =
+                    document.createElement("td");
+
+                subjectCell.textContent =
+                    subject.name;
+
+                const markCell =
+                    document.createElement("td");
+
+                markCell.textContent =
+                    subject.mark + " / 100";
+
+                row.appendChild(subjectCell);
+                row.appendChild(markCell);
+
+                tableBody.appendChild(row);
+            });
+
+            resultSection.classList.add("show");
+
+            showMessage(
+                "Result calculated successfully.",
+                "#16a34a"
+            );
+        }
+
+        function calculateGrade(percentage) {
+            if (percentage >= 90) {
+                return "A+";
+            }
+
+            if (percentage >= 80) {
+                return "A";
+            }
+
+            if (percentage >= 70) {
+                return "B";
+            }
+
+            if (percentage >= 60) {
+                return "C";
+            }
+
+            if (percentage >= 50) {
+                return "D";
+            }
+
+            return "F";
+        }
+
+        function resetCalculator() {
+            marksForm.reset();
+
+            resultSection.classList.remove("show");
+
+            message.textContent = "";
+
+            document.getElementById("studentName").focus();
+        }
+
+        function showMessage(text, color) {
+            message.textContent = text;
+            message.style.color = color;
+        }
+    </script>
+
+</body>
+</html>

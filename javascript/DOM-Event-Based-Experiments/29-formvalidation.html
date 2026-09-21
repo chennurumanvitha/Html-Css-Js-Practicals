@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>JavaScript Practical 29 - Form Validation</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: #f1f5f9;
+            color: #334155;
+            line-height: 1.6;
+        }
+
+        header {
+            background: #0f172a;
+            color: white;
+            padding: 18px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            font-size: 22px;
+            font-weight: 700;
+        }
+
+        nav {
+            display: flex;
+            gap: 22px;
+        }
+
+        nav a {
+            color: #cbd5e1;
+            text-decoration: none;
+            font-size: 15px;
+        }
+
+        nav a:hover {
+            color: white;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #1e3a8a, #2563eb);
+            color: white;
+            text-align: center;
+            padding: 65px 20px;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 7px 14px;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.18);
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        .hero h1 {
+            margin: 0;
+            font-size: 38px;
+        }
+
+        .hero p {
+            margin: 10px 0 0;
+            font-size: 17px;
+            color: #dbeafe;
+        }
+
+        main {
+            width: 90%;
+            max-width: 1050px;
+            margin: 40px auto;
+        }
+
+        .card {
+            background: white;
+            padding: 28px;
+            margin-bottom: 25px;
+            border-radius: 12px;
+            box-shadow: 0 5px 18px rgba(15, 23, 42, 0.08);
+        }
+
+        .objective {
+            border-left: 5px solid #2563eb;
+        }
+
+        .card h2 {
+            margin-top: 0;
+            color: #1e3a8a;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 10px;
+        }
+
+        .form-container {
+            max-width: 600px;
+            margin: auto;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 7px;
+            color: #334155;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #cbd5e1;
+            border-radius: 7px;
+            font-size: 15px;
+            outline: none;
+        }
+
+        input:focus {
+            border-color: #2563eb;
+        }
+
+        .error {
+            color: #dc2626;
+            font-size: 13px;
+            margin-top: 5px;
+            min-height: 18px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 11px 20px;
+            border: none;
+            border-radius: 7px;
+            background: #2563eb;
+            color: white;
+            text-decoration: none;
+            font-size: 15px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .btn:hover {
+            background: #1d4ed8;
+        }
+
+        .output {
+            background: #eff6ff;
+            border: 2px dashed #93c5fd;
+            border-radius: 8px;
+            padding: 18px;
+            text-align: center;
+            font-weight: 600;
+            color: #1e3a8a;
+            margin-top: 20px;
+        }
+
+        .success {
+            color: #15803d;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+
+        .secondary {
+            background: #475569;
+        }
+
+        .secondary:hover {
+            background: #334155;
+        }
+
+        footer {
+            background: #0f172a;
+            color: #94a3b8;
+            text-align: center;
+            padding: 22px;
+            margin-top: 50px;
+        }
+
+        @media (max-width: 750px) {
+            header {
+                justify-content: center;
+                gap: 12px;
+            }
+
+            nav {
+                gap: 15px;
+            }
+
+            .hero h1 {
+                font-size: 30px;
+            }
+
+            .card {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">JavaScript Practical</div>
+
+    <nav>
+       <a href="../../index.html">Home</a>
+<a href="../index.html">JavaScript Programs</a>
+    </nav>
+</header>
+
+<section class="hero">
+    <div class="badge">JavaScript Practical 29</div>
+
+    <h1>Form Validation</h1>
+
+    <p>Validate form input using JavaScript</p>
+</section>
+
+<main>
+
+    <section class="card objective">
+        <h2>Objective</h2>
+
+        <p>
+            Create a form validation program using JavaScript.
+        </p>
+    </section>
+
+    <section class="card">
+        <h2>Form Validation</h2>
+
+        <div class="form-container">
+
+            <form id="validationForm">
+
+                <div class="form-group">
+                    <label for="name">Name</label>
+
+                    <input
+                        type="text"
+                        id="name"
+                        placeholder="Enter your name"
+                    >
+
+                    <div class="error" id="nameError"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email</label>
+
+                    <input
+                        type="text"
+                        id="email"
+                        placeholder="Enter your email"
+                    >
+
+                    <div class="error" id="emailError"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password</label>
+
+                    <input
+                        type="password"
+                        id="password"
+                        placeholder="Enter your password"
+                    >
+
+                    <div class="error" id="passwordError"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="confirmPassword">Confirm Password</label>
+
+                    <input
+                        type="password"
+                        id="confirmPassword"
+                        placeholder="Re-enter your password"
+                    >
+
+                    <div class="error" id="confirmPasswordError"></div>
+                </div>
+
+                <button type="submit" class="btn">
+                    Validate Form
+                </button>
+
+            </form>
+
+            <div class="output" id="result">
+                Fill in the form and click "Validate Form".
+            </div>
+
+        </div>
+    </section>
+
+    <div class="buttons">
+        <a href="javascript-28.html" class="btn">← Previous Practical</a>
+
+        <a href="index.html" class="btn secondary">
+            JavaScript Programs
+        </a>
+
+        <a href="../index.html" class="btn">
+            Dashboard
+        </a>
+    </div>
+
+</main>
+
+<footer>
+    <p>JavaScript Practical Assignment</p>
+</footer>
+
+<script>
+    document.getElementById("validationForm").addEventListener("submit", function(event) {
+
+        event.preventDefault();
+
+        const name = document.getElementById("name").value.trim();
+        const email = document.getElementById("email").value.trim();
+        const password = document.getElementById("password").value;
+        const confirmPassword = document.getElementById("confirmPassword").value;
+
+        const nameError = document.getElementById("nameError");
+        const emailError = document.getElementById("emailError");
+        const passwordError = document.getElementById("passwordError");
+        const confirmPasswordError =
+            document.getElementById("confirmPasswordError");
+
+        const result = document.getElementById("result");
+
+        nameError.textContent = "";
+        emailError.textContent = "";
+        passwordError.textContent = "";
+        confirmPasswordError.textContent = "";
+
+        result.classList.remove("success");
+
+        let isValid = true;
+
+        if (name === "") {
+            nameError.textContent = "Name is required.";
+            isValid = false;
+        }
+
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        if (email === "") {
+            emailError.textContent = "Email is required.";
+            isValid = false;
+        } else if (!emailPattern.test(email)) {
+            emailError.textContent = "Enter a valid email address.";
+            isValid = false;
+        }
+
+        if (password === "") {
+            passwordError.textContent = "Password is required.";
+            isValid = false;
+        } else if (password.length < 6) {
+            passwordError.textContent =
+                "Password must contain at least 6 characters.";
+            isValid = false;
+        }
+
+        if (confirmPassword === "") {
+            confirmPasswordError.textContent =
+                "Please confirm your password.";
+            isValid = false;
+        } else if (password !== confirmPassword) {
+            confirmPasswordError.textContent =
+                "Passwords do not match.";
+            isValid = false;
+        }
+
+        if (isValid) {
+            result.textContent =
+                "Form submitted successfully. All fields are valid.";
+
+            result.classList.add("success");
+        } else {
+            result.textContent =
+                "Please correct the errors in the form.";
+        }
+    });
+</script>
+
+</body>
+</html>

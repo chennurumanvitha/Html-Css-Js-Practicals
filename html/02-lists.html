@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>HTML Lists | Practical 02</title>
+
+    <style>
+        /* ------------------------------
+           General Styling
+        ------------------------------ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background-color: #f1f5f9;
+            color: #334155;
+            line-height: 1.7;
+        }
+
+        /* ------------------------------
+           Navigation Bar
+        ------------------------------ */
+        nav {
+            background-color: #0f172a;
+            padding: 16px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: white;
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        nav a {
+            color: #cbd5e1;
+            text-decoration: none;
+            margin-left: 25px;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            color: white;
+        }
+
+        /* ------------------------------
+           Hero Section
+        ------------------------------ */
+        .hero {
+            background: linear-gradient(135deg, #1e3a8a, #2563eb);
+            color: white;
+            text-align: center;
+            padding: 65px 20px;
+        }
+
+        .badge {
+            display: inline-block;
+            background-color: rgba(255, 255, 255, 0.15);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            margin-bottom: 15px;
+        }
+
+        .hero h1 {
+            font-size: 42px;
+            margin-bottom: 10px;
+        }
+
+        .hero p {
+            font-size: 18px;
+            color: #dbeafe;
+        }
+
+        /* ------------------------------
+           Main Content
+        ------------------------------ */
+        main {
+            width: 90%;
+            max-width: 1000px;
+            margin: 40px auto;
+        }
+
+        .objective {
+            background-color: white;
+            border-left: 5px solid #2563eb;
+            padding: 22px 25px;
+            margin-bottom: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(15, 23, 42, 0.06);
+        }
+
+        .objective h2 {
+            color: #1e3a8a;
+            font-size: 20px;
+            margin-bottom: 5px;
+        }
+
+        .content-card {
+            background-color: white;
+            padding: 35px;
+            margin-bottom: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(15, 23, 42, 0.06);
+        }
+
+        .content-card h2 {
+            color: #1e3a8a;
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #e2e8f0;
+        }
+
+        .content-card p {
+            margin-bottom: 15px;
+        }
+
+        /* ------------------------------
+           List Styling
+        ------------------------------ */
+        ol,
+        ul,
+        dl {
+            margin: 15px 0 25px 25px;
+        }
+
+        ol li,
+        ul li {
+            padding: 5px 0;
+        }
+
+        ol li::marker {
+            font-weight: bold;
+        }
+
+        ul li::marker {
+            font-size: 14px;
+        }
+
+        dt {
+            color: #1e40af;
+            font-weight: 700;
+            margin-top: 15px;
+        }
+
+        dd {
+            margin-left: 25px;
+            color: #475569;
+        }
+
+        .list-box {
+            background-color: #f8fafc;
+            border: 1px solid #e2e8f0;
+            padding: 20px 25px;
+            border-radius: 8px;
+            margin-top: 15px;
+        }
+
+        /* ------------------------------
+           Navigation Buttons
+        ------------------------------ */
+        .buttons {
+            text-align: center;
+            margin: 35px 0;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 22px;
+            margin: 5px;
+            background-color: #2563eb;
+            color: white;
+            text-decoration: none;
+            border-radius: 7px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #1d4ed8;
+            transform: translateY(-2px);
+        }
+
+        .btn.secondary {
+            background-color: #475569;
+        }
+
+        .btn.secondary:hover {
+            background-color: #334155;
+        }
+
+        /* ------------------------------
+           Footer
+        ------------------------------ */
+        footer {
+            background-color: #0f172a;
+            color: #94a3b8;
+            text-align: center;
+            padding: 25px 15px;
+            margin-top: 50px;
+        }
+
+        footer strong {
+            color: white;
+        }
+
+        /* ------------------------------
+           Responsive Design
+        ------------------------------ */
+        @media (max-width: 700px) {
+
+            nav {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            nav a {
+                margin: 0 8px;
+            }
+
+            .hero h1 {
+                font-size: 30px;
+            }
+
+            .content-card {
+                padding: 22px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ==============================
+         Navigation Bar
+    =============================== -->
+    <nav>
+
+        <div class="logo">
+            Web Practicals
+        </div>
+
+        <div>
+            <a href="../index.html">Home</a>
+            <a href="index.html">HTML Programs</a>
+        </div>
+
+    </nav>
+
+
+    <!-- ==============================
+         Hero Section
+    =============================== -->
+    <section class="hero">
+
+        <div class="badge">
+            HTML PRACTICAL 02
+        </div>
+
+        <h1>HTML Lists</h1>
+
+        <p>
+            Ordered, Unordered and Description Lists
+        </p>
+
+    </section>
+
+
+    <!-- ==============================
+         Main Content
+    =============================== -->
+    <main>
+
+        <!-- Objective -->
+        <section class="objective">
+
+            <h2>Objective</h2>
+
+            <p>
+                To create an HTML webpage containing ordered,
+                unordered, and description lists.
+            </p>
+
+        </section>
+
+
+        <!-- Ordered List -->
+        <section class="content-card">
+
+            <h2>1. Ordered List</h2>
+
+            <p>
+                An ordered list is used when the items need to be
+                displayed in a specific sequence.
+            </p>
+
+            <div class="list-box">
+
+                <h3>Steps to Develop a Web Page</h3>
+
+                <ol>
+                    <li>Plan the webpage structure</li>
+                    <li>Create the HTML document</li>
+                    <li>Add content and elements</li>
+                    <li>Apply CSS styling</li>
+                    <li>Test the webpage</li>
+                </ol>
+
+            </div>
+
+        </section>
+
+
+        <!-- Unordered List -->
+        <section class="content-card">
+
+            <h2>2. Unordered List</h2>
+
+            <p>
+                An unordered list is used when the items do not
+                require a particular order.
+            </p>
+
+            <div class="list-box">
+
+                <h3>Areas of Interest</h3>
+
+                <ul>
+                    <li>Artificial Intelligence</li>
+                    <li>Machine Learning</li>
+                    <li>Data Science</li>
+                    <li>Web Development</li>
+                    <li>Programming</li>
+                </ul>
+
+            </div>
+
+        </section>
+
+
+        <!-- Description List -->
+        <section class="content-card">
+
+            <h2>3. Description List</h2>
+
+            <p>
+                A description list is used to display terms along
+                with their corresponding descriptions.
+            </p>
+
+            <div class="list-box">
+
+                <h3>Web Technologies</h3>
+
+                <dl>
+
+                    <dt>HTML</dt>
+                    <dd>
+                        HTML stands for HyperText Markup Language.
+                        It is used to structure content on webpages.
+                    </dd>
+
+                    <dt>CSS</dt>
+                    <dd>
+                        CSS stands for Cascading Style Sheets.
+                        It is used to style and design webpages.
+                    </dd>
+
+                    <dt>JavaScript</dt>
+                    <dd>
+                        JavaScript is a programming language used
+                        to add interactivity and dynamic behavior
+                        to webpages.
+                    </dd>
+
+                </dl>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- Navigation -->
+        <div class="buttons">
+
+            <a href="index.html" class="btn">
+                ← HTML Programs
+            </a>
+
+            <a href="html-01.html" class="btn secondary">
+                Previous Practical
+            </a>
+
+            <a href="../index.html" class="btn secondary">
+                Dashboard
+            </a>
+
+        </div>
+
+    </main>
+
+
+    <!-- ==============================
+         Footer
+    =============================== -->
+    <footer>
+
+        <p>
+            <strong>Web Practicals</strong> |
+            HTML Practical 02
+        </p>
+
+        <p>
+            Ordered Lists • Unordered Lists • Description Lists
+        </p>
+
+    </footer>
+
+</body>
+
+</html>

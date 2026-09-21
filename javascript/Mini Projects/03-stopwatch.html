@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stopwatch | JavaScript Mini Project</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Segoe UI", Arial, sans-serif;
+      background: #f1f5f9;
+      color: #334155;
+      line-height: 1.6;
+    }
+
+    header {
+      background: #0f172a;
+      padding: 18px 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      color: white;
+      font-size: 22px;
+      font-weight: bold;
+    }
+
+    nav a {
+      color: #cbd5e1;
+      text-decoration: none;
+      margin-left: 25px;
+      font-size: 15px;
+    }
+
+    nav a:hover {
+      color: white;
+    }
+
+    .hero {
+      background: linear-gradient(135deg, #1e3a8a, #2563eb);
+      color: white;
+      text-align: center;
+      padding: 65px 20px;
+    }
+
+    .badge {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.15);
+      padding: 7px 16px;
+      border-radius: 20px;
+      margin-bottom: 15px;
+      font-size: 14px;
+    }
+
+    .hero h1 {
+      font-size: 36px;
+      margin-bottom: 10px;
+    }
+
+    .hero p {
+      font-size: 17px;
+      opacity: 0.9;
+    }
+
+    main {
+      width: 90%;
+      max-width: 1050px;
+      margin: 40px auto;
+    }
+
+    .objective {
+      background: white;
+      padding: 22px;
+      border-left: 5px solid #2563eb;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
+      margin-bottom: 25px;
+    }
+
+    .objective h2 {
+      color: #1e3a8a;
+      margin-bottom: 8px;
+    }
+
+    .card {
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(15, 23, 42, 0.08);
+      margin-bottom: 25px;
+    }
+
+    .card h2 {
+      color: #1e3a8a;
+      margin-bottom: 25px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #e2e8f0;
+    }
+
+    .stopwatch-wrapper {
+      display: flex;
+      justify-content: center;
+    }
+
+    .stopwatch {
+      width: 100%;
+      max-width: 600px;
+      background: #0f172a;
+      color: white;
+      border-radius: 16px;
+      padding: 40px 25px;
+      text-align: center;
+      box-shadow: 0 10px 25px rgba(15, 23, 42, 0.2);
+    }
+
+    .stopwatch-label {
+      color: #93c5fd;
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 15px;
+    }
+
+    #display {
+      font-size: 58px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      color: white;
+    }
+
+    .controls {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 30px;
+    }
+
+    .control-btn {
+      border: none;
+      color: white;
+      padding: 11px 22px;
+      border-radius: 7px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .start-btn {
+      background: #16a34a;
+    }
+
+    .start-btn:hover {
+      background: #15803d;
+    }
+
+    .pause-btn {
+      background: #d97706;
+    }
+
+    .pause-btn:hover {
+      background: #b45309;
+    }
+
+    .reset-btn {
+      background: #dc2626;
+    }
+
+    .reset-btn:hover {
+      background: #b91c1c;
+    }
+
+    .status {
+      margin-top: 20px;
+      color: #cbd5e1;
+      font-size: 15px;
+    }
+
+    .info-box {
+      margin-top: 25px;
+      padding: 18px;
+      background: #eff6ff;
+      border-left: 4px solid #2563eb;
+      border-radius: 7px;
+      color: #1e40af;
+    }
+
+    .feature-list {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 15px;
+    }
+
+    .feature {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      padding: 18px;
+    }
+
+    .feature strong {
+      display: block;
+      color: #1e3a8a;
+      margin-bottom: 5px;
+    }
+
+    .navigation {
+      display: flex;
+      justify-content: space-between;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      border: none;
+      background: #2563eb;
+      color: white;
+      padding: 11px 20px;
+      border-radius: 7px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      transition: 0.2s;
+    }
+
+    .btn:hover {
+      background: #1d4ed8;
+    }
+
+    .btn.secondary {
+      background: #475569;
+    }
+
+    .btn.secondary:hover {
+      background: #334155;
+    }
+
+    footer {
+      background: #0f172a;
+      color: #cbd5e1;
+      text-align: center;
+      padding: 22px;
+      margin-top: 50px;
+    }
+
+    @media (max-width: 750px) {
+      header {
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      nav a {
+        margin: 0 8px;
+      }
+
+      .hero h1 {
+        font-size: 28px;
+      }
+
+      .card {
+        padding: 22px;
+      }
+
+      .feature-list {
+        grid-template-columns: 1fr;
+      }
+
+      #display {
+        font-size: 43px;
+      }
+    }
+
+    @media (max-width: 450px) {
+      main {
+        width: 94%;
+      }
+
+      .hero {
+        padding: 50px 15px;
+      }
+
+      .stopwatch {
+        padding: 30px 15px;
+      }
+
+      #display {
+        font-size: 32px;
+        letter-spacing: 1px;
+      }
+
+      .navigation {
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <div class="logo">JavaScript Mini Project</div>
+
+    <nav>
+      <a href="../../index.html">Home</a>
+<a href="../index.html">JavaScript Programs</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <span class="badge">Mini Projects — Project 3</span>
+    <h1>Stopwatch</h1>
+    <p>A functional stopwatch created using JavaScript</p>
+  </section>
+
+  <main>
+
+    <section class="objective">
+      <h2>Objective</h2>
+      <p>
+        To create a stopwatch that measures elapsed time using
+        JavaScript timer functions.
+      </p>
+    </section>
+
+    <section class="card">
+      <h2>Digital Stopwatch</h2>
+
+      <div class="stopwatch-wrapper">
+
+        <div class="stopwatch">
+
+          <div class="stopwatch-label">
+            Elapsed Time
+          </div>
+
+          <div id="display">
+            00:00:00.0
+          </div>
+
+          <div class="controls">
+            <button
+              class="control-btn start-btn"
+              id="startButton"
+            >
+              Start
+            </button>
+
+            <button
+              class="control-btn pause-btn"
+              id="pauseButton"
+            >
+              Pause
+            </button>
+
+            <button
+              class="control-btn reset-btn"
+              id="resetButton"
+            >
+              Reset
+            </button>
+          </div>
+
+          <div class="status" id="status">
+            Stopwatch ready
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="info-box">
+        The stopwatch uses JavaScript timing functions to measure
+        elapsed time without reloading the webpage.
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Project Features</h2>
+
+      <div class="feature-list">
+
+        <div class="feature">
+          <strong>Start</strong>
+          <p>Starts the stopwatch and begins measuring elapsed time.</p>
+        </div>
+
+        <div class="feature">
+          <strong>Pause</strong>
+          <p>Pauses the stopwatch while preserving the elapsed time.</p>
+        </div>
+
+        <div class="feature">
+          <strong>Reset</strong>
+          <p>Stops the stopwatch and returns the display to zero.</p>
+        </div>
+
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Navigation</h2>
+
+      <div class="navigation">
+        <a class="btn secondary" href="02-digital-clock.html">
+          ← Previous
+        </a>
+
+        <a class="btn" href="../index.html">
+          Home
+        </a>
+
+        <a class="btn secondary" href="04-countdown-timer.html">
+          Next Project →
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>JavaScript Mini Projects &copy; 2026</p>
+  </footer>
+
+  <script>
+    const display =
+      document.getElementById("display");
+
+    const startButton =
+      document.getElementById("startButton");
+
+    const pauseButton =
+      document.getElementById("pauseButton");
+
+    const resetButton =
+      document.getElementById("resetButton");
+
+    const status =
+      document.getElementById("status");
+
+    let startTime = 0;
+    let elapsedTime = 0;
+    let timerId = null;
+
+    function formatTime(milliseconds) {
+      const totalSeconds =
+        Math.floor(milliseconds / 1000);
+
+      const hours =
+        Math.floor(totalSeconds / 3600);
+
+      const minutes =
+        Math.floor((totalSeconds % 3600) / 60);
+
+      const seconds =
+        totalSeconds % 60;
+
+      const tenths =
+        Math.floor((milliseconds % 1000) / 100);
+
+      return (
+        String(hours).padStart(2, "0") +
+        ":" +
+        String(minutes).padStart(2, "0") +
+        ":" +
+        String(seconds).padStart(2, "0") +
+        "." +
+        tenths
+      );
+    }
+
+    function updateDisplay() {
+      elapsedTime =
+        Date.now() - startTime;
+
+      display.textContent =
+        formatTime(elapsedTime);
+    }
+
+    function startStopwatch() {
+      if (timerId !== null) {
+        return;
+      }
+
+      startTime =
+        Date.now() - elapsedTime;
+
+      timerId =
+        setInterval(updateDisplay, 100);
+
+      status.textContent =
+        "Stopwatch is running";
+    }
+
+    function pauseStopwatch() {
+      if (timerId === null) {
+        return;
+      }
+
+      elapsedTime =
+        Date.now() - startTime;
+
+      clearInterval(timerId);
+
+      timerId = null;
+
+      display.textContent =
+        formatTime(elapsedTime);
+
+      status.textContent =
+        "Stopwatch paused";
+    }
+
+    function resetStopwatch() {
+      if (timerId !== null) {
+        clearInterval(timerId);
+      }
+
+      timerId = null;
+      startTime = 0;
+      elapsedTime = 0;
+
+      display.textContent =
+        "00:00:00.0";
+
+      status.textContent =
+        "Stopwatch reset";
+    }
+
+    startButton.addEventListener(
+      "click",
+      startStopwatch
+    );
+
+    pauseButton.addEventListener(
+      "click",
+      pauseStopwatch
+    );
+
+    resetButton.addEventListener(
+      "click",
+      resetStopwatch
+    );
+  </script>
+
+</body>
+</html>

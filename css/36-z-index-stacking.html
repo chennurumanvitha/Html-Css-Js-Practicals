@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Z-Index and Stacking Order | Practical 36</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: #f1f5f9;
+            color: #334155;
+            line-height: 1.6;
+        }
+
+        /* Header */
+        header {
+            background: #0f172a;
+            padding: 18px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: #ffffff;
+            font-size: 22px;
+            font-weight: 700;
+        }
+
+        nav a {
+            color: #cbd5e1;
+            text-decoration: none;
+            margin-left: 25px;
+            font-weight: 500;
+        }
+
+        nav a:hover {
+            color: #ffffff;
+        }
+
+        /* Hero */
+        .hero {
+            background: linear-gradient(135deg, #1e3a8a, #2563eb);
+            color: #ffffff;
+            text-align: center;
+            padding: 65px 20px;
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 7px 15px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .hero h1 {
+            font-size: 38px;
+            margin-bottom: 10px;
+        }
+
+        .hero p {
+            font-size: 17px;
+            color: #dbeafe;
+        }
+
+        /* Main */
+        main {
+            width: 90%;
+            max-width: 1050px;
+            margin: 40px auto;
+        }
+
+        /* Objective */
+        .objective {
+            background: #ffffff;
+            border-left: 5px solid #2563eb;
+            padding: 22px 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(15, 23, 42, 0.08);
+            margin-bottom: 25px;
+        }
+
+        .objective h2 {
+            color: #1e3a8a;
+            margin-bottom: 8px;
+        }
+
+        /* Content Card */
+        .content-card {
+            background: #ffffff;
+            padding: 35px;
+            margin-bottom: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(15, 23, 42, 0.08);
+        }
+
+        .content-card h2 {
+            color: #1e3a8a;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #dbeafe;
+        }
+
+        /* Stacking Order Demonstration */
+        .stack-area {
+            position: relative;
+            width: 100%;
+            height: 350px;
+            background: #eff6ff;
+            border: 2px dashed #2563eb;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .stack-box {
+            position: absolute;
+            width: 180px;
+            height: 130px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            color: #ffffff;
+            font-weight: 700;
+            text-align: center;
+        }
+
+        .box-one {
+            background: #1e3a8a;
+            left: 15%;
+            top: 80px;
+            z-index: 1;
+        }
+
+        .box-two {
+            background: #2563eb;
+            left: 35%;
+            top: 120px;
+            z-index: 2;
+        }
+
+        .box-three {
+            background: #64748b;
+            left: 55%;
+            top: 160px;
+            z-index: 3;
+        }
+
+        /* Z-Index Grid */
+        .zindex-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .zindex-card {
+            background: #f8fafc;
+            border-left: 4px solid #2563eb;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .zindex-card h3 {
+            color: #1e3a8a;
+            margin-bottom: 12px;
+        }
+
+        .zindex-card p {
+            color: #64748b;
+        }
+
+        .z-number {
+            width: 100px;
+            height: 100px;
+            margin: 15px auto;
+            border-radius: 10px;
+            background: #dbeafe;
+            border: 2px solid #2563eb;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #1e3a8a;
+            font-size: 22px;
+            font-weight: 700;
+        }
+
+        /* Negative Z-Index */
+        .negative-area {
+            position: relative;
+            height: 250px;
+            background: #e2e8f0;
+            border: 2px dashed #2563eb;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .negative-background {
+            position: absolute;
+            width: 220px;
+            height: 120px;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            background: #2563eb;
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            z-index: 1;
+        }
+
+        .negative-content {
+            position: absolute;
+            width: 280px;
+            height: 150px;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(255, 255, 255, 0.9);
+            border: 3px solid #1e3a8a;
+            color: #1e3a8a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            border-radius: 12px;
+            font-weight: 700;
+            z-index: 2;
+        }
+
+        /* Practical Example */
+        .example-area {
+            position: relative;
+            height: 260px;
+            background: #f8fafc;
+            border: 2px solid #cbd5e1;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .back-card {
+            position: absolute;
+            width: 250px;
+            height: 150px;
+            left: 20%;
+            top: 50px;
+            background: #dbeafe;
+            border: 3px solid #1e3a8a;
+            border-radius: 10px;
+            padding: 20px;
+            z-index: 1;
+        }
+
+        .front-card {
+            position: absolute;
+            width: 250px;
+            height: 150px;
+            left: 45%;
+            top: 80px;
+            background: #2563eb;
+            color: #ffffff;
+            border-radius: 10px;
+            padding: 20px;
+            z-index: 2;
+            box-shadow: 0 8px 20px rgba(15, 23, 42, 0.2);
+        }
+
+        /* Navigation Buttons */
+        .buttons {
+            text-align: center;
+            margin: 35px 0;
+        }
+
+        .btn {
+            display: inline-block;
+            background: #2563eb;
+            color: #ffffff;
+            text-decoration: none;
+            padding: 12px 22px;
+            border-radius: 8px;
+            margin: 5px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background: #1e3a8a;
+            transform: translateY(-2px);
+        }
+
+        .secondary {
+            background: #e2e8f0;
+            color: #1e3a8a;
+        }
+
+        .secondary:hover {
+            background: #cbd5e1;
+        }
+
+        /* Footer */
+        footer {
+            background: #0f172a;
+            color: #cbd5e1;
+            text-align: center;
+            padding: 25px;
+            margin-top: 40px;
+        }
+
+        footer strong {
+            color: #ffffff;
+        }
+
+        /* Responsive */
+        @media (max-width: 750px) {
+            header {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            nav a {
+                margin: 0 8px;
+                font-size: 14px;
+            }
+
+            .hero h1 {
+                font-size: 30px;
+            }
+
+            .content-card {
+                padding: 25px 20px;
+            }
+
+            .zindex-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stack-area {
+                height: 360px;
+            }
+
+            .stack-box {
+                width: 150px;
+                height: 110px;
+            }
+
+            .box-one {
+                left: 5%;
+            }
+
+            .box-two {
+                left: 30%;
+            }
+
+            .box-three {
+                left: 55%;
+            }
+
+            .back-card {
+                left: 5%;
+            }
+
+            .front-card {
+                left: 30%;
+            }
+        }
+
+        @media (max-width: 500px) {
+            .stack-box {
+                width: 130px;
+                height: 100px;
+                font-size: 14px;
+            }
+
+            .box-one {
+                left: 2%;
+            }
+
+            .box-two {
+                left: 25%;
+            }
+
+            .box-three {
+                left: 48%;
+            }
+
+            .back-card {
+                left: 5%;
+                width: 210px;
+            }
+
+            .front-card {
+                left: 25%;
+                width: 210px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="logo">Web Practicals</div>
+
+        <nav>
+            <a href="../index.html">Home</a>
+            <a href="index.html">CSS Programs</a>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="badge">CSS PRACTICAL 36</div>
+        <h1>Z-Index and Stacking Order</h1>
+        <p>Demonstrating how elements are layered using the CSS z-index property</p>
+    </section>
+
+    <main>
+
+        <!-- Objective -->
+        <section class="objective">
+            <h2>Objective</h2>
+            <p>
+                To demonstrate the use of the CSS <strong>z-index</strong>
+                property and understand how stacking order determines
+                which positioned element appears in front of another.
+            </p>
+        </section>
+
+        <!-- Stacking Order -->
+        <section class="content-card">
+            <h2>Stacking Order Demonstration</h2>
+
+            <div class="stack-area">
+
+                <div class="stack-box box-one">
+                    Box 1<br>
+                    z-index: 1
+                </div>
+
+                <div class="stack-box box-two">
+                    Box 2<br>
+                    z-index: 2
+                </div>
+
+                <div class="stack-box box-three">
+                    Box 3<br>
+                    z-index: 3
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Z-Index Values -->
+        <section class="content-card">
+            <h2>Different Z-Index Values</h2>
+
+            <div class="zindex-grid">
+
+                <div class="zindex-card">
+                    <h3>Lower Value</h3>
+
+                    <div class="z-number">
+                        1
+                    </div>
+
+                    <p>
+                        Elements with a lower z-index are placed
+                        behind elements with higher values.
+                    </p>
+                </div>
+
+                <div class="zindex-card">
+                    <h3>Higher Value</h3>
+
+                    <div class="z-number">
+                        10
+                    </div>
+
+                    <p>
+                        A higher z-index places a positioned element
+                        above a lower z-index element.
+                    </p>
+                </div>
+
+                <div class="zindex-card">
+                    <h3>Highest Value</h3>
+
+                    <div class="z-number">
+                        100
+                    </div>
+
+                    <p>
+                        A much higher z-index places the element
+                        above other elements in the same stacking context.
+                    </p>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Practical Example -->
+        <section class="content-card">
+            <h2>Practical Stacking Example</h2>
+
+            <div class="example-area">
+
+                <div class="back-card">
+                    <strong>Background Card</strong>
+                    <p>
+                        z-index: 1
+                    </p>
+                </div>
+
+                <div class="front-card">
+                    <strong>Front Card</strong>
+                    <p>
+                        z-index: 2
+                    </p>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Navigation -->
+        <div class="buttons">
+            <a href="css-35.html" class="btn secondary">
+                ← Previous Practical
+            </a>
+
+            <a href="index.html" class="btn">
+                CSS Programs
+            </a>
+
+            <a href="../index.html" class="btn">
+                Dashboard
+            </a>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>
+            <strong>CSS Practical 36</strong> | Web Practicals
+        </p>
+        <p>Demonstrating z-index and stacking order using CSS</p>
+    </footer>
+
+</body>
+</html>

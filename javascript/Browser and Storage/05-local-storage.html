@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>localStorage - JavaScript Practical</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Segoe UI", Arial, sans-serif;
+      background: #f1f5f9;
+      color: #334155;
+      line-height: 1.6;
+    }
+
+    header {
+      background: #0f172a;
+      padding: 18px 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      color: white;
+      font-size: 22px;
+      font-weight: bold;
+    }
+
+    nav a {
+      color: #cbd5e1;
+      text-decoration: none;
+      margin-left: 25px;
+      font-size: 15px;
+    }
+
+    nav a:hover {
+      color: white;
+    }
+
+    .hero {
+      background: linear-gradient(135deg, #1e3a8a, #2563eb);
+      color: white;
+      text-align: center;
+      padding: 65px 20px;
+    }
+
+    .badge {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.15);
+      padding: 7px 16px;
+      border-radius: 20px;
+      margin-bottom: 15px;
+      font-size: 14px;
+    }
+
+    .hero h1 {
+      font-size: 36px;
+      margin-bottom: 10px;
+    }
+
+    .hero p {
+      font-size: 17px;
+      opacity: 0.9;
+    }
+
+    main {
+      width: 90%;
+      max-width: 1050px;
+      margin: 40px auto;
+    }
+
+    .objective {
+      background: white;
+      padding: 22px;
+      border-left: 5px solid #2563eb;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
+      margin-bottom: 25px;
+    }
+
+    .objective h2 {
+      color: #1e3a8a;
+      margin-bottom: 8px;
+    }
+
+    .card {
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(15, 23, 42, 0.08);
+      margin-bottom: 25px;
+    }
+
+    .card h2 {
+      color: #1e3a8a;
+      margin-bottom: 25px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #e2e8f0;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      color: #1e3a8a;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #cbd5e1;
+      border-radius: 7px;
+      font-size: 15px;
+      outline: none;
+    }
+
+    .form-group input:focus {
+      border-color: #2563eb;
+    }
+
+    .buttons {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      flex-wrap: wrap;
+      margin-top: 30px;
+    }
+
+    .btn {
+      border: none;
+      background: #2563eb;
+      color: white;
+      padding: 11px 20px;
+      border-radius: 7px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      transition: 0.2s;
+    }
+
+    .btn:hover {
+      background: #1d4ed8;
+    }
+
+    .btn.secondary {
+      background: #475569;
+    }
+
+    .btn.secondary:hover {
+      background: #334155;
+    }
+
+    .btn.danger {
+      background: #dc2626;
+    }
+
+    .btn.danger:hover {
+      background: #b91c1c;
+    }
+
+    .result {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 9px;
+      padding: 20px;
+      margin-top: 25px;
+      text-align: center;
+    }
+
+    .result h3 {
+      color: #1e3a8a;
+      margin-bottom: 8px;
+    }
+
+    #storedData {
+      color: #2563eb;
+      font-size: 18px;
+      font-weight: 600;
+      word-break: break-word;
+    }
+
+    .status {
+      display: none;
+      padding: 13px;
+      border-radius: 7px;
+      margin-top: 20px;
+      text-align: center;
+      font-weight: 600;
+      background: #ecfdf5;
+      color: #166534;
+      border: 1px solid #86efac;
+    }
+
+    footer {
+      background: #0f172a;
+      color: #cbd5e1;
+      text-align: center;
+      padding: 22px;
+      margin-top: 50px;
+    }
+
+    @media (max-width: 750px) {
+      header {
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      nav a {
+        margin: 0 8px;
+      }
+
+      .hero h1 {
+        font-size: 28px;
+      }
+
+      .card {
+        padding: 22px;
+      }
+    }
+
+    @media (max-width: 550px) {
+      main {
+        width: 94%;
+      }
+
+      .hero {
+        padding: 50px 15px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <div class="logo">JavaScript Practical</div>
+
+    <nav>
+      <a href="../../index.html">Home</a>
+<a href="../index.html">JavaScript Programs</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <span class="badge">Browser &amp; Storage — Practice 5</span>
+
+    <h1>localStorage</h1>
+
+    <p>
+      Store and retrieve data using browser localStorage.
+    </p>
+  </section>
+
+  <main>
+
+    <section class="objective">
+      <h2>Objective</h2>
+
+      <p>
+        To create a JavaScript program that stores, retrieves, and removes
+        data using the browser's localStorage object.
+      </p>
+    </section>
+
+    <section class="card">
+
+      <h2>localStorage Demonstration</h2>
+
+      <div class="form-group">
+        <label for="username">Enter Username</label>
+
+        <input
+          type="text"
+          id="username"
+          placeholder="Enter a username"
+        >
+      </div>
+
+      <div class="buttons">
+
+        <button
+          type="button"
+          class="btn"
+          id="saveButton"
+        >
+          Save Data
+        </button>
+
+        <button
+          type="button"
+          class="btn secondary"
+          id="retrieveButton"
+        >
+          Retrieve Data
+        </button>
+
+        <button
+          type="button"
+          class="btn danger"
+          id="removeButton"
+        >
+          Remove Data
+        </button>
+
+      </div>
+
+      <div class="result">
+
+        <h3>Stored Username</h3>
+
+        <p id="storedData">
+          No data stored yet.
+        </p>
+
+      </div>
+
+      <div
+        class="status"
+        id="statusMessage"
+      ></div>
+
+    </section>
+
+    <div class="buttons">
+
+      <a
+        href="04-history-object.html"
+        class="btn secondary"
+      >
+        ← Previous Practical
+      </a>
+
+      <a
+        href="../../index.html"
+        class="btn secondary"
+      >
+        Home
+      </a>
+
+      <a
+        href="06-localstorage-retrieve.html"
+        class="btn"
+      >
+        Next Practical →
+      </a>
+
+    </div>
+
+  </main>
+
+  <footer>
+    <p>
+      &copy; 2026 JavaScript Practical —
+      Browser &amp; Storage
+    </p>
+  </footer>
+
+  <script>
+    const usernameInput =
+      document.getElementById("username");
+
+    const storedData =
+      document.getElementById("storedData");
+
+    const statusMessage =
+      document.getElementById("statusMessage");
+
+    function showStatus(message) {
+      statusMessage.textContent = message;
+      statusMessage.style.display = "block";
+
+      setTimeout(function () {
+        statusMessage.style.display = "none";
+      }, 2000);
+    }
+
+    document
+      .getElementById("saveButton")
+      .addEventListener("click", function () {
+
+        const username = usernameInput.value.trim();
+
+        if (username === "") {
+          showStatus("Please enter a username.");
+          return;
+        }
+
+        localStorage.setItem("username", username);
+
+        storedData.textContent = username;
+
+        showStatus("Username saved successfully.");
+
+      });
+
+    document
+      .getElementById("retrieveButton")
+      .addEventListener("click", function () {
+
+        const username =
+          localStorage.getItem("username");
+
+        if (username !== null) {
+
+          storedData.textContent = username;
+
+          usernameInput.value = username;
+
+          showStatus("Stored username retrieved.");
+
+        } else {
+
+          storedData.textContent =
+            "No data stored yet.";
+
+          showStatus("No username found in localStorage.");
+
+        }
+
+      });
+
+    document
+      .getElementById("removeButton")
+      .addEventListener("click", function () {
+
+        localStorage.removeItem("username");
+
+        storedData.textContent =
+          "No data stored yet.";
+
+        usernameInput.value = "";
+
+        showStatus("Stored username removed.");
+
+      });
+
+    window.addEventListener("load", function () {
+
+      const username =
+        localStorage.getItem("username");
+
+      if (username !== null) {
+        storedData.textContent = username;
+      }
+
+    });
+  </script>
+
+</body>
+</html>

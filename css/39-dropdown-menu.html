@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Dropdown Menu | CSS Practical 39</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: #f1f5f9;
+            color: #334155;
+            line-height: 1.6;
+        }
+
+        /* Header */
+        header {
+            background: #0f172a;
+            color: white;
+            padding: 18px 6%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        header nav {
+            display: flex;
+            gap: 25px;
+        }
+
+        header nav a {
+            color: #cbd5e1;
+            text-decoration: none;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+
+        header nav a:hover {
+            color: white;
+        }
+
+        /* Hero */
+        .hero {
+            background: linear-gradient(135deg, #1e3a8a, #2563eb);
+            color: white;
+            text-align: center;
+            padding: 65px 20px;
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 8px 18px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .hero h1 {
+            font-size: 38px;
+            margin-bottom: 10px;
+        }
+
+        .hero p {
+            font-size: 17px;
+            opacity: 0.95;
+        }
+
+        /* Main */
+        main {
+            width: 90%;
+            max-width: 1050px;
+            margin: 40px auto;
+        }
+
+        /* Objective */
+        .objective {
+            background: white;
+            border-left: 5px solid #2563eb;
+            border-radius: 12px;
+            padding: 22px 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 15px rgba(15, 23, 42, 0.08);
+        }
+
+        .objective h2 {
+            color: #1e3a8a;
+            margin-bottom: 8px;
+        }
+
+        /* Content Card */
+        .content-card {
+            background: white;
+            border-radius: 12px;
+            padding: 35px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 15px rgba(15, 23, 42, 0.08);
+        }
+
+        .content-card h2 {
+            color: #1e3a8a;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #dbeafe;
+        }
+
+        .content-card h3 {
+            color: #2563eb;
+            margin-bottom: 10px;
+        }
+
+        /* Dropdown Demo */
+        .dropdown-demo {
+            background: #f8fafc;
+            border-left: 4px solid #2563eb;
+            border-radius: 10px;
+            padding: 30px;
+            margin-top: 20px;
+        }
+
+        .dropdown-demo p {
+            margin-bottom: 20px;
+        }
+
+        /* Dropdown Menu */
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropbtn {
+            background: #2563eb;
+            color: white;
+            padding: 13px 22px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .dropbtn:hover {
+            background: #1e3a8a;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            min-width: 190px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 8px 20px rgba(15, 23, 42, 0.18);
+            overflow: hidden;
+            z-index: 100;
+            margin-top: 5px;
+        }
+
+        .dropdown-content a {
+            display: block;
+            padding: 12px 16px;
+            color: #334155;
+            text-decoration: none;
+            border-bottom: 1px solid #e2e8f0;
+            transition: 0.3s;
+        }
+
+        .dropdown-content a:last-child {
+            border-bottom: none;
+        }
+
+        .dropdown-content a:hover {
+            background: #dbeafe;
+            color: #1e3a8a;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        /* Multiple Dropdowns */
+        .menu-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .menu-row .dropdown-content {
+            min-width: 170px;
+        }
+
+        /* Navigation Dropdown */
+        .nav-demo {
+            background: #0f172a;
+            border-radius: 10px;
+            padding: 0 20px;
+            margin-top: 20px;
+        }
+
+        .nav-demo ul {
+            list-style: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-demo > ul > li {
+            position: relative;
+        }
+
+        .nav-demo a {
+            display: block;
+            color: #cbd5e1;
+            text-decoration: none;
+            padding: 16px 20px;
+            transition: 0.3s;
+        }
+
+        .nav-demo a:hover {
+            background: #1e3a8a;
+            color: white;
+        }
+
+        .nav-demo .submenu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            min-width: 190px;
+            background: white;
+            border-radius: 0 0 8px 8px;
+            box-shadow: 0 8px 20px rgba(15, 23, 42, 0.2);
+            overflow: hidden;
+            z-index: 200;
+        }
+
+        .nav-demo li:hover .submenu {
+            display: block;
+        }
+
+        .nav-demo .submenu a {
+            color: #334155;
+            padding: 12px 16px;
+            background: white;
+        }
+
+        .nav-demo .submenu a:hover {
+            background: #dbeafe;
+            color: #1e3a8a;
+        }
+
+        /* Code */
+        .code-box {
+            background: #0f172a;
+            color: #e2e8f0;
+            padding: 20px;
+            border-radius: 10px;
+            overflow-x: auto;
+            margin-top: 20px;
+        }
+
+        .code-box pre {
+            font-family: Consolas, monospace;
+            font-size: 14px;
+        }
+
+        /* Navigation Buttons */
+        .buttons {
+            text-align: center;
+            margin: 35px 0;
+        }
+
+        .btn {
+            display: inline-block;
+            background: #2563eb;
+            color: white;
+            text-decoration: none;
+            padding: 12px 22px;
+            border-radius: 8px;
+            margin: 5px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background: #1e3a8a;
+            transform: translateY(-2px);
+        }
+
+        .secondary {
+            background: #64748b;
+        }
+
+        .secondary:hover {
+            background: #475569;
+        }
+
+        /* Footer */
+        footer {
+            background: #0f172a;
+            color: #cbd5e1;
+            text-align: center;
+            padding: 25px;
+            margin-top: 40px;
+        }
+
+        footer strong {
+            color: white;
+        }
+
+        /* Responsive */
+        @media (max-width: 750px) {
+            header {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            header nav {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 15px;
+            }
+
+            .hero h1 {
+                font-size: 30px;
+            }
+
+            .content-card {
+                padding: 25px 20px;
+            }
+
+            .nav-demo ul {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .nav-demo > ul > li {
+                width: 100%;
+            }
+
+            .nav-demo .submenu {
+                position: static;
+                width: 100%;
+            }
+
+            .menu-row {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="logo">Web Development Practical</div>
+
+        <nav>
+            <a href="../index.html">Home</a>
+            <a href="index.html">CSS Programs</a>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <span class="badge">CSS PRACTICAL 39</span>
+
+        <h1>Dropdown Menu Using CSS</h1>
+
+        <p>Create interactive dropdown menus using HTML and CSS.</p>
+    </section>
+
+    <!-- Main Content -->
+    <main>
+
+        <!-- Objective -->
+        <section class="objective">
+            <h2>Objective</h2>
+
+            <p>
+                To create a dropdown menu using HTML and CSS and demonstrate
+                how CSS positioning, hover effects, and display properties
+                can be used to show and hide submenu items.
+            </p>
+        </section>
+
+        <!-- Basic Dropdown -->
+        <section class="content-card">
+
+            <h2>Basic Dropdown Menu</h2>
+
+            <div class="dropdown-demo">
+
+                <p>
+                    Hover over the button below to display the dropdown menu.
+                </p>
+
+                <div class="dropdown">
+
+                    <button class="dropbtn">
+                        Select Course ▼
+                    </button>
+
+                    <div class="dropdown-content">
+                        <a href="#">HTML &amp; CSS</a>
+                        <a href="#">JavaScript</a>
+                        <a href="#">Python</a>
+                        <a href="#">Data Science</a>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- Multiple Dropdowns -->
+        <section class="content-card">
+
+            <h2>Multiple Dropdown Menus</h2>
+
+            <div class="dropdown-demo">
+
+                <p>
+                    Multiple dropdown menus can be placed together to create
+                    a simple navigation system.
+                </p>
+
+                <div class="menu-row">
+
+                    <div class="dropdown">
+
+                        <button class="dropbtn">
+                            Departments ▼
+                        </button>
+
+                        <div class="dropdown-content">
+                            <a href="#">Computer Science</a>
+                            <a href="#">Data Science</a>
+                            <a href="#">Artificial Intelligence</a>
+                            <a href="#">Electronics</a>
+                        </div>
+
+                    </div>
+
+                    <div class="dropdown">
+
+                        <button class="dropbtn">
+                            Resources ▼
+                        </button>
+
+                        <div class="dropdown-content">
+                            <a href="#">Notes</a>
+                            <a href="#">Assignments</a>
+                            <a href="#">Projects</a>
+                            <a href="#">Tutorials</a>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- Navigation Dropdown -->
+        <section class="content-card">
+
+            <h2>Dropdown Navigation Bar</h2>
+
+            <div class="nav-demo">
+
+                <ul>
+
+                    <li>
+                        <a href="#">Home</a>
+                    </li>
+
+                    <li>
+                        <a href="#">Courses ▼</a>
+
+                        <div class="submenu">
+                            <a href="#">HTML</a>
+                            <a href="#">CSS</a>
+                            <a href="#">JavaScript</a>
+                        </div>
+
+                    </li>
+
+                    <li>
+                        <a href="#">Services ▼</a>
+
+                        <div class="submenu">
+                            <a href="#">Web Design</a>
+                            <a href="#">Development</a>
+                            <a href="#">UI Design</a>
+                        </div>
+
+                    </li>
+
+                    <li>
+                        <a href="#">Contact</a>
+                    </li>
+
+                </ul>
+
+            </div>
+
+        </section>
+
+
+        <!-- Navigation Buttons -->
+        <div class="buttons">
+
+            <a href="css-38.html" class="btn">
+                ← Previous Practical
+            </a>
+
+            <a href="index.html" class="btn secondary">
+                CSS Programs
+            </a>
+
+            <a href="../index.html" class="btn">
+                Dashboard
+            </a>
+
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>
+            <strong>CSS Practical 39</strong> | Dropdown Menu using HTML and CSS
+        </p>
+
+        <p>
+            Web Development Practical Assignment
+        </p>
+    </footer>
+
+</body>
+</html>

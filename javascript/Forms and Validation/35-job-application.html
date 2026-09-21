@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Job Application Form</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Segoe UI", Arial, sans-serif;
+      background: #f1f5f9;
+      color: #334155;
+      line-height: 1.6;
+    }
+
+    header {
+      background: #0f172a;
+      padding: 18px 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      color: white;
+      font-size: 22px;
+      font-weight: bold;
+    }
+
+    nav a {
+      color: #cbd5e1;
+      text-decoration: none;
+      margin-left: 25px;
+      font-size: 15px;
+    }
+
+    nav a:hover {
+      color: white;
+    }
+
+    .hero {
+      background: linear-gradient(135deg, #1e3a8a, #2563eb);
+      color: white;
+      text-align: center;
+      padding: 65px 20px;
+    }
+
+    .badge {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.15);
+      padding: 7px 16px;
+      border-radius: 20px;
+      margin-bottom: 15px;
+      font-size: 14px;
+    }
+
+    .hero h1 {
+      font-size: 36px;
+      margin-bottom: 10px;
+    }
+
+    .hero p {
+      font-size: 17px;
+      opacity: 0.9;
+    }
+
+    main {
+      width: 90%;
+      max-width: 1050px;
+      margin: 40px auto;
+    }
+
+    .objective {
+      background: white;
+      padding: 22px;
+      border-left: 5px solid #2563eb;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
+      margin-bottom: 25px;
+    }
+
+    .objective h2 {
+      color: #1e3a8a;
+      margin-bottom: 8px;
+    }
+
+    .card {
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(15, 23, 42, 0.08);
+    }
+
+    .card h2 {
+      color: #1e3a8a;
+      margin-bottom: 25px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #e2e8f0;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 7px;
+    }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      padding: 11px 13px;
+      border: 1px solid #cbd5e1;
+      border-radius: 7px;
+      font-size: 15px;
+      font-family: inherit;
+      outline: none;
+      transition: 0.2s;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      border-color: #2563eb;
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+    }
+
+    textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    .radio-group {
+      display: flex;
+      gap: 25px;
+      flex-wrap: wrap;
+      padding: 8px 0;
+    }
+
+    .radio-option {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      font-weight: normal;
+    }
+
+    .radio-option input {
+      width: auto;
+    }
+
+    .error {
+      color: #dc2626;
+      font-size: 13px;
+      margin-top: 5px;
+      min-height: 18px;
+    }
+
+    .valid {
+      border-color: #16a34a;
+      background: #f0fdf4;
+    }
+
+    .invalid {
+      border-color: #dc2626;
+      background: #fff7f7;
+    }
+
+    .success-message {
+      display: none;
+      background: #ecfdf5;
+      color: #166534;
+      border: 1px solid #86efac;
+      padding: 15px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      text-align: center;
+      font-weight: 600;
+    }
+
+    .submit-btn {
+      width: 100%;
+      border: none;
+      background: #2563eb;
+      color: white;
+      padding: 13px 20px;
+      border-radius: 7px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .submit-btn:hover {
+      background: #1d4ed8;
+    }
+
+    .buttons {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      flex-wrap: wrap;
+      margin-top: 30px;
+    }
+
+    .btn-link {
+      text-decoration: none;
+      background: #2563eb;
+      color: white;
+      padding: 11px 20px;
+      border-radius: 7px;
+      font-weight: 600;
+    }
+
+    .btn-link:hover {
+      background: #1d4ed8;
+    }
+
+    .btn-link.secondary {
+      background: #475569;
+    }
+
+    .btn-link.secondary:hover {
+      background: #334155;
+    }
+
+    footer {
+      background: #0f172a;
+      color: #cbd5e1;
+      text-align: center;
+      padding: 22px;
+      margin-top: 50px;
+    }
+
+    @media (max-width: 750px) {
+      header {
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      nav a {
+        margin: 0 8px;
+      }
+
+      .hero h1 {
+        font-size: 28px;
+      }
+
+      .card {
+        padding: 22px;
+      }
+    }
+
+    @media (max-width: 550px) {
+      main {
+        width: 94%;
+      }
+
+      .hero {
+        padding: 50px 15px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <div class="logo">JavaScript Practical</div>
+
+    <nav>
+     <a href="../../index.html">Home</a>
+<a href="../index.html">JavaScript Programs</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <span class="badge">Practice 35</span>
+    <h1>Job Application Form</h1>
+    <p>Validate job application details using JavaScript.</p>
+  </section>
+
+  <main>
+
+    <section class="objective">
+      <h2>Objective</h2>
+      <p>
+        To create a job application form and validate personal,
+        contact, education, and application details using JavaScript.
+      </p>
+    </section>
+
+    <section class="card">
+      <h2>Job Application</h2>
+
+      <div class="success-message" id="successMessage">
+        Job application submitted successfully!
+      </div>
+
+      <form id="jobForm" novalidate>
+
+        <div class="form-group">
+          <label for="fullName">Full Name</label>
+
+          <input
+            type="text"
+            id="fullName"
+            placeholder="Enter your full name"
+            autocomplete="off"
+          >
+
+          <div class="error" id="fullNameError"></div>
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email Address</label>
+
+          <input
+            type="email"
+            id="email"
+            placeholder="Enter your email address"
+            autocomplete="off"
+          >
+
+          <div class="error" id="emailError"></div>
+        </div>
+
+        <div class="form-group">
+          <label for="mobile">Mobile Number</label>
+
+          <input
+            type="text"
+            id="mobile"
+            maxlength="10"
+            inputmode="numeric"
+            placeholder="Enter 10-digit mobile number"
+            autocomplete="off"
+          >
+
+          <div class="error" id="mobileError"></div>
+        </div>
+
+        <div class="form-group">
+          <label for="position">Position Applied For</label>
+
+          <select id="position">
+            <option value="">-- Select Position --</option>
+            <option value="Web Developer">Web Developer</option>
+            <option value="Frontend Developer">Frontend Developer</option>
+            <option value="Backend Developer">Backend Developer</option>
+            <option value="Software Tester">Software Tester</option>
+          </select>
+
+          <div class="error" id="positionError"></div>
+        </div>
+
+        <div class="form-group">
+          <label for="qualification">Highest Qualification</label>
+
+          <select id="qualification">
+            <option value="">-- Select Qualification --</option>
+            <option value="Diploma">Diploma</option>
+            <option value="Bachelor's Degree">Bachelor's Degree</option>
+            <option value="Master's Degree">Master's Degree</option>
+          </select>
+
+          <div class="error" id="qualificationError"></div>
+        </div>
+
+        <div class="form-group">
+          <label for="experience">Years of Experience</label>
+
+          <input
+            type="number"
+            id="experience"
+            min="0"
+            max="50"
+            step="1"
+            placeholder="Enter years of experience"
+          >
+
+          <div class="error" id="experienceError"></div>
+        </div>
+
+        <div class="form-group">
+          <label>Employment Type</label>
+
+          <div class="radio-group">
+            <label class="radio-option">
+              <input
+                type="radio"
+                name="employmentType"
+                value="Full Time"
+              >
+              Full Time
+            </label>
+
+            <label class="radio-option">
+              <input
+                type="radio"
+                name="employmentType"
+                value="Part Time"
+              >
+              Part Time
+            </label>
+
+            <label class="radio-option">
+              <input
+                type="radio"
+                name="employmentType"
+                value="Internship"
+              >
+              Internship
+            </label>
+          </div>
+
+          <div class="error" id="employmentTypeError"></div>
+        </div>
+
+        <div class="form-group">
+          <label for="coverLetter">Cover Letter</label>
+
+          <textarea
+            id="coverLetter"
+            placeholder="Write a short cover letter"
+          ></textarea>
+
+          <div class="error" id="coverLetterError"></div>
+        </div>
+
+        <div class="form-group">
+          <label for="city">Current City</label>
+
+          <input
+            type="text"
+            id="city"
+            placeholder="Enter your city"
+            autocomplete="off"
+          >
+
+          <div class="error" id="cityError"></div>
+        </div>
+
+        <div class="form-group">
+          <label>
+            <input type="checkbox" id="declaration" style="width:auto;">
+            I confirm that the information provided is correct.
+          </label>
+
+          <div class="error" id="declarationError"></div>
+        </div>
+
+        <button type="submit" class="submit-btn">
+          Submit Application
+        </button>
+
+      </form>
+    </section>
+
+    <div class="buttons">
+      <a href="34-college-admission-validation.html" class="btn-link">
+        ← Previous Practical
+      </a>
+
+      <a href="index.html" class="btn-link secondary">
+        Forms &amp; Validation
+      </a>
+
+      <a href="36-feedback-validation.html" class="btn-link">
+        Next Practical →
+      </a>
+    </div>
+
+  </main>
+
+  <footer>
+    <p>&copy; 2026 JavaScript Practical — Forms &amp; Validation</p>
+  </footer>
+
+  <script>
+    const jobForm = document.getElementById("jobForm");
+
+    const fullName = document.getElementById("fullName");
+    const email = document.getElementById("email");
+    const mobile = document.getElementById("mobile");
+    const position = document.getElementById("position");
+    const qualification = document.getElementById("qualification");
+    const experience = document.getElementById("experience");
+    const coverLetter = document.getElementById("coverLetter");
+    const city = document.getElementById("city");
+    const declaration = document.getElementById("declaration");
+
+    const fullNameError =
+      document.getElementById("fullNameError");
+    const emailError =
+      document.getElementById("emailError");
+    const mobileError =
+      document.getElementById("mobileError");
+    const positionError =
+      document.getElementById("positionError");
+    const qualificationError =
+      document.getElementById("qualificationError");
+    const experienceError =
+      document.getElementById("experienceError");
+    const employmentTypeError =
+      document.getElementById("employmentTypeError");
+    const coverLetterError =
+      document.getElementById("coverLetterError");
+    const cityError =
+      document.getElementById("cityError");
+    const declarationError =
+      document.getElementById("declarationError");
+
+    const successMessage =
+      document.getElementById("successMessage");
+
+    const nameRegex = /^[A-Za-z ]+$/;
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const mobileRegex = /^\d{10}$/;
+    const cityRegex = /^[A-Za-z ]+$/;
+
+    function validateFullName() {
+      const value = fullName.value.trim();
+
+      fullName.classList.remove("valid", "invalid");
+      fullNameError.textContent = "";
+
+      if (value === "") {
+        fullName.classList.add("invalid");
+        fullNameError.textContent =
+          "Full name is required.";
+        return false;
+      }
+
+      if (!nameRegex.test(value)) {
+        fullName.classList.add("invalid");
+        fullNameError.textContent =
+          "Name can contain only alphabets and spaces.";
+        return false;
+      }
+
+      fullName.classList.add("valid");
+      return true;
+    }
+
+    function validateEmail() {
+      const value = email.value.trim();
+
+      email.classList.remove("valid", "invalid");
+      emailError.textContent = "";
+
+      if (value === "") {
+        email.classList.add("invalid");
+        emailError.textContent =
+          "Email address is required.";
+        return false;
+      }
+
+      if (!emailRegex.test(value)) {
+        email.classList.add("invalid");
+        emailError.textContent =
+          "Enter a valid email address.";
+        return false;
+      }
+
+      email.classList.add("valid");
+      return true;
+    }
+
+    function validateMobile() {
+      const value = mobile.value.trim();
+
+      mobile.classList.remove("valid", "invalid");
+      mobileError.textContent = "";
+
+      if (value === "") {
+        mobile.classList.add("invalid");
+        mobileError.textContent =
+          "Mobile number is required.";
+        return false;
+      }
+
+      if (!mobileRegex.test(value)) {
+        mobile.classList.add("invalid");
+        mobileError.textContent =
+          "Mobile number must contain exactly 10 digits.";
+        return false;
+      }
+
+      mobile.classList.add("valid");
+      return true;
+    }
+
+    function validatePosition() {
+      position.classList.remove("valid", "invalid");
+      positionError.textContent = "";
+
+      if (position.value === "") {
+        position.classList.add("invalid");
+        positionError.textContent =
+          "Please select a position.";
+        return false;
+      }
+
+      position.classList.add("valid");
+      return true;
+    }
+
+    function validateQualification() {
+      qualification.classList.remove("valid", "invalid");
+      qualificationError.textContent = "";
+
+      if (qualification.value === "") {
+        qualification.classList.add("invalid");
+        qualificationError.textContent =
+          "Please select your highest qualification.";
+        return false;
+      }
+
+      qualification.classList.add("valid");
+      return true;
+    }
+
+    function validateExperience() {
+      const value = experience.value.trim();
+
+      experience.classList.remove("valid", "invalid");
+      experienceError.textContent = "";
+
+      if (value === "") {
+        experience.classList.add("invalid");
+        experienceError.textContent =
+          "Years of experience is required.";
+        return false;
+      }
+
+      const numberValue = Number(value);
+
+      if (
+        !Number.isInteger(numberValue) ||
+        numberValue < 0 ||
+        numberValue > 50
+      ) {
+        experience.classList.add("invalid");
+        experienceError.textContent =
+          "Experience must be a whole number from 0 to 50.";
+        return false;
+      }
+
+      experience.classList.add("valid");
+      return true;
+    }
+
+    function validateEmploymentType() {
+      const selectedType =
+        document.querySelector(
+          'input[name="employmentType"]:checked'
+        );
+
+      employmentTypeError.textContent = "";
+
+      if (!selectedType) {
+        employmentTypeError.textContent =
+          "Please select an employment type.";
+        return false;
+      }
+
+      return true;
+    }
+
+    function validateCoverLetter() {
+      const value = coverLetter.value.trim();
+
+      coverLetter.classList.remove("valid", "invalid");
+      coverLetterError.textContent = "";
+
+      if (value === "") {
+        coverLetter.classList.add("invalid");
+        coverLetterError.textContent =
+          "Cover letter is required.";
+        return false;
+      }
+
+      if (value.length < 20) {
+        coverLetter.classList.add("invalid");
+        coverLetterError.textContent =
+          "Cover letter must contain at least 20 characters.";
+        return false;
+      }
+
+      coverLetter.classList.add("valid");
+      return true;
+    }
+
+    function validateCity() {
+      const value = city.value.trim();
+
+      city.classList.remove("valid", "invalid");
+      cityError.textContent = "";
+
+      if (value === "") {
+        city.classList.add("invalid");
+        cityError.textContent =
+          "City is required.";
+        return false;
+      }
+
+      if (!cityRegex.test(value)) {
+        city.classList.add("invalid");
+        cityError.textContent =
+          "City can contain only alphabets and spaces.";
+        return false;
+      }
+
+      city.classList.add("valid");
+      return true;
+    }
+
+    function validateDeclaration() {
+      declarationError.textContent = "";
+
+      if (!declaration.checked) {
+        declarationError.textContent =
+          "Please accept the declaration.";
+        return false;
+      }
+
+      return true;
+    }
+
+    // Real-time validation
+    fullName.addEventListener("input", function () {
+      successMessage.style.display = "none";
+      validateFullName();
+    });
+
+    email.addEventListener("input", function () {
+      successMessage.style.display = "none";
+      validateEmail();
+    });
+
+    mobile.addEventListener("input", function () {
+      successMessage.style.display = "none";
+      validateMobile();
+    });
+
+    position.addEventListener("change", function () {
+      successMessage.style.display = "none";
+      validatePosition();
+    });
+
+    qualification.addEventListener("change", function () {
+      successMessage.style.display = "none";
+      validateQualification();
+    });
+
+    experience.addEventListener("input", function () {
+      successMessage.style.display = "none";
+      validateExperience();
+    });
+
+    document
+      .querySelectorAll('input[name="employmentType"]')
+      .forEach(function (radio) {
+        radio.addEventListener("change", function () {
+          successMessage.style.display = "none";
+          validateEmploymentType();
+        });
+      });
+
+    coverLetter.addEventListener("input", function () {
+      successMessage.style.display = "none";
+      validateCoverLetter();
+    });
+
+    city.addEventListener("input", function () {
+      successMessage.style.display = "none";
+      validateCity();
+    });
+
+    declaration.addEventListener("change", function () {
+      successMessage.style.display = "none";
+      validateDeclaration();
+    });
+
+    // Form submission
+    jobForm.addEventListener("submit", function (event) {
+      event.preventDefault();
+
+      const validFullName = validateFullName();
+      const validEmail = validateEmail();
+      const validMobile = validateMobile();
+      const validPosition = validatePosition();
+      const validQualification = validateQualification();
+      const validExperience = validateExperience();
+      const validEmploymentType = validateEmploymentType();
+      const validCoverLetter = validateCoverLetter();
+      const validCity = validateCity();
+      const validDeclaration = validateDeclaration();
+
+      const formIsValid =
+        validFullName &&
+        validEmail &&
+        validMobile &&
+        validPosition &&
+        validQualification &&
+        validExperience &&
+        validEmploymentType &&
+        validCoverLetter &&
+        validCity &&
+        validDeclaration;
+
+      if (!formIsValid) {
+        successMessage.style.display = "none";
+        return;
+      }
+
+      successMessage.style.display = "block";
+
+      jobForm.reset();
+
+      fullName.classList.remove("valid", "invalid");
+      email.classList.remove("valid", "invalid");
+      mobile.classList.remove("valid", "invalid");
+      position.classList.remove("valid", "invalid");
+      qualification.classList.remove("valid", "invalid");
+      experience.classList.remove("valid", "invalid");
+      coverLetter.classList.remove("valid", "invalid");
+      city.classList.remove("valid", "invalid");
+
+      fullNameError.textContent = "";
+      emailError.textContent = "";
+      mobileError.textContent = "";
+      positionError.textContent = "";
+      qualificationError.textContent = "";
+      experienceError.textContent = "";
+      employmentTypeError.textContent = "";
+      coverLetterError.textContent = "";
+      cityError.textContent = "";
+      declarationError.textContent = "";
+    });
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Digital Clock - JavaScript Practical</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Segoe UI", Arial, sans-serif;
+      background: #f1f5f9;
+      color: #334155;
+      line-height: 1.6;
+    }
+
+    header {
+      background: #0f172a;
+      padding: 18px 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      color: white;
+      font-size: 22px;
+      font-weight: bold;
+    }
+
+    nav a {
+      color: #cbd5e1;
+      text-decoration: none;
+      margin-left: 25px;
+      font-size: 15px;
+    }
+
+    nav a:hover {
+      color: white;
+    }
+
+    .hero {
+      background: linear-gradient(135deg, #1e3a8a, #2563eb);
+      color: white;
+      text-align: center;
+      padding: 65px 20px;
+    }
+
+    .badge {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.15);
+      padding: 7px 16px;
+      border-radius: 20px;
+      margin-bottom: 15px;
+      font-size: 14px;
+    }
+
+    .hero h1 {
+      font-size: 36px;
+      margin-bottom: 10px;
+    }
+
+    .hero p {
+      font-size: 17px;
+      opacity: 0.9;
+    }
+
+    main {
+      width: 90%;
+      max-width: 1050px;
+      margin: 40px auto;
+    }
+
+    .objective {
+      background: white;
+      padding: 22px;
+      border-left: 5px solid #2563eb;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
+      margin-bottom: 25px;
+    }
+
+    .objective h2 {
+      color: #1e3a8a;
+      margin-bottom: 8px;
+    }
+
+    .card {
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(15, 23, 42, 0.08);
+      margin-bottom: 25px;
+    }
+
+    .card h2 {
+      color: #1e3a8a;
+      margin-bottom: 25px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #e2e8f0;
+    }
+
+    .clock-box {
+      background: #0f172a;
+      border-radius: 12px;
+      padding: 40px 20px;
+      text-align: center;
+    }
+
+    .clock-icon {
+      font-size: 45px;
+      margin-bottom: 15px;
+    }
+
+    .clock {
+      color: white;
+      font-size: 52px;
+      font-weight: 700;
+      letter-spacing: 4px;
+      margin: 10px 0;
+    }
+
+    .date {
+      color: #cbd5e1;
+      font-size: 17px;
+      margin-top: 8px;
+    }
+
+    .status {
+      color: #93c5fd;
+      margin-top: 20px;
+      font-weight: 600;
+    }
+
+    .note {
+      background: #eff6ff;
+      border: 1px solid #bfdbfe;
+      color: #1e40af;
+      padding: 15px;
+      border-radius: 8px;
+      margin-top: 20px;
+    }
+
+    .buttons {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      flex-wrap: wrap;
+      margin-top: 30px;
+    }
+
+    .btn {
+      border: none;
+      background: #2563eb;
+      color: white;
+      padding: 11px 20px;
+      border-radius: 7px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      transition: 0.2s;
+    }
+
+    .btn:hover {
+      background: #1d4ed8;
+    }
+
+    .btn.secondary {
+      background: #475569;
+    }
+
+    .btn.secondary:hover {
+      background: #334155;
+    }
+
+    footer {
+      background: #0f172a;
+      color: #cbd5e1;
+      text-align: center;
+      padding: 22px;
+      margin-top: 50px;
+    }
+
+    @media (max-width: 750px) {
+      header {
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      nav a {
+        margin: 0 8px;
+      }
+
+      .hero h1 {
+        font-size: 28px;
+      }
+
+      .card {
+        padding: 22px;
+      }
+
+      .clock {
+        font-size: 38px;
+      }
+    }
+
+    @media (max-width: 550px) {
+      main {
+        width: 94%;
+      }
+
+      .hero {
+        padding: 50px 15px;
+      }
+
+      .clock {
+        font-size: 30px;
+        letter-spacing: 2px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <div class="logo">JavaScript Practical</div>
+
+    <nav>
+      <a href="../../index.html">Home</a>
+<a href="../index.html">JavaScript Programs</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <span class="badge">
+      Browser Objects &amp; Browser Features — Practice 5
+    </span>
+
+    <h1>Digital Clock</h1>
+
+    <p>
+      Display the current time using JavaScript and setInterval().
+    </p>
+  </section>
+
+  <main>
+
+    <section class="objective">
+      <h2>Objective</h2>
+
+      <p>
+        To create a digital clock using JavaScript setInterval()
+        that continuously displays the current time and date.
+      </p>
+    </section>
+
+    <section class="card">
+
+      <h2>Digital Clock Demonstration</h2>
+
+      <div class="clock-box">
+
+        <div class="clock-icon">🕐</div>
+
+        <div
+          class="clock"
+          id="clock"
+        >
+          00:00:00
+        </div>
+
+        <div
+          class="date"
+          id="date"
+        >
+          Loading date...
+        </div>
+
+        <div
+          class="status"
+          id="status"
+        >
+          Clock is running using setInterval().
+        </div>
+
+      </div>
+
+      <div class="note">
+        <strong>Note:</strong>
+        The setInterval() function calls the updateClock()
+        function every 1000 milliseconds, allowing the digital
+        clock to update every second.
+      </div>
+
+    </section>
+
+    <div class="buttons">
+
+      <a
+        href="04-setinterval.html"
+        class="btn secondary"
+      >
+        ← Previous Practical
+      </a>
+
+      <a
+        href="../../index.html"
+        class="btn secondary"
+      >
+        Home
+      </a>
+
+      <a
+        href="06-countdown-timer.html"
+        class="btn"
+      >
+        Next Practical →
+      </a>
+
+    </div>
+
+  </main>
+
+  <footer>
+    <p>
+      &copy; 2026 JavaScript Practical —
+      Browser Objects &amp; Browser Features
+    </p>
+  </footer>
+
+  <script>
+    function updateClock() {
+
+      const now = new Date();
+
+      let hours = now.getHours();
+      let minutes = now.getMinutes();
+      let seconds = now.getSeconds();
+
+      let period = hours >= 12 ? "PM" : "AM";
+
+      hours = hours % 12;
+
+      if (hours === 0) {
+        hours = 12;
+      }
+
+      hours = String(hours).padStart(2, "0");
+      minutes = String(minutes).padStart(2, "0");
+      seconds = String(seconds).padStart(2, "0");
+
+      document.getElementById("clock").textContent =
+        hours + ":" + minutes + ":" + seconds + " " + period;
+
+      const options = {
+        weekday: "long",
+        year: "numeric",
+        month: "long",
+        day: "numeric"
+      };
+
+      document.getElementById("date").textContent =
+        now.toLocaleDateString("en-IN", options);
+    }
+
+    updateClock();
+
+    setInterval(updateClock, 1000);
+  </script>
+
+</body>
+</html>

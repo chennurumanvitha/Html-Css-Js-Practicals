@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Practical 8 - Drag and Drop Application</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: #f1f5f9;
+            color: #334155;
+            line-height: 1.6;
+        }
+
+        header {
+            background: #0f172a;
+            color: white;
+            padding: 18px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        nav a {
+            color: #cbd5e1;
+            text-decoration: none;
+            margin-left: 25px;
+            font-size: 15px;
+        }
+
+        nav a:hover {
+            color: white;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #1e3a8a, #2563eb);
+            color: white;
+            text-align: center;
+            padding: 65px 20px;
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.18);
+            padding: 7px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            margin-bottom: 12px;
+        }
+
+        .hero h1 {
+            margin: 5px 0;
+            font-size: 36px;
+        }
+
+        .hero p {
+            margin: 8px 0 0;
+            opacity: 0.9;
+        }
+
+        main {
+            width: 90%;
+            max-width: 1050px;
+            margin: 40px auto;
+        }
+
+        .card {
+            background: white;
+            padding: 28px;
+            margin-bottom: 25px;
+            border-radius: 12px;
+            box-shadow: 0 5px 18px rgba(15, 23, 42, 0.08);
+        }
+
+        .objective {
+            border-left: 5px solid #2563eb;
+        }
+
+        .card h2 {
+            color: #1e3a8a;
+            margin-top: 0;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 10px;
+        }
+
+        .instructions {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .instructions p {
+            margin: 5px 0;
+        }
+
+        .drag-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 60px;
+            flex-wrap: wrap;
+            margin: 30px auto;
+        }
+
+        .drag-items,
+        .drop-zone {
+            width: 280px;
+            min-height: 250px;
+            padding: 20px;
+            border-radius: 12px;
+        }
+
+        .drag-items {
+            background: #eff6ff;
+            border: 2px solid #bfdbfe;
+        }
+
+        .drop-zone {
+            background: #f8fafc;
+            border: 3px dashed #93c5fd;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: 0.2s;
+        }
+
+        .drop-zone.drag-over {
+            background: #dbeafe;
+            border-color: #2563eb;
+        }
+
+        .drag-items h3,
+        .drop-zone h3 {
+            color: #1e3a8a;
+            margin-top: 0;
+            text-align: center;
+        }
+
+        .drag-item {
+            background: #2563eb;
+            color: white;
+            padding: 12px 15px;
+            margin: 10px 0;
+            border-radius: 8px;
+            text-align: center;
+            cursor: grab;
+            font-weight: 600;
+            user-select: none;
+            transition: 0.2s;
+        }
+
+        .drag-item:hover {
+            background: #1d4ed8;
+        }
+
+        .drag-item.dragging {
+            opacity: 0.5;
+        }
+
+        .drop-zone .drag-item {
+            width: 90%;
+            cursor: default;
+        }
+
+        .drop-message {
+            color: #64748b;
+            text-align: center;
+        }
+
+        .output {
+            background: #eff6ff;
+            border: 2px dashed #93c5fd;
+            border-radius: 10px;
+            padding: 18px;
+            max-width: 650px;
+            margin: 25px auto 0;
+            text-align: center;
+        }
+
+        .output strong {
+            color: #1e3a8a;
+        }
+
+        .reset-btn {
+            border: none;
+            background: #2563eb;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 7px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 18px;
+        }
+
+        .reset-btn:hover {
+            background: #1d4ed8;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin: 30px 0;
+        }
+
+        .btn-link {
+            display: inline-block;
+            background: #2563eb;
+            color: white;
+            text-decoration: none;
+            padding: 10px 18px;
+            border-radius: 7px;
+            font-weight: 600;
+            transition: 0.2s;
+        }
+
+        .btn-link:hover {
+            background: #1d4ed8;
+        }
+
+        .btn-link.secondary {
+            background: #475569;
+        }
+
+        .btn-link.secondary:hover {
+            background: #334155;
+        }
+
+        footer {
+            background: #0f172a;
+            color: #cbd5e1;
+            text-align: center;
+            padding: 20px;
+            margin-top: 50px;
+        }
+
+        @media (max-width: 750px) {
+            header {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            nav a {
+                margin: 0 8px;
+            }
+
+            .hero h1 {
+                font-size: 30px;
+            }
+
+            .drag-container {
+                gap: 25px;
+            }
+        }
+
+        @media (max-width: 550px) {
+            main {
+                width: 94%;
+            }
+
+            .card {
+                padding: 20px;
+            }
+
+            .hero {
+                padding: 45px 15px;
+            }
+
+            .drag-items,
+            .drop-zone {
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="logo">JavaScript Practical</div>
+
+        <nav>
+            <a href="../../index.html">Home</a>
+<a href="../index.html">JavaScript Programs</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="badge">Events Practical 8</div>
+        <h1>Drag-and-Drop Application</h1>
+        <p>Move elements using JavaScript drag-and-drop events</p>
+    </section>
+
+    <main>
+
+        <section class="card objective">
+            <h2>Objective</h2>
+            <p>
+                To create an interactive drag-and-drop application using
+                JavaScript and demonstrate drag-and-drop events.
+            </p>
+        </section>
+
+        <section class="card">
+
+            <h2>Drag-and-Drop Demonstration</h2>
+
+            <div class="instructions">
+                <p><strong>Instructions:</strong></p>
+                <p>Drag any item from the left box and drop it into the target area.</p>
+            </div>
+
+            <div class="drag-container">
+
+                <div class="drag-items" id="dragItems">
+                    <h3>Items</h3>
+
+                    <div class="drag-item" draggable="true" data-item="HTML">
+                        HTML
+                    </div>
+
+                    <div class="drag-item" draggable="true" data-item="CSS">
+                        CSS
+                    </div>
+
+                    <div class="drag-item" draggable="true" data-item="JavaScript">
+                        JavaScript
+                    </div>
+
+                    <div class="drag-item" draggable="true" data-item="DOM">
+                        DOM
+                    </div>
+                </div>
+
+                <div class="drop-zone" id="dropZone">
+                    <h3>Drop Here</h3>
+                    <p class="drop-message" id="dropMessage">
+                        Drag an item here
+                    </p>
+                </div>
+
+            </div>
+
+            <div class="output">
+                <strong>Event Output</strong>
+                <p id="output">
+                    Waiting for a drag-and-drop action.
+                </p>
+
+                <button class="reset-btn" id="resetButton">
+                    Reset Application
+                </button>
+            </div>
+
+        </section>
+
+        <div class="buttons">
+
+            <a href="07-keyboard-game.html" class="btn-link">
+                ← Previous Practical
+            </a>
+
+            <a href="index.html" class="btn-link secondary">
+                Events Programs
+            </a>
+
+            <a href="09-next.html" class="btn-link">
+                Next Practical →
+            </a>
+
+        </div>
+
+    </main>
+
+    <footer>
+        <p>JavaScript Practical Assignment</p>
+    </footer>
+
+    <script>
+        const dragItems = document.querySelectorAll(".drag-item");
+        const dropZone = document.getElementById("dropZone");
+        const dropMessage = document.getElementById("dropMessage");
+        const output = document.getElementById("output");
+        const resetButton = document.getElementById("resetButton");
+
+        let draggedItem = null;
+
+        dragItems.forEach(function(item) {
+
+            item.addEventListener("dragstart", function(event) {
+                draggedItem = event.target;
+
+                event.target.classList.add("dragging");
+
+                event.dataTransfer.setData(
+                    "text/plain",
+                    event.target.dataset.item
+                );
+
+                output.textContent =
+                    "Dragging: " + event.target.dataset.item;
+            });
+
+            item.addEventListener("dragend", function(event) {
+                event.target.classList.remove("dragging");
+                draggedItem = null;
+            });
+        });
+
+        dropZone.addEventListener("dragover", function(event) {
+            event.preventDefault();
+
+            dropZone.classList.add("drag-over");
+
+            output.textContent =
+                "Drag over the drop zone.";
+        });
+
+        dropZone.addEventListener("dragleave", function() {
+            dropZone.classList.remove("drag-over");
+        });
+
+        dropZone.addEventListener("drop", function(event) {
+            event.preventDefault();
+
+            dropZone.classList.remove("drag-over");
+
+            if (draggedItem) {
+
+                const itemName = draggedItem.dataset.item;
+
+                dropMessage.remove();
+
+                dropZone.appendChild(draggedItem);
+
+                output.textContent =
+                    itemName + " was dropped successfully.";
+            }
+        });
+
+        resetButton.addEventListener("click", function() {
+
+            const dragItemsContainer =
+                document.getElementById("dragItems");
+
+            const items =
+                document.querySelectorAll(".drop-zone .drag-item");
+
+            items.forEach(function(item) {
+                dragItemsContainer.appendChild(item);
+            });
+
+            dropZone.innerHTML =
+                "<h3>Drop Here</h3>" +
+                "<p class='drop-message' id='dropMessage'>" +
+                "Drag an item here</p>";
+
+            output.textContent =
+                "Application reset. Drag an item to the target area.";
+        });
+    </script>
+
+</body>
+</html>

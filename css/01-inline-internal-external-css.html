@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>CSS Practical 01 - Types of CSS</title>
+
+    <!-- External CSS -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Internal CSS -->
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f4f7fb;
+            color: #1f2937;
+        }
+
+        header {
+            background: linear-gradient(135deg, #0f172a, #2563eb);
+            color: white;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        header h1 {
+            margin: 0 0 10px;
+            font-size: 32px;
+        }
+
+        header p {
+            margin: 0;
+            font-size: 17px;
+        }
+
+        nav {
+            background-color: #111827;
+            padding: 14px;
+            text-align: center;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 12px;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            color: #60a5fa;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1000px;
+            margin: 30px auto;
+        }
+
+        .card {
+            background-color: white;
+            padding: 25px;
+            margin-bottom: 25px;
+            border-radius: 12px;
+            box-shadow: 0 5px 18px rgba(0, 0, 0, 0.08);
+        }
+
+        .card h2 {
+            color: #1d4ed8;
+            border-bottom: 2px solid #dbeafe;
+            padding-bottom: 10px;
+        }
+
+        .objective {
+            background-color: #eff6ff;
+            border-left: 5px solid #2563eb;
+            padding: 15px;
+            line-height: 1.6;
+        }
+
+        .demo {
+            padding: 20px;
+            margin-top: 15px;
+            border-radius: 10px;
+        }
+
+        /* Internal CSS demonstration */
+        .internal-box {
+            background-color: #ecfdf5;
+            border: 2px solid #10b981;
+            color: #065f46;
+        }
+
+        .internal-box h3 {
+            margin-bottom: 8px;
+        }
+
+        .code {
+            background-color: #111827;
+            color: #e5e7eb;
+            padding: 18px;
+            border-radius: 8px;
+            overflow-x: auto;
+            line-height: 1.6;
+            font-family: Consolas, monospace;
+            font-size: 14px;
+        }
+
+        /* Navigation buttons */
+        .navigation {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin: 35px 0;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 22px;
+            background-color: #2563eb;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #1d4ed8;
+            transform: translateY(-2px);
+        }
+
+        .btn.secondary {
+            background-color: #475569;
+        }
+
+        .btn.secondary:hover {
+            background-color: #334155;
+        }
+
+        footer {
+            background-color: #0f172a;
+            color: #cbd5e1;
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+        }
+
+        footer p {
+            margin: 5px;
+        }
+
+        @media (max-width: 600px) {
+            header h1 {
+                font-size: 25px;
+            }
+
+            nav a {
+                display: inline-block;
+                margin: 6px;
+            }
+
+            .container {
+                width: 94%;
+            }
+
+            .card {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header>
+        <h1>CSS Practical 01</h1>
+        <p>Demonstration of Inline, Internal and External CSS</p>
+    </header>
+
+    <!-- Top Navigation -->
+    <nav>
+        <a href="../index.html">Dashboard</a>
+        <a href="index.html">CSS Programs</a>
+    </nav>
+
+    <main class="container">
+
+        <!-- Objective -->
+        <section class="card">
+            <h2>1. Objective</h2>
+
+            <div class="objective">
+                To create a webpage demonstrating the three methods of
+                applying CSS: <strong>Inline CSS</strong>,
+                <strong>Internal CSS</strong>, and
+                <strong>External CSS</strong>.
+            </div>
+        </section>
+
+        <!-- Inline CSS -->
+        <section class="card">
+            <h2>2. Inline CSS</h2>
+
+            <p>
+                Inline CSS is applied directly to an HTML element using
+                the <strong>style</strong> attribute.
+            </p>
+
+            <div
+                class="demo"
+                style="
+                    background-color: #fff7ed;
+                    border: 2px solid #f97316;
+                    color: #9a3412;
+                "
+            >
+                <h3 style="margin-bottom: 8px;">
+                    Inline CSS Demonstration
+                </h3>
+
+                <p style="font-size: 17px; line-height: 1.6;">
+                    This box is styled using CSS written directly inside
+                    the HTML element.
+                </p>
+            </div>
+        </section>
+
+        <!-- Internal CSS -->
+        <section class="card">
+            <h2>3. Internal CSS</h2>
+
+            <p>
+                Internal CSS is written inside the
+                <strong>&lt;style&gt;</strong> element in the
+                <strong>&lt;head&gt;</strong> section of an HTML document.
+            </p>
+
+            <div class="demo internal-box">
+                <h3>Internal CSS Demonstration</h3>
+
+                <p>
+                    This box receives its styling from the internal
+                    CSS rules defined in the &lt;style&gt; section.
+                </p>
+            </div>
+        </section>
+
+        <!-- External CSS -->
+        <section class="card">
+            <h2>4. External CSS</h2>
+
+            <p>
+                External CSS is stored in a separate
+                <strong>.css</strong> file and connected to the HTML
+                page using the <strong>&lt;link&gt;</strong> element.
+            </p>
+
+            <div class="external-box">
+                <h3>External CSS Demonstration</h3>
+
+                <p class="external-text">
+                    This box receives its styling from the external
+                    <strong>style.css</strong> file.
+                </p>
+            </div>
+        </section>
+
+        <!-- Comparison -->
+        <section class="card">
+            <h2>5. Comparison of CSS Types</h2>
+
+            <table style="width: 100%; border-collapse: collapse;">
+                <tr style="background-color: #1d4ed8; color: white;">
+                    <th style="padding: 12px; border: 1px solid #ddd;">
+                        Type
+                    </th>
+
+                    <th style="padding: 12px; border: 1px solid #ddd;">
+                        Location
+                    </th>
+
+                    <th style="padding: 12px; border: 1px solid #ddd;">
+                        Usage
+                    </th>
+                </tr>
+
+                <tr>
+                    <td style="padding: 12px; border: 1px solid #ddd;">
+                        Inline CSS
+                    </td>
+
+                    <td style="padding: 12px; border: 1px solid #ddd;">
+                        Inside HTML element
+                    </td>
+
+                    <td style="padding: 12px; border: 1px solid #ddd;">
+                        Styling a specific element
+                    </td>
+                </tr>
+
+                <tr>
+                    <td style="padding: 12px; border: 1px solid #ddd;">
+                        Internal CSS
+                    </td>
+
+                    <td style="padding: 12px; border: 1px solid #ddd;">
+                        Inside &lt;style&gt;
+                    </td>
+
+                    <td style="padding: 12px; border: 1px solid #ddd;">
+                        Styling one webpage
+                    </td>
+                </tr>
+
+                <tr>
+                    <td style="padding: 12px; border: 1px solid #ddd;">
+                        External CSS
+                    </td>
+
+                    <td style="padding: 12px; border: 1px solid #ddd;">
+                        Separate .css file
+                    </td>
+
+                    <td style="padding: 12px; border: 1px solid #ddd;">
+                        Styling multiple webpages
+                    </td>
+                </tr>
+            </table>
+        </section>
+
+        
+        <!-- Navigation Buttons -->
+        <div class="navigation">
+            <a href="../index.html" class="btn secondary">
+                ← Dashboard
+            </a>
+
+            <a href="index.html" class="btn">
+                CSS Programs
+            </a>
+
+            <a href="css-02.html" class="btn">
+                Next Practical →
+            </a>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p><strong>CSS Practical 01</strong></p>
+        <p>Inline, Internal and External CSS</p>
+    </footer>
+
+</body>
+</html>

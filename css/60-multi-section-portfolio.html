@@ -1,0 +1,956 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multi-Section Portfolio | CSS Practical 60</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: #f1f5f9;
+            color: #334155;
+            line-height: 1.6;
+        }
+
+        header {
+            background: #0f172a;
+            color: white;
+            padding: 18px 6%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 3px 12px rgba(15, 23, 42, 0.18);
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: white;
+        }
+
+        nav a {
+            color: #cbd5e1;
+            text-decoration: none;
+            margin-left: 20px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            color: white;
+        }
+
+        /* Hero Section */
+
+        .hero {
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(30, 58, 138, 0.96),
+                    rgba(37, 99, 235, 0.9)
+                );
+            color: white;
+            text-align: center;
+            padding: 75px 20px;
+        }
+
+        .profile-icon {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 20px;
+            border-radius: 50%;
+            background: white;
+            color: #1e3a8a;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 40px;
+            font-weight: 700;
+            box-shadow: 0 8px 20px rgba(15, 23, 42, 0.2);
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.18);
+            padding: 8px 18px;
+            border-radius: 30px;
+            margin-bottom: 15px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .hero h1 {
+            font-size: 44px;
+            margin-bottom: 8px;
+        }
+
+        .hero h2 {
+            font-size: 20px;
+            font-weight: 500;
+            margin-bottom: 12px;
+        }
+
+        .hero p {
+            max-width: 700px;
+            margin: auto;
+            font-size: 17px;
+        }
+
+        .hero-button {
+            display: inline-block;
+            margin-top: 25px;
+            background: white;
+            color: #1e3a8a;
+            text-decoration: none;
+            padding: 12px 25px;
+            border-radius: 7px;
+            font-weight: 700;
+            transition: 0.3s;
+        }
+
+        .hero-button:hover {
+            background: #dbeafe;
+            transform: translateY(-3px);
+        }
+
+        main {
+            width: 90%;
+            max-width: 1100px;
+            margin: 40px auto;
+        }
+
+        .objective,
+        .content-card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(15, 23, 42, 0.08);
+        }
+
+        .objective {
+            border-left: 5px solid #2563eb;
+            padding: 22px 25px;
+            margin-bottom: 25px;
+        }
+
+        .objective h2 {
+            color: #1e3a8a;
+            margin-bottom: 8px;
+        }
+
+        .content-card {
+            padding: 35px;
+            margin-bottom: 25px;
+        }
+
+        .content-card > h2 {
+            color: #1e3a8a;
+            border-bottom: 2px solid #dbeafe;
+            padding-bottom: 10px;
+            margin-bottom: 25px;
+        }
+
+        /* About Section */
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .about-text p {
+            margin-bottom: 15px;
+            color: #64748b;
+        }
+
+        .about-info {
+            background: #eff6ff;
+            border-left: 4px solid #2563eb;
+            border-radius: 10px;
+            padding: 22px;
+        }
+
+        .about-info p {
+            margin-bottom: 8px;
+        }
+
+        .about-info strong {
+            color: #1e3a8a;
+        }
+
+        /* Skills */
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 18px;
+        }
+
+        .skill-card {
+            background: #f8fafc;
+            border-left: 4px solid #2563eb;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            transition: 0.3s;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 7px 18px rgba(15, 23, 42, 0.1);
+        }
+
+        .skill-icon {
+            font-size: 30px;
+            margin-bottom: 8px;
+        }
+
+        .skill-card h3 {
+            color: #1e3a8a;
+            font-size: 17px;
+        }
+
+        /* Education */
+
+        .education-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .education-card {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 22px;
+        }
+
+        .education-card h3 {
+            color: #1e3a8a;
+            margin-bottom: 7px;
+        }
+
+        .education-card .year {
+            color: #2563eb;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        /* Projects */
+
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 22px;
+        }
+
+        .project-card {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 22px;
+            transition: 0.3s;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(15, 23, 42, 0.12);
+        }
+
+        .project-number {
+            color: #2563eb;
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        .project-card h3 {
+            color: #1e3a8a;
+            margin: 7px 0;
+        }
+
+        .project-card p {
+            color: #64748b;
+            font-size: 14px;
+        }
+
+        .project-link {
+            display: inline-block;
+            margin-top: 14px;
+            color: #2563eb;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .project-link:hover {
+            color: #1e3a8a;
+        }
+
+        /* Interests */
+
+        .interest-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 18px;
+        }
+
+        .interest-card {
+            background: #eff6ff;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            border-bottom: 3px solid #2563eb;
+        }
+
+        .interest-card h3 {
+            color: #1e3a8a;
+            margin-top: 8px;
+            font-size: 17px;
+        }
+
+        .interest-icon {
+            font-size: 30px;
+        }
+
+        /* Contact */
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+        }
+
+        .contact-info {
+            background: #eff6ff;
+            border-left: 4px solid #2563eb;
+            border-radius: 10px;
+            padding: 25px;
+        }
+
+        .contact-info h3 {
+            color: #1e3a8a;
+            margin-bottom: 12px;
+        }
+
+        .contact-info p {
+            margin-bottom: 8px;
+        }
+
+        .contact-info strong {
+            color: #1e3a8a;
+        }
+
+        .social-links {
+            margin-top: 18px;
+        }
+
+        .social-links a {
+            display: inline-block;
+            margin-right: 10px;
+            color: #2563eb;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .social-links a:hover {
+            color: #1e3a8a;
+        }
+
+        .contact-message {
+            background: #f8fafc;
+            border-radius: 10px;
+            padding: 25px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .contact-message h3 {
+            color: #1e3a8a;
+            margin-bottom: 10px;
+        }
+
+        .contact-message p {
+            color: #64748b;
+        }
+
+        /* Career Goal */
+
+        .career-goal {
+            background: linear-gradient(135deg, #1e3a8a, #2563eb);
+            color: white;
+            text-align: center;
+            padding: 35px;
+            border-radius: 12px;
+        }
+
+        .career-goal h2 {
+            margin-bottom: 10px;
+        }
+
+        .career-goal p {
+            max-width: 750px;
+            margin: auto;
+        }
+
+        /* Navigation Buttons */
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 35px 0;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 11px 22px;
+            background: #2563eb;
+            color: white;
+            text-decoration: none;
+            border-radius: 7px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background: #1e3a8a;
+            transform: translateY(-2px);
+        }
+
+        .secondary {
+            background: #64748b;
+        }
+
+        .secondary:hover {
+            background: #475569;
+        }
+
+        footer {
+            background: #0f172a;
+            color: #cbd5e1;
+            text-align: center;
+            padding: 25px;
+            margin-top: 40px;
+        }
+
+        footer strong {
+            color: white;
+        }
+
+        /* Responsive Design */
+
+        @media (max-width: 850px) {
+            .skills-grid,
+            .interest-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .project-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .about-grid,
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 750px) {
+            header {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            nav a {
+                margin: 0 7px;
+                font-size: 13px;
+            }
+
+            .hero h1 {
+                font-size: 34px;
+            }
+
+            .hero h2 {
+                font-size: 18px;
+            }
+
+            .content-card {
+                padding: 25px;
+            }
+
+            .skills-grid,
+            .interest-grid,
+            .education-grid,
+            .project-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header -->
+
+    <header>
+
+        <div class="logo">My Portfolio</div>
+
+        <nav>
+            <a href="#about">About</a>
+            <a href="#skills">Skills</a>
+            <a href="#education">Education</a>
+            <a href="#projects">Projects</a>
+            <a href="#contact">Contact</a>
+        </nav>
+
+    </header>
+
+    <!-- Hero Section -->
+
+    <section class="hero">
+
+        <div class="profile-icon">M</div>
+
+        <div class="badge">CSS PRACTICAL 60</div>
+
+        <h1>Chennuru Manvitha Reddy</h1>
+
+        <h2>Computing and Data Science Student</h2>
+
+        <p>
+            Sai University | Interested in Artificial Intelligence,
+            Machine Learning, Data Science, and Programming
+        </p>
+
+        <a href="#about" class="hero-button">
+            Explore My Portfolio
+        </a>
+
+    </section>
+
+    <main>
+
+        <!-- Objective -->
+
+        <section class="objective">
+
+            <h2>Objective</h2>
+
+            <p>
+                To create a multi-section personal portfolio website using
+                HTML and CSS by organizing personal information, skills,
+                education, projects, interests, and contact details into
+                a professional and responsive layout.
+            </p>
+
+        </section>
+
+        <!-- About -->
+
+        <section class="content-card" id="about">
+
+            <h2>About Me</h2>
+
+            <div class="about-grid">
+
+                <div class="about-text">
+
+                    <p>
+                        I am a Computing and Data Science student at
+                        Sai University with a strong interest in
+                        technology and programming.
+                    </p>
+
+                    <p>
+                        I enjoy learning about Artificial Intelligence,
+                        Machine Learning, Data Science, and modern
+                        web technologies.
+                    </p>
+
+                    <p>
+                        My goal is to continuously develop my technical
+                        knowledge and apply it to meaningful projects.
+                    </p>
+
+                </div>
+
+                <div class="about-info">
+
+                    <p>
+                        <strong>Name:</strong>
+                        Chennuru Manvitha Reddy
+                    </p>
+
+                    <p>
+                        <strong>Course:</strong>
+                        Computing and Data Science
+                    </p>
+
+                    <p>
+                        <strong>University:</strong>
+                        Sai University
+                    </p>
+
+                    <p>
+                        <strong>Focus:</strong>
+                        AI, ML, Data Science &amp; Programming
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- Skills -->
+
+        <section class="content-card" id="skills">
+
+            <h2>Technical Skills</h2>
+
+            <div class="skills-grid">
+
+                <div class="skill-card">
+                    <div class="skill-icon">🌐</div>
+                    <h3>HTML</h3>
+                </div>
+
+                <div class="skill-card">
+                    <div class="skill-icon">🎨</div>
+                    <h3>CSS</h3>
+                </div>
+
+                <div class="skill-card">
+                    <div class="skill-icon">💻</div>
+                    <h3>JavaScript</h3>
+                </div>
+
+                <div class="skill-card">
+                    <div class="skill-icon">🐍</div>
+                    <h3>Python</h3>
+                </div>
+
+                <div class="skill-card">
+                    <div class="skill-icon">🤖</div>
+                    <h3>Artificial Intelligence</h3>
+                </div>
+
+                <div class="skill-card">
+                    <div class="skill-icon">🧠</div>
+                    <h3>Machine Learning</h3>
+                </div>
+
+                <div class="skill-card">
+                    <div class="skill-icon">📊</div>
+                    <h3>Data Science</h3>
+                </div>
+
+                <div class="skill-card">
+                    <div class="skill-icon">🗄️</div>
+                    <h3>Database Basics</h3>
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- Education -->
+
+        <section class="content-card" id="education">
+
+            <h2>Education</h2>
+
+            <div class="education-grid">
+
+                <div class="education-card">
+
+                    <div class="year">
+                        Current
+                    </div>
+
+                    <h3>
+                        Computing and Data Science
+                    </h3>
+
+                    <p>
+                        Sai University
+                    </p>
+
+                    <p>
+                        Focus areas include programming,
+                        data science, artificial intelligence,
+                        and machine learning.
+                    </p>
+
+                </div>
+
+                <div class="education-card">
+
+                    <div class="year">
+                        Academic Development
+                    </div>
+
+                    <h3>
+                        Technical Learning
+                    </h3>
+
+                    <p>
+                        Developing practical knowledge through
+                        programming exercises, web development,
+                        and technology-based projects.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- Projects -->
+
+        <section class="content-card" id="projects">
+
+            <h2>Projects &amp; Practical Work</h2>
+
+            <div class="project-grid">
+
+                <div class="project-card">
+
+                    <div class="project-number">
+                        PROJECT 01
+                    </div>
+
+                    <h3>
+                        Web Development
+                    </h3>
+
+                    <p>
+                        Designed responsive webpages using HTML,
+                        CSS, and JavaScript with structured layouts
+                        and interactive components.
+                    </p>
+
+                    <a href="#" class="project-link">
+                        View Project →
+                    </a>
+
+                </div>
+
+                <div class="project-card">
+
+                    <div class="project-number">
+                        PROJECT 02
+                    </div>
+
+                    <h3>
+                        Data Science Learning
+                    </h3>
+
+                    <p>
+                        Exploring data analysis, visualization,
+                        programming techniques, and fundamental
+                        data science concepts.
+                    </p>
+
+                    <a href="#" class="project-link">
+                        View Project →
+                    </a>
+
+                </div>
+
+                <div class="project-card">
+
+                    <div class="project-number">
+                        PROJECT 03
+                    </div>
+
+                    <h3>
+                        AI &amp; ML Exploration
+                    </h3>
+
+                    <p>
+                        Learning fundamental concepts of artificial
+                        intelligence and machine learning through
+                        practical exercises.
+                    </p>
+
+                    <a href="#" class="project-link">
+                        View Project →
+                    </a>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- Areas of Interest -->
+
+        <section class="content-card">
+
+            <h2>Areas of Interest</h2>
+
+            <div class="interest-grid">
+
+                <div class="interest-card">
+                    <div class="interest-icon">🤖</div>
+                    <h3>Artificial Intelligence</h3>
+                </div>
+
+                <div class="interest-card">
+                    <div class="interest-icon">🧠</div>
+                    <h3>Machine Learning</h3>
+                </div>
+
+                <div class="interest-card">
+                    <div class="interest-icon">📊</div>
+                    <h3>Data Science</h3>
+                </div>
+
+                <div class="interest-card">
+                    <div class="interest-icon">💻</div>
+                    <h3>Programming</h3>
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- Career Goal -->
+
+        <section class="content-card">
+
+            <div class="career-goal">
+
+                <h2>Career Goal</h2>
+
+                <p>
+                    My goal is to build strong technical skills in
+                    computing, artificial intelligence, machine learning,
+                    and data science while developing practical solutions
+                    to real-world problems.
+                </p>
+
+            </div>
+
+        </section>
+
+        <!-- Contact -->
+
+        <section class="content-card" id="contact">
+
+            <h2>Contact &amp; Professional Profiles</h2>
+
+            <div class="contact-grid">
+
+                <div class="contact-info">
+
+                    <h3>Get In Touch</h3>
+
+                    <p>
+                        <strong>Name:</strong>
+                        Chennuru Manvitha Reddy
+                    </p>
+
+                    <p>
+                        <strong>University:</strong>
+                        Sai University
+                    </p>
+
+                    <p>
+                        <strong>Course:</strong>
+                        Computing and Data Science
+                    </p>
+
+                    <div class="social-links">
+
+                        <a
+                            href="https://www.linkedin.com/in/chennuru-manvitha-reddy-7a10b3417"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            LinkedIn
+                        </a>
+
+                        <a
+                            href="https://github.com/chennurumanvitha"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            GitHub
+                        </a>
+
+                    </div>
+
+                </div>
+
+                <div class="contact-message">
+
+                    <h3>Professional Profile</h3>
+
+                    <p>
+                        This portfolio presents my academic background,
+                        technical skills, areas of interest, and practical
+                        work in computing and data science.
+                    </p>
+
+                    <p>
+                        I am continuously learning and developing new
+                        skills through academic and personal projects.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- Navigation -->
+
+        <div class="buttons">
+
+            <a href="css-59.html" class="btn">
+                Previous Practical
+            </a>
+
+            <a href="index.html" class="btn">
+                CSS Programs
+            </a>
+
+            <a href="../index.html" class="btn secondary">
+                Dashboard
+            </a>
+
+        </div>
+
+    </main>
+
+    <footer>
+
+        <p>
+            <strong>CSS Practical 60</strong> |
+            Multi-Section Portfolio Website
+        </p>
+
+        <p>
+            Designed using HTML5 and CSS3
+        </p>
+
+    </footer>
+
+</body>
+</html>

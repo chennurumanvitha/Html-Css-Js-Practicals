@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Three-Column Layout Using Flexbox | CSS Practical 49</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: #f1f5f9;
+            color: #334155;
+            line-height: 1.6;
+        }
+
+        /* Header */
+        header {
+            background: #0f172a;
+            color: white;
+            padding: 18px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 22px;
+            font-weight: 700;
+        }
+
+        nav a {
+            color: #cbd5e1;
+            text-decoration: none;
+            margin-left: 22px;
+            font-size: 15px;
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            color: white;
+        }
+
+        /* Hero */
+        .hero {
+            background: linear-gradient(135deg, #1e3a8a, #2563eb);
+            color: white;
+            text-align: center;
+            padding: 65px 20px;
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 7px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .hero h1 {
+            font-size: 38px;
+            margin-bottom: 10px;
+        }
+
+        .hero p {
+            max-width: 700px;
+            margin: auto;
+            color: #dbeafe;
+        }
+
+        /* Main */
+        main {
+            width: 90%;
+            max-width: 1050px;
+            margin: 40px auto;
+        }
+
+        /* Objective */
+        .objective {
+            background: white;
+            border-left: 5px solid #2563eb;
+            padding: 22px 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(15, 23, 42, 0.08);
+            margin-bottom: 25px;
+        }
+
+        .objective h2 {
+            color: #1e3a8a;
+            margin-bottom: 8px;
+        }
+
+        /* Content Card */
+        .content-card {
+            background: white;
+            padding: 35px;
+            margin-bottom: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(15, 23, 42, 0.08);
+        }
+
+        .content-card h2 {
+            color: #1e3a8a;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #dbeafe;
+        }
+
+        /* Three-Column Flexbox Layout */
+        .three-column-layout {
+            display: flex;
+            gap: 20px;
+            align-items: stretch;
+        }
+
+        .column {
+            flex: 1;
+            background: #f8fafc;
+            border-left: 4px solid #2563eb;
+            border-radius: 10px;
+            padding: 25px;
+        }
+
+        .column:nth-child(2) {
+            border-left-color: #1e3a8a;
+        }
+
+        .column h3 {
+            color: #1e3a8a;
+            margin-bottom: 12px;
+        }
+
+        .column p {
+            color: #64748b;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        .column p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Feature List */
+        .feature-list {
+            list-style: none;
+        }
+
+        .feature-list li {
+            padding: 9px 0;
+            border-bottom: 1px solid #e2e8f0;
+            font-size: 14px;
+        }
+
+        .feature-list li:last-child {
+            border-bottom: none;
+        }
+
+        /* Information Cards */
+        .info-container {
+            display: flex;
+            gap: 20px;
+        }
+
+        .info-card {
+            flex: 1;
+            background: #eff6ff;
+            border-left: 4px solid #2563eb;
+            border-radius: 10px;
+            padding: 22px;
+        }
+
+        .info-card h3 {
+            color: #1e3a8a;
+            margin-bottom: 8px;
+        }
+
+        .info-card p {
+            color: #64748b;
+            font-size: 14px;
+        }
+
+        /* Buttons */
+        .buttons {
+            text-align: center;
+            margin: 35px 0;
+        }
+
+        .btn {
+            display: inline-block;
+            background: #2563eb;
+            color: white;
+            text-decoration: none;
+            padding: 11px 22px;
+            border-radius: 7px;
+            margin: 5px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background: #1e3a8a;
+            transform: translateY(-2px);
+        }
+
+        .secondary {
+            background: #64748b;
+        }
+
+        .secondary:hover {
+            background: #475569;
+        }
+
+        /* Footer */
+        footer {
+            background: #0f172a;
+            color: #94a3b8;
+            text-align: center;
+            padding: 25px;
+            margin-top: 40px;
+        }
+
+        footer strong {
+            color: white;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 800px) {
+            .three-column-layout {
+                flex-wrap: wrap;
+            }
+
+            .column {
+                flex: 1 1 calc(50% - 10px);
+            }
+
+            .column:last-child {
+                flex-basis: 100%;
+            }
+
+            .info-container {
+                flex-wrap: wrap;
+            }
+
+            .info-card {
+                flex: 1 1 45%;
+            }
+        }
+
+        @media (max-width: 750px) {
+            header {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            nav a {
+                margin: 0 8px;
+            }
+
+            .hero h1 {
+                font-size: 30px;
+            }
+
+            .content-card {
+                padding: 25px;
+            }
+
+            .three-column-layout {
+                flex-direction: column;
+            }
+
+            .column {
+                width: 100%;
+            }
+
+            .info-container {
+                flex-direction: column;
+            }
+
+            .info-card {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="logo">CSS Practical Portfolio</div>
+
+        <nav>
+            <a href="../index.html">Home</a>
+            <a href="index.html">CSS Programs</a>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="badge">CSS PRACTICAL 49</div>
+
+        <h1>Three-Column Webpage Layout</h1>
+
+        <p>
+            A responsive three-column webpage layout created using
+            CSS Flexbox for organizing content efficiently.
+        </p>
+    </section>
+
+    <main>
+
+        <!-- Objective -->
+        <section class="objective">
+            <h2>Objective</h2>
+
+            <p>
+                To create a three-column webpage layout using CSS Flexbox
+                for arranging multiple content sections horizontally and
+                making the layout responsive on smaller screens.
+            </p>
+        </section>
+
+        <!-- Three Column Layout -->
+        <section class="content-card">
+            <h2>Three-Column Flexbox Layout</h2>
+
+            <div class="three-column-layout">
+
+                <!-- Column 1 -->
+                <article class="column">
+                    <h3>About</h3>
+
+                    <p>
+                        CSS Flexbox is a one-dimensional layout system
+                        designed to arrange elements in rows or columns.
+                    </p>
+
+                    <p>
+                        It provides an efficient way to distribute
+                        available space between elements.
+                    </p>
+                </article>
+
+                <!-- Column 2 -->
+                <article class="column">
+                    <h3>Services</h3>
+
+                    <ul class="feature-list">
+                        <li>Web Development</li>
+                        <li>UI Design</li>
+                        <li>Responsive Design</li>
+                        <li>Frontend Development</li>
+                        <li>Website Maintenance</li>
+                    </ul>
+                </article>
+
+                <!-- Column 3 -->
+                <article class="column">
+                    <h3>Resources</h3>
+
+                    <p>
+                        Learn HTML, CSS and JavaScript to build modern
+                        and responsive web applications.
+                    </p>
+
+                    <p>
+                        Flexbox makes it easier to create flexible layouts
+                        that adapt to different screen sizes.
+                    </p>
+                </article>
+
+            </div>
+        </section>
+
+        <!-- Flexbox Features -->
+        <section class="content-card">
+            <h2>Flexbox Layout Features</h2>
+
+            <div class="info-container">
+
+                <div class="info-card">
+                    <h3>display: flex</h3>
+                    <p>
+                        Creates a Flexbox container and allows its
+                        child elements to be arranged flexibly.
+                    </p>
+                </div>
+
+                <div class="info-card">
+                    <h3>flex: 1</h3>
+                    <p>
+                        Allows each column to share the available
+                        horizontal space equally.
+                    </p>
+                </div>
+
+                <div class="info-card">
+                    <h3>gap</h3>
+                    <p>
+                        Provides consistent spacing between the
+                        three columns.
+                    </p>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Navigation -->
+        <div class="buttons">
+
+            <a href="css-48.html" class="btn secondary">
+                ← Previous Practical
+            </a>
+
+            <a href="index.html" class="btn">
+                CSS Programs
+            </a>
+
+            <a href="../index.html" class="btn">
+                Dashboard
+            </a>
+
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>
+            <strong>CSS Practical 49</strong> |
+            Three-Column Webpage Layout Using Flexbox
+        </p>
+
+        <p>Created using HTML5 and CSS3</p>
+    </footer>
+
+</body>
+</html>

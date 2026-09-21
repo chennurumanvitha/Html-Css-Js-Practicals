@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Feedback Form with Validation</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Segoe UI", Arial, sans-serif;
+      background: #f1f5f9;
+      color: #334155;
+      line-height: 1.6;
+    }
+
+    header {
+      background: #0f172a;
+      padding: 18px 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      color: white;
+      font-size: 22px;
+      font-weight: bold;
+    }
+
+    nav a {
+      color: #cbd5e1;
+      text-decoration: none;
+      margin-left: 25px;
+      font-size: 15px;
+    }
+
+    nav a:hover {
+      color: white;
+    }
+
+    .hero {
+      background: linear-gradient(135deg, #1e3a8a, #2563eb);
+      color: white;
+      text-align: center;
+      padding: 65px 20px;
+    }
+
+    .badge {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.15);
+      padding: 7px 16px;
+      border-radius: 20px;
+      margin-bottom: 15px;
+      font-size: 14px;
+    }
+
+    .hero h1 {
+      font-size: 36px;
+      margin-bottom: 10px;
+    }
+
+    .hero p {
+      font-size: 17px;
+      opacity: 0.9;
+    }
+
+    main {
+      width: 90%;
+      max-width: 1050px;
+      margin: 40px auto;
+    }
+
+    .objective {
+      background: white;
+      padding: 22px;
+      border-left: 5px solid #2563eb;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
+      margin-bottom: 25px;
+    }
+
+    .objective h2 {
+      color: #1e3a8a;
+      margin-bottom: 8px;
+    }
+
+    .card {
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(15, 23, 42, 0.08);
+    }
+
+    .card h2 {
+      color: #1e3a8a;
+      margin-bottom: 25px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #e2e8f0;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 7px;
+    }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      padding: 11px 13px;
+      border: 1px solid #cbd5e1;
+      border-radius: 7px;
+      font-size: 15px;
+      font-family: inherit;
+      outline: none;
+      transition: 0.2s;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      border-color: #2563eb;
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+    }
+
+    textarea {
+      min-height: 130px;
+      resize: vertical;
+    }
+
+    .rating-group {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      padding: 8px 0;
+    }
+
+    .rating-option {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      font-weight: normal;
+    }
+
+    .rating-option input {
+      width: auto;
+    }
+
+    .error {
+      color: #dc2626;
+      font-size: 13px;
+      margin-top: 5px;
+      min-height: 18px;
+    }
+
+    .valid {
+      border-color: #16a34a;
+      background: #f0fdf4;
+    }
+
+    .invalid {
+      border-color: #dc2626;
+      background: #fff7f7;
+    }
+
+    .success-message {
+      display: none;
+      background: #ecfdf5;
+      color: #166534;
+      border: 1px solid #86efac;
+      padding: 15px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      text-align: center;
+      font-weight: 600;
+    }
+
+    .submit-btn {
+      width: 100%;
+      border: none;
+      background: #2563eb;
+      color: white;
+      padding: 13px 20px;
+      border-radius: 7px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .submit-btn:hover {
+      background: #1d4ed8;
+    }
+
+    .buttons {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      flex-wrap: wrap;
+      margin-top: 30px;
+    }
+
+    .btn-link {
+      text-decoration: none;
+      background: #2563eb;
+      color: white;
+      padding: 11px 20px;
+      border-radius: 7px;
+      font-weight: 600;
+    }
+
+    .btn-link:hover {
+      background: #1d4ed8;
+    }
+
+    .btn-link.secondary {
+      background: #475569;
+    }
+
+    .btn-link.secondary:hover {
+      background: #334155;
+    }
+
+    footer {
+      background: #0f172a;
+      color: #cbd5e1;
+      text-align: center;
+      padding: 22px;
+      margin-top: 50px;
+    }
+
+    @media (max-width: 750px) {
+      header {
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      nav a {
+        margin: 0 8px;
+      }
+
+      .hero h1 {
+        font-size: 28px;
+      }
+
+      .card {
+        padding: 22px;
+      }
+    }
+
+    @media (max-width: 550px) {
+      main {
+        width: 94%;
+      }
+
+      .hero {
+        padding: 50px 15px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <div class="logo">JavaScript Practical</div>
+
+    <nav>
+      <a href="../../index.html">Home</a>
+<a href="../index.html">JavaScript Programs</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <span class="badge">Practice 36</span>
+    <h1>Feedback Form</h1>
+    <p>Collect and validate user feedback using JavaScript.</p>
+  </section>
+
+  <main>
+
+    <section class="objective">
+      <h2>Objective</h2>
+      <p>
+        To create a feedback form and validate user details, rating,
+        category, and feedback message using JavaScript.
+      </p>
+    </section>
+
+    <section class="card">
+      <h2>Submit Your Feedback</h2>
+
+      <div class="success-message" id="successMessage">
+        Thank you! Your feedback has been submitted successfully.
+      </div>
+
+      <form id="feedbackForm" novalidate>
+
+        <div class="form-group">
+          <label for="fullName">Full Name</label>
+
+          <input
+            type="text"
+            id="fullName"
+            placeholder="Enter your name"
+            autocomplete="off"
+          >
+
+          <div class="error" id="fullNameError"></div>
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email Address</label>
+
+          <input
+            type="email"
+            id="email"
+            placeholder="Enter your email address"
+            autocomplete="off"
+          >
+
+          <div class="error" id="emailError"></div>
+        </div>
+
+        <div class="form-group">
+          <label>Rating</label>
+
+          <div class="rating-group">
+            <label class="rating-option">
+              <input
+                type="radio"
+                name="rating"
+                value="Excellent"
+              >
+              Excellent
+            </label>
+
+            <label class="rating-option">
+              <input
+                type="radio"
+                name="rating"
+                value="Good"
+              >
+              Good
+            </label>
+
+            <label class="rating-option">
+              <input
+                type="radio"
+                name="rating"
+                value="Average"
+              >
+              Average
+            </label>
+
+            <label class="rating-option">
+              <input
+                type="radio"
+                name="rating"
+                value="Poor"
+              >
+              Poor
+            </label>
+          </div>
+
+          <div class="error" id="ratingError"></div>
+        </div>
+
+        <div class="form-group">
+          <label for="category">Feedback Category</label>
+
+          <select id="category">
+            <option value="">-- Select Category --</option>
+            <option value="Website">Website</option>
+            <option value="Service">Service</option>
+            <option value="Content">Content</option>
+            <option value="Other">Other</option>
+          </select>
+
+          <div class="error" id="categoryError"></div>
+        </div>
+
+        <div class="form-group">
+          <label for="feedback">Your Feedback</label>
+
+          <textarea
+            id="feedback"
+            maxlength="500"
+            placeholder="Enter your feedback"
+          ></textarea>
+
+          <div class="error" id="feedbackError"></div>
+
+          <div
+            id="characterCount"
+            style="font-size:13px;color:#64748b;margin-top:5px;"
+          >
+            0 / 500 characters
+          </div>
+        </div>
+
+        <button type="submit" class="submit-btn">
+          Submit Feedback
+        </button>
+
+      </form>
+    </section>
+
+    <div class="buttons">
+      <a href="35-job-application-validation.html" class="btn-link">
+        ← Previous Practical
+      </a>
+
+      <a href="index.html" class="btn-link secondary">
+        Forms &amp; Validation
+      </a>
+
+      <a href="37-contact-validation.html" class="btn-link">
+        Next Practical →
+      </a>
+    </div>
+
+  </main>
+
+  <footer>
+    <p>&copy; 2026 JavaScript Practical — Forms &amp; Validation</p>
+  </footer>
+
+  <script>
+    const feedbackForm = document.getElementById("feedbackForm");
+
+    const fullName = document.getElementById("fullName");
+    const email = document.getElementById("email");
+    const category = document.getElementById("category");
+    const feedback = document.getElementById("feedback");
+
+    const fullNameError =
+      document.getElementById("fullNameError");
+    const emailError =
+      document.getElementById("emailError");
+    const ratingError =
+      document.getElementById("ratingError");
+    const categoryError =
+      document.getElementById("categoryError");
+    const feedbackError =
+      document.getElementById("feedbackError");
+
+    const characterCount =
+      document.getElementById("characterCount");
+
+    const successMessage =
+      document.getElementById("successMessage");
+
+    const nameRegex = /^[A-Za-z ]+$/;
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    function validateFullName() {
+      const value = fullName.value.trim();
+
+      fullName.classList.remove("valid", "invalid");
+      fullNameError.textContent = "";
+
+      if (value === "") {
+        fullName.classList.add("invalid");
+        fullNameError.textContent =
+          "Full name is required.";
+        return false;
+      }
+
+      if (!nameRegex.test(value)) {
+        fullName.classList.add("invalid");
+        fullNameError.textContent =
+          "Name can contain only alphabets and spaces.";
+        return false;
+      }
+
+      fullName.classList.add("valid");
+      return true;
+    }
+
+    function validateEmail() {
+      const value = email.value.trim();
+
+      email.classList.remove("valid", "invalid");
+      emailError.textContent = "";
+
+      if (value === "") {
+        email.classList.add("invalid");
+        emailError.textContent =
+          "Email address is required.";
+        return false;
+      }
+
+      if (!emailRegex.test(value)) {
+        email.classList.add("invalid");
+        emailError.textContent =
+          "Enter a valid email address.";
+        return false;
+      }
+
+      email.classList.add("valid");
+      return true;
+    }
+
+    function validateRating() {
+      const selectedRating =
+        document.querySelector('input[name="rating"]:checked');
+
+      ratingError.textContent = "";
+
+      if (!selectedRating) {
+        ratingError.textContent =
+          "Please select a rating.";
+        return false;
+      }
+
+      return true;
+    }
+
+    function validateCategory() {
+      category.classList.remove("valid", "invalid");
+      categoryError.textContent = "";
+
+      if (category.value === "") {
+        category.classList.add("invalid");
+        categoryError.textContent =
+          "Please select a feedback category.";
+        return false;
+      }
+
+      category.classList.add("valid");
+      return true;
+    }
+
+    function validateFeedback() {
+      const value = feedback.value.trim();
+
+      feedback.classList.remove("valid", "invalid");
+      feedbackError.textContent = "";
+
+      characterCount.textContent =
+        feedback.value.length + " / 500 characters";
+
+      if (value === "") {
+        feedback.classList.add("invalid");
+        feedbackError.textContent =
+          "Feedback is required.";
+        return false;
+      }
+
+      if (value.length < 10) {
+        feedback.classList.add("invalid");
+        feedbackError.textContent =
+          "Feedback must contain at least 10 characters.";
+        return false;
+      }
+
+      feedback.classList.add("valid");
+      return true;
+    }
+
+    // Real-time validation
+    fullName.addEventListener("input", function () {
+      successMessage.style.display = "none";
+      validateFullName();
+    });
+
+    email.addEventListener("input", function () {
+      successMessage.style.display = "none";
+      validateEmail();
+    });
+
+    document
+      .querySelectorAll('input[name="rating"]')
+      .forEach(function (radio) {
+        radio.addEventListener("change", function () {
+          successMessage.style.display = "none";
+          validateRating();
+        });
+      });
+
+    category.addEventListener("change", function () {
+      successMessage.style.display = "none";
+      validateCategory();
+    });
+
+    feedback.addEventListener("input", function () {
+      successMessage.style.display = "none";
+      validateFeedback();
+    });
+
+    // Form submission
+    feedbackForm.addEventListener("submit", function (event) {
+      event.preventDefault();
+
+      const validName = validateFullName();
+      const validEmail = validateEmail();
+      const validRating = validateRating();
+      const validCategory = validateCategory();
+      const validFeedback = validateFeedback();
+
+      const formIsValid =
+        validName &&
+        validEmail &&
+        validRating &&
+        validCategory &&
+        validFeedback;
+
+      if (!formIsValid) {
+        successMessage.style.display = "none";
+        return;
+      }
+
+      successMessage.style.display = "block";
+
+      feedbackForm.reset();
+
+      fullName.classList.remove("valid", "invalid");
+      email.classList.remove("valid", "invalid");
+      category.classList.remove("valid", "invalid");
+      feedback.classList.remove("valid", "invalid");
+
+      fullNameError.textContent = "";
+      emailError.textContent = "";
+      ratingError.textContent = "";
+      categoryError.textContent = "";
+      feedbackError.textContent = "";
+
+      characterCount.textContent = "0 / 500 characters";
+    });
+  </script>
+
+</body>
+</html>

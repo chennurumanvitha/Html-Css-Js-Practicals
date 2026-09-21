@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Keyframe Animations | Practical 67</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: #f1f5f9;
+            color: #334155;
+            line-height: 1.6;
+        }
+
+        header {
+            background: #0f172a;
+            color: white;
+            padding: 18px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        nav {
+            display: flex;
+            gap: 22px;
+        }
+
+        nav a {
+            color: #cbd5e1;
+            text-decoration: none;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            color: white;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #1e3a8a, #2563eb);
+            color: white;
+            text-align: center;
+            padding: 65px 20px;
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 8px 18px;
+            border-radius: 20px;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        .hero h1 {
+            font-size: 38px;
+            margin-bottom: 10px;
+        }
+
+        .hero p {
+            font-size: 17px;
+        }
+
+        main {
+            width: 90%;
+            max-width: 1050px;
+            margin: 40px auto;
+        }
+
+        .objective,
+        .content-card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(15, 23, 42, 0.08);
+        }
+
+        .objective {
+            border-left: 5px solid #2563eb;
+            padding: 22px 25px;
+            margin-bottom: 25px;
+        }
+
+        .objective h2 {
+            color: #1e3a8a;
+            margin-bottom: 8px;
+        }
+
+        .content-card {
+            padding: 35px;
+            margin-bottom: 25px;
+        }
+
+        .content-card h2 {
+            color: #1e3a8a;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #dbeafe;
+        }
+
+        .content-card h3 {
+            color: #2563eb;
+            margin-bottom: 10px;
+        }
+
+        .content-card p {
+            margin-bottom: 12px;
+        }
+
+        /* Animation Area */
+
+        .animation-area {
+            height: 180px;
+            background: #eff6ff;
+            border-radius: 10px;
+            margin-top: 25px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Moving Animation */
+
+        .moving-box {
+            width: 80px;
+            height: 80px;
+            background: #2563eb;
+            color: white;
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: 600;
+            position: absolute;
+            top: 50px;
+            left: 10px;
+
+            animation: moveBox 4s infinite alternate ease-in-out;
+        }
+
+        @keyframes moveBox {
+            0% {
+                left: 10px;
+            }
+
+            100% {
+                left: calc(100% - 90px);
+            }
+        }
+
+        /* Rotation Animation */
+
+        .rotation-area {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 180px;
+            background: #eff6ff;
+            border-radius: 10px;
+            margin-top: 25px;
+        }
+
+        .rotation-box {
+            width: 90px;
+            height: 90px;
+            background: #1e3a8a;
+            color: white;
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: 600;
+
+            animation: rotateBox 3s linear infinite;
+        }
+
+        @keyframes rotateBox {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Scaling Animation */
+
+        .scale-area {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 180px;
+            background: #eff6ff;
+            border-radius: 10px;
+            margin-top: 25px;
+        }
+
+        .scale-box {
+            width: 100px;
+            height: 80px;
+            background: #2563eb;
+            color: white;
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: 600;
+
+            animation: scaleBox 2s infinite alternate ease-in-out;
+        }
+
+        @keyframes scaleBox {
+            0% {
+                transform: scale(0.8);
+            }
+
+            100% {
+                transform: scale(1.3);
+            }
+        }
+
+        /* Fade Animation */
+
+        .fade-area {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 180px;
+            background: #eff6ff;
+            border-radius: 10px;
+            margin-top: 25px;
+        }
+
+        .fade-box {
+            width: 140px;
+            height: 80px;
+            background: #1e3a8a;
+            color: white;
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: 600;
+
+            animation: fadeBox 2.5s infinite alternate;
+        }
+
+        @keyframes fadeBox {
+            0% {
+                opacity: 0.2;
+            }
+
+            100% {
+                opacity: 1;
+            }
+        }
+
+        /* Bounce Animation */
+
+        .bounce-area {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            height: 220px;
+            background: #eff6ff;
+            border-radius: 10px;
+            margin-top: 25px;
+            padding-top: 15px;
+        }
+
+        .bounce-ball {
+            width: 70px;
+            height: 70px;
+            background: #2563eb;
+            border-radius: 50%;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 13px;
+            font-weight: 600;
+
+            animation: bounceBall 1.2s infinite;
+        }
+
+        @keyframes bounceBall {
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(110px);
+            }
+        }
+
+        /* Pulse Animation */
+
+        .pulse-area {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 180px;
+            background: #eff6ff;
+            border-radius: 10px;
+            margin-top: 25px;
+        }
+
+        .pulse-box {
+            width: 150px;
+            height: 80px;
+            background: #1e3a8a;
+            color: white;
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: 600;
+
+            animation: pulseBox 1.5s infinite;
+        }
+
+        @keyframes pulseBox {
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.15);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        /* Loading Animation */
+
+        .loading-area {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 180px;
+            background: #eff6ff;
+            border-radius: 10px;
+            margin-top: 25px;
+        }
+
+        .loader {
+            width: 55px;
+            height: 55px;
+            border: 6px solid #dbeafe;
+            border-top: 6px solid #2563eb;
+            border-radius: 50%;
+
+            animation: loading 1s linear infinite;
+        }
+
+        @keyframes loading {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Animation Cards */
+
+        .animation-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-top: 25px;
+        }
+
+        .animation-card {
+            background: #f8fafc;
+            border-left: 4px solid #2563eb;
+            border-radius: 10px;
+            padding: 25px;
+            text-align: center;
+        }
+
+        .animation-icon {
+            width: 60px;
+            height: 60px;
+            background: #2563eb;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto 15px;
+            font-weight: 700;
+            animation: iconPulse 2s infinite;
+        }
+
+        @keyframes iconPulse {
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.12);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 22px;
+            background: #2563eb;
+            color: white;
+            text-decoration: none;
+            border-radius: 7px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background: #1e3a8a;
+            transform: translateY(-2px);
+        }
+
+        .secondary {
+            background: #0f172a;
+        }
+
+        .secondary:hover {
+            background: #1e293b;
+        }
+
+        footer {
+            background: #0f172a;
+            color: #cbd5e1;
+            text-align: center;
+            padding: 25px;
+            margin-top: 40px;
+        }
+
+        footer strong {
+            color: white;
+        }
+
+        @media (max-width: 850px) {
+            .animation-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 750px) {
+            header {
+                justify-content: center;
+                gap: 15px;
+            }
+
+            nav {
+                width: 100%;
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+
+            .hero h1 {
+                font-size: 30px;
+            }
+
+            .content-card {
+                padding: 25px 20px;
+            }
+
+            .animation-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+
+        <div class="logo">CSS Learning Hub</div>
+
+        <nav>
+            <a href="../index.html">Home</a>
+            <a href="index.html">CSS Programs</a>
+        </nav>
+
+    </header>
+
+    <section class="hero">
+
+        <div class="badge">CSS PRACTICAL 67</div>
+
+        <h1>CSS Keyframe Animations</h1>
+
+        <p>
+            Creating animations using the CSS @keyframes rule
+        </p>
+
+    </section>
+
+    <main>
+
+        <section class="objective">
+
+            <h2>Objective</h2>
+
+            <p>
+                To create a webpage demonstrating CSS keyframe animations
+                using the <strong>@keyframes</strong> rule and animation
+                properties to create movement, rotation, scaling, fading,
+                bouncing, and loading effects.
+            </p>
+
+        </section>
+
+        <section class="content-card">
+
+            <h2>Moving Animation</h2>
+
+            <p>
+                The moving box continuously moves from the left side
+                to the right side using a keyframe animation.
+            </p>
+
+            <div class="animation-area">
+
+                <div class="moving-box">
+                    Move
+                </div>
+
+            </div>
+
+        </section>
+
+        <section class="content-card">
+
+            <h2>Rotation Animation</h2>
+
+            <p>
+                The element rotates continuously from 0 degrees
+                to 360 degrees.
+            </p>
+
+            <div class="rotation-area">
+
+                <div class="rotation-box">
+                    Rotate
+                </div>
+
+            </div>
+
+        </section>
+
+        <section class="content-card">
+
+            <h2>Scaling Animation</h2>
+
+            <p>
+                The element smoothly increases and decreases in size
+                using the scale transformation.
+            </p>
+
+            <div class="scale-area">
+
+                <div class="scale-box">
+                    Scale
+                </div>
+
+            </div>
+
+        </section>
+
+        <section class="content-card">
+
+            <h2>Fade Animation</h2>
+
+            <p>
+                The opacity of the element changes continuously to
+                create a fading effect.
+            </p>
+
+            <div class="fade-area">
+
+                <div class="fade-box">
+                    Fade Effect
+                </div>
+
+            </div>
+
+        </section>
+
+        <section class="content-card">
+
+            <h2>Bounce Animation</h2>
+
+            <p>
+                The circular element moves vertically to create
+                a bouncing animation.
+            </p>
+
+            <div class="bounce-area">
+
+                <div class="bounce-ball">
+                    Bounce
+                </div>
+
+            </div>
+
+        </section>
+
+        <section class="content-card">
+
+            <h2>Pulse Animation</h2>
+
+            <p>
+                The element continuously grows slightly and returns
+                to its original size.
+            </p>
+
+            <div class="pulse-area">
+
+                <div class="pulse-box">
+                    Pulse Effect
+                </div>
+
+            </div>
+
+        </section>
+
+        <section class="content-card">
+
+            <h2>Loading Animation</h2>
+
+            <p>
+                A rotating circular loader can be created using
+                CSS keyframes without JavaScript.
+            </p>
+
+            <div class="loading-area">
+
+                <div class="loader"></div>
+
+            </div>
+
+        </section>
+
+        <section class="content-card">
+
+            <h2>Multiple Keyframe Animations</h2>
+
+            <div class="animation-grid">
+
+                <div class="animation-card">
+
+                    <div class="animation-icon">1</div>
+
+                    <h3>Move</h3>
+
+                    <p>
+                        Changes the position of an element over time.
+                    </p>
+
+                </div>
+
+                <div class="animation-card">
+
+                    <div class="animation-icon">2</div>
+
+                    <h3>Rotate</h3>
+
+                    <p>
+                        Rotates an element continuously using keyframes.
+                    </p>
+
+                </div>
+
+                <div class="animation-card">
+
+                    <div class="animation-icon">3</div>
+
+                    <h3>Scale</h3>
+
+                    <p>
+                        Changes the size of an element smoothly.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <div class="buttons">
+
+            <a href="css-66.html" class="btn secondary">
+                ← Previous Practical
+            </a>
+
+            <a href="index.html" class="btn">
+                CSS Programs
+            </a>
+
+            <a href="../index.html" class="btn secondary">
+                Dashboard
+            </a>
+
+        </div>
+
+    </main>
+
+    <footer>
+
+        <p>
+            <strong>CSS Practical 67</strong> |
+            CSS Keyframe Animations
+        </p>
+
+        <p>
+            Designed using HTML5 and CSS3
+        </p>
+
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>HTML Tables | Practical 03</title>
+
+    <style>
+        /* =========================================
+           GLOBAL STYLES
+        ========================================== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: #f1f5f9;
+            color: #334155;
+            line-height: 1.6;
+        }
+
+        /* =========================================
+           NAVIGATION BAR
+        ========================================== */
+        nav {
+            background: #0f172a;
+            padding: 16px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: #ffffff;
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        nav a {
+            color: #cbd5e1;
+            text-decoration: none;
+            margin-left: 25px;
+            font-size: 14px;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: #ffffff;
+        }
+
+        /* =========================================
+           HERO SECTION
+        ========================================== */
+        .hero {
+            background: linear-gradient(135deg, #1e3a8a, #2563eb);
+            color: #ffffff;
+            text-align: center;
+            padding: 65px 20px;
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 6px 15px;
+            border-radius: 20px;
+            font-size: 13px;
+            margin-bottom: 15px;
+        }
+
+        .hero h1 {
+            font-size: 42px;
+            margin-bottom: 10px;
+        }
+
+        .hero p {
+            font-size: 18px;
+            color: #dbeafe;
+        }
+
+        /* =========================================
+           MAIN CONTENT
+        ========================================== */
+        main {
+            width: 90%;
+            max-width: 1050px;
+            margin: 40px auto;
+        }
+
+        .objective,
+        .content-card {
+            background: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(15, 23, 42, 0.06);
+        }
+
+        /* Objective Box */
+        .objective {
+            border-left: 5px solid #2563eb;
+            padding: 22px 25px;
+            margin-bottom: 30px;
+        }
+
+        .objective h2 {
+            color: #1e3a8a;
+            font-size: 20px;
+            margin-bottom: 6px;
+        }
+
+        /* Content Cards */
+        .content-card {
+            padding: 35px;
+            margin-bottom: 25px;
+        }
+
+        .content-card h2 {
+            color: #1e3a8a;
+            margin-bottom: 12px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e2e8f0;
+        }
+
+        .content-card > p {
+            margin-bottom: 20px;
+        }
+
+        /* =========================================
+           TABLE STYLING
+        ========================================== */
+        .table-container {
+            width: 100%;
+            overflow-x: auto;
+            margin-top: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 650px;
+        }
+
+        th,
+        td {
+            border: 1px solid #94a3b8;
+            padding: 14px 16px;
+            text-align: center;
+        }
+
+        th {
+            background: #1e3a8a;
+            color: #ffffff;
+            font-weight: 600;
+        }
+
+        td {
+            background: #f8fafc;
+        }
+
+        tbody tr:hover td {
+            background: #eff6ff;
+        }
+
+        /* Merged cell */
+        .merged-cell {
+            background: #2563eb !important;
+            color: #ffffff;
+            font-weight: 700;
+        }
+
+        /* Total row */
+        .total-row td {
+            background: #dbeafe;
+            font-weight: 700;
+            color: #1e3a8a;
+        }
+
+        /* =========================================
+           CONCEPT BOX
+        ========================================== */
+        .concept-box {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 20px 25px;
+        }
+
+        .concept-box ul {
+            padding-left: 20px;
+        }
+
+        .concept-box li {
+            margin: 8px 0;
+        }
+
+        code {
+            background: #e2e8f0;
+            color: #1e40af;
+            padding: 3px 7px;
+            border-radius: 4px;
+            font-family: Consolas, monospace;
+        }
+
+        /* =========================================
+           NAVIGATION BUTTONS
+        ========================================== */
+        .buttons {
+            text-align: center;
+            margin: 35px 0;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 22px;
+            margin: 5px;
+            background: #2563eb;
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 7px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            background: #1d4ed8;
+            transform: translateY(-2px);
+        }
+
+        .secondary {
+            background: #475569;
+        }
+
+        .secondary:hover {
+            background: #334155;
+        }
+
+        /* =========================================
+           FOOTER
+        ========================================== */
+        footer {
+            background: #0f172a;
+            color: #94a3b8;
+            text-align: center;
+            padding: 25px 15px;
+            margin-top: 50px;
+        }
+
+        footer strong {
+            color: #ffffff;
+        }
+
+        /* =========================================
+           RESPONSIVE DESIGN
+        ========================================== */
+        @media (max-width: 700px) {
+
+            nav {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            nav a {
+                margin: 0 8px;
+            }
+
+            .hero h1 {
+                font-size: 30px;
+            }
+
+            .hero p {
+                font-size: 16px;
+            }
+
+            .content-card {
+                padding: 22px;
+            }
+
+            th,
+            td {
+                padding: 10px;
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- =========================================
+         NAVIGATION
+    ========================================== -->
+    <nav>
+
+        <div class="logo">
+            Web Practicals
+        </div>
+
+        <div>
+            <a href="../index.html">Home</a>
+            <a href="index.html">HTML Programs</a>
+        </div>
+
+    </nav>
+
+
+    <!-- =========================================
+         HERO SECTION
+    ========================================== -->
+    <section class="hero">
+
+        <div class="badge">
+            HTML PRACTICAL 03
+        </div>
+
+        <h1>HTML Tables</h1>
+
+        <p>
+            Rows, Columns, Borders and Merged Cells
+        </p>
+
+    </section>
+
+
+    <!-- =========================================
+         MAIN CONTENT
+    ========================================== -->
+    <main>
+
+        <!-- OBJECTIVE -->
+        <section class="objective">
+
+            <h2>Objective</h2>
+
+            <p>
+                To create a webpage using HTML tables with rows,
+                columns, borders, and merged cells.
+            </p>
+
+        </section>
+
+
+        <!-- =====================================
+             TABLE 1 - STUDENT PERFORMANCE
+        ====================================== -->
+        <section class="content-card">
+
+            <h2>Student Academic Performance</h2>
+
+            <p>
+                This table demonstrates the use of table rows,
+                columns, borders, and both column and row merging.
+            </p>
+
+            <div class="table-container">
+
+                <table>
+
+                    <thead>
+
+                        <!-- colspan merges five columns -->
+                        <tr>
+                            <th colspan="5">
+                                Student Academic Performance
+                            </th>
+                        </tr>
+
+                        <tr>
+                            <th>Roll No.</th>
+                            <th>Student Name</th>
+                            <th>HTML</th>
+                            <th>CSS</th>
+                            <th>JavaScript</th>
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        <tr>
+                            <td>101</td>
+                            <td>Student 1</td>
+                            <td>88</td>
+                            <td>85</td>
+                            <td>90</td>
+                        </tr>
+
+                        <tr>
+                            <td>102</td>
+                            <td>Student 2</td>
+                            <td>92</td>
+                            <td>89</td>
+                            <td>87</td>
+                        </tr>
+
+                        <tr>
+                            <td>103</td>
+                            <td>Student 3</td>
+                            <td>84</td>
+                            <td>91</td>
+                            <td>86</td>
+                        </tr>
+
+                        <!-- rowspan merges the Roll No. cell across two rows -->
+                        <tr>
+                            <td rowspan="2" class="merged-cell">
+                                104
+                            </td>
+
+                            <td>Student 4</td>
+                            <td>90</td>
+                            <td>88</td>
+                            <td>93</td>
+                        </tr>
+
+                        <tr>
+                            <td>Student 5</td>
+                            <td>87</td>
+                            <td>90</td>
+                            <td>89</td>
+                        </tr>
+
+                        <!-- colspan merges the first two columns -->
+                        <tr class="total-row">
+
+                            <td colspan="2">
+                                Average Score
+                            </td>
+
+                            <td>88.2</td>
+                            <td>88.6</td>
+                            <td>89.0</td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================
+             TABLE 2 - CLASS SCHEDULE
+        ====================================== -->
+        <section class="content-card">
+
+            <h2>Weekly Class Schedule</h2>
+
+            <p>
+                This table organizes a weekly schedule and demonstrates
+                merged cells using <code>colspan</code>.
+            </p>
+
+            <div class="table-container">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+                            <th>Day</th>
+                            <th>09:00 - 10:00</th>
+                            <th>10:00 - 11:00</th>
+                            <th>11:00 - 12:00</th>
+                            <th>12:00 - 01:00</th>
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        <tr>
+
+                            <td>Monday</td>
+                            <td>HTML</td>
+                            <td>CSS</td>
+                            <td>JavaScript</td>
+                            <td>Lunch</td>
+
+                        </tr>
+
+                        <tr>
+
+                            <td>Tuesday</td>
+                            <td>Python</td>
+
+                            <!-- Actual merged cells -->
+                            <td colspan="2" class="merged-cell">
+                                Data Science
+                            </td>
+
+                            <td>Lunch</td>
+
+                        </tr>
+
+                        <tr>
+
+                            <td>Wednesday</td>
+                            <td>HTML</td>
+                            <td>JavaScript</td>
+                            <td>Programming</td>
+                            <td>Lunch</td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+
+    
+        <!-- =====================================
+             NAVIGATION BUTTONS
+        ====================================== -->
+        <div class="buttons">
+
+            <a href="index.html" class="btn">
+                ← HTML Programs
+            </a>
+
+            <a href="html-02.html" class="btn secondary">
+                Previous Practical
+            </a>
+
+            <a href="../index.html" class="btn secondary">
+                Dashboard
+            </a>
+
+        </div>
+
+    </main>
+
+
+    <!-- =========================================
+         FOOTER
+    ========================================== -->
+    <footer>
+
+        <p>
+            <strong>Web Practicals</strong> |
+            HTML Practical 03
+        </p>
+
+        <p>
+            Tables • Rows • Columns • Borders • Merged Cells
+        </p>
+
+    </footer>
+
+</body>
+
+</html>

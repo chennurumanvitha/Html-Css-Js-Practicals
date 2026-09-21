@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>CSS calc() Function | Practical 74</title>
+
+    <style>
+
+        /* =========================
+           GENERAL STYLES
+        ========================= */
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: #f1f5f9;
+            color: #334155;
+        }
+
+
+        /* =========================
+           HEADER
+        ========================= */
+
+        header {
+            background: #0f172a;
+            color: white;
+            padding: 18px 8%;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .logo {
+            font-size: 1.4rem;
+            font-weight: 700;
+        }
+
+        nav {
+            display: flex;
+            gap: 20px;
+        }
+
+        nav a {
+            color: #cbd5e1;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        nav a:hover {
+            color: white;
+        }
+
+
+        /* =========================
+           HERO
+        ========================= */
+
+        .hero {
+            background: linear-gradient(135deg, #1e3a8a, #2563eb);
+            color: white;
+            text-align: center;
+            padding: 65px 20px;
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.18);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .hero h1 {
+            margin: 0 0 10px;
+            font-size: clamp(2rem, 5vw, 3rem);
+        }
+
+        .hero p {
+            margin: 0;
+            font-size: 1.1rem;
+        }
+
+
+        /* =========================
+           MAIN
+        ========================= */
+
+        main {
+            width: 90%;
+            max-width: 1050px;
+            margin: 40px auto;
+        }
+
+
+        /* =========================
+           OBJECTIVE
+        ========================= */
+
+        .objective {
+            background: white;
+            border-left: 5px solid #2563eb;
+            padding: 22px 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(15, 23, 42, 0.08);
+            margin-bottom: 25px;
+        }
+
+        .objective h2 {
+            margin-top: 0;
+            color: #0f172a;
+        }
+
+        .objective p {
+            line-height: 1.7;
+        }
+
+
+        /* =========================
+           CONTENT CARD
+        ========================= */
+
+        .content-card {
+            background: white;
+            padding: 35px;
+            margin-bottom: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(15, 23, 42, 0.08);
+        }
+
+        .content-card h2 {
+            color: #0f172a;
+            margin-top: 0;
+            padding-bottom: 12px;
+            border-bottom: 2px solid #cbd5e1;
+
+            font-size: clamp(1.4rem, 3vw, 2rem);
+        }
+
+        .content-card h3 {
+            color: #1e3a8a;
+        }
+
+
+        /* =========================
+           CALC WIDTH DEMONSTRATION
+        ========================= */
+
+        .calc-width-area {
+            background: #f8fafc;
+            padding: 25px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+
+        .calc-width-box {
+            /*
+                calc() subtracts 40px from
+                the available width.
+            */
+            width: calc(100% - 40px);
+
+            margin: 0 auto;
+
+            background: #dbeafe;
+            border: 3px solid #2563eb;
+            border-radius: 10px;
+
+            padding: 25px;
+            text-align: center;
+        }
+
+        .calc-width-box h3 {
+            margin-top: 0;
+        }
+
+
+        /* =========================
+           CALC SPACING
+        ========================= */
+
+        .spacing-demo {
+            background: #eff6ff;
+            padding: 25px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+
+        .spacing-box {
+            background: white;
+            border: 2px solid #2563eb;
+            border-radius: 10px;
+
+            /*
+                Top and bottom spacing
+                are calculated using calc().
+            */
+            margin-top: calc(20px + 10px);
+            margin-bottom: calc(10px + 15px);
+
+            /*
+                Padding is also calculated.
+            */
+            padding: calc(15px + 5px);
+
+            text-align: center;
+        }
+
+        .spacing-box h3 {
+            margin-top: 0;
+        }
+
+
+        /* =========================
+           CALC TWO COLUMN LAYOUT
+        ========================= */
+
+        .two-column-demo {
+            background: #f8fafc;
+            padding: 25px;
+            border-radius: 10px;
+            margin-top: 20px;
+
+            display: flex;
+            gap: 20px;
+        }
+
+        .column-left {
+            /*
+                Parent width minus the
+                gap between the columns.
+            */
+            width: calc(60% - 10px);
+
+            background: #dbeafe;
+            border: 2px solid #2563eb;
+            border-radius: 10px;
+            padding: 25px;
+        }
+
+        .column-right {
+            width: calc(40% - 10px);
+
+            background: #e0e7ff;
+            border: 2px solid #1e3a8a;
+            border-radius: 10px;
+            padding: 25px;
+        }
+
+        .column-left h3,
+        .column-right h3 {
+            margin-top: 0;
+        }
+
+
+        /* =========================
+           CALC HEIGHT
+        ========================= */
+
+        .height-demo {
+            background: #eff6ff;
+            border-radius: 10px;
+            padding: 25px;
+            margin-top: 20px;
+        }
+
+        .height-box {
+            /*
+                Height is calculated from
+                the viewport height.
+            */
+            height: calc(40vh - 20px);
+
+            min-height: 180px;
+
+            background: linear-gradient(
+                135deg,
+                #dbeafe,
+                #bfdbfe
+            );
+
+            border: 3px solid #2563eb;
+            border-radius: 10px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            text-align: center;
+        }
+
+        .height-box h3 {
+            margin: 0;
+        }
+
+
+        /* =========================
+           CALC FONT SIZE
+        ========================= */
+
+        .font-demo {
+            background: #f8fafc;
+            padding: 25px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+
+        .calc-heading {
+            /*
+                Font size is calculated
+                using viewport width.
+            */
+            font-size: calc(1.5rem + 1.5vw);
+
+            color: #2563eb;
+            margin-top: 0;
+        }
+
+        .font-demo p {
+            font-size: calc(1rem + 0.2vw);
+            line-height: 1.7;
+        }
+
+
+        /* =========================
+           CALC CARD GRID
+        ========================= */
+
+        .card-grid {
+            display: grid;
+
+            /*
+                Three columns with
+                calculated equal widths.
+            */
+            grid-template-columns:
+                calc(33.333% - 13.33px)
+                calc(33.333% - 13.33px)
+                calc(33.333% - 13.33px);
+
+            gap: 20px;
+            margin-top: 25px;
+        }
+
+        .calc-card {
+            background: #f8fafc;
+            border-left: 4px solid #2563eb;
+            border-radius: 10px;
+            padding: 22px;
+        }
+
+        .calc-card h3 {
+            margin-top: 0;
+        }
+
+        .calc-card p {
+            line-height: 1.6;
+        }
+
+
+        /* =========================
+           CALC FUNCTION EXAMPLE
+        ========================= */
+
+        .example-box {
+            background: #0f172a;
+            color: #e2e8f0;
+            padding: 22px;
+            border-radius: 10px;
+            margin-top: 20px;
+            overflow-x: auto;
+        }
+
+        .example-box code {
+            font-family: Consolas, monospace;
+            line-height: 1.8;
+        }
+
+
+        /* =========================
+           BUTTONS
+        ========================= */
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-block;
+            background: #2563eb;
+            color: white;
+            text-decoration: none;
+            padding: 12px 22px;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background: #1e3a8a;
+            transform: translateY(-2px);
+        }
+
+        .secondary {
+            background: #64748b;
+        }
+
+        .secondary:hover {
+            background: #475569;
+        }
+
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        footer {
+            background: #0f172a;
+            color: #cbd5e1;
+            text-align: center;
+            padding: 25px;
+            margin-top: 50px;
+        }
+
+        footer strong {
+            color: white;
+        }
+
+
+        /* =========================
+           RESPONSIVE DESIGN
+        ========================= */
+
+        @media (max-width: 850px) {
+
+            .card-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .two-column-demo {
+                flex-direction: column;
+            }
+
+            .column-left,
+            .column-right {
+                width: 100%;
+            }
+
+        }
+
+
+        @media (max-width: 750px) {
+
+            header {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            nav {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            .card-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .content-card {
+                padding: 25px;
+            }
+
+            .hero {
+                padding: 50px 20px;
+            }
+
+            .calc-width-box {
+                width: calc(100% - 20px);
+            }
+
+        }
+
+    </style>
+</head>
+
+<body>
+
+
+    <!-- =========================
+         HEADER
+    ========================= -->
+
+    <header>
+
+        <div class="logo">
+            CSS Practical
+        </div>
+
+        <nav>
+
+            <a href="../index.html">
+                Home
+            </a>
+
+            <a href="index.html">
+                CSS Programs
+            </a>
+
+        </nav>
+
+    </header>
+
+
+    <!-- =========================
+         HERO
+    ========================= -->
+
+    <section class="hero">
+
+        <div class="badge">
+            CSS PRACTICAL 74
+        </div>
+
+        <h1>
+            CSS calc() Function
+        </h1>
+
+        <p>
+            Create flexible layouts using calculated CSS values
+        </p>
+
+    </section>
+
+
+    <!-- =========================
+         MAIN
+    ========================= -->
+
+    <main>
+
+
+        <!-- OBJECTIVE -->
+
+        <section class="objective">
+
+            <h2>
+                Objective
+            </h2>
+
+            <p>
+                To create a webpage demonstrating the CSS
+                <strong>calc()</strong> function for calculating
+                flexible widths, heights, spacing, font sizes,
+                and responsive layouts.
+            </p>
+
+        </section>
+
+
+        <!-- CALC WIDTH -->
+
+        <section class="content-card">
+
+            <h2>
+                calc() for Width
+            </h2>
+
+            <div class="calc-width-area">
+
+                <div class="calc-width-box">
+
+                    <h3>
+                        Calculated Width
+                    </h3>
+
+                    <p>
+                        This box uses
+                        <strong>width: calc(100% - 40px)</strong>.
+                        The browser calculates the width by
+                        subtracting 40 pixels from the available
+                        width.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- CALC SPACING -->
+
+        <section class="content-card">
+
+            <h2>
+                calc() for Spacing
+            </h2>
+
+            <div class="spacing-demo">
+
+                <div class="spacing-box">
+
+                    <h3>
+                        Calculated Margin and Padding
+                    </h3>
+
+                    <p>
+                        The margin and padding of this box are
+                        calculated using the CSS calc() function.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- CALC TWO COLUMN -->
+
+        <section class="content-card">
+
+            <h2>
+                calc() for Two-Column Layout
+            </h2>
+
+            <div class="two-column-demo">
+
+                <div class="column-left">
+
+                    <h3>
+                        Main Content
+                    </h3>
+
+                    <p>
+                        This column uses
+                        <strong>calc(60% - 10px)</strong>
+                        to calculate its width.
+                    </p>
+
+                </div>
+
+
+                <div class="column-right">
+
+                    <h3>
+                        Sidebar
+                    </h3>
+
+                    <p>
+                        This column uses
+                        <strong>calc(40% - 10px)</strong>
+                        to calculate its width.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- CALC HEIGHT -->
+
+        <section class="content-card">
+
+            <h2>
+                calc() for Height
+            </h2>
+
+            <div class="height-demo">
+
+                <div class="height-box">
+
+                    <div>
+
+                        <h3>
+                            Calculated Height
+                        </h3>
+
+                        <p>
+                            Height:
+                            <strong>calc(40vh - 20px)</strong>
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- CALC FONT -->
+
+        <section class="content-card">
+
+            <h2>
+                calc() for Font Size
+            </h2>
+
+            <div class="font-demo">
+
+                <h3 class="calc-heading">
+                    Responsive Font Size
+                </h3>
+
+                <p>
+                    The heading uses
+                    <strong>calc(1.5rem + 1.5vw)</strong>
+                    to calculate its font size based on the
+                    viewport width.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- CALC GRID -->
+
+        <section class="content-card">
+
+            <h2>
+                calc() in Grid Layout
+            </h2>
+
+            <div class="card-grid">
+
+                <div class="calc-card">
+
+                    <h3>
+                        Card One
+                    </h3>
+
+                    <p>
+                        Grid column width is calculated using
+                        the calc() function.
+                    </p>
+
+                </div>
+
+
+                <div class="calc-card">
+
+                    <h3>
+                        Card Two
+                    </h3>
+
+                    <p>
+                        Calculated widths help create flexible
+                        layouts with consistent gaps.
+                    </p>
+
+                </div>
+
+
+                <div class="calc-card">
+
+                    <h3>
+                        Card Three
+                    </h3>
+
+                    <p>
+                        The layout automatically adapts on
+                        smaller screen sizes.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- NAVIGATION -->
+
+        <div class="buttons">
+
+            <a href="css-73.html" class="btn">
+                ← Previous Practical
+            </a>
+
+            <a href="index.html" class="btn secondary">
+                CSS Programs
+            </a>
+
+            <a href="../index.html" class="btn secondary">
+                Dashboard
+            </a>
+
+        </div>
+
+    </main>
+
+
+    <!-- =========================
+         FOOTER
+    ========================= -->
+
+    <footer>
+
+        <p>
+            <strong>CSS Practical 74</strong>
+            | CSS calc() Function
+        </p>
+
+        <p>
+            Designed using HTML5 and CSS3
+        </p>
+
+    </footer>
+
+</body>
+</html>

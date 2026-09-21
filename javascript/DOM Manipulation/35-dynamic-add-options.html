@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM Manipulation - Add Select Options</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: #f1f5f9;
+            color: #334155;
+            line-height: 1.6;
+        }
+
+        header {
+            background: #0f172a;
+            padding: 18px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: white;
+            font-size: 22px;
+            font-weight: 700;
+        }
+
+        nav a {
+            color: #cbd5e1;
+            text-decoration: none;
+            margin-left: 25px;
+            font-size: 15px;
+        }
+
+        nav a:hover {
+            color: white;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #1e3a8a, #2563eb);
+            color: white;
+            text-align: center;
+            padding: 65px 20px;
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 7px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        .hero h1 {
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+
+        .hero p {
+            font-size: 16px;
+            opacity: 0.9;
+        }
+
+        main {
+            width: 90%;
+            max-width: 1050px;
+            margin: 40px auto;
+        }
+
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 28px;
+            margin-bottom: 25px;
+            box-shadow: 0 5px 18px rgba(15, 23, 42, 0.08);
+        }
+
+        .objective {
+            border-left: 5px solid #2563eb;
+        }
+
+        .objective h2,
+        .card h2 {
+            color: #1e3a8a;
+            margin-bottom: 15px;
+        }
+
+        .card h2 {
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 8px;
+        }
+
+        .demo {
+            background: #eff6ff;
+            border: 2px dashed #93c5fd;
+            border-radius: 10px;
+            padding: 30px;
+            margin-top: 20px;
+        }
+
+        .instruction {
+            margin-bottom: 20px;
+            color: #475569;
+        }
+
+        .form-area {
+            max-width: 550px;
+            margin: 0 auto;
+        }
+
+        label {
+            display: block;
+            color: #1e3a8a;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .input-group {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        input {
+            flex: 1;
+            padding: 11px 14px;
+            border: 1px solid #cbd5e1;
+            border-radius: 7px;
+            font-size: 15px;
+            outline: none;
+        }
+
+        input:focus {
+            border-color: #2563eb;
+        }
+
+        button {
+            background: #2563eb;
+            color: white;
+            border: none;
+            padding: 11px 20px;
+            border-radius: 7px;
+            cursor: pointer;
+            font-size: 15px;
+        }
+
+        button:hover {
+            background: #1e3a8a;
+        }
+
+        select {
+            width: 100%;
+            padding: 12px 14px;
+            border: 1px solid #cbd5e1;
+            border-radius: 7px;
+            background: white;
+            color: #334155;
+            font-size: 15px;
+            outline: none;
+            cursor: pointer;
+        }
+
+        select:focus {
+            border-color: #2563eb;
+        }
+
+        .output {
+            margin-top: 20px;
+            padding: 15px;
+            background: white;
+            border: 1px solid #bfdbfe;
+            border-radius: 8px;
+            text-align: center;
+            color: #1e3a8a;
+            font-weight: 600;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin: 35px 0;
+        }
+
+        .btn-link {
+            display: inline-block;
+            background: #2563eb;
+            color: white;
+            text-decoration: none;
+            padding: 11px 20px;
+            border-radius: 7px;
+            font-size: 15px;
+        }
+
+        .btn-link:hover {
+            background: #1e3a8a;
+        }
+
+        .btn-link.secondary {
+            background: #0f172a;
+        }
+
+        .btn-link.secondary:hover {
+            background: #1e293b;
+        }
+
+        footer {
+            background: #0f172a;
+            color: #cbd5e1;
+            text-align: center;
+            padding: 22px;
+            margin-top: 50px;
+            font-size: 14px;
+        }
+
+        @media (max-width: 750px) {
+            header {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            nav a {
+                margin: 0 8px;
+            }
+
+            .hero h1 {
+                font-size: 30px;
+            }
+
+            .card {
+                padding: 22px;
+            }
+        }
+
+        @media (max-width: 650px) {
+            .hero {
+                padding: 50px 15px;
+            }
+
+            .demo {
+                padding: 20px;
+            }
+
+            .input-group {
+                flex-direction: column;
+            }
+
+            .input-group button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="logo">Practical Programs</div>
+
+        <nav>
+            <a href="../../index.html">Home</a>
+<a href="../index.html">JavaScript Programs</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="badge">DOM Manipulation • Practical 35</div>
+        <h1>Add Select Options Dynamically</h1>
+        <p>Add new options to a select element using JavaScript</p>
+    </section>
+
+    <main>
+
+        <section class="card objective">
+            <h2>Objective</h2>
+            <p>
+                To demonstrate how JavaScript can dynamically create
+                and add new options to an HTML select element.
+            </p>
+        </section>
+
+        <section class="card">
+            <h2>Interactive Demonstration</h2>
+
+            <div class="demo">
+
+                <p class="instruction">
+                    Enter an option name and click <strong>Add Option</strong>
+                    to add it dynamically to the dropdown.
+                </p>
+
+                <div class="form-area">
+
+                    <label for="optionInput">
+                        New Option
+                    </label>
+
+                    <div class="input-group">
+
+                        <input
+                            type="text"
+                            id="optionInput"
+                            placeholder="Enter an option"
+                        >
+
+                        <button onclick="addOption()">
+                            Add Option
+                        </button>
+
+                    </div>
+
+                    <label for="dynamicSelect">
+                        Select an Option
+                    </label>
+
+                    <select id="dynamicSelect"
+                            onchange="showSelection()">
+
+                        <option value="">
+                            -- Select an Option --
+                        </option>
+
+                        <option value="HTML">
+                            HTML
+                        </option>
+
+                        <option value="CSS">
+                            CSS
+                        </option>
+
+                        <option value="JavaScript">
+                            JavaScript
+                        </option>
+
+                    </select>
+
+                    <div class="output" id="output">
+                        Please select an option.
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+        <div class="buttons">
+
+            <a href="34-dropdown.html" class="btn-link">
+                ← Previous Practical
+            </a>
+
+            <a href="index.html" class="btn-link secondary">
+                DOM Programs
+            </a>
+
+            <a href="36-dependent-dropdown.html" class="btn-link">
+                Next Practical →
+            </a>
+
+        </div>
+
+    </main>
+
+    <footer>
+        <p>JavaScript Practical Programs | DOM Manipulation</p>
+    </footer>
+
+    <script>
+        function addOption() {
+            const input =
+                document.getElementById("optionInput");
+
+            const optionText = input.value.trim();
+
+            if (optionText === "") {
+                alert("Please enter an option.");
+                return;
+            }
+
+            const select =
+                document.getElementById("dynamicSelect");
+
+            const option =
+                document.createElement("option");
+
+            option.value = optionText;
+            option.textContent = optionText;
+
+            select.appendChild(option);
+
+            input.value = "";
+
+            input.focus();
+
+            document.getElementById("output").textContent =
+                "Option added successfully: " + optionText;
+        }
+
+        function showSelection() {
+            const select =
+                document.getElementById("dynamicSelect");
+
+            const selectedOption = select.value;
+
+            const output =
+                document.getElementById("output");
+
+            if (selectedOption === "") {
+                output.textContent =
+                    "Please select an option.";
+            } else {
+                output.textContent =
+                    "Selected Option: " + selectedOption;
+            }
+        }
+
+        document
+            .getElementById("optionInput")
+            .addEventListener("keydown", function(event) {
+                if (event.key === "Enter") {
+                    addOption();
+                }
+            });
+    </script>
+
+</body>
+</html>

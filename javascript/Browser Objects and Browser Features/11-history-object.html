@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>History Object | JavaScript Practical</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Segoe UI", Arial, sans-serif;
+      background: #f1f5f9;
+      color: #334155;
+      line-height: 1.6;
+    }
+
+    header {
+      background: #0f172a;
+      padding: 18px 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      color: white;
+      font-size: 22px;
+      font-weight: bold;
+    }
+
+    nav a {
+      color: #cbd5e1;
+      text-decoration: none;
+      margin-left: 25px;
+      font-size: 15px;
+    }
+
+    nav a:hover {
+      color: white;
+    }
+
+    .hero {
+      background: linear-gradient(135deg, #1e3a8a, #2563eb);
+      color: white;
+      text-align: center;
+      padding: 65px 20px;
+    }
+
+    .badge {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.15);
+      padding: 7px 16px;
+      border-radius: 20px;
+      margin-bottom: 15px;
+      font-size: 14px;
+    }
+
+    .hero h1 {
+      font-size: 36px;
+      margin-bottom: 10px;
+    }
+
+    .hero p {
+      font-size: 17px;
+      opacity: 0.9;
+    }
+
+    main {
+      width: 90%;
+      max-width: 1050px;
+      margin: 40px auto;
+    }
+
+    .objective {
+      background: white;
+      padding: 22px;
+      border-left: 5px solid #2563eb;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
+      margin-bottom: 25px;
+    }
+
+    .objective h2 {
+      color: #1e3a8a;
+      margin-bottom: 8px;
+    }
+
+    .card {
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(15, 23, 42, 0.08);
+      margin-bottom: 25px;
+    }
+
+    .card h2 {
+      color: #1e3a8a;
+      margin-bottom: 25px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #e2e8f0;
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+    }
+
+    .info-box {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 10px;
+      padding: 20px;
+    }
+
+    .info-box h3 {
+      color: #475569;
+      font-size: 15px;
+      margin-bottom: 8px;
+    }
+
+    .value {
+      color: #1e3a8a;
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    .buttons {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      flex-wrap: wrap;
+      margin-top: 30px;
+    }
+
+    .btn {
+      border: none;
+      background: #2563eb;
+      color: white;
+      padding: 11px 20px;
+      border-radius: 7px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      transition: 0.2s;
+    }
+
+    .btn:hover {
+      background: #1d4ed8;
+    }
+
+    .btn.secondary {
+      background: #475569;
+    }
+
+    .btn.secondary:hover {
+      background: #334155;
+    }
+
+    .warning {
+      margin-top: 25px;
+      padding: 15px;
+      background: #fff7ed;
+      border-left: 4px solid #f97316;
+      border-radius: 7px;
+      color: #9a3412;
+    }
+
+    .navigation {
+      display: flex;
+      justify-content: space-between;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    footer {
+      background: #0f172a;
+      color: #cbd5e1;
+      text-align: center;
+      padding: 22px;
+      margin-top: 50px;
+    }
+
+    @media (max-width: 750px) {
+      header {
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      nav a {
+        margin: 0 8px;
+      }
+
+      .hero h1 {
+        font-size: 28px;
+      }
+
+      .card {
+        padding: 22px;
+      }
+
+      .info-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 550px) {
+      main {
+        width: 94%;
+      }
+
+      .hero {
+        padding: 50px 15px;
+      }
+
+      .navigation {
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <div class="logo">JavaScript Practical</div>
+
+    <nav>
+      <a href="../../index.html">Home</a>
+<a href="../index.html">JavaScript Programs</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <span class="badge">Browser Objects &amp; Browser Features — Practice 11</span>
+    <h1>History Object</h1>
+    <p>Demonstrating browser history navigation using JavaScript</p>
+  </section>
+
+  <main>
+
+    <section class="objective">
+      <h2>Objective</h2>
+      <p>
+        To demonstrate the JavaScript <strong>History object</strong> and
+        use its properties and methods to navigate through browser history.
+      </p>
+    </section>
+
+    <section class="card">
+      <h2>Browser History Information</h2>
+
+      <div class="info-grid">
+        <div class="info-box">
+          <h3>History Length</h3>
+          <div class="value" id="historyLength">0</div>
+        </div>
+
+        <div class="info-box">
+          <h3>Current Page</h3>
+          <div class="value" id="currentPage">1</div>
+        </div>
+      </div>
+
+      <div class="buttons">
+        <button class="btn" id="backButton">
+          Go Back
+        </button>
+
+        <button class="btn" id="forwardButton">
+          Go Forward
+        </button>
+
+        <button class="btn secondary" id="reloadButton">
+          Reload Page
+        </button>
+      </div>
+
+      <div class="warning">
+        <strong>Note:</strong>
+        The Back and Forward buttons use the browser's actual session history.
+        Their effect depends on the pages you have visited in the current
+        browser session.
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>History Object Methods</h2>
+
+      <p>
+        JavaScript provides the following commonly used methods through the
+        <strong>history</strong> object:
+      </p>
+
+      <div class="info-grid" style="margin-top: 20px;">
+        <div class="info-box">
+          <h3>history.back()</h3>
+          <p>Moves the browser back by one page in the session history.</p>
+        </div>
+
+        <div class="info-box">
+          <h3>history.forward()</h3>
+          <p>Moves the browser forward by one page in the session history.</p>
+        </div>
+
+        <div class="info-box">
+          <h3>history.go()</h3>
+          <p>Moves a specified number of steps through the session history.</p>
+        </div>
+
+        <div class="info-box">
+          <h3>history.length</h3>
+          <p>Returns the number of entries in the current session history.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Navigation</h2>
+
+      <div class="navigation">
+        <a class="btn secondary" href="10-current-url.html">
+          ← Previous
+        </a>
+
+        <a class="btn" href="../../index.html">
+          Home
+        </a>
+
+        <a class="btn secondary" href="12-history-navigation-buttons.html">
+          Next →
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>JavaScript Practical &copy; 2026</p>
+  </footer>
+
+  <script>
+    const historyLength = document.getElementById("historyLength");
+    const currentPage = document.getElementById("currentPage");
+
+    const backButton = document.getElementById("backButton");
+    const forwardButton = document.getElementById("forwardButton");
+    const reloadButton = document.getElementById("reloadButton");
+
+    function displayHistoryInformation() {
+      historyLength.textContent = history.length;
+
+      if (history.length > 0) {
+        currentPage.textContent = "Available";
+      }
+    }
+
+    backButton.addEventListener("click", function () {
+      history.back();
+    });
+
+    forwardButton.addEventListener("click", function () {
+      history.forward();
+    });
+
+    reloadButton.addEventListener("click", function () {
+      history.go(0);
+    });
+
+    displayHistoryInformation();
+  </script>
+
+</body>
+</html>

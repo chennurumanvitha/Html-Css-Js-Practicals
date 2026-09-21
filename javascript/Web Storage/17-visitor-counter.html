@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Visitor Counter using Browser Storage</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Segoe UI", Arial, sans-serif;
+      background: #f1f5f9;
+      color: #334155;
+      line-height: 1.6;
+    }
+
+    header {
+      background: #0f172a;
+      padding: 18px 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      color: white;
+      font-size: 22px;
+      font-weight: bold;
+    }
+
+    nav a {
+      color: #cbd5e1;
+      text-decoration: none;
+      margin-left: 25px;
+      font-size: 15px;
+    }
+
+    nav a:hover {
+      color: white;
+    }
+
+    .hero {
+      background: linear-gradient(135deg, #1e3a8a, #2563eb);
+      color: white;
+      text-align: center;
+      padding: 65px 20px;
+    }
+
+    .badge {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.15);
+      padding: 7px 16px;
+      border-radius: 20px;
+      margin-bottom: 15px;
+      font-size: 14px;
+    }
+
+    .hero h1 {
+      font-size: 36px;
+      margin-bottom: 10px;
+    }
+
+    .hero p {
+      font-size: 17px;
+      opacity: 0.9;
+    }
+
+    main {
+      width: 90%;
+      max-width: 1050px;
+      margin: 40px auto;
+    }
+
+    .objective {
+      background: white;
+      padding: 22px;
+      border-left: 5px solid #2563eb;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
+      margin-bottom: 25px;
+    }
+
+    .objective h2 {
+      color: #1e3a8a;
+      margin-bottom: 8px;
+    }
+
+    .card {
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(15, 23, 42, 0.08);
+      margin-bottom: 25px;
+      text-align: center;
+    }
+
+    .card h2 {
+      color: #1e3a8a;
+      margin-bottom: 25px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #e2e8f0;
+    }
+
+    .counter-box {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 35px 20px;
+      margin-bottom: 25px;
+    }
+
+    .counter-label {
+      color: #64748b;
+      font-size: 17px;
+      margin-bottom: 10px;
+    }
+
+    .counter {
+      color: #2563eb;
+      font-size: 52px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .counter-info {
+      color: #64748b;
+      font-size: 14px;
+    }
+
+    .buttons {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      flex-wrap: wrap;
+      margin-top: 30px;
+    }
+
+    .btn {
+      border: none;
+      background: #2563eb;
+      color: white;
+      padding: 11px 20px;
+      border-radius: 7px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      background: #1d4ed8;
+    }
+
+    .btn.danger {
+      background: #dc2626;
+    }
+
+    .btn.danger:hover {
+      background: #b91c1c;
+    }
+
+    .message {
+      text-align: center;
+      margin-top: 15px;
+      font-weight: 600;
+      min-height: 24px;
+    }
+
+    .navigation {
+      display: flex;
+      justify-content: space-between;
+      gap: 15px;
+      margin-top: 35px;
+    }
+
+    .navigation a {
+      text-decoration: none;
+      background: #2563eb;
+      color: white;
+      padding: 11px 20px;
+      border-radius: 7px;
+      font-weight: 600;
+      font-size: 14px;
+    }
+
+    .navigation a:hover {
+      background: #1d4ed8;
+    }
+
+    footer {
+      background: #0f172a;
+      color: #cbd5e1;
+      text-align: center;
+      padding: 22px;
+      margin-top: 50px;
+    }
+
+    @media (max-width: 750px) {
+      header {
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      nav a {
+        margin: 0 8px;
+      }
+
+      .hero h1 {
+        font-size: 28px;
+      }
+
+      .card {
+        padding: 22px;
+      }
+
+      .counter {
+        font-size: 42px;
+      }
+
+      .navigation {
+        flex-direction: column;
+      }
+
+      .navigation a {
+        text-align: center;
+      }
+    }
+
+    @media (max-width: 550px) {
+      main {
+        width: 94%;
+      }
+
+      .hero {
+        padding: 50px 15px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <div class="logo">Web Storage Practical</div>
+
+    <nav>
+      <a href="../../index.html">Home</a>
+<a href="../index.html">JavaScript Programs</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div class="badge">Practical 17</div>
+    <h1>Visitor Counter</h1>
+    <p>Count visitors using browser storage</p>
+  </section>
+
+  <main>
+
+    <section class="objective">
+      <h2>Objective</h2>
+      <p>
+        To create a visitor counter that stores and displays the
+        number of visits using browser localStorage.
+      </p>
+    </section>
+
+    <section class="card">
+
+      <h2>Visitor Count</h2>
+
+      <div class="counter-box">
+
+        <div class="counter-label">
+          Total Visits
+        </div>
+
+        <div class="counter" id="visitorCount">
+          0
+        </div>
+
+        <div class="counter-info">
+          The counter is saved in localStorage.
+        </div>
+
+      </div>
+
+      <div class="buttons">
+
+        <button
+          type="button"
+          class="btn"
+          onclick="refreshCounter()"
+        >
+          Refresh Counter
+        </button>
+
+        <button
+          type="button"
+          class="btn danger"
+          onclick="resetCounter()"
+        >
+          Reset Counter
+        </button>
+
+      </div>
+
+      <div class="message" id="message"></div>
+
+    </section>
+
+    <div class="navigation">
+      <a href="16-recently-viewed-localstorage.html">← Previous</a>
+      <a href="../index.html">Home</a>
+      <a href="18-localstorage-sessionstorage.html">Next →</a>
+    </div>
+
+  </main>
+
+  <footer>
+    Web Storage Practicals &copy; 2026
+  </footer>
+
+  <script>
+    const visitorCount =
+      document.getElementById("visitorCount");
+
+    const message =
+      document.getElementById("message");
+
+    function updateVisitorCount() {
+      let count =
+        Number(localStorage.getItem("visitorCount")) || 0;
+
+      count++;
+
+      localStorage.setItem(
+        "visitorCount",
+        count
+      );
+
+      visitorCount.textContent = count;
+    }
+
+    function refreshCounter() {
+      const count =
+        Number(localStorage.getItem("visitorCount")) || 0;
+
+      visitorCount.textContent = count;
+
+      showMessage("Counter refreshed.");
+    }
+
+    function resetCounter() {
+      const confirmed = confirm(
+        "Are you sure you want to reset the visitor counter?"
+      );
+
+      if (!confirmed) {
+        return;
+      }
+
+      localStorage.removeItem("visitorCount");
+
+      visitorCount.textContent = "0";
+
+      showMessage("Visitor counter reset successfully.");
+    }
+
+    function showMessage(text) {
+      message.textContent = text;
+      message.style.color = "#16a34a";
+
+      setTimeout(function() {
+        message.textContent = "";
+      }, 2000);
+    }
+
+    updateVisitorCount();
+  </script>
+
+</body>
+</html>

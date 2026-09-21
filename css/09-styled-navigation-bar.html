@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Styled Navigation Bar | CSS Practical 09</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: #f1f5f9;
+            color: #334155;
+            line-height: 1.6;
+        }
+
+        /* Header */
+        header {
+            background: #0f172a;
+            color: white;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header .logo {
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        header nav a {
+            color: #cbd5e1;
+            text-decoration: none;
+            margin-left: 25px;
+            font-weight: 500;
+        }
+
+        header nav a:hover {
+            color: white;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #1e3a8a, #2563eb);
+            color: white;
+            text-align: center;
+            padding: 65px 20px;
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 7px 15px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+        }
+
+        .hero h1 {
+            font-size: 38px;
+            margin-bottom: 10px;
+        }
+
+        .hero p {
+            font-size: 17px;
+            color: #dbeafe;
+        }
+
+        /* Main Content */
+        main {
+            width: 90%;
+            max-width: 1050px;
+            margin: 40px auto;
+        }
+
+        .objective {
+            background: white;
+            border-left: 5px solid #2563eb;
+            padding: 22px 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
+            margin-bottom: 25px;
+        }
+
+        .objective h2 {
+            color: #1e3a8a;
+            margin-bottom: 8px;
+        }
+
+        .content-card {
+            background: white;
+            padding: 35px;
+            margin-bottom: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
+        }
+
+        .content-card h2 {
+            color: #1e3a8a;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #dbeafe;
+        }
+
+        /* Horizontal Navigation */
+        .navigation-demo {
+            background: #0f172a;
+            border-radius: 10px;
+            padding: 0 20px;
+            margin-top: 25px;
+        }
+
+        .navigation-demo ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .navigation-demo a {
+            display: block;
+            color: #cbd5e1;
+            text-decoration: none;
+            padding: 18px 24px;
+            font-weight: 600;
+            transition: 0.3s;
+            border-bottom: 3px solid transparent;
+        }
+
+        .navigation-demo a:hover {
+            color: white;
+            background: #1e3a8a;
+            border-bottom-color: #60a5fa;
+        }
+
+        .navigation-demo .active {
+            color: white;
+            background: #1e3a8a;
+            border-bottom-color: #60a5fa;
+        }
+
+        /* Navigation with Logo */
+        .nav-with-logo {
+            background: #1e3a8a;
+            border-radius: 10px;
+            padding: 0 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-top: 25px;
+        }
+
+        .nav-with-logo .nav-logo {
+            color: white;
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        .nav-with-logo ul {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .nav-with-logo a {
+            display: block;
+            color: #dbeafe;
+            text-decoration: none;
+            padding: 18px 20px;
+            transition: 0.3s;
+        }
+
+        .nav-with-logo a:hover {
+            background: #2563eb;
+            color: white;
+        }
+
+        /* Vertical Navigation */
+        .vertical-nav {
+            width: 250px;
+            background: #0f172a;
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 25px auto 0;
+        }
+
+        .vertical-nav a {
+            display: block;
+            color: #cbd5e1;
+            text-decoration: none;
+            padding: 16px 20px;
+            border-bottom: 1px solid #334155;
+            transition: 0.3s;
+        }
+
+        .vertical-nav a:hover {
+            background: #2563eb;
+            color: white;
+            padding-left: 28px;
+        }
+
+        /* Buttons */
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin: 30px 0;
+        }
+
+        .btn {
+            text-decoration: none;
+            background: #2563eb;
+            color: white;
+            padding: 12px 22px;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background: #1e3a8a;
+            transform: translateY(-2px);
+        }
+
+        .secondary {
+            background: #64748b;
+        }
+
+        .secondary:hover {
+            background: #475569;
+        }
+
+        /* Footer */
+        footer {
+            background: #0f172a;
+            color: #cbd5e1;
+            text-align: center;
+            padding: 25px;
+            margin-top: 40px;
+        }
+
+        footer strong {
+            color: white;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 750px) {
+            header {
+                flex-direction: column;
+                gap: 12px;
+                text-align: center;
+                padding: 20px;
+            }
+
+            header nav a {
+                margin: 0 8px;
+            }
+
+            .hero h1 {
+                font-size: 30px;
+            }
+
+            .content-card {
+                padding: 25px 20px;
+            }
+
+            .navigation-demo ul {
+                flex-direction: column;
+            }
+
+            .navigation-demo {
+                padding: 0;
+            }
+
+            .navigation-demo a {
+                width: 100%;
+                text-align: center;
+            }
+
+            .nav-with-logo {
+                flex-direction: column;
+                padding: 10px;
+            }
+
+            .nav-with-logo ul {
+                flex-direction: column;
+                width: 100%;
+            }
+
+            .nav-with-logo a {
+                text-align: center;
+                width: 100%;
+            }
+
+            .vertical-nav {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="logo">Web Practicals</div>
+
+        <nav>
+            <a href="../index.html">Home</a>
+            <a href="index.html">CSS Programs</a>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="badge">CSS PRACTICAL 09</div>
+        <h1>Styled Navigation Bar</h1>
+        <p>Create attractive and user-friendly navigation bars using CSS.</p>
+    </section>
+
+    <!-- Main Content -->
+    <main>
+
+        <!-- Objective -->
+        <section class="objective">
+            <h2>Objective</h2>
+            <p>
+                To create and style navigation bars using CSS properties such as
+                display, padding, colors, borders, hover effects, and responsive design.
+            </p>
+        </section>
+
+        <!-- Horizontal Navigation -->
+        <section class="content-card">
+            <h2>Horizontal Navigation Bar</h2>
+
+            <div class="navigation-demo">
+                <ul>
+                    <li><a href="#" class="active">Home</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Services</a></li>
+                    <li><a href="#">Projects</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Navigation with Logo -->
+        <section class="content-card">
+            <h2>Navigation Bar with Logo</h2>
+
+            <div class="nav-with-logo">
+                <div class="nav-logo">MyWebsite</div>
+
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Courses</a></li>
+                    <li><a href="#">Gallery</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Vertical Navigation -->
+        <section class="content-card">
+            <h2>Vertical Navigation Bar</h2>
+
+            <div class="vertical-nav">
+                <a href="#">Dashboard</a>
+                <a href="#">Profile</a>
+                <a href="#">Assignments</a>
+                <a href="#">Projects</a>
+                <a href="#">Settings</a>
+            </div>
+        </section>
+
+        <!-- Navigation Buttons -->
+        <div class="buttons">
+            <a href="css-08.html" class="btn secondary">Previous Practical</a>
+            <a href="index.html" class="btn">CSS Programs</a>
+            <a href="../index.html" class="btn">Dashboard</a>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>
+            <strong>CSS Practical 09</strong> | Styled Navigation Bar
+        </p>
+        <p>Web Development Practical Assignment</p>
+    </footer>
+
+</body>
+</html>

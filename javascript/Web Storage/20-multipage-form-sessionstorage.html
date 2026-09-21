@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Multi-Page Form - Page 1</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Segoe UI", Arial, sans-serif;
+      background: #f1f5f9;
+      color: #334155;
+      line-height: 1.6;
+    }
+
+    header {
+      background: #0f172a;
+      padding: 18px 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      color: white;
+      font-size: 22px;
+      font-weight: bold;
+    }
+
+    nav a {
+      color: #cbd5e1;
+      text-decoration: none;
+      margin-left: 25px;
+      font-size: 15px;
+    }
+
+    nav a:hover {
+      color: white;
+    }
+
+    .hero {
+      background: linear-gradient(135deg, #1e3a8a, #2563eb);
+      color: white;
+      text-align: center;
+      padding: 65px 20px;
+    }
+
+    .badge {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.15);
+      padding: 7px 16px;
+      border-radius: 20px;
+      margin-bottom: 15px;
+      font-size: 14px;
+    }
+
+    .hero h1 {
+      font-size: 36px;
+      margin-bottom: 10px;
+    }
+
+    .hero p {
+      font-size: 17px;
+      opacity: 0.9;
+    }
+
+    main {
+      width: 90%;
+      max-width: 1050px;
+      margin: 40px auto;
+    }
+
+    .objective {
+      background: white;
+      padding: 22px;
+      border-left: 5px solid #2563eb;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
+      margin-bottom: 25px;
+    }
+
+    .objective h2 {
+      color: #1e3a8a;
+      margin-bottom: 8px;
+    }
+
+    .card {
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(15, 23, 42, 0.08);
+      margin-bottom: 25px;
+    }
+
+    .card h2 {
+      color: #1e3a8a;
+      margin-bottom: 25px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #e2e8f0;
+    }
+
+    .step {
+      display: inline-block;
+      background: #dbeafe;
+      color: #1e3a8a;
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+
+    .form-group {
+      margin-bottom: 18px;
+    }
+
+    .form-group label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 7px;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 11px 12px;
+      border: 1px solid #cbd5e1;
+      border-radius: 7px;
+      font-size: 15px;
+      font-family: inherit;
+    }
+
+    .form-group input:focus {
+      outline: none;
+      border-color: #2563eb;
+    }
+
+    .buttons {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      flex-wrap: wrap;
+      margin-top: 30px;
+    }
+
+    .btn {
+      border: none;
+      background: #2563eb;
+      color: white;
+      padding: 11px 20px;
+      border-radius: 7px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      background: #1d4ed8;
+    }
+
+    .btn.secondary {
+      background: #475569;
+    }
+
+    .btn.secondary:hover {
+      background: #334155;
+    }
+
+    .message {
+      text-align: center;
+      margin-top: 15px;
+      font-weight: 600;
+      min-height: 24px;
+    }
+
+    .navigation {
+      display: flex;
+      justify-content: space-between;
+      gap: 15px;
+      margin-top: 35px;
+    }
+
+    .navigation a {
+      text-decoration: none;
+      background: #2563eb;
+      color: white;
+      padding: 11px 20px;
+      border-radius: 7px;
+      font-weight: 600;
+      font-size: 14px;
+    }
+
+    .navigation a:hover {
+      background: #1d4ed8;
+    }
+
+    footer {
+      background: #0f172a;
+      color: #cbd5e1;
+      text-align: center;
+      padding: 22px;
+      margin-top: 50px;
+    }
+
+    @media (max-width: 750px) {
+      header {
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      nav a {
+        margin: 0 8px;
+      }
+
+      .hero h1 {
+        font-size: 28px;
+      }
+
+      .card {
+        padding: 22px;
+      }
+
+      .navigation {
+        flex-direction: column;
+      }
+
+      .navigation a {
+        text-align: center;
+      }
+    }
+
+    @media (max-width: 550px) {
+      main {
+        width: 94%;
+      }
+
+      .hero {
+        padding: 50px 15px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <div class="logo">Web Storage Practical</div>
+
+    <nav>
+      <a href="../../index.html">Home</a>
+<a href="../index.html">JavaScript Programs</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div class="badge">Practical 20</div>
+    <h1>Multi-Page Form</h1>
+    <p>Store form data using sessionStorage</p>
+  </section>
+
+  <main>
+
+    <section class="objective">
+      <h2>Objective</h2>
+      <p>
+        To create a multi-page form that temporarily stores
+        user-entered data using sessionStorage while moving
+        between different pages.
+      </p>
+    </section>
+
+    <section class="card">
+
+      <span class="step">Step 1 of 2</span>
+
+      <h2>Personal Information</h2>
+
+      <form id="personalForm">
+
+        <div class="form-group">
+          <label for="studentName">Student Name</label>
+          <input
+            type="text"
+            id="studentName"
+            placeholder="Enter student name"
+          >
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input
+            type="email"
+            id="email"
+            placeholder="Enter email address"
+          >
+        </div>
+
+        <div class="form-group">
+          <label for="phone">Phone Number</label>
+          <input
+            type="tel"
+            id="phone"
+            placeholder="Enter phone number"
+          >
+        </div>
+
+        <div class="buttons">
+
+          <button
+            type="button"
+            class="btn"
+            onclick="saveAndContinue()"
+          >
+            Save & Continue →
+          </button>
+
+          <button
+            type="button"
+            class="btn secondary"
+            onclick="clearForm()"
+          >
+            Clear
+          </button>
+
+        </div>
+
+      </form>
+
+      <div class="message" id="message"></div>
+
+    </section>
+
+    <div class="navigation">
+      <a href="19-temporary-form-sessionstorage.html">← Previous</a>
+      <a href="../index.html">Home</a>
+      <a href="20-multi-page-form-page2.html">Next →</a>
+    </div>
+
+  </main>
+
+  <footer>
+    Web Storage Practicals &copy; 2026
+  </footer>
+
+  <script>
+    const studentName =
+      document.getElementById("studentName");
+
+    const email =
+      document.getElementById("email");
+
+    const phone =
+      document.getElementById("phone");
+
+    const message =
+      document.getElementById("message");
+
+    function loadData() {
+      studentName.value =
+        sessionStorage.getItem("multiStudentName") || "";
+
+      email.value =
+        sessionStorage.getItem("multiEmail") || "";
+
+      phone.value =
+        sessionStorage.getItem("multiPhone") || "";
+    }
+
+    function saveAndContinue() {
+      const name = studentName.value.trim();
+      const emailValue = email.value.trim();
+      const phoneValue = phone.value.trim();
+
+      if (name === "" || emailValue === "" || phoneValue === "") {
+        showMessage("Please fill in all fields.");
+        return;
+      }
+
+      sessionStorage.setItem(
+        "multiStudentName",
+        name
+      );
+
+      sessionStorage.setItem(
+        "multiEmail",
+        emailValue
+      );
+
+      sessionStorage.setItem(
+        "multiPhone",
+        phoneValue
+      );
+
+      window.location.href =
+        "20-multi-page-form-page2.html";
+    }
+
+    function clearForm() {
+      sessionStorage.removeItem("multiStudentName");
+      sessionStorage.removeItem("multiEmail");
+      sessionStorage.removeItem("multiPhone");
+
+      studentName.value = "";
+      email.value = "";
+      phone.value = "";
+
+      showMessage("Form data cleared.");
+    }
+
+    function showMessage(text) {
+      message.textContent = text;
+      message.style.color = "#dc2626";
+
+      setTimeout(function() {
+        message.textContent = "";
+      }, 2000);
+    }
+
+    loadData();
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Practical 64 - Regular Expressions</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: #f1f5f9;
+            color: #334155;
+            line-height: 1.6;
+        }
+
+        header {
+            background: #0f172a;
+            padding: 18px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: white;
+            font-size: 22px;
+            font-weight: 700;
+        }
+
+        nav a {
+            color: #cbd5e1;
+            text-decoration: none;
+            margin-left: 25px;
+            font-size: 15px;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #1e3a8a, #2563eb);
+            color: white;
+            text-align: center;
+            padding: 65px 20px;
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 7px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        .hero h1 {
+            font-size: 34px;
+            margin-bottom: 8px;
+        }
+
+        main {
+            width: 90%;
+            max-width: 1050px;
+            margin: 40px auto;
+        }
+
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 28px;
+            margin-bottom: 25px;
+            box-shadow: 0 5px 18px rgba(15, 23, 42, 0.08);
+        }
+
+        .objective {
+            border-left: 5px solid #2563eb;
+        }
+
+        .objective h2,
+        .card h2 {
+            color: #1e3a8a;
+            margin-bottom: 15px;
+        }
+
+        .card h2 {
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 8px;
+        }
+
+        .demo {
+            background: #eff6ff;
+            border: 2px dashed #93c5fd;
+            border-radius: 10px;
+            padding: 22px;
+            margin-top: 20px;
+        }
+
+        label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #1e3a8a;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #cbd5e1;
+            border-radius: 7px;
+            font-family: inherit;
+            font-size: 15px;
+            margin-bottom: 15px;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #2563eb;
+        }
+
+        .btn {
+            display: inline-block;
+            border: none;
+            background: #2563eb;
+            color: white;
+            padding: 11px 20px;
+            border-radius: 7px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            opacity: 0.9;
+        }
+
+        .output {
+            margin-top: 20px;
+            padding: 15px;
+            background: white;
+            border-radius: 7px;
+            color: #1e3a8a;
+            font-weight: 600;
+        }
+
+        .result {
+            margin: 8px 0;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin: 35px 0;
+        }
+
+        .buttons a {
+            text-decoration: none;
+        }
+
+        .btn-link {
+            display: inline-block;
+            background: #2563eb;
+            color: white;
+            padding: 11px 20px;
+            border-radius: 7px;
+            font-weight: 600;
+        }
+
+        .btn-link.secondary {
+            background: #475569;
+        }
+
+        footer {
+            background: #0f172a;
+            color: #cbd5e1;
+            text-align: center;
+            padding: 22px;
+            margin-top: 50px;
+            font-size: 14px;
+        }
+
+        @media (max-width: 750px) {
+            header {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            nav a {
+                margin: 0 8px;
+            }
+
+            .hero h1 {
+                font-size: 30px;
+            }
+        }
+
+        @media (max-width: 650px) {
+            .card {
+                padding: 20px;
+            }
+
+            .hero {
+                padding: 50px 15px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="logo">JavaScript Practical</div>
+
+        <nav>
+            <a href="../../index.html">Home</a>
+<a href="../index.html">JavaScript Programs</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="badge">Practical 64</div>
+        <h1>Regular Expressions</h1>
+        <p>Demonstrating Regular Expressions in JavaScript</p>
+    </section>
+
+    <main>
+
+        <section class="card objective">
+            <h2>Objective</h2>
+            <p>
+                To write a JavaScript program that demonstrates the use of
+                regular expressions for searching and matching patterns in a string.
+            </p>
+        </section>
+
+        <section class="card">
+            <h2>Program Demonstration</h2>
+
+            <div class="demo">
+                <label for="textInput">Enter a string:</label>
+
+                <input
+                    type="text"
+                    id="textInput"
+                    placeholder="Example: JavaScript is powerful"
+                >
+
+                <label for="patternInput">Enter a pattern to search:</label>
+
+                <input
+                    type="text"
+                    id="patternInput"
+                    placeholder="Example: JavaScript"
+                >
+
+                <button class="btn" onclick="testRegex()">
+                    Test Regular Expression
+                </button>
+
+                <div class="output" id="output">
+                    Result will appear here.
+                </div>
+            </div>
+        </section>
+
+        <div class="buttons">
+            <a href="characterfrequency.html" class="btn-link">
+                ← Previous Practical
+            </a>
+
+            <a href="index.html" class="btn-link secondary">
+                JavaScript Programs
+            </a>
+
+            <a href="emailregex.html" class="btn-link">
+                Next Practical →
+            </a>
+        </div>
+
+    </main>
+
+    <footer>
+        <p>JavaScript Practical Assignment</p>
+    </footer>
+
+    <script>
+        function testRegex() {
+            const text = document.getElementById("textInput").value;
+            const pattern = document.getElementById("patternInput").value;
+            const output = document.getElementById("output");
+
+            if (text.trim() === "" || pattern.trim() === "") {
+                output.textContent = "Please enter both a string and a pattern.";
+                return;
+            }
+
+            try {
+                const regex = new RegExp(pattern, "gi");
+                const matches = text.match(regex);
+
+                if (matches) {
+                    output.innerHTML = `
+                        <div class="result">Pattern found: Yes</div>
+                        <div class="result">Number of matches: ${matches.length}</div>
+                        <div class="result">Matched text: ${matches.join(", ")}</div>
+                    `;
+                } else {
+                    output.textContent = "Pattern found: No";
+                }
+            } catch (error) {
+                output.textContent = "Invalid regular expression pattern.";
+            }
+        }
+    </script>
+
+</body>
+</html>

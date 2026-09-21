@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>clamp(), min() and max() | Practical 73</title>
+
+    <style>
+
+        /* =========================
+           GENERAL STYLES
+        ========================= */
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: #f1f5f9;
+            color: #334155;
+        }
+
+
+        /* =========================
+           HEADER
+        ========================= */
+
+        header {
+            background: #0f172a;
+            color: white;
+            padding: 18px 8%;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .logo {
+            font-size: 1.4rem;
+            font-weight: 700;
+        }
+
+        nav {
+            display: flex;
+            gap: 20px;
+        }
+
+        nav a {
+            color: #cbd5e1;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        nav a:hover {
+            color: white;
+        }
+
+
+        /* =========================
+           HERO
+        ========================= */
+
+        .hero {
+            background: linear-gradient(135deg, #1e3a8a, #2563eb);
+            color: white;
+            text-align: center;
+            padding: 65px 20px;
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.18);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .hero h1 {
+            margin: 0 0 10px;
+            font-size: clamp(2rem, 5vw, 3rem);
+        }
+
+        .hero p {
+            margin: 0;
+            font-size: 1.1rem;
+        }
+
+
+        /* =========================
+           MAIN
+        ========================= */
+
+        main {
+            width: 90%;
+            max-width: 1050px;
+            margin: 40px auto;
+        }
+
+
+        /* =========================
+           OBJECTIVE
+        ========================= */
+
+        .objective {
+            background: white;
+            border-left: 5px solid #2563eb;
+            padding: 22px 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(15, 23, 42, 0.08);
+            margin-bottom: 25px;
+        }
+
+        .objective h2 {
+            margin-top: 0;
+            color: #0f172a;
+        }
+
+        .objective p {
+            line-height: 1.7;
+        }
+
+
+        /* =========================
+           CONTENT CARD
+        ========================= */
+
+        .content-card {
+            background: white;
+            padding: 35px;
+            margin-bottom: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(15, 23, 42, 0.08);
+        }
+
+        .content-card h2 {
+            color: #0f172a;
+            margin-top: 0;
+            padding-bottom: 12px;
+            border-bottom: 2px solid #cbd5e1;
+
+            font-size: clamp(1.4rem, 3vw, 2rem);
+        }
+
+        .content-card h3 {
+            color: #1e3a8a;
+        }
+
+
+        /* =========================
+           CLAMP()
+        ========================= */
+
+        .clamp-demo {
+            background: #f8fafc;
+            border-left: 4px solid #2563eb;
+            padding: 25px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+
+        .clamp-heading {
+            /*
+                Minimum: 1.8rem
+                Preferred: 6vw
+                Maximum: 3.5rem
+            */
+            font-size: clamp(1.8rem, 6vw, 3.5rem);
+
+            color: #2563eb;
+            margin: 0 0 15px;
+        }
+
+        .clamp-text {
+            /*
+                Minimum: 1rem
+                Preferred: 2vw
+                Maximum: 1.25rem
+            */
+            font-size: clamp(1rem, 2vw, 1.25rem);
+            line-height: 1.7;
+        }
+
+
+        /* =========================
+           MIN()
+        ========================= */
+
+        .min-demo {
+            background: #eff6ff;
+            padding: 25px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+
+        .min-box {
+            /*
+                Width will never exceed 700px.
+                It will also remain 90% of the parent width.
+            */
+            width: min(700px, 90%);
+
+            margin: 0 auto;
+
+            background: white;
+            border: 3px solid #2563eb;
+            padding: 25px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .min-box h3 {
+            margin-top: 0;
+        }
+
+        .min-box p {
+            line-height: 1.7;
+        }
+
+
+        /* =========================
+           MAX()
+        ========================= */
+
+        .max-demo {
+            background: #f8fafc;
+            padding: 25px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+
+        .max-box {
+            /*
+                Width will always be at least 300px,
+                while also using 70% of the parent width.
+            */
+            width: max(300px, 70%);
+
+            margin: 0 auto;
+
+            background: white;
+            border: 3px solid #1e3a8a;
+            padding: 25px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .max-box h3 {
+            margin-top: 0;
+        }
+
+        .max-box p {
+            line-height: 1.7;
+        }
+
+
+        /* =========================
+           COMBINING FUNCTIONS
+        ========================= */
+
+        .combined-demo {
+            background: #eff6ff;
+            padding: 25px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+
+        .combined-box {
+            /*
+                clamp() controls responsive font size.
+                min() limits the width.
+                max() provides a minimum padding value.
+            */
+
+            width: min(800px, 100%);
+            padding: max(20px, 3vw);
+
+            margin: 0 auto;
+
+            background: white;
+            border: 2px solid #2563eb;
+            border-radius: 10px;
+        }
+
+        .combined-box h3 {
+            font-size: clamp(1.5rem, 4vw, 2.5rem);
+            margin-top: 0;
+            color: #1e3a8a;
+        }
+
+        .combined-box p {
+            font-size: clamp(1rem, 2vw, 1.2rem);
+            line-height: 1.8;
+        }
+
+
+        /* =========================
+           FUNCTION COMPARISON
+        ========================= */
+
+        .function-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+            margin-top: 25px;
+        }
+
+        .function-card {
+            background: #f8fafc;
+            border-left: 4px solid #2563eb;
+            border-radius: 10px;
+            padding: 22px;
+        }
+
+        .function-card h3 {
+            margin-top: 0;
+        }
+
+        .function-card code {
+            display: block;
+            background: #0f172a;
+            color: #e2e8f0;
+            padding: 12px;
+            border-radius: 6px;
+            margin: 12px 0;
+            font-family: Consolas, monospace;
+            overflow-x: auto;
+        }
+
+        .function-card p {
+            line-height: 1.6;
+        }
+
+
+        /* =========================
+           BUTTONS
+        ========================= */
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-block;
+            background: #2563eb;
+            color: white;
+            text-decoration: none;
+            padding: 12px 22px;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background: #1e3a8a;
+            transform: translateY(-2px);
+        }
+
+        .secondary {
+            background: #64748b;
+        }
+
+        .secondary:hover {
+            background: #475569;
+        }
+
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        footer {
+            background: #0f172a;
+            color: #cbd5e1;
+            text-align: center;
+            padding: 25px;
+            margin-top: 50px;
+        }
+
+        footer strong {
+            color: white;
+        }
+
+
+        /* =========================
+           RESPONSIVE DESIGN
+        ========================= */
+
+        @media (max-width: 850px) {
+
+            .function-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+        }
+
+
+        @media (max-width: 750px) {
+
+            header {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            nav {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            .function-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .content-card {
+                padding: 25px;
+            }
+
+            .hero {
+                padding: 50px 20px;
+            }
+
+            .max-box {
+                width: max(250px, 70%);
+            }
+
+        }
+
+    </style>
+</head>
+
+<body>
+
+
+    <!-- =========================
+         HEADER
+    ========================= -->
+
+    <header>
+
+        <div class="logo">
+            CSS Practical
+        </div>
+
+        <nav>
+
+            <a href="../index.html">
+                Home
+            </a>
+
+            <a href="index.html">
+                CSS Programs
+            </a>
+
+        </nav>
+
+    </header>
+
+
+    <!-- =========================
+         HERO
+    ========================= -->
+
+    <section class="hero">
+
+        <div class="badge">
+            CSS PRACTICAL 73
+        </div>
+
+        <h1>
+            clamp(), min() and max()
+        </h1>
+
+        <p>
+            CSS functions for flexible and responsive layouts
+        </p>
+
+    </section>
+
+
+    <!-- =========================
+         MAIN
+    ========================= -->
+
+    <main>
+
+
+        <!-- OBJECTIVE -->
+
+        <section class="objective">
+
+            <h2>
+                Objective
+            </h2>
+
+            <p>
+                To create a responsive webpage using the CSS
+                <strong>clamp()</strong>, <strong>min()</strong>,
+                and <strong>max()</strong> functions for flexible
+                sizing and responsive layouts.
+            </p>
+
+        </section>
+
+
+        <!-- CLAMP -->
+
+        <section class="content-card">
+
+            <h2>
+                clamp() Function
+            </h2>
+
+            <div class="clamp-demo">
+
+                <h3 class="clamp-heading">
+                    Responsive Heading
+                </h3>
+
+                <p class="clamp-text">
+                    The clamp() function allows a value to grow or
+                    shrink within a specified minimum and maximum
+                    range. It is useful for creating responsive
+                    typography without using many media queries.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- MIN -->
+
+        <section class="content-card">
+
+            <h2>
+                min() Function
+            </h2>
+
+            <div class="min-demo">
+
+                <div class="min-box">
+
+                    <h3>
+                        Flexible Width Using min()
+                    </h3>
+
+                    <p>
+                        The min() function selects the smallest value
+                        from the given values. This box uses
+                        <strong>min(700px, 90%)</strong>, so its width
+                        never becomes larger than 700 pixels.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- MAX -->
+
+        <section class="content-card">
+
+            <h2>
+                max() Function
+            </h2>
+
+            <div class="max-demo">
+
+                <div class="max-box">
+
+                    <h3>
+                        Flexible Width Using max()
+                    </h3>
+
+                    <p>
+                        The max() function selects the largest value
+                        from the given values. This box uses
+                        <strong>max(300px, 70%)</strong>, providing
+                        a minimum width while remaining responsive.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- COMBINED -->
+
+        <section class="content-card">
+
+            <h2>
+                Combining clamp(), min() and max()
+            </h2>
+
+            <div class="combined-demo">
+
+                <div class="combined-box">
+
+                    <h3>
+                        Responsive Content Box
+                    </h3>
+
+                    <p>
+                        This section combines all three CSS functions.
+                        The width uses min(), the padding uses max(),
+                        and the heading and paragraph use clamp().
+                        This creates a flexible layout that adapts
+                        to different screen sizes.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- FUNCTION COMPARISON -->
+
+        <section class="content-card">
+
+            <h2>
+                CSS Functions
+            </h2>
+
+            <div class="function-grid">
+
+                <div class="function-card">
+
+                    <h3>
+                        clamp()
+                    </h3>
+
+                    <code>
+                        clamp(min, preferred, max)
+                    </code>
+
+                    <p>
+                        Keeps a value between a minimum and
+                        maximum while allowing it to respond
+                        to the available space.
+                    </p>
+
+                </div>
+
+
+                <div class="function-card">
+
+                    <h3>
+                        min()
+                    </h3>
+
+                    <code>
+                        min(value1, value2)
+                    </code>
+
+                    <p>
+                        Uses the smallest value from the
+                        supplied values.
+                    </p>
+
+                </div>
+
+
+                <div class="function-card">
+
+                    <h3>
+                        max()
+                    </h3>
+
+                    <code>
+                        max(value1, value2)
+                    </code>
+
+                    <p>
+                        Uses the largest value from the
+                        supplied values.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- NAVIGATION -->
+
+        <div class="buttons">
+
+            <a href="css-72.html" class="btn">
+                ← Previous Practical
+            </a>
+
+            <a href="index.html" class="btn secondary">
+                CSS Programs
+            </a>
+
+            <a href="../index.html" class="btn secondary">
+                Dashboard
+            </a>
+
+        </div>
+
+    </main>
+
+
+    <!-- =========================
+         FOOTER
+    ========================= -->
+
+    <footer>
+
+        <p>
+            <strong>CSS Practical 73</strong>
+            | clamp(), min() and max()
+        </p>
+
+        <p>
+            Designed using HTML5 and CSS3
+        </p>
+
+    </footer>
+
+</body>
+</html>

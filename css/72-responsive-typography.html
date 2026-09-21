@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Responsive Typography | Practical 72</title>
+
+    <style>
+
+        /* =========================
+           GENERAL STYLES
+        ========================= */
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            font-size: 16px;
+        }
+
+        body {
+            margin: 0;
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: #f1f5f9;
+            color: #334155;
+        }
+
+
+        /* =========================
+           HEADER
+        ========================= */
+
+        header {
+            background: #0f172a;
+            color: white;
+            padding: 18px 8%;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .logo {
+            font-size: 1.4rem;
+            font-weight: 700;
+        }
+
+        nav {
+            display: flex;
+            gap: 20px;
+        }
+
+        nav a {
+            color: #cbd5e1;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        nav a:hover {
+            color: white;
+        }
+
+
+        /* =========================
+           HERO
+        ========================= */
+
+        .hero {
+            background: linear-gradient(135deg, #1e3a8a, #2563eb);
+            color: white;
+            text-align: center;
+            padding: 65px 20px;
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.18);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .hero h1 {
+            margin: 0 0 10px;
+
+            /* Responsive font size */
+            font-size: clamp(2rem, 5vw, 3rem);
+        }
+
+        .hero p {
+            margin: 0;
+            font-size: clamp(1rem, 2.5vw, 1.25rem);
+        }
+
+
+        /* =========================
+           MAIN
+        ========================= */
+
+        main {
+            width: 90%;
+            max-width: 1050px;
+            margin: 40px auto;
+        }
+
+
+        /* =========================
+           OBJECTIVE
+        ========================= */
+
+        .objective {
+            background: white;
+            border-left: 5px solid #2563eb;
+            padding: 22px 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(15, 23, 42, 0.08);
+            margin-bottom: 25px;
+        }
+
+        .objective h2 {
+            margin-top: 0;
+            color: #0f172a;
+            font-size: 1.5rem;
+        }
+
+        .objective p {
+            font-size: 1rem;
+            line-height: 1.7;
+        }
+
+
+        /* =========================
+           CONTENT CARD
+        ========================= */
+
+        .content-card {
+            background: white;
+            padding: 35px;
+            margin-bottom: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(15, 23, 42, 0.08);
+        }
+
+        .content-card h2 {
+            color: #0f172a;
+            margin-top: 0;
+            padding-bottom: 12px;
+            border-bottom: 2px solid #cbd5e1;
+
+            font-size: clamp(1.4rem, 3vw, 2rem);
+        }
+
+        .content-card h3 {
+            color: #1e3a8a;
+        }
+
+
+        /* =========================
+           RESPONSIVE TYPOGRAPHY DEMO
+        ========================= */
+
+        .typography-box {
+            background: #f8fafc;
+            border-left: 4px solid #2563eb;
+            border-radius: 10px;
+            padding: 25px;
+            margin-top: 20px;
+        }
+
+        .typography-box h3 {
+            margin-top: 0;
+            color: #1e3a8a;
+        }
+
+        .responsive-heading {
+            font-size: clamp(1.8rem, 6vw, 3.2rem);
+            line-height: 1.1;
+            margin: 15px 0;
+            color: #0f172a;
+        }
+
+        .responsive-text {
+            font-size: clamp(1rem, 2vw, 1.25rem);
+            line-height: 1.7;
+            color: #475569;
+        }
+
+
+        /* =========================
+           FONT SIZE UNITS
+        ========================= */
+
+        .font-size-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+            margin-top: 25px;
+        }
+
+        .size-card {
+            background: #f8fafc;
+            border-left: 4px solid #2563eb;
+            border-radius: 10px;
+            padding: 20px;
+        }
+
+        .size-card h3 {
+            margin-top: 0;
+        }
+
+        .rem-text {
+            font-size: 1.5rem;
+        }
+
+        .em-text {
+            font-size: 1.5em;
+        }
+
+        .vw-text {
+            font-size: 4vw;
+        }
+
+
+        /* =========================
+           RESPONSIVE HEADINGS
+        ========================= */
+
+        .heading-demo h1 {
+            font-size: clamp(2rem, 7vw, 4rem);
+            color: #2563eb;
+            margin-bottom: 10px;
+        }
+
+        .heading-demo h2 {
+            font-size: clamp(1.5rem, 5vw, 2.5rem);
+            color: #1e3a8a;
+        }
+
+        .heading-demo p {
+            font-size: clamp(1rem, 2.2vw, 1.2rem);
+            line-height: 1.7;
+        }
+
+
+        /* =========================
+           RESPONSIVE TEXT CARD
+        ========================= */
+
+        .text-card {
+            background: #eff6ff;
+            padding: 25px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+
+        .text-card p {
+            font-size: clamp(0.95rem, 2vw, 1.15rem);
+            line-height: 1.8;
+            margin: 0;
+        }
+
+
+        /* =========================
+           MEDIA QUERY
+        ========================= */
+
+        @media (max-width: 850px) {
+
+            .font-size-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .content-card {
+                padding: 28px;
+            }
+        }
+
+
+        @media (max-width: 750px) {
+
+            header {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            nav {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            .font-size-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .content-card {
+                padding: 25px;
+            }
+
+            .hero {
+                padding: 50px 20px;
+            }
+        }
+
+
+        @media (max-width: 500px) {
+
+            html {
+                font-size: 15px;
+            }
+
+            .typography-box {
+                padding: 20px;
+            }
+
+            .responsive-heading {
+                font-size: 2rem;
+            }
+
+            .responsive-text {
+                font-size: 1rem;
+            }
+        }
+
+
+        /* =========================
+           BUTTONS
+        ========================= */
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-block;
+            background: #2563eb;
+            color: white;
+            text-decoration: none;
+            padding: 12px 22px;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background: #1e3a8a;
+            transform: translateY(-2px);
+        }
+
+        .secondary {
+            background: #64748b;
+        }
+
+        .secondary:hover {
+            background: #475569;
+        }
+
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        footer {
+            background: #0f172a;
+            color: #cbd5e1;
+            text-align: center;
+            padding: 25px;
+            margin-top: 50px;
+        }
+
+        footer strong {
+            color: white;
+        }
+
+    </style>
+</head>
+
+<body>
+
+
+    <!-- =========================
+         HEADER
+    ========================= -->
+
+    <header>
+
+        <div class="logo">
+            CSS Practical
+        </div>
+
+        <nav>
+
+            <a href="../index.html">
+                Home
+            </a>
+
+            <a href="index.html">
+                CSS Programs
+            </a>
+
+        </nav>
+
+    </header>
+
+
+    <!-- =========================
+         HERO
+    ========================= -->
+
+    <section class="hero">
+
+        <div class="badge">
+            CSS PRACTICAL 72
+        </div>
+
+        <h1>
+            Responsive Typography
+        </h1>
+
+        <p>
+            Create text that adapts to different screen sizes
+        </p>
+
+    </section>
+
+
+    <!-- =========================
+         MAIN CONTENT
+    ========================= -->
+
+    <main>
+
+
+        <!-- OBJECTIVE -->
+
+        <section class="objective">
+
+            <h2>
+                Objective
+            </h2>
+
+            <p>
+                To create a webpage demonstrating responsive typography
+                using relative units, viewport units, CSS clamp(), and
+                media queries.
+            </p>
+
+        </section>
+
+
+        <!-- RESPONSIVE TYPOGRAPHY -->
+
+        <section class="content-card">
+
+            <h2>
+                Responsive Typography Demonstration
+            </h2>
+
+            <div class="typography-box">
+
+                <h3>
+                    Responsive Heading
+                </h3>
+
+                <div class="responsive-heading">
+                    Typography That Adapts
+                </div>
+
+                <p class="responsive-text">
+                    This paragraph uses responsive font sizing.
+                    The text automatically adjusts according to
+                    the screen width, making the webpage easier
+                    to read on desktops, tablets, and mobile devices.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- FONT SIZE UNITS -->
+
+        <section class="content-card">
+
+            <h2>
+                Responsive Font Size Units
+            </h2>
+
+            <div class="font-size-grid">
+
+                <div class="size-card">
+
+                    <h3>
+                        rem Unit
+                    </h3>
+
+                    <p class="rem-text">
+                        This text uses 1.5rem.
+                    </p>
+
+                    <p>
+                        The rem unit is relative to the root
+                        font size of the document.
+                    </p>
+
+                </div>
+
+
+                <div class="size-card">
+
+                    <h3>
+                        em Unit
+                    </h3>
+
+                    <p class="em-text">
+                        This text uses 1.5em.
+                    </p>
+
+                    <p>
+                        The em unit is relative to the font
+                        size of its parent element.
+                    </p>
+
+                </div>
+
+
+                <div class="size-card">
+
+                    <h3>
+                        vw Unit
+                    </h3>
+
+                    <p class="vw-text">
+                        Responsive Text
+                    </p>
+
+                    <p>
+                        The vw unit is relative to the width
+                        of the browser viewport.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- RESPONSIVE HEADINGS -->
+
+        <section class="content-card">
+
+            <h2>
+                Responsive Headings
+            </h2>
+
+            <div class="heading-demo">
+
+                <h1>
+                    Main Heading
+                </h1>
+
+                <h2>
+                    Secondary Heading
+                </h2>
+
+                <p>
+                    The heading sizes use the CSS clamp()
+                    function so that they remain readable
+                    across different screen sizes.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- RESPONSIVE PARAGRAPH -->
+
+        <section class="content-card">
+
+            <h2>
+                Responsive Paragraph Text
+            </h2>
+
+            <div class="text-card">
+
+                <p>
+                    Responsive typography improves readability by
+                    allowing text to resize according to the device
+                    and available screen space. CSS functions such
+                    as clamp(), along with relative units such as
+                    rem, em, and vw, can be used to create flexible
+                    and user-friendly text layouts.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- NAVIGATION -->
+
+        <div class="buttons">
+
+            <a href="css-71.html" class="btn">
+                ← Previous Practical
+            </a>
+
+            <a href="index.html" class="btn secondary">
+                CSS Programs
+            </a>
+
+            <a href="../index.html" class="btn secondary">
+                Dashboard
+            </a>
+
+        </div>
+
+    </main>
+
+
+    <!-- =========================
+         FOOTER
+    ========================= -->
+
+    <footer>
+
+        <p>
+            <strong>CSS Practical 72</strong>
+            | Responsive Typography
+        </p>
+
+        <p>
+            Designed using HTML5 and CSS3
+        </p>
+
+    </footer>
+
+</body>
+</html>
