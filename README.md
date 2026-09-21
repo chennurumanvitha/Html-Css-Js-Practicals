@@ -5,11 +5,8 @@
 **Student Name:** Chennuru Manvitha Reddy  
 **Register Number:** 250200006  
 **Class:** Computing and Data Science 
-
 **Section:** 07 
-
 **Subject:** Web Technology and Internet Program 
-
 **Assignment:** HTML, CSS and JavaScript Practical Programs 
 
 
