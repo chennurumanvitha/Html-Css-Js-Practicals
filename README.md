@@ -142,7 +142,7 @@ The practical programs are designed with the following features:
 | Mini Projects | 17 |
 
 
-### Project OrganiZation
+### Project Organization
 
 Home/
 │
