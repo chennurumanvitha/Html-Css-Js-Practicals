@@ -143,7 +143,7 @@ The practical programs are designed with the following features:
 
 
 ### Project Organization
-
+<pre>
 Home/
 │
 ├── Assets/
@@ -167,6 +167,7 @@ Home/
        ├── Browser Objects and Features/
        ├── Web Storage/
        └── Mini Projects/
+</pre>
 ---
 
 ## 7. Execution
